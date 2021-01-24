@@ -121,7 +121,12 @@
                         <label>Lần sửa dổi: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="number" min="0" class="form-control" id="SoLanSua" />
+                        <div class="valid" style="color: red; font-style: italic;">
+                            <div class="textNotiTypeNumber" id="textvalidTypeNumber">
+                                <!--hiển thị thông báo-->
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -232,12 +237,34 @@
 
                 <div class="row">
                     <div class="col-md-2 text-right">
-                        <label>Nhân viên quản lý đơn hàng: </label>
+                        <label>Quy cách chung: </label>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-4">
                         <input type="text" class="form-control" id="" />
                     </div>
 
+                    <div class="col-md-2 text-right">
+                        <label>Người duyệt: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>Nhân viên quản lý đơn hàng: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Số điện thoại: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" />
+                    </div>
                 </div>
             </div>
         </form>
@@ -675,5 +702,12 @@
             }
         }
 
+
+        $("input#SoLanSua").on({
+            keydown: function (e) {
+                if (e.which === 69)
+                    return false;
+            },
+        });
     </script>
 }

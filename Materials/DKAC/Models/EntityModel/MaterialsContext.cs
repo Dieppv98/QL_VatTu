@@ -4,7 +4,9 @@ namespace DKAC.Models.EntityModel
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using MySql.Data.Entity;
 
+    //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public partial class MaterialsContext : DbContext
     {
         public MaterialsContext()
@@ -21,6 +23,9 @@ namespace DKAC.Models.EntityModel
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<MaterialType> MaterialTypes { get; set; }
+
+        //public MaterialsContext(string connectionString)
+        //    : base(connectionString) { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
