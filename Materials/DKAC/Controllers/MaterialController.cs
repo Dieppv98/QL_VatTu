@@ -107,5 +107,10 @@ namespace DKAC.Controllers
             rs.AddRange(lstResultSearch);
             return Json(rs, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
     }
 }
