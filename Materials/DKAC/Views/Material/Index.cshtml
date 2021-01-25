@@ -1,7 +1,17 @@
-﻿
+﻿@using System.Collections.Generic
+@using DKAC.Models.EntityModel
+@model DKAC.Models.RequestModel.DonHangRequestModel
 @{
     ViewBag.Title = "";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var count = 0;
+    var data = new List<DonHang>();
+    if (Model != null)
+    {
+        count = Model.pageSize * (Model.page - 1);
+        data = (List<DKAC.Models.EntityModel.DonHang>)Model.lstDonHang;
+    }
 }
 
 
@@ -83,82 +93,83 @@
                     <tr>
                         <th class="text-center">STT</th>
                         <th class="text-center">Số LSX</th>
-                        <th class="text-center">Tên vật tư</th>
-                        <th class="text-center">Ngày nhập</th>
+                        <th class="text-center">Mã sản phẩm</th>
+                        <th class="text-center">Tên sản phẩm</th>
+                        <th class="text-center">Mã khách hàng</th>
                         <th class="text-center">Tên khách hàng</th>
+                        <th class="text-center">Nhân viên KD</th>
+                        <th class="text-center">Ngày giao hàng</th>
                         <th class="text-center">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @{
-                        var count = 0;
+                    @foreach (var item in data)
+                    {
+                        count++;
+                        <tr>
+                            <td class="text-center">@count</td>
+                            <td class="text-center">@item.so_lenh_sx</td>
+                            <td class="text-center">@item.ma_san_pham</td>
+                            <td class="text-center">@item.ten_san_pham</td>
+                            <td class="text-center">@item.ma_khach_hang</td>
+                            <td class="text-center">@item.ten_khach_hang</td>
+                            <td class="text-center">@item.nv_kinh_doanh</td>
+                            <td class="text-center">@(item.ngay_giao_hang.HasValue ? item.ngay_giao_hang.Value.ToString("dd/MM/yyyy") : "")</td>
+                            <td class="text-center">
+                                <a href="/Employee/Details/@item.id" class="details-link" style="margin-right: 5px;"><i class="fa fa-eye" title="Xem"></i></a>
+                            </td>
+                        </tr>
                     }
-                    @*@foreach (var item in )
-                        {
-                            count++;
-                            <tr>
-                                <td class="text-center">@count</td>
-                                <td class="text-center"></td>
-                                <td class="text-center"></td>
-                                <td class="text-center"></td>
-                                <td class="text-center">
-                                    <div>Trưởng phòng</div>
-                                </td>
-                                <td class="text-center">
-                                    <a href="/Employee/Details/@item.id" class="details-link" style="margin-right: 5px;"><i class="fa fa-eye" title="Xem"></i></a>
-                                </td>
-                            </tr>
-                        }*@
                 </tbody>
             </table>
 
             <!--Paging-->
-            @*<div class="row paging">
-                    <div class="col-md-3" style="text-align: left; margin-top: 8px; padding: 0px;">
-                        <label>Có tất cả @Model.totalRecord kết quả</label>
-                    </div>
-                    <div class="col-md-9" style="padding: 0px;">
-                        <ul class="pagination">
-                            @{
-                                int position;
-                                if (Model.page > 1)
-                                {
-                                    <li class="page-item">
-                                        <a class="page-link" href="@Url.Action("Index", "Employee", new { page = Model.page-1, pageSize = Model.pageSize, KeySearch = Model.Keywords})" tabindex="-1"> << </a>
-                                    </li>
-                                }
-
-                                for (position = 1; position <= Model.totalPage; position++)
-                                {
-
-                                    if (position == Model.page)
-                                    {
-                                        <li class="page-item active"><a class="page-link" href="@Url.Action("Index", "Employee", new { page = position, pageSize = Model.pageSize, KeySearch = Model.Keywords })">@position</a></li>
-                                    }
-
-                                    else
-                                    {
-                                        <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Employee", new { page = position, pageSize = Model.pageSize, KeySearch = Model.Keywords })">@position</a></li>
-                                    }
-
-                                }
-                                if (Model.page > 0 && Model.page < Model.totalPage)
-                                {
-                                    <li class="page-item">
-                                        <a class="page-link" href="@Url.Action("Index", "Employee", new { page = Model.page+1, pageSize = Model.pageSize, KeySearch = Model.Keywords })" tabindex="-1"> >> </a>
-                                    </li>
-                                }
-
-                                if (Model.totalPage == 0)
-                                {
-                                    <li>
-                                        <div role="status" aria-live="polite">Không có dữ liệu hiển thị</div>
-                                    </li>
-                                }
+            <div class="row paging">
+                <div class="col-md-3" style="text-align: left; margin-top: 8px; padding: 0px;">
+                    <label>Có tất cả @Model.totalRecord kết quả</label>
+                </div>
+                <div class="col-md-9" style="padding: 0px;">
+                    <ul class="pagination">
+                        @{
+                            int position;
+                            if (Model.page > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("Index", "Material", new { page = Model.page-1, pageSize = Model.pageSize, KeySearch = Model.Keywords})" tabindex="-1"> << </a>
+                                </li>
                             }
-                        </ul>
-                    </div>
-                </div>*@
+
+                            for (position = 1; position <= Model.totalPage; position++)
+                            {
+
+                                if (position == Model.page)
+                                {
+                                    <li class="page-item active"><a class="page-link" href="@Url.Action("Index", "Material", new { page = position, pageSize = Model.pageSize, KeySearch = Model.Keywords })">@position</a></li>
+                                }
+
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Material", new { page = position, pageSize = Model.pageSize, KeySearch = Model.Keywords })">@position</a></li>
+                                }
+
+                            }
+                            if (Model.page > 0 && Model.page < Model.totalPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("Index", "Material", new { page = Model.page+1, pageSize = Model.pageSize, KeySearch = Model.Keywords })" tabindex="-1"> >> </a>
+                                </li>
+                            }
+
+                            if (Model.totalPage == 0)
+                            {
+                                <li>
+                                    <div role="status" aria-live="polite">Không có dữ liệu hiển thị</div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </body>

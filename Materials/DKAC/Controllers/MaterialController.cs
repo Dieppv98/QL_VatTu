@@ -15,39 +15,45 @@ namespace DKAC.Controllers
     {
         MaterialRepository _mater = new MaterialRepository();
         // GET: Material
-        public ActionResult Index(string KeySearch, int page = 1, int pageSize = 20)
+        public ActionResult Index(DonHangRequestModel model)
         {
             var currentUser = (User)Session[CommonConstants.USER_SESSION];
-            //EmployeeRequestModel model = new EmployeeRequestModel();
-            //model = _empRepo.GetListAllEmployee(employee, user, KeySearch, page, pageSize);
-            //return View(model);
-            return View();
+            model.page = model.page == 0 ? 1 : model.page;
+            model.pageSize = 5;
+            int totalCount = 0;
+            ViewBag.hasViewPermission = CheckPermission(3, 1, currentUser);
+            ViewBag.hasAddPermission = CheckPermission(3, 2, currentUser);
+            ViewBag.hasUpdatePermission = CheckPermission(3, 4, currentUser);
+            ViewBag.hasDeletePermission = CheckPermission(3, 8, currentUser);
+            if (!ViewBag.hasViewPermission)
+            {
+                return RedirectToAction("NotPermission", "Home");
+            }
+            var rs = _mater.Search(model, model.page, model.pageSize, out totalCount);
+            model.totalRecord = rs.Count();
+            model.totalPage = (int)Math.Ceiling((decimal)rs.Count() / model.pageSize);
+            model.lstDonHang = rs;
+            return View(model);
         }
 
         public ActionResult Edit(int id)
         {
-            var lstMaterial = _mater.GetAllMaterial();
-            UserInfo u = new UserInfo();
-            u.lstMaterialType = new List<MaterialType>();
-            u.lstMaterial = lstMaterial.ConvertAll(a => new SelectListItem()
-            {
-                Value = a.Id.ToString(),
-                Text = a.MaterialTypeName.ToString(),
-            });
-            u.lstMaterialType.AddRange(lstMaterial);
+            var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
+            DonHangInfo donHang = new DonHangInfo();
             //gọi hàm
-            return View(u);
+            donHang = _mater.GetbyId(id);
+            donHang.lstMaterialType = lstMaterial;
+            return View(donHang);
         }
 
-        public ActionResult EditMaterial(int id)
+        public ActionResult EditMaterial(int id, DonHangInfo model)
         {
-            if (id == (int)0)
+            if (model.id == (int)0)
             {
-                UserInfo u = new UserInfo();
-                return View(u);
+                return View(model);
             }
             //gọi hàm
-            return View();
+            return View(model);
         }
 
         public ActionResult EditProductionOrder(int id)
@@ -71,7 +77,7 @@ namespace DKAC.Controllers
                 page = 1,
                 pageSize = 50
             };
-            var result = _mater.Search(model, model.page, model.pageSize, out var totalCount);
+            var result = _mater.SearchMaterial(model, model.page, model.pageSize, out var totalCount);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

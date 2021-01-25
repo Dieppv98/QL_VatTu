@@ -1,4 +1,4 @@
-﻿@model DKAC.Models.InfoModel.UserInfo
+﻿@model DKAC.Models.InfoModel.DonHangInfo
 @{
     ViewBag.Title = "Nhập liệu";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -68,10 +68,23 @@
     .ui-autocomplete {
         z-index: 1000;
     }
+
+
+    .p-l-0 {
+        padding-left: 0px !important;
+    }
+
+    .margin-top-10 {
+        margin-top: 10px !important;
+    }
+
+    .margin-top-40 {
+        margin-top: 40px !important
+    }
 </style>
 
 <head>
-    <title>Nhập liệu tổng quan đơn hàng</title>
+    <title>Nhập liệu</title>
 </head>
 
 <div class="container">
@@ -94,7 +107,7 @@
 
         <form action="" method="post" id="edit">
             <div class="form-group">
-                <input type="hidden" class="form-control" id="Id" value="@Model.id" />
+                <input type="hidden" class="form-control" id="id" value="@Model.id" />
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-8 text-center">
@@ -108,7 +121,7 @@
                         <label>Ngày: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="date" class="form-control" id="Date" />
+                        <input type="date" class="form-control" id="created_date" value="@Model.created_date" />
                         <div class="valid" style="color: red; font-style: italic;">
                             <div class="textNoti" id="textvalid">
                                 <!--hiển thị thông báo-->
@@ -121,7 +134,7 @@
                         <label>Lần sửa dổi: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="number" min="0" class="form-control" id="SoLanSua" />
+                        <input type="number" min="0" class="form-control" id="lan_dieu_chinh" value="@Model.lan_dieu_chinh" />
                         <div class="valid" style="color: red; font-style: italic;">
                             <div class="textNotiTypeNumber" id="textvalidTypeNumber">
                                 <!--hiển thị thông báo-->
@@ -132,17 +145,17 @@
 
                 <div class="row">
                     <div class="col-md-2 text-right">
-                        <label>PĐNSX số: </label>
+                        <label>Phiếu ĐNSX số: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="phieu_dnsx_so" value="@Model.phieu_dnsx_so" />
                     </div>
 
                     <div class="col-md-2 text-right">
-                        <label>NVKD: </label>
+                        <label>Nhân Viên Kinh Doanh: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="nv_kinh_doanh" value="@Model.nv_kinh_doanh" />
                     </div>
                 </div>
 
@@ -151,14 +164,14 @@
                         <label>Mã khách hàng: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="ma_khach_hang" value="@Model.ma_khach_hang" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Tên khác hàng: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="ten_khach_hang" value="@Model.ten_khach_hang" />
                     </div>
                 </div>
 
@@ -167,14 +180,14 @@
                         <label>Mã sản phẩm: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="ma_san_pham" value="@Model.ma_san_pham" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Tên sản phẩm: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="ten_san_pham" value="@Model.ten_san_pham" />
                     </div>
                 </div>
 
@@ -183,14 +196,14 @@
                         <label>Nhà cung cấp vật tư: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="nha_cc" value="@Model.nha_cc" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Khổ TP: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="NameTest" oninput="SearchNameAutoComplete(this)" onchange="TrimValue(this)" />
+                        <input type="text" class="form-control" id="kho_tp" value="@Model.kho_tp" oninput="SearchNameAutoComplete(this)" onchange="TrimValue(this)" />
                     </div>
                 </div>
 
@@ -239,31 +252,40 @@
                     <div class="col-md-2 text-right">
                         <label>Quy cách chung: </label>
                     </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
-                    </div>
-
-                    <div class="col-md-2 text-right">
-                        <label>Người duyệt: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                    <div class="col-md-10">
+                        <textarea class="form-control" rows="3" id="quy_cach_chung" value="@Model.quy_cach_chung"></textarea>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-2 text-right">
+                        <label>Người duyệt: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ten_can_bo_kt" value="@Model.ten_can_bo_kt" />
+                    </div>
+
+                    <div class="col-md-2 text-right">
                         <label>Nhân viên quản lý đơn hàng: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="ten_can_bo_ql" value="@Model.ten_can_bo_ql" />
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="col-md-2 text-right">
                         <label>Số điện thoại: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="phone_number" value="@Model.phone_number" />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Email: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="email" value="@Model.email" />
                     </div>
                 </div>
             </div>
@@ -272,12 +294,517 @@
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
                 <a href="/Material" class="btn btn-primary" style="width: 8%">Hủy</a>
-                <a @*onclick="TransViewEditMaterial()"*@ href="/Material/EditMaterial/0" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
+                <a onclick="TransViewEditMaterial()" @*href="/Material/EditMaterial/0"*@ class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
 </div>
 
+<div class="container2">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6 uppercase">
+                    <h2>NHẬP LIỆU DỰ TOÁN VẬT TƯ SẢN XUẤT</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <ol class="breadcrumb" style="margin-left: 15px;">
+                <li style="margin-right: 10px"><a href="/"> <i class="fa fa-home home"></i> Home</a></li>
+                <li class="active">
+                    <span>Nhập liệu</span>
+                </li>
+            </ol>
+        </div>
+
+        <form action="" method="post" id="edit">
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="Id" value="@Model.id" />
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 text-center">
+                        <h2><label>BẢNG DỰ TOÁN VẬT TƯ SẢN XUẤT</label></h2>
+                    </div>
+                    <div class="col-md-2 m-1"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2 text-right">
+                        <label>Số LSX: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="so_lenh_sx" value="@Model.so_lenh_sx" />
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>Tên khách hàng: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ma_khach_hang" disabled value="@Model.ma_khach_hang" />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Tên sản phẩm: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ten_san_pham" disabled value="@Model.ten_san_pham" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>Mã sản phẩm: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ma_san_pham" disabled value="@Model.ma_san_pham" />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Điều chỉnh lần: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="lan_dieu_chinh" disabled value="@Model.lan_dieu_chinh" />
+                    </div>
+                </div>
+
+                <hr />
+
+                <!--Bảng nội dung CTP-->
+                <div class="group">
+                    <div class="form-body">
+                        <div class="row span">
+                            <div class="col-md-12">
+                                <label class="caption-subject sbold uppercase" style="font-size:20px;">
+                                    Bảng dự toán vật tư
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered info-materials" id="appendixTableMH2">
+                                        <tr style="background-color: #0076d2; color: white;">
+                                            <th class="text-center" rowspan="2" style="width:40px">STT</th>
+                                            <th class="text-center" rowspan="2" style="width:50px">Số lượng</th>
+                                            <th class="text-center" colspan="4">Loại vật tư</th>
+                                            <th class="text-center" rowspan="2" style="width:80px">Mã vật tư</th>
+                                            <th class="text-center" rowspan="2" style="width:50px">Trang/tờ</th>
+                                            <th class="text-center" rowspan="2" style="width:70px">Định mức</th>
+                                            <th class="text-center" colspan="4">Số lượng</th>
+                                            <th class="text-center" rowspan="2" style="width:70px">Đơn vị tính</th>
+                                            <th class="text-center" rowspan="2" style="width:70px">Quy ký</th>
+                                            <th class="text-center" rowspan="2" style="width:130px">Mục đích sử dụng</th>
+                                            <th class="text-center" rowspan="2" style="width:70px">CC vật tư</th>
+                                            <th class="text-center" style="width:40px;" rowspan="2">
+                                                <a class="btn btn-sm btn-primary lock p5" id="addRowAppendixTableMH2" title="Thêm mới">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: #0076d2; color: white;">
+                                            <th class="text-center" colspan="4">Quy cách</th>
+                                            <th class="text-center" style="width:70px">Chính</th>
+                                            <th class="text-center" style="width:70px">Bù in</th>
+                                            <th class="text-center" style="width:70px">Bù TP</th>
+                                            <th class="text-center" style="width:70px">Tổng</th>
+                                        </tr>
+
+                                        <tbody id="appendixTbodyMH2"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row" style="margin-top: 15px">
+            <div class="col-md-12 text-right">
+                <a onclick="goBack()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
+                <a @*onclick=""*@ href="/Material/EditProductionOrder/0" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container3">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6 uppercase">
+                    <h2>NHẬP LIỆU LỆNH SẢN XUẤT</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <ol class="breadcrumb" style="margin-left: 15px;">
+                <li style="margin-right: 10px"><a href="/"> <i class="fa fa-home home"></i> Home</a></li>
+                <li class="active">
+                    <span>Nhập liệu</span>
+                </li>
+            </ol>
+        </div>
+
+        <form action="" method="post" id="edit">
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="Id" value="@Model.id" />
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 text-center">
+                        <h2><label>BẢNG LỆNH SẢN XUẤT</label></h2>
+                    </div>
+                    <div class="col-md-2 m-1"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>Số LSX: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="SoLSX" />
+                        <div style="color: red; font-style: italic;" class="textNoti" id="textvalid">
+                            <!--hiển thị thông báo-->
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Ngày: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="Date" disabled />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>PĐNSX số: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" disabled />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>NVKD: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" disabled />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>Lần sửa đổi: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" disabled />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Sản phẩm: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" disabled />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>Khách hàng: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" disabled />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Ngày giao hàng: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="Date" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 margin-top-10">
+                        <div class="table-responsive" style="border: 1px solid black !important;">
+                            <table class="table table-striped table-bordered info-materials" id="printTableSLTong" style="margin-bottom:0px !important">
+                                <tr style="background-color: white; color: black;">
+                                    <th class="text-center" style="width:30px">STT</th>
+                                    <th class="text-center" style="width:250px">
+                                        <div class="row">
+                                            <div class="col-md-6 p-l-0">
+                                                <label>Số lượng tổng:</label>
+                                            </div>
+                                            <div class="col-md-6 p-l-0">
+                                                <input type="text" class="form-control" id="" />
+                                            </div>
+                                        </div>
+
+                                    </th>
+                                    <th class="text-center" style="width:30px;">
+                                        <a class="btn btn-sm btn-primary lock p5" id="addRowSLTong" title="Thêm mới">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+
+                                <tbody id="appendixPrintTbodySLTong"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <hr />
+
+                <!--I. Quy cách sản phẩm-->
+                <div class="group">
+                    <div class="form-body">
+                        <div class="row span">
+                            <div class="col-md-12">
+                                <label class="caption-subject sbold uppercase" style="font-size:20px;">
+                                    <u>I. QUY CÁCH SP</u>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                @{
+                    var n = 4;
+                    var m = 6;
+                }
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="table-responsive" style="border: 1px solid black !important;">
+                            <table class="table table-striped table-bordered" style="border: 1px solid black !important; margin-bottom: 0px">
+                                <tr class="bg-blue" style="background-color: #e9ecef;color: black;">
+                                    <th class="text-center wrapper" rowspan="@(n)" style="width: 200px;vertical-align: middle;border: black solid 1px !important;">
+                                        Ruột 1
+                                    </th>
+                                    <td class="wrapper" style="padding: 0px !important;border: black solid 1px !important;">
+                                        @for (int i = 0; i < n; i++)
+                                        {
+                                            <table class="table table-striped table-bordered" style="margin-bottom: 0px !important">
+                                                <tbody>
+                                                    <tr class="wrapper">
+                                                        <td class="wrapper">@i</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        }
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+
+                <!--Bảng nội dung CTP-->
+                <div class="group">
+                    <div class="form-body">
+                        <div class="row span">
+                            <div class="col-md-12">
+                                <label class="caption-subject sbold uppercase" style="font-size:20px;">
+                                    <u>II. CHẾ BẢN</u>&emsp;  Ghi bản CTP
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered info-materials" id="appendixTableMH3">
+                                        <tr style="background-color: #0076d2; color: white;">
+                                            <th class="text-center" style="width:40px">STT</th>
+                                            <th class="text-center" style="width:250px">Tay in</th>
+                                            <th class="text-center" style="width:120px">Số kẽm</th>
+                                            <th class="text-center" style="width:120px">Số bộ</th>
+                                            <th class="text-center" style="width:120px">TỔNG</th>
+                                            <th class="text-center" style="width:150px">Trang/khổ in</th>
+                                            <th class="text-center" style="width:120px">Khổ in</th>
+                                            <th class="text-center" style="width:120px">Khổ kẽm</th>
+                                            <th class="text-center" style="width:150px">PP in</th>
+                                            <th class="text-center" style="width:40px;">
+                                                <a class="btn btn-sm btn-primary lock p5" id="addRowAppendixTableMH3" title="Thêm mới">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </th>
+                                        </tr>
+
+                                        <tbody id="appendixTbodyMH3"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Thời gian giao bản:</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Ghi chú đặc biệt:</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="" />
+                    </div>
+                </div>
+
+                <hr />
+
+                <!--Bảng In-->
+                <div class="group">
+                    <div class="form-body">
+                        <div class="row span">
+                            <div class="col-md-12">
+                                <label class="caption-subject sbold uppercase" style="font-size:20px;">
+                                    <u>III. IN</u>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered info-materials" id="printTable">
+                                        <tr style="background-color: #0076d2; color: white;">
+                                            <th class="text-center" style="width:40px">STT</th>
+                                            <th class="text-center" style="width:250px">Tay in</th>
+                                            <th class="text-center" style="width:120px">Loại giấy</th>
+                                            <th class="text-center" style="width:120px">Khổ giấy</th>
+                                            <th class="text-center" style="width:120px">Khổ in</th>
+                                            <th class="text-center" style="width:120px">Chính</th>
+                                            <th class="text-center" style="width:120px">Bù in</th>
+                                            <th class="text-center" style="width:120px">Bù TP</th>
+                                            <th class="text-center" style="width:120px">Tổng</th>
+                                            <th class="text-center" style="width:120px">PP in</th>
+                                            <th class="text-center" style="width:100px">Số kg</th>
+                                            <th class="text-center" style="width:100px">Số lượt in quy đổi</th>
+                                            <th class="text-center" style="width:100px">Số lượt in thực tế</th>
+                                            <th class="text-center" style="width:40px;">
+                                                <a class="btn btn-sm btn-primary lock p5" id="addRowprintTable" title="Thêm mới">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </th>
+                                        </tr>
+
+                                        <tbody id="appendixPrintTbody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Ghi chú đặc biệt:</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Thời hạn giao bán thành phẩm:</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="" />
+                    </div>
+                </div>
+
+                <!--IV Thành phẩm-->
+                <div class="group">
+                    <div class="form-body">
+                        <div class="row span">
+                            <div class="col-md-12">
+                                <label class="caption-subject sbold uppercase" style="font-size:20px;">
+                                    <u>IV. THÀNH PHẨM</u>
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="margin-top-40">Thành phẩm chung:</label>
+                    </div>
+
+                    <div class="col-md-10">
+                        <textarea class="form-control" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="margin-top-40">Ghi chú đặc biệt:</label>
+                    </div>
+
+                    <div class="col-md-10">
+                        <textarea class="form-control" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Thời hạn giao thành phẩm:</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="" />
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Người lập lệnh sản xuất:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" disabled />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Người duyệt:</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" disabled />
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="row" style="margin-top: 15px">
+            <div class="col-md-12 text-right">
+                <a onclick="goBack()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
+                <a onclick="" class="btn btn-success" style="width: 8%; color:white">Lưu</a>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Modal content-->
 <div class="modal" id="Modal-StageTranfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -319,9 +846,7 @@
 @section scripts {
     <script type="text/javascript">
 
-        //var lstAppendix = model.listContentOfHandoverInfos;
-        var lstAppendix = [];
-        //var lstMaterial = Html.Raw(Json.Encode(Model.lstMaterial));
+        var lstAppendix = @Html.Raw(Json.Encode(Model.lstVatTus));
         var lstMaterialType = @Html.Raw(Json.Encode(Model.lstMaterialType));
 
 
@@ -330,7 +855,7 @@
                 return false;
             });
 
-            $("input#Date").on({
+            $("input#ngay").on({
                 keydown: function (e) {
                     if (e.which === 8 || e.which === 46)
                         return true;
@@ -382,10 +907,10 @@
         }
 
         function generate(appendix, index) {
-            var htmlRow = `<select class="form-control MaterialTypeId selcted2" required style="width: 100%">`;
-            htmlRow += `<option value="" ${appendix.MaterialTypeId == '' ? 'selected' : ''}>---Chọn---</option > `;
+            var htmlRow = `<select class="form-control nhom_vat_tu_id selcted2" required style="width: 100%">`;
+            htmlRow += `<option value="" ${appendix.nhom_vat_tu_id == '' ? 'selected' : ''}>---Chọn---</option > `;
             for (var i = 0; i < lstMaterialType.length; i++) {
-                htmlRow += `<option value = "${lstMaterialType[i].Id}" ${lstMaterialType[i].Id == appendix.MaterialTypeId ? 'selected' : ''}> ${lstMaterialType[i].MaterialTypeName}</option> `;
+                htmlRow += `<option value = "${lstMaterialType[i].Id}" ${lstMaterialType[i].Id == appendix.nhom_vat_tu_id ? 'selected' : ''}> ${lstMaterialType[i].MaterialTypeName}</option> `;
             }
             htmlRow += `</select>`
             return htmlRow;
@@ -398,25 +923,25 @@
                                     ${generate(appendix, index)}
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText LoaiVatTu" value="${appendix.LoaiVatTu == null ? '' : appendix.LoaiVatTu}" />
+                                    <input type="text" class="form-control inputText ten" value="${appendix.ten == null ? '' : appendix.ten}" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText Trang" value="${appendix.Trang == null ? '' : appendix.Trang}" />
+                                    <input type="text" class="form-control inputText trang" value="${appendix.trang == null ? '' : appendix.trang}" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText Giay" value="${appendix.Giay == null ? '' : appendix.Giay}" />
+                                    <input type="text" class="form-control inputText loai_giay" value="${appendix.loai_giay == null ? '' : appendix.loai_giay}" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText Dinhluong" value="${appendix.Dinhluong == null ? '' : appendix.Dinhluong}" />
+                                    <input type="text" class="form-control inputText dinh_luong_giay" value="${appendix.dinh_luong_giay == null ? '' : appendix.dinh_luong_giay}" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText KieuIn1" value="${appendix.KieuIn1 == null ? '' : appendix.KieuIn1}" />
+                                    <input type="text" class="form-control inputText kieu_in_1" value="${appendix.kieu_in_1 == null ? '' : appendix.kieu_in_1}" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText KieuIn2" value="${appendix.KieuIn2 == null ? '' : appendix.KieuIn2}" />
+                                    <input type="text" class="form-control inputText kieu_in_2" value="${appendix.kieu_in_2 == null ? '' : appendix.kieu_in_2}" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText GhiChu" value="${appendix.GhiChu == null ? '' : appendix.GhiChu}" />
+                                    <input type="text" class="form-control inputText ghi_chu" value="${appendix.ghi_chu == null ? '' : appendix.ghi_chu}" />
                                 </td>
                                 <td class="text-center">
                                     <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" style"background-color: white !important;" onclick="removeAppendixRow(this)" id="removeAppendixRow_${index + 1}" myid="${index + 1}" title="Xóa">
@@ -429,14 +954,14 @@
 
         $("#addRowAppendixTable").click(function () {
             var appendix = {
-                LoaiVatTu: '',
-                MaterialTypeId: '',
-                Trang: '',
-                Giay: '',
-                Dinhluong: '',
-                KieuIn1: '',
-                KieuIn2: '',
-                GhiChu: '',
+                ten: '',
+                nhom_vat_tu_id: '',
+                trang: '',
+                loai_giay: '',
+                dinh_luong_giay: '',
+                kieu_in_1: '',
+                kieu_in_2: '',
+                ghi_chu: '',
             };
             var htmlRow = generateHtmlAppendixRow(appendix, lstAppendix.length)
             $("#appendixTable #appendixTbody").append(htmlRow);
@@ -606,12 +1131,14 @@
             lstContents = [];
             for (var i = 0; i < lstAppendix.length; i++) {
                 var contents = {
-                    MeasuringId: $('#standard_' + (i + 1) + ' .MeasuringId').val(),
-                    MeasuringName: measurName,
-                    Model: $('#standard_' + (i + 1) + ' .Model').val(),
-                    SerialNumber: $('#standard_' + (i + 1) + ' .SerialNumber').val(),
-                    Accessories: $('#standard_' + (i + 1) + ' .Accessories').val(),
-                    Status: $('#standard_' + (i + 1) + ' .Status').val(),
+                    ten: $('#standard_' + (i + 1) + ' .ten').val(),
+                    nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val(),
+                    trang: $('#standard_' + (i + 1) + ' .trang').val(),
+                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val(),
+                    dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val(),
+                    kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val(),
+                    kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val(),
+                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val(),
                 };
                 lstContents.push(contents);
             };
@@ -622,86 +1149,37 @@
 
         function GetData() {
             $("#textvalid").empty();
-            var date = $("#Date").val();
+            var date = $("#created_date").val();
             if (date == null || date == "" || date == ' ') {
                 $(".textNoti").html(textnoti);
                 toastr.warning('Bạn chưa nhập đầy đủ thông tin');
             }
             else {
                 var data = {
-                    Id: $('#Id').val() * 1,
-                    listContentOfHandoverInfos: GetInfoDetail(),
+                    id: $('#id').val() * 1,
+                    created_date: $('#created_date').val().trim(),
+                    email: $('#email').val().trim(),
+                    kho_tp: $('#kho_tp').val().trim(),
+                    lan_dieu_chinh: $('#lan_dieu_chinh').val().trim(),
+                    ma_khach_hang: $('#ma_khach_hang').val().trim(),
+                    ma_san_pham: $('#ma_san_pham').val().trim(),
+                    nha_cc: $('#nha_cc').val().trim(),
+                    nv_kinh_doanh: $('#nv_kinh_doanh').val().trim(),
+                    phieu_dnsx_so: $('#phieu_dnsx_so').val().trim(),
+                    phone_number: $('#phone_number').val().trim(),
+                    email: $('#email').val().trim(),
+                    quy_cach_chung: $('#quy_cach_chung').val().trim(),
+                    ten_can_bo_kt: $('#ten_can_bo_kt').val().trim(),
+                    ten_can_bo_ql: $('#ten_can_bo_ql').val().trim(),
+                    ten_khach_hang: $('#ten_khach_hang').val().trim(),
+                    ten_san_pham: $('#ten_san_pham').val().trim(),
+
+                    lstVatTus: GetInfoDetail(), ///thông tin bảng details
                 }
                 return data;
             }
             return false;
         }
-
-
-        function TransViewEditMaterial() {
-            var data = GetData();
-            if (data != false) {
-                url = '/MinutesOfHandoverMeeting/SaveAndSignVO/';
-                $.post(url, data,
-                    function (rs) {
-                    });
-
-            }
-        }
-
-        function AddOrUpdate() {
-            var data = {
-                FullName: $('#FullName').val(),
-                UserName: $('#UserName').val(),
-                PassWord: $('#PassWord').val(),
-                Gender: $('#Gender').val().trim(),
-                BirthDay: $('#BirthDay').val(),
-                RoomId: $('#RoomId').val(),
-                Permission: $('#Permission').val(),
-                Role: $('#Role').val(),
-                Tel: $('#Tel').val(),
-                Email: $('#Email').val(),
-                CMND: $('#CMND').val(),
-                Address: $('#Address').val(),
-            };
-
-            var title2 = "Bạn có đồng ý thêm mới không?";
-            var url = '/Employee/Add';
-
-            if ($("form#edit").valid()) {
-                swal({
-                    title: title2,
-                    icon: "warning",
-                    buttons: {
-                        ok: "Xác nhận",
-                        cancel: "Hủy",
-                    }
-                }).then((isConfirm) => {
-                    if (isConfirm != 'ok') {
-
-                    } else {
-                        $("#btnLuu").attr("disabled", true);
-                        $.post(url, data,
-                            function (rs) {
-                                if (rs.status > 0) {
-                                    swal({
-                                        title: "Cập nhật thành công!",
-                                        text: "Dữ liệu của bạn đã được cập nhật!",
-                                        icon: "success",
-                                    }).then(function (isConfirm) {
-                                        window.location.href = '/Employee';
-                                    });
-                                }
-                                else {
-                                    toastr.error(rs.message);
-                                }
-                            });
-                        $("#btnLuu").attr("disabled", false);
-                    }
-                });
-            }
-        }
-
 
         $("input#SoLanSua").on({
             keydown: function (e) {
@@ -709,5 +1187,399 @@
                     return false;
             },
         });
+
+        //function TransViewEditMaterial() {
+        //    var data = GetData();
+        //    if (data != false) {
+        //        var title2 = "Bạn có đồng ý thêm mới không?";
+        //        var url = '/Material/EditMaterial/' + data.id;
+        //        $.post(url, data,
+        //            function (rs) {
+
+        //            });
+        //    }
+        //}
+
+        ///////////////////////// Man hinh 2 //////////////////////////////////////
+        var lstAppendixMH2 = [];
+        function generateHtmlAppendixRowMK2(appendix, index) {
+            return `<tr id="standard_${index + 1}" class="appendixRow">
+                                <td id="STT" class="text-center">${index + 1}</td>
+                                <td>
+                                    <input type="text" class="form-control inputText SoLuong" value="${appendix.SoLuong == null ? '' : appendix.SoLuong}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText QuyCach1" value="${appendix.QuyCach1 == null ? '' : appendix.QuyCach1}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText QuyCach2" style="width:60px" value="${appendix.QuyCach2 == null ? '' : appendix.QuyCach2}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText QuyCach3" style="width:60px" value="${appendix.QuyCach3 == null ? '' : appendix.QuyCach3}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText QuyCach4" style="width:60px" value="${appendix.QuyCach4 == null ? '' : appendix.QuyCach4}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText MaVT" value="${appendix.MaVT == null ? '' : appendix.MaVT}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText Trang" value="${appendix.Trang == null ? '' : appendix.Trang}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText DinhMuc" value="${appendix.DinhMuc == null ? '' : appendix.DinhMuc}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText Chinh" value="${appendix.Chinh == null ? '' : appendix.Chinh}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText BuIn" value="${appendix.BuIn == null ? '' : appendix.BuIn}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText BuTP" value="${appendix.BuTP == null ? '' : appendix.BuTP}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText Tong" value="${appendix.Tong == null ? '' : appendix.Tong}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText DVTinh" value="${appendix.DVTinh == null ? '' : appendix.DVTinh}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText QuyKy" value="${appendix.QuyKy == null ? '' : appendix.QuyKy}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText MucDichSD" value="${appendix.MucDichSD == null ? '' : appendix.MucDichSD}" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control inputText CCVatTu" value="${appendix.CCVatTu == null ? '' : appendix.CCVatTu}" />
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendixRowMH2(this)" id="removeAppendixRow_${index + 1}" myid="${index + 1}" title="Xóa">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>`
+        }
+
+
+        $("#addRowAppendixTableMH2").click(function () {
+            var appendix = {
+                SoLuong: '',
+                QuyCach1: '',
+                QuyCach2: '',
+                QuyCach3: '',
+                QuyCach4: '',
+                MaVT: '',
+                Trang: '',
+                DinhMuc: '',
+                Chinh: '',
+                BuIn: '',
+                BuTP: '',
+                Tong: '',
+                DVTinh: '',
+                QuyKy: '',
+                MucDichSD: '',
+                CCVatTu: '',
+            };
+            var htmlRow = generateHtmlAppendixRowMK2(appendix, lstAppendixMH2.length)
+            $("#appendixTableMH2 #appendixTbodyMH2").append(htmlRow);
+            lstAppendixMH2.push(appendix);
+            if (lstAppendixMH2.length > 1000) {
+                $("#addRowAppendixTableMH2").prop("disabled", true);
+            }
+            else {
+                $("#addRowAppendixTableMH2").prop("disabled", false);
+            }
+        });
+
+
+        function removeAppendixRowMH2(element) {
+            var row = parseInt($(element).attr("myid"));
+            $(element).parent().parent().remove();
+            lstAppendixMH2.splice(row - 1, 1);
+            if (row <= lstAppendixMH2.length) {
+                for (r = row + 1; r <= lstAppendixMH2.length + 1; r++) {
+                    $("#appendixTableMH2 #standard_" + r + " #STT").text(row);
+
+                    $("#appendixTableMH2 #standard_" + r + " .ac").removeAttr("myid");
+                    $("#appendixTableMH2 #standard_" + r + " .ac").attr("myid", "re_" + row);
+                    $("#appendixTableMH2 #standard_" + r + " .ac").attr("id", "ac_" + row);
+
+                    $("#appendixTableMH2 #standard_" + r + " .re").removeAttr("myid");
+                    $("#appendixTableMH2 #standard_" + r + " .re").attr("myid", "ac_" + row);
+                    $("#appendixTableMH2 #standard_" + r + " .re").attr("id", "re_" + row);
+
+                    $("#appendixTableMH2 #standard_" + r + " .appendix-row").removeAttr("myid");
+                    $("#appendixTableMH2 #standard_" + r + " .appendix-row").attr("myid", row);
+                    $("#appendixTableMH2 #standard_" + r + " .appendix-row").attr("id", "removeAppendixRow_" + row);
+
+                    $("#appendixTableMH2 #standard_" + r).attr("id", "standard_" + row);
+                    row = row + 1;
+                }
+            }
+        }
+
+        ////////////////// Man hinh 3 ///////////////////////////////////////////
+
+        var lstAppendixMH3 = [];
+        var lstAppendixPrint = [];
+        var lstAppenSLTong = [];
+
+        ////////bảng in thứ 1 ///////////////////
+        function generateHtmlAppendixMH3(lstAppendix) {
+            var htmlAllRows = '';
+            for (var i = 0; i < lstAppendix.length; i++) {
+                htmlAllRows = htmlAllRows + generateHtmlAppendixRowMH3(lstAppendix[i], i);
+            }
+            return htmlAllRows;
+        }
+
+        function generateHtmlAppendixRowMH3(appendix, index) {
+            return `<tr id="standard_${index + 1}" class="appendixRow">
+                            <td id="STT" class="text-center">${index + 1}</td>
+                            <td>
+                                <input type="text" class="form-control inputText TayIn" value="${appendix.TayIn == null ? '' : appendix.TayIn}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText SoKem" value="${appendix.SoKem == null ? '' : appendix.SoKem}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText SoBo" value="${appendix.SoBo == null ? '' : appendix.SoBo}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText Tong" value="${appendix.Tong == null ? '' : appendix.Tong}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText Trang" value="${appendix.Trang == null ? '' : appendix.Trang}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText KhoIn" value="${appendix.KhoIn == null ? '' : appendix.KhoIn}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText KhoKem" value="${appendix.KhoKem == null ? '' : appendix.KhoKem}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText PPIn" value="${appendix.PPIn == null ? '' : appendix.PPIn}" />
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendixRowMH3(this)" id="removeAppendixRow_${index + 1}" myid="${index + 1}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>`
+        }
+
+
+        $("#addRowAppendixTableMH3").click(function () {
+            var appendix = {
+                TayIn: '',
+                SoKem: '',
+                SoBo: '',
+                Tong: '',
+                Trang: '',
+                KhoIn: '',
+                KhoKem: '',
+                PPIn: '',
+            };
+            var htmlRow = generateHtmlAppendixRowMH3(appendix, lstAppendixMH3.length)
+            $("#appendixTableMH3 #appendixTbodyMH3").append(htmlRow);
+            lstAppendixMH3.push(appendix);
+            if (lstAppendixMH3.length > 100) {
+                $("#addRowAppendixTableMH3").prop("disabled", true);
+            }
+            else {
+                $("#addRowAppendixTableMH3").prop("disabled", false);
+            }
+        });
+
+
+        function removeAppendixRowMH3(element) {
+            var row = parseInt($(element).attr("myid"));
+            $(element).parent().parent().remove();
+            lstAppendixMH3.splice(row - 1, 1);
+            if (row <= lstAppendixMH3.length) {
+                for (r = row + 1; r <= lstAppendixMH3.length + 1; r++) {
+                    $("#appendixTableMH3 #standard_" + r + " #STT").text(row);
+
+                    $("#appendixTableMH3 #standard_" + r + " .ac").removeAttr("myid");
+                    $("#appendixTableMH3 #standard_" + r + " .ac").attr("myid", "re_" + row);
+                    $("#appendixTableMH3 #standard_" + r + " .ac").attr("id", "ac_" + row);
+
+                    $("#appendixTableMH3 #standard_" + r + " .re").removeAttr("myid");
+                    $("#appendixTableMH3 #standard_" + r + " .re").attr("myid", "ac_" + row);
+                    $("#appendixTableMH3 #standard_" + r + " .re").attr("id", "re_" + row);
+
+                    $("#appendixTableMH3 #standard_" + r + " .appendix-row").removeAttr("myid");
+                    $("#appendixTableMH3 #standard_" + r + " .appendix-row").attr("myid", row);
+                    $("#appendixTableMH3 #standard_" + r + " .appendix-row").attr("id", "removeAppendixRow_" + row);
+
+                    $("#appendixTableMH3 #standard_" + r).attr("id", "standard_" + row);
+                    row = row + 1;
+                }
+            }
+        }
+
+        ////// bảng in thứ 2 //////////////
+        function generateHtmlAppendixPrint(lstAppendixPrint) {
+            var htmlAllRows = '';
+            for (var i = 0; i < lstAppendixPrint.length; i++) {
+                htmlAllRows = htmlAllRows + generateHtmlAppendixPrintRow(lstAppendixPrint[i], i);
+            }
+            return htmlAllRows;
+        }
+
+        function generateHtmlAppendixPrintRow(appendix, index) {
+            return `<tr id="standard_${index + 1}" class="appendixRow">
+                            <td id="STT" class="text-center">${index + 1}</td>
+                            <td>
+                                <input type="text" class="form-control inputText TayIn" value="${appendix.TayIn == null ? '' : appendix.TayIn}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText LoaiGiay" value="${appendix.LoaiGiay == null ? '' : appendix.LoaiGiay}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText KhoGiay" value="${appendix.KhoGiay == null ? '' : appendix.KhoGiay}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText KhoIn" value="${appendix.KhoIn == null ? '' : appendix.KhoIn}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText Chinh" value="${appendix.Chinh == null ? '' : appendix.Chinh}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText BuIn" value="${appendix.BuIn == null ? '' : appendix.BuIn}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText BuTP" value="${appendix.BuTP == null ? '' : appendix.BuTP}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText Tong" value="${appendix.Tong == null ? '' : appendix.Tong}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText PPIn" value="${appendix.PPIn == null ? '' : appendix.PPIn}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText SoKg" value="${appendix.SoKg == null ? '' : appendix.SoKg}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText SoLuotInQuyDoi" value="${appendix.SoLuotInQuyDoi == null ? '' : appendix.SoLuotInQuyDoi}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control inputText SoLuotInThucTe" value="${appendix.SoLuotInThucTe == null ? '' : appendix.SoLuotInThucTe}" />
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendixPrintRow(this)" id="removeAppendixPrintRow_${index + 1}" myid="${index + 1}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>`
+        }
+
+
+        $("#addRowprintTable").click(function () {
+            var appendix = {
+                TayIn: '',
+                LoaiGiay: '',
+                KhoGiay: '',
+                KhoIn: '',
+                Chinh: '',
+                BuIn: '',
+                BuTP: '',
+                Tong: '',
+                PPIn: '',
+                SoKg: '',
+                SoLuotInQuyDoi: '',
+                SoLuotInThucTe: '',
+            };
+            var htmlRow = generateHtmlAppendixPrintRow(appendix, lstAppendixPrint.length)
+            $("#printTable #appendixPrintTbody").append(htmlRow);
+            lstAppendixPrint.push(appendix);
+            if (lstAppendixPrint.length > 100) {
+                $("#addRowprintTable").prop("disabled", true);
+            }
+            else {
+                $("#addRowprintTable").prop("disabled", false);
+            }
+        });
+
+
+        function removeAppendixPrintRow(element) {
+            var row = parseInt($(element).attr("myid"));
+            $(element).parent().parent().remove();
+            lstAppendixPrint.splice(row - 1, 1);
+            if (row <= lstAppendixPrint.length) {
+                for (r = row + 1; r <= lstAppendixPrint.length + 1; r++) {
+                    $("#printTable #standard_" + r + " #STT").text(row);
+                    $("#printTable #standard_" + r + " .ac").removeAttr("myid");
+                    $("#printTable #standard_" + r + " .ac").attr("myid", "re_" + row);
+                    $("#printTable #standard_" + r + " .ac").attr("id", "ac_" + row);
+                    $("#printTable #standard_" + r + " .re").removeAttr("myid");
+                    $("#printTable #standard_" + r + " .re").attr("myid", "ac_" + row);
+                    $("#printTable #standard_" + r + " .re").attr("id", "re_" + row);
+                    $("#printTable #standard_" + r + " .appendix-row").removeAttr("myid");
+                    $("#printTable #standard_" + r + " .appendix-row").attr("myid", row);
+                    $("#printTable #standard_" + r + " .appendix-row").attr("id", "removeAppendixPrintRow_$" + row);
+                    $("#printTable #standard_" + r).attr("id", "standard_" + row);
+                    row = row + 1;
+                }
+            }
+        }
+
+        /////////bảng SL Tổng///////////////
+
+        function generateHtmlAppendSLTongRow(appendix, index) {
+            return `<tr id="standard_${index + 1}" class="appendixRow">
+                            <td id="STT" class="text-center">${index + 1}</td>
+                            <td>
+                                <input type="text" class="form-control inputText SoLuong" value="${appendix.SoLuong == null ? '' : appendix.SoLuong}" />
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendSLTongRow(this)" id="removeAppendSLTongRow_${index + 1}" myid="${index + 1}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>`
+        }
+
+
+        $("#addRowSLTong").click(function () {
+            var appendix = {
+                SoLuong: '',
+            };
+            var htmlRow = generateHtmlAppendSLTongRow(appendix, lstAppenSLTong.length)
+            $("#printTableSLTong #appendixPrintTbodySLTong").append(htmlRow);
+            lstAppenSLTong.push(appendix);
+            if (lstAppenSLTong.length > 100) {
+                $("#addRowSLTong").prop("disabled", true);
+            }
+            else {
+                $("#addRowSLTong").prop("disabled", false);
+            }
+        });
+
+
+        function removeAppendSLTongRow(element) {
+            var row = parseInt($(element).attr("myid"));
+            $(element).parent().parent().remove();
+            lstAppenSLTong.splice(row - 1, 1);
+            if (row <= lstAppenSLTong.length) {
+                for (r = row + 1; r <= lstAppenSLTong.length + 1; r++) {
+                    $("#printTableSLTong #standard_" + r + " #STT").text(row);
+                    $("#printTableSLTong #standard_" + r + " .ac").removeAttr("myid");
+                    $("#printTableSLTong #standard_" + r + " .ac").attr("myid", "re_" + row);
+                    $("#printTableSLTong #standard_" + r + " .ac").attr("id", "ac_" + row);
+                    $("#printTableSLTong #standard_" + r + " .re").removeAttr("myid");
+                    $("#printTableSLTong #standard_" + r + " .re").attr("myid", "ac_" + row);
+                    $("#printTableSLTong #standard_" + r + " .re").attr("id", "re_" + row);
+                    $("#printTableSLTong #standard_" + r + " .appendix-row").removeAttr("myid");
+                    $("#printTableSLTong #standard_" + r + " .appendix-row").attr("myid", row);
+                    $("#printTableSLTong #standard_" + r + " .appendix-row").attr("id", "removeAppendSLTongRow_$" + row);
+                    $("#printTableSLTong #standard_" + r).attr("id", "standard_" + row);
+                    row = row + 1;
+                }
+            }
+        }
+        ///////////////////////////////////////////////////////////////////////////////
+
     </script>
 }
