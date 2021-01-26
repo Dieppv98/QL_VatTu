@@ -91,5 +91,8 @@ namespace DKAC.Models.InfoModel
 
         public List<MaterialType> lstMaterialType { get; set; }
         public List<VatTu> lstVatTus { get; set; }
+        public List<ChiTietDuToan> lstChiTietDuToans { get; set; }
+        public List<ChiTietCheBan> lstChiTietCheBans { get; set; }
+        public List<ChiTietIn> lstChiTietIns { get; set; }
     }
 }

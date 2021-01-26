@@ -55,6 +55,9 @@ namespace DKAC.Repository
                              tp_thoi_han = d.tp_thoi_han
                          }).FirstOrDefault() ?? new DonHangInfo();
             query.lstVatTus = db.VatTu.Where(x => x.don_hang_id == query.id).ToList() ?? new List<VatTu>();
+            query.lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietDuToan>();
+            query.lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietCheBan>();
+            query.lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietIn>();
             return query;
         }
 

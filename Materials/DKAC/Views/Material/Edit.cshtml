@@ -87,7 +87,7 @@
     <title>Nhập liệu</title>
 </head>
 
-<div class="container">
+<div class="container manhinh1">
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
@@ -294,13 +294,13 @@
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
                 <a href="/Material" class="btn btn-primary" style="width: 8%">Hủy</a>
-                <a onclick="TransViewEditMaterial()" @*href="/Material/EditMaterial/0"*@ class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
+                <a onclick="TransViewEditMaterial()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container2">
+<div class="container manhinh2" style="display:none;">
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
@@ -320,7 +320,6 @@
 
         <form action="" method="post" id="edit">
             <div class="form-group">
-                <input type="hidden" class="form-control" id="Id" value="@Model.id" />
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-8 text-center">
@@ -345,14 +344,14 @@
                         <label>Tên khách hàng: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ma_khach_hang" disabled value="@Model.ma_khach_hang" />
+                        <input type="text" class="form-control" id="ma_khach_hangMH2" disabled value="@Model.ma_khach_hang" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Tên sản phẩm: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_san_pham" disabled value="@Model.ten_san_pham" />
+                        <input type="text" class="form-control" id="ten_san_phamMH2" disabled value="@Model.ten_san_pham" />
                     </div>
                 </div>
 
@@ -361,14 +360,14 @@
                         <label>Mã sản phẩm: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ma_san_pham" disabled value="@Model.ma_san_pham" />
+                        <input type="text" class="form-control" id="ma_san_phamMH2" disabled value="@Model.ma_san_pham" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Điều chỉnh lần: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="lan_dieu_chinh" disabled value="@Model.lan_dieu_chinh" />
+                        <input type="text" class="form-control" id="lan_dieu_chinhMH2" disabled value="@Model.lan_dieu_chinh" />
                     </div>
                 </div>
 
@@ -427,14 +426,14 @@
 
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
-                <a onclick="goBack()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
-                <a @*onclick=""*@ href="/Material/EditProductionOrder/0" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
+                <a onclick="goBackMH1()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
+                <a onclick="TransViewEditProductOrder()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container3">
+<div class="container manhinh3" style="display:none;">
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
@@ -454,7 +453,6 @@
 
         <form action="" method="post" id="edit">
             <div class="form-group">
-                <input type="hidden" class="form-control" id="Id" value="@Model.id" />
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-8 text-center">
@@ -799,7 +797,7 @@
 
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
-                <a onclick="goBack()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
+                <a onclick="goBackMH2()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
                 <a onclick="" class="btn btn-success" style="width: 8%; color:white">Lưu</a>
             </div>
         </div>
@@ -846,10 +844,15 @@
 @section scripts {
     <script type="text/javascript">
 
-        var lstAppendix = @Html.Raw(Json.Encode(Model.lstVatTus));
         var lstMaterialType = @Html.Raw(Json.Encode(Model.lstMaterialType));
+        var lstAppendix = @Html.Raw(Json.Encode(Model.lstVatTus));
+        var lstAppendixMH2 = [];  //Html.Raw(Json.Encode(Model.lstChiTietDuToans));
 
+        var lstAppendixMH3 = [];  //Html.Raw(Json.Encode(Model.lstChiTietCheBans));
+        var lstAppendixPrint = [];  //Html.Raw(Json.Encode(Model.lstChiTietIns));
+        var lstAppenSLTong = [];
 
+        ///////////////////////////////////////Man hinh 1 ///////////////////////////////////////////////
         $(document).ready(function () {
             $("#edit").submit(function () {
                 return false;
@@ -1188,18 +1191,6 @@
             },
         });
 
-        //function TransViewEditMaterial() {
-        //    var data = GetData();
-        //    if (data != false) {
-        //        var title2 = "Bạn có đồng ý thêm mới không?";
-        //        var url = '/Material/EditMaterial/' + data.id;
-        //        $.post(url, data,
-        //            function (rs) {
-
-        //            });
-        //    }
-        //}
-
         ///////////////////////// Man hinh 2 //////////////////////////////////////
         var lstAppendixMH2 = [];
         function generateHtmlAppendixRowMK2(appendix, index) {
@@ -1321,9 +1312,6 @@
 
         ////////////////// Man hinh 3 ///////////////////////////////////////////
 
-        var lstAppendixMH3 = [];
-        var lstAppendixPrint = [];
-        var lstAppenSLTong = [];
 
         ////////bảng in thứ 1 ///////////////////
         function generateHtmlAppendixMH3(lstAppendix) {
@@ -1579,7 +1567,46 @@
                 }
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////
+
+        /////////////////////////////Su ly su kien chuyen view//////////////////////////////////////////////////
+
+        function goBackMH1() {
+            $(".manhinh1").attr("style", "display:block");
+            $(".manhinh2").attr("style", "display:none");
+            $(".manhinh3").attr("style", "display:none");
+        }
+
+        function goBackMH2() {
+            $(".manhinh1").attr("style", "display:none");
+            $(".manhinh2").attr("style", "display:block");
+            $(".manhinh3").attr("style", "display:none");
+        }
+
+        function TransViewEditMaterial() {
+            var data = GetData();
+            var lstTemp = data.lstVatTus;
+            if (data != false) {
+                $("#ma_khach_hangMH2").val(data.ma_khach_hang);
+                $("#ten_khach_hangMH2").val(data.ten_khach_hang);
+                $("#ma_san_phamMH2").val(data.ma_san_pham);
+                $("#ten_san_phamMH2").val(data.ten_san_pham);
+                $("#lan_dieu_chinhMH2").val(data.lan_dieu_chinh);
+
+
+
+                $(".manhinh1").attr("style", "display:none");
+                $(".manhinh2").attr("style", "display:block");
+                $(".manhinh3").attr("style", "display:none");
+            }
+        }
+
+        function TransViewEditProductOrder() {
+            $(".manhinh1").attr("style", "display:none");
+            $(".manhinh2").attr("style", "display:none");
+            $(".manhinh3").attr("style", "display:block");
+        }
+
+
 
     </script>
 }
