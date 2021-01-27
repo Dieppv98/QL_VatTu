@@ -11,8 +11,11 @@ namespace DKAC.Models.EntityModel
     {
         public int id { get; set; }
 
-        [StringLength(10)]
+        [StringLength(50)]
         public string ma_khach_hang { get; set; }
+
+        [StringLength(100)]
+        public string ten_khach_hang { get; set; }
 
         [StringLength(500)]
         public string ten_cong_ty { get; set; }

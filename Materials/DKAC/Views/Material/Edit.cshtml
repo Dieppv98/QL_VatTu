@@ -175,14 +175,14 @@
                         <label>Mã khách hàng: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ma_khach_hang" value="@Model.ma_khach_hang" />
+                        <input type="text" class="form-control" id="ma_khach_hang" value="@Model.ma_khach_hang" oninput="SearchMaKHAutoComplete(this)" onchange="TrimValue(this)" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Tên khách hàng: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_khach_hang" value="@Model.ten_khach_hang" />
+                        <input type="text" class="form-control" id="ten_khach_hang" value="@Model.ten_khach_hang" oninput="SearchTenKHAutoComplete(this)" onchange="TrimValue(this)" />
                     </div>
                 </div>
 
@@ -191,14 +191,14 @@
                         <label>Mã sản phẩm: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ma_san_pham" value="@Model.ma_san_pham" />
+                        <input type="text" class="form-control" id="ma_san_pham" value="@Model.ma_san_pham" oninput="SearchMaSPAutoComplete(this)" onchange="TrimValue(this)" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Tên sản phẩm: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_san_pham" value="@Model.ten_san_pham" />
+                        <input type="text" class="form-control" id="ten_san_pham" value="@Model.ten_san_pham" oninput="SearchTenSPAutoComplete(this)" onchange="TrimValue(this)" />
                     </div>
                 </div>
 
@@ -214,7 +214,7 @@
                         <label>Khổ TP: </label>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" id="kho_doc" value="@Model.kho_doc" placeholder="Dài" oninput="SearchNameAutoComplete(this)" onchange="TrimValue(this)" />
+                        <input type="text" class="form-control" id="kho_doc" value="@Model.kho_doc" placeholder="Dài" />
                     </div>
 
                     <div class="col-md-2">
@@ -348,14 +348,19 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2"></div>
                     <div class="col-md-2 text-right">
                         <label>Số LSX: </label>
                     </div>
                     <div class="col-md-4">
                         <input type="text" class="form-control" id="so_lenh_sxMH2" value="@Model.so_lenh_sx" disabled />
                     </div>
-                    <div class="col-md-4"></div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Ngày: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="created_dateMH2" value="@Model.created_date" disabled />
+                    </div>
                 </div>
 
                 <div class="row">
@@ -1140,7 +1145,7 @@
             }
         });
 
-        function SearchNameAutoComplete(element) {
+        function SearchMaKHAutoComplete(element) {
             var value = $(element).val();
             $(element).autocomplete({
                 minLength: 1,
@@ -1149,7 +1154,73 @@
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        url: "/Material/SearchNameAutoComplete",
+                        url: "/Material/SearchMaKHAutoComplete",
+                        data: "{'keySearch':'" + value + "'}",
+                        success: function (rs) {
+                            response(rs);
+                        },
+                        error: function (result) {
+                            alert("No Match");
+                        }
+                    });
+                }
+            });
+        }
+
+        function SearchTenKHAutoComplete(element) {
+            var value = $(element).val();
+            $(element).autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        url: "/Material/SearchTenKHAutoComplete",
+                        data: "{'keySearch':'" + value + "'}",
+                        success: function (rs) {
+                            response(rs);
+                        },
+                        error: function (result) {
+                            alert("No Match");
+                        }
+                    });
+                }
+            });
+        }
+
+        function SearchMaSPAutoComplete(element) {
+            var value = $(element).val();
+            $(element).autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        url: "/Material/SearchMaSPAutoComplete",
+                        data: "{'keySearch':'" + value + "'}",
+                        success: function (rs) {
+                            response(rs);
+                        },
+                        error: function (result) {
+                            alert("No Match");
+                        }
+                    });
+                }
+            });
+        }
+
+        function SearchTenSPAutoComplete(element) {
+            var value = $(element).val();
+            $(element).autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        url: "/Material/SearchTenSPAutoComplete",
                         data: "{'keySearch':'" + value + "'}",
                         success: function (rs) {
                             response(rs);
@@ -1246,7 +1317,7 @@
             return `<tr id="standard_${index + 1}" class="appendixRow">
                                 <td id="STT" class="text-center">${index + 1}</td>
                                 <td>
-                                    <input type="text" class="form-control inputText so_luongMH2" value="${appendix.so_luong == null ? '' : appendix.so_luong}" id="soluongMH2_${index + 1}"/>
+                                    <input type="text" class="form-control inputText so_luongMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.so_luong == null ? '' : appendix.so_luong}" id="soluongMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText tenMH2" value="${appendix.ten == null ? '' : appendix.ten}" id="tenMH2_${index + 1}"/>
@@ -1270,16 +1341,16 @@
                                     <input type="number" style="display:none;" class="form-control inputText trangMH1" value="${appendix.trangMH1 == null ? '' : appendix.trangMH1}" id="trangMH1MH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText dinh_mucMH2" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText dinh_mucMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_chinhMH2" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText sl_chinhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_bu_inMH2" value="${appendix.sl_bu_in == null ? '' : appendix.sl_bu_in}" id="slbuinMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText sl_bu_inMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_in == null ? '' : appendix.sl_bu_in}" id="slbuinMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_bu_tpMH2" value="${appendix.sl_bu_tp == null ? '' : appendix.sl_bu_tp}" id="slbutpMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText sl_bu_tpMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_tp == null ? '' : appendix.sl_bu_tp}" id="slbutpMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="number" class="form-control inputText sl_tongMH2" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
@@ -1649,6 +1720,7 @@
                 $("#ten_san_phamMH2").val(data.ten_san_pham);
                 $("#lan_dieu_chinhMH2").val(data.lan_dieu_chinh);
                 $("#so_lenh_sxMH2").val(data.so_lenh_sx);
+                $("#created_dateMH2").val(data.created_date);
 
                 //fill bảng con giấy
                 for (var i = 0; i < lstTemp.length; i++) {
@@ -1737,9 +1809,51 @@
             var index = id.indexOf('_');
 
             var numberid = id.substring(index + 1);
-            var trangMH1 = $('#trangMH1MH2_' + numberid).val() * 1;
-            var dinhmuc = (trangMH2 / trangMH1).toFixed(2);
+            var trangMH1 = ($('#trangMH1MH2_' + numberid).val() * 1 == 0) ? 1 : $('#trangMH1MH2_' + numberid).val() * 1;
+            var dinhmuc = (trangMH1 / trangMH2).toFixed(2);
             $('#dinhmucMH2_' + numberid).val(dinhmuc);
+            var soLuong = ($('#soluongMH2_' + numberid).val() * 1 == 0) ? 1 : $('#soluongMH2_' + numberid).val() * 1;
+            var soLuongChinh = (soLuong * dinhmuc).toFixed(2);
+            $('#slchinhMH2_' + numberid).val(soLuongChinh);
+
+            var soLuongBuIn = $('#slbuinMH2_' + numberid).val() * 1;
+            var soLuongBuTP = $('#slbutpMH2_' + numberid).val() * 1;
+            var soLuongChinh = $('#slchinhMH2_' + numberid).val() * 1;
+
+            var slTong = (soLuongChinh + soLuongBuIn + soLuongBuTP).toFixed(2);
+            $('#sltongMH2_' + numberid).val(slTong);
+        }
+
+        function AutoTinhSoLuongChinh(element) {
+            var id = $(element).attr("id");
+            var index = id.indexOf('_');
+            var numberid = id.substring(index + 1);
+
+            var soLuong = ($('#soluongMH2_' + numberid).val() * 1 == 0) ? 1 : $('#soluongMH2_' + numberid).val() * 1;
+            var dinhMuc = ($('#dinhmucMH2_' + numberid).val() * 1 == 0) ? 1 : $('#dinhmucMH2_' + numberid).val() * 1;
+
+            var soLuongChinh = (soLuong * dinhMuc).toFixed(2);
+            $('#slchinhMH2_' + numberid).val(soLuongChinh);
+
+            var soLuongBuIn = $('#slbuinMH2_' + numberid).val() * 1;
+            var soLuongBuTP = $('#slbutpMH2_' + numberid).val() * 1;
+            var slChinh = $('#slchinhMH2_' + numberid).val() * 1;
+
+            var slTong = (slChinh + soLuongBuIn + soLuongBuTP).toFixed(2);
+            $('#sltongMH2_' + numberid).val(slTong);
+        }
+
+        function AutoTinhSoLuongTong(element) {
+            var id = $(element).attr("id");
+            var index = id.indexOf('_');
+            var numberid = id.substring(index + 1);
+
+            var soLuongBuIn = $('#slbuinMH2_' + numberid).val() * 1;
+            var soLuongBuTP = $('#slbutpMH2_' + numberid).val() * 1;
+            var soLuongChinh = $('#slchinhMH2_' + numberid).val() * 1;
+
+            var slTong = (soLuongChinh + soLuongBuIn + soLuongBuTP).toFixed(2);
+            $('#sltongMH2_' + numberid).val(slTong);
         }
 
     </script>

@@ -105,11 +105,41 @@ namespace DKAC.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchNameAutoComplete(string keySearch)
+        public ActionResult SearchMaKHAutoComplete(string keySearch)
         {
-            var lstUser = _mater.GetAllMaterialTest(keySearch);
+            var lstUser = _mater.GetAllKhachHang(keySearch);
             var rs = new List<string>();
-            var lstResultSearch = lstUser.Select(x => x.MaterialTypeName).ToList();
+            var lstResultSearch = lstUser.Select(x => x.ma_khach_hang).ToList();
+            rs.AddRange(lstResultSearch);
+            return Json(rs, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SearchTenKHAutoComplete(string keySearch)
+        {
+            var lstUser = _mater.GetAllKhachHang(keySearch);
+            var rs = new List<string>();
+            var lstResultSearch = lstUser.Select(x => x.ten_khach_hang).ToList();
+            rs.AddRange(lstResultSearch);
+            return Json(rs, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SearchMaSPAutoComplete(string keySearch)
+        {
+            var lstUser = _mater.GetAllSanPham(keySearch);
+            var rs = new List<string>();
+            var lstResultSearch = lstUser.Select(x => x.ma_san_pham).ToList();
+            rs.AddRange(lstResultSearch);
+            return Json(rs, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult SearchTenSPAutoComplete(string keySearch)
+        {
+            var lstUser = _mater.GetAllSanPham(keySearch);
+            var rs = new List<string>();
+            var lstResultSearch = lstUser.Select(x => x.ten_san_pham).ToList();
             rs.AddRange(lstResultSearch);
             return Json(rs, JsonRequestBehavior.AllowGet);
         }

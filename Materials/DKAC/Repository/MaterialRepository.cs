@@ -101,9 +101,14 @@ namespace DKAC.Repository
             return data;
         }
 
-        public List<MaterialType> GetAllMaterialTest(string name)
+        public List<KhachHang> GetAllKhachHang(string key)
         {
-            return db.MaterialTypes.AsNoTracking().Where(x => x.MaterialTypeName.ToLower().Contains(name.ToLower())).ToList();
+            return db.KhachHang.AsNoTracking().Where(x => x.ma_khach_hang.ToLower().Contains(key.ToLower()) || x.ten_khach_hang.ToLower().Contains(key.ToLower())).ToList();
+        }
+
+        public List<SanPham> GetAllSanPham(string key)
+        {
+            return db.SanPham.AsNoTracking().Where(x => x.ma_san_pham.ToLower().Contains(key.ToLower()) || x.ten_san_pham.ToLower().Contains(key.ToLower())).ToList();
         }
     }
 }
