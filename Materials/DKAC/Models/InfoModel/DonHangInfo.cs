@@ -35,9 +35,9 @@ namespace DKAC.Models.InfoModel
         [StringLength(50)]
         public string loai { get; set; }
 
-        public decimal? kho_ngang { get; set; }
+        public string kho_ngang { get; set; }
 
-        public decimal? kho_doc { get; set; }
+        public string kho_doc { get; set; }
 
         [StringLength(200)]
         public string ten_che_ban { get; set; }

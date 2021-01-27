@@ -22,7 +22,7 @@ namespace DKAC.Models.EntityModel
 
         public int? dinh_luong_thuc_te { get; set; }
 
-        public int? kho_giay { get; set; }
+        public int? so_luong { get; set; }
 
         [StringLength(20)]
         public string ma_vat_tu { get; set; }
@@ -47,6 +47,9 @@ namespace DKAC.Models.EntityModel
 
         [StringLength(50)]
         public string cc_vat_tu { get; set; }
+        public string kho_giay_dai { get; set; }
+        public string kho_giay_rong { get; set; }
+        public string quy_ky { get; set; } 
 
         public DateTime? thoi_han_cc { get; set; }
 
