@@ -175,10 +175,10 @@
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
     <!-- Vendor JS Files -->
     <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquerys-3.5.1.js"></script>
+
     <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
-    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
-    <script src="~/Scripts/jquery-3.5.1.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
     <script src="~/assets/vendor/php-email-form/validate.js"></script>
     <script src="~/assets/vendor/jquery-sticky/jquery.sticky.js"></script>
@@ -188,12 +188,13 @@
     <script src="~/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="~/assets/vendor/aos/aos.js"></script>
     <script src="~/assets/font/js/all.js"></script>
-    <script src="~/assets/vendor/jquery/sweetalert.min.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="~/Scripts/toastr.js"></script>
     <script src="~/assets/js/main.js"></script>
-    <script src="~/Scripts/jsSweetalert/sweetalert2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="~/Scripts/jsSweetalert/sweetalert2.min.js"></script>*@
+    <script src="~/assets/vendor/jquery/sweetalert.min.js"></script>
 
     <!--Select2-->
     <script src="~/Scripts/select2-version1/select2.min.js"></script>
@@ -212,38 +213,28 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
-        const regex = /http:\/\/.*\/(.*)\//g;
-        const match = regex.exec(window.location.href);
-        var match_1 = match[1];
-        // iterate over all and find match
-        if (match) {
-            $(".nav-link").each(function () {
-                var name = $(this).find("a").attr("href");
-                var name_1 = name.slice(1);
-                if (name_1 == match_1) {
-                    $(this).addClass(" active");
-                };
+        //$(document).ready(function () {
+        //    const regex = /http:\/\/.*\/(.*)\//g;
+        //    const match = regex.exec(window.location.href);
+        //    var match_1 = match[1];
+        //    // iterate over all and find match
+        //    if (match) {
+        //        $(".nav-link").each(function () {
+        //            var name = $(this).find("a").attr("href");
+        //            var name_1 = name.slice(1);
+        //            if (name_1 == match_1) {
+        //                $(this).addClass(" active");
+        //            };
 
-                //if ($(this).find(".nav .nav-link .a").attr("href").slice(1) == match[1]) {
-                //    $(this).addClass("active");
-                //}
-            });
-        }
-        // set active first element
-        else {
-            $(".nav-link:first").addClass("active");
-        }
-    });
-
-    //var btnContainer = document.getElementById("myUl");
-    //var btns = btnContainer.getElementsByClassName("btn");
-    //for (var i = 0; i < btns.length; i++) {
-    //    btns[i].addEventListener("click", function () {
-    //        var current = document.getElementsByClassName("active");
-    //        current[0].className = current[0].className.replace(" active", "");
-    //        this.className += " active";
-    //    });
-    //}
+        //            //if ($(this).find(".nav .nav-link .a").attr("href").slice(1) == match[1]) {
+        //            //    $(this).addClass("active");
+        //            //}
+        //        });
+        //    }
+        //    // set active first element
+        //    else {
+        //        $(".nav-link:first").addClass("active");
+        //    }
+        //});
 
 </script>
