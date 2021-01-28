@@ -144,6 +144,16 @@ namespace DKAC.Controllers
             return Json(rs, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult SearchLoaiGiayAutoComplete(string keySearch)
+        {
+            var lstUser = _mater.GetAllLoaiGiay(keySearch);
+            var rs = new List<string>();
+            var lstResultSearch = lstUser.Select(x => x.loai_giay).ToList();
+            rs.AddRange(lstResultSearch);
+            return Json(rs, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Test()
         {
             return View();

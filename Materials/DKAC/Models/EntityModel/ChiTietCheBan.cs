@@ -23,7 +23,9 @@ namespace DKAC.Models.EntityModel
         public int? trang { get; set; }
 
         [StringLength(20)]
-        public string kho_in { get; set; }
+        public string kho_in_dai { get; set; }
+
+        public string kho_in_rong { get; set; }
 
         [StringLength(20)]
         public string kho_kem { get; set; }

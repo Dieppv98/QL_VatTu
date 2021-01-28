@@ -110,5 +110,10 @@ namespace DKAC.Repository
         {
             return db.SanPham.AsNoTracking().Where(x => x.ma_san_pham.ToLower().Contains(key.ToLower()) || x.ten_san_pham.ToLower().Contains(key.ToLower())).ToList();
         }
+
+        public List<VatTu> GetAllLoaiGiay(string key)
+        {
+            return db.VatTu.AsNoTracking().Where(x => x.loai_giay.ToLower().Contains(key.ToLower())).ToList();
+        }
     }
 }
