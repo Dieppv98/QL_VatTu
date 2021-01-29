@@ -16,26 +16,26 @@ namespace DKAC.Models.EntityModel
 
         [StringLength(100)]
         public string ten_loai { get; set; }
-        
+
         public string kho_giay { get; set; }
-        public double? kho_in_dai { get; set; }
-        public double? kho_in_rong { get; set; }
+        public string kho_in_dai { get; set; }
+        public string kho_in_rong { get; set; }
 
-        public double? chinh { get; set; }
+        public string chinh { get; set; }
 
-        public double? bu_thanh_pham { get; set; }
+        public string bu_thanh_pham { get; set; }
 
-        public double? bu_in { get; set; }
+        public string bu_in { get; set; }
 
-        public double? sl_tong { get; set; }
-        
+        public string sl_tong { get; set; }
+
         public string phuong_phap_in { get; set; }
 
-        public double? so_kg { get; set; }
+        public string so_kg { get; set; }
 
-        public double? so_luot_in_quy_doi { get; set; }
+        public string so_luot_in_quy_doi { get; set; }
 
-        public double? so_luot_in_thuc_te { get; set; }
+        public string so_luot_in_thuc_te { get; set; }
 
         public int? don_hang_id { get; set; }
     }

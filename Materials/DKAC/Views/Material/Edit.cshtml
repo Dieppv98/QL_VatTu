@@ -1285,15 +1285,15 @@
             lstContents = [];
             for (var i = 0; i < lstAppendix.length; i++) {
                 var contents = {
-                    ten: $('#standard_' + (i + 1) + ' .ten').val().trim(),
-                    nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val().trim(),
+                    ten: $('#standard_' + (i + 1) + ' .ten').val().toString().trim(),
+                    nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val().toString().trim(),
                     ten_nhom_vat_tu: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id option:selected').text().trim(),
-                    trang: $('#standard_' + (i + 1) + ' .trang').val().trim(),
-                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val().trim(),
-                    dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val().trim(),
-                    kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val().trim(),
-                    kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val().trim(),
-                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val().trim(),
+                    trang: $('#standard_' + (i + 1) + ' .trang').val().toString().trim(),
+                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val().toString().trim(),
+                    dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val().toString().trim(),
+                    kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val().toString().trim(),
+                    kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val().toString().trim(),
+                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val().toString().trim(),
                 };
                 lstContents.push(contents);
             };
@@ -1307,21 +1307,21 @@
                 var contents = {
                     so_luong: $('#standard_' + (i + 1) + ' .so_luongMH2').val().trim(),
                     ten: $('#standard_' + (i + 1) + ' .tenMH2').val().trim(),
-                    dinh_luong: $('#standard_' + (i + 1) + ' .dinh_luongMH2').val().trim(),
-                    kho_giay_dai: $('#standard_' + (i + 1) + ' .kho_giay_daiMH2').val().trim(),
-                    kho_giay_rong: $('#standard_' + (i + 1) + ' .kho_giay_rongMH2').val().trim(),
-                    ma_vat_tu: $('#standard_' + (i + 1) + ' .ma_vat_tuMH2').val().trim(),
-                    trang: $('#standard_' + (i + 1) + ' .trangMH2').val().trim(),
-                    dinh_muc: $('#standard_' + (i + 1) + ' .dinh_mucMH2').val().trim(),
-                    sl_chinh: $('#standard_' + (i + 1) + ' .sl_chinhMH2').val().trim(),
-                    sl_bu_in: $('#standard_' + (i + 1) + ' .sl_bu_inMH2').val().trim(),
-                    sl_bu_tp: $('#standard_' + (i + 1) + ' .sl_bu_tpMH2').val().trim(),
-                    sl_tong: $('#standard_' + (i + 1) + ' .sl_tongMH2').val().trim(),
-                    don_vi_tinh: $('#standard_' + (i + 1) + ' .don_vi_tinhMH2').val().trim(),
-                    quy_ky: $('#standard_' + (i + 1) + ' .quy_kyMH2').val().trim(),
-                    muc_dich_sd: $('#standard_' + (i + 1) + ' .muc_dich_sdMH2').val().trim(),
-                    cc_vat_tu: $('#standard_' + (i + 1) + ' .cc_vat_tuMH2').val().trim(),
-                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giayMH2').val().trim(),
+                    dinh_luong: $('#standard_' + (i + 1) + ' .dinh_luongMH2').val().toString().trim(),
+                    kho_giay_dai: $('#standard_' + (i + 1) + ' .kho_giay_daiMH2').val().toString().trim(),
+                    kho_giay_rong: $('#standard_' + (i + 1) + ' .kho_giay_rongMH2').val().toString(),
+                    ma_vat_tu: $('#standard_' + (i + 1) + ' .ma_vat_tuMH2').val().toString().trim(),
+                    trang: $('#standard_' + (i + 1) + ' .trangMH2').val().toString().trim(),
+                    dinh_muc: ($('#standard_' + (i + 1) + ' .dinh_mucMH2').val()).toString().trim(),
+                    sl_chinh: $('#standard_' + (i + 1) + ' .sl_chinhMH2').val().toString().trim(),
+                    sl_bu_in: $('#standard_' + (i + 1) + ' .sl_bu_inMH2').val().toString().trim(),
+                    sl_bu_tp: $('#standard_' + (i + 1) + ' .sl_bu_tpMH2').val().toString().trim(),
+                    sl_tong: ($('#standard_' + (i + 1) + ' .sl_tongMH2').val()).toString().trim(),
+                    don_vi_tinh: $('#standard_' + (i + 1) + ' .don_vi_tinhMH2').val().toString().trim(),
+                    quy_ky: ($('#standard_' + (i + 1) + ' .quy_kyMH2').val()).toString().trim(),
+                    muc_dich_sd: $('#standard_' + (i + 1) + ' .muc_dich_sdMH2').val().toString().trim(),
+                    cc_vat_tu: $('#standard_' + (i + 1) + ' .cc_vat_tuMH2').val().toString().trim(),
+                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giayMH2').val().toString().trim(),
                 };
                 lstContents.push(contents);
             };
@@ -1333,7 +1333,7 @@
             lstContents = [];
             for (var i = 0; i < lstAppenSLTong.length; i++) {
                 var contents = {
-                    Values: $('#standard_' + (i + 1) + ' .Values').val().trim(),
+                    Values: $('#standard_' + (i + 1) + ' .Values').val().toString().trim(),
                 };
                 lstContents.push(contents);
             };
@@ -1346,13 +1346,13 @@
             for (var i = 0; i < lstAppendixMH3.length; i++) {
                 var contents = {
                     ten_tay_in: $('#standard_' + (i + 1) + ' .ten_tay_in1').val().trim(),
-                    so_kem: $('#standard_' + (i + 1) + ' .so_kem1').val().trim(),
-                    so_bo: $('#standard_' + (i + 1) + ' .so_bo1').val().trim(),
-                    tong: $('#standard_' + (i + 1) + ' .tong1').val().trim(),
-                    trang: $('#standard_' + (i + 1) + ' .trang1').val().trim(),
-                    kho_in_dai: $('#standard_' + (i + 1) + ' .kho_in_dai1').val().trim(),
-                    kho_in_rong: $('#standard_' + (i + 1) + ' .kho_in_rong1').val().trim(),
-                    kho_kem: $('#standard_' + (i + 1) + ' .kho_kem1').val().trim(),
+                    so_kem: $('#standard_' + (i + 1) + ' .so_kem1').val().toString(),
+                    so_bo: $('#standard_' + (i + 1) + ' .so_bo1').val().toString().trim(),
+                    tong: $('#standard_' + (i + 1) + ' .tong1').val().toString().trim(),
+                    trang: $('#standard_' + (i + 1) + ' .trang1').val().toString().trim(),
+                    kho_in_dai: $('#standard_' + (i + 1) + ' .kho_in_dai1').val().toString().trim(),
+                    kho_in_rong: $('#standard_' + (i + 1) + ' .kho_in_rong1').val().toString().trim(),
+                    kho_kem: $('#standard_' + (i + 1) + ' .kho_kem1').val().toString().trim(),
                     phuong_phap_in: $('#standard_' + (i + 1) + ' .phuong_phap_in1').val().trim(),
                 };
                 lstContents.push(contents);
@@ -1367,17 +1367,17 @@
                 var contents = {
                     ten_tay_in: $('#standard_' + (i + 1) + ' .ten_tay_in').val().trim(),
                     ten_loai: $('#standard_' + (i + 1) + ' .ten_loai').val().trim(),
-                    kho_giay: $('#standard_' + (i + 1) + ' .kho_giay').val().trim(),
-                    kho_in_dai: $('#standard_' + (i + 1) + ' .kho_in_dai').val().trim(),
-                    kho_in_rong: $('#standard_' + (i + 1) + ' .kho_in_rong').val().trim(),
-                    chinh: $('#standard_' + (i + 1) + ' .chinh').val().trim(),
-                    bu_in: $('#standard_' + (i + 1) + ' .bu_in').val().trim(),
-                    bu_thanh_pham: $('#standard_' + (i + 1) + ' .bu_thanh_pham').val().trim(),
-                    sl_tong: $('#standard_' + (i + 1) + ' .sl_tong').val().trim(),
+                    kho_giay: $('#standard_' + (i + 1) + ' .kho_giay').val().toString().trim(),
+                    kho_in_dai: $('#standard_' + (i + 1) + ' .kho_in_dai').val().toString().trim(),
+                    kho_in_rong: $('#standard_' + (i + 1) + ' .kho_in_rong').val().toString().trim(),
+                    chinh: $('#standard_' + (i + 1) + ' .chinh').val().toString().trim(),
+                    bu_in: $('#standard_' + (i + 1) + ' .bu_in').val().toString().trim(),
+                    bu_thanh_pham: $('#standard_' + (i + 1) + ' .bu_thanh_pham').val().toString().trim(),
+                    sl_tong: $('#standard_' + (i + 1) + ' .sl_tong').val().toString().trim(),
                     phuong_phap_in: $('#standard_' + (i + 1) + ' .phuong_phap_in').val().trim(),
-                    so_kg: $('#standard_' + (i + 1) + ' .so_kg').val().trim(),
-                    so_luot_in_quy_doi: $('#standard_' + (i + 1) + ' .so_luot_in_quy_doi').val().trim(),
-                    so_luot_in_thuc_te: $('#standard_' + (i + 1) + ' .so_luot_in_thuc_te').val().trim(),
+                    so_kg: $('#standard_' + (i + 1) + ' .so_kg').val().toString().trim(),
+                    so_luot_in_quy_doi: $('#standard_' + (i + 1) + ' .so_luot_in_quy_doi').val().toString().trim(),
+                    so_luot_in_thuc_te: $('#standard_' + (i + 1) + ' .so_luot_in_thuc_te').val().toString().trim(),
                 };
                 lstContents.push(contents);
             };
@@ -1468,10 +1468,10 @@
                                     <input type="number" style="display:none;" class="form-control inputText trangMH1" value="${appendix.trangMH1 == null ? '' : appendix.trangMH1}" id="trangMH1MH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText dinh_mucMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText dinh_mucMH2" disabled onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_chinhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText sl_chinhMH2" disabled onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="number" class="form-control inputText sl_bu_inMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_in == null ? '' : appendix.sl_bu_in}" id="slbuinMH2_${index + 1}"/>
@@ -1480,13 +1480,13 @@
                                     <input type="number" class="form-control inputText sl_bu_tpMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_tp == null ? '' : appendix.sl_bu_tp}" id="slbutpMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_tongMH2" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText sl_tongMH2" disabled value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText don_vi_tinhMH2" value="${appendix.don_vi_tinh == null ? '' : appendix.don_vi_tinh}" id="donvitinhMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText quy_kyMH2" value="${appendix.quy_ky == null ? '' : appendix.quy_ky}" id="quykyMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText quy_kyMH2" disabled value="${appendix.quy_ky == null ? '' : appendix.quy_ky}" id="quykyMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText muc_dich_sdMH2" value="${appendix.muc_dich_sd == null ? '' : appendix.muc_dich_sd}" id="mucdichsdMH2_${index + 1}"/>

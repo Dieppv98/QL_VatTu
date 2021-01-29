@@ -29,15 +29,15 @@ namespace DKAC.Models.EntityModel
 
         public double? trang { get; set; }
 
-        public double? dinh_muc { get; set; }
+        public string dinh_muc { get; set; }
 
-        public double? sl_chinh { get; set; }
+        public string sl_chinh { get; set; }
 
         public double? sl_bu_in { get; set; }
 
         public double? sl_bu_tp { get; set; }
 
-        public double? sl_tong { get; set; }
+        public string sl_tong { get; set; }
 
         [StringLength(50)]
         public string don_vi_tinh { get; set; }
@@ -49,7 +49,7 @@ namespace DKAC.Models.EntityModel
         public string cc_vat_tu { get; set; }
         public double? kho_giay_dai { get; set; }
         public double? kho_giay_rong { get; set; }
-        public double? quy_ky { get; set; } 
+        public string quy_ky { get; set; }
 
         public DateTime? thoi_han_cc { get; set; }
 

@@ -14,19 +14,19 @@ namespace DKAC.Models.EntityModel
         [StringLength(500)]
         public string ten_tay_in { get; set; }
 
-        public double? so_kem { get; set; }
+        public string so_kem { get; set; }
 
-        public double? so_bo { get; set; }
+        public string so_bo { get; set; }
 
-        public double? tong { get; set; }
+        public string tong { get; set; }
 
-        public double? trang { get; set; }
+        public string trang { get; set; }
         
-        public double? kho_in_dai { get; set; }
+        public string kho_in_dai { get; set; }
 
-        public double? kho_in_rong { get; set; }
+        public string kho_in_rong { get; set; }
         
-        public double? kho_kem { get; set; }
+        public string kho_kem { get; set; }
         
         public string phuong_phap_in { get; set; }
 
