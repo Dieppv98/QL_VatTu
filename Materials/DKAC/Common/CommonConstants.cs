@@ -9,5 +9,6 @@ namespace DKAC.Common
     {
         public static string USER_SESSION = "USER_SESSION";
         public static string PAGE_MODUL_SESSION = "PAGE_MODUL_SESSION";
+        public const string KeyPassWord = "GKHTDGDS";
     }
 }

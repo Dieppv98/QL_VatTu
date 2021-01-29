@@ -278,18 +278,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Common\Encryption.cs" />
+    <Compile Include="Common\SecurityUtility.cs" />
     <Compile Include="Common\Ultilities.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaterialController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Enum\Enum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IRepository\ILoginRepository.cs" />
     <Compile Include="IRepository\IReportRepository.cs" />
+    <Compile Include="IRepository\IUserRepository.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\EntityModel\Action.cs" />
     <Compile Include="Models\EntityModel\ChiTietCheBan.cs" />
@@ -310,16 +314,20 @@
     <Compile Include="Models\EntityModel\VatTu.cs" />
     <Compile Include="Models\InfoModel\AccountModulPageInfo.cs" />
     <Compile Include="Models\InfoModel\DonHangInfo.cs" />
+    <Compile Include="Models\InfoModel\EmployeeInfo.cs" />
     <Compile Include="Models\InfoModel\PermissionActionInfo.cs" />
     <Compile Include="Models\InfoModel\UserInfo.cs" />
     <Compile Include="Models\InfoModel\UserRoleInfo.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\RequestModel\ChangePasswordModel.cs" />
     <Compile Include="Models\RequestModel\DonHangRequestModel.cs" />
     <Compile Include="Models\RequestModel\MaterialTypeRequestModel.cs" />
+    <Compile Include="Models\RequestModel\UserRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\MaterialRepository.cs" />
     <Compile Include="Repository\ReportRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\style.css" />
@@ -2572,6 +2580,12 @@
     <Content Include="Views\Admin\EditRole.cshtml" />
     <Content Include="Views\Admin\PermissionManagerment.cshtml" />
     <Content Include="Views\Admin\RoleManagerment.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Add.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\EditUserInfo.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
