@@ -99,5 +99,6 @@ namespace DKAC.Models.InfoModel
         public List<ChiTietCheBan> lstChiTietCheBans { get; set; }
         public List<ChiTietIn> lstChiTietIns { get; set; }
         public List<string> lstchi_tiet_sl_tong { get; set; }
+        public List<TongSoLuongInfo> lst_sl_tong { get; set; }
     }
 }

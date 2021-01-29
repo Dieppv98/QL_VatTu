@@ -54,12 +54,22 @@ namespace DKAC.Repository
                              ten_san_pham = d.ten_san_pham,
                              thanh_pham_chung = d.thanh_pham_chung,
                              tp_ghi_chu = d.tp_ghi_chu,
-                             tp_thoi_han = d.tp_thoi_han
+                             tp_thoi_han = d.tp_thoi_han,
+                             chi_tiet_sl_tong = d.chi_tiet_sl_tong,
                          }).FirstOrDefault() ?? new DonHangInfo();
             query.lstVatTus = db.VatTu.Where(x => x.don_hang_id == query.id).ToList() ?? new List<VatTu>();
             query.lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietDuToan>();
             query.lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietCheBan>();
             query.lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietIn>();
+            if (query.chi_tiet_sl_tong != null)
+            {
+                query.lst_sl_tong = JsonConvert.DeserializeObject<List<TongSoLuongInfo>>(query.chi_tiet_sl_tong ?? string.Empty)
+                        .Select(o => new TongSoLuongInfo()
+                        {
+                            Values = o.Values
+                        }).ToList() ?? new List<TongSoLuongInfo>();
+            }
+            else { query.lst_sl_tong = new List<TongSoLuongInfo>(); }
             return query;
         }
 
@@ -157,9 +167,9 @@ namespace DKAC.Repository
             dh.thanh_pham_chung = model.thanh_pham_chung;
             dh.tp_ghi_chu = model.tp_ghi_chu;
             dh.tp_thoi_han = model.tp_thoi_han;
-            if (model.lstchi_tiet_sl_tong != null)
+            if (model.lst_sl_tong != null)
             {
-                dh.chi_tiet_sl_tong = JsonConvert.SerializeObject(model.lstchi_tiet_sl_tong);
+                dh.chi_tiet_sl_tong = JsonConvert.SerializeObject(model.lst_sl_tong);
             }
             if (model.id <= 0)
             {

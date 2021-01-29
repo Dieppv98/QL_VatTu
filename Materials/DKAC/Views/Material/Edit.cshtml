@@ -1329,7 +1329,7 @@
             lstContents = [];
             for (var i = 0; i < lstAppenSLTong.length; i++) {
                 var contents = {
-                    soluong: $('#standard_' + (i + 1) + ' .soluong').val().trim(),
+                    Values: $('#standard_' + (i + 1) + ' .Values').val().trim(),
                 };
                 lstContents.push(contents);
             };
@@ -1788,7 +1788,7 @@
             return `<tr id="standard_${index + 1}" class="appendixRow">
                             <td id="STT" class="text-center">${index + 1}</td>
                             <td>
-                                <input type="text" class="form-control inputText soluong" value="${appendix.soluong == null ? '' : appendix.soluong}" />
+                                <input type="text" class="form-control inputText Values" value="${appendix.Values == null ? '' : appendix.Values}" />
                             </td>
                             <td class="text-center">
                                 <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendSLTongRow(this)" id="removeAppendSLTongRow_${index + 1}" myid="${index + 1}" title="Xóa">
@@ -1801,7 +1801,7 @@
 
         $("#addRowSLTong").click(function () {
             var appendix = {
-                soluong: '',
+                Values: '',
             };
             var htmlRow = generateHtmlAppendSLTongRow(appendix, lstAppenSLTong.length)
             $("#printTableSLTong #appendixPrintTbodySLTong").append(htmlRow);
@@ -2201,7 +2201,7 @@
 
                     lstVatTus: GetInfoDetail(), //thông tin bảng details tổng quan đơn hàng
                     lstChiTietDuToans: GetInfoChiTietDuToan(), //thông tin bảng details tổng quan đơn hàng
-                    lstchi_tiet_sl_tong: GetInfoSoLuongTong(), //thông tin bảng số lượng tổng
+                    lst_sl_tong: GetInfoSoLuongTong(), //thông tin bảng số lượng tổng
                     lstChiTietCheBans: GetInfoChiTietCheBan(), //thông tin bảng chế phẩm
                     lstChiTietIns: GetInfoChiTietBangIn(),  //thông tin bảng in
                 }
@@ -2255,18 +2255,5 @@
 
         }
 
-        //if (minuteInfo.ListContentOfHandover != null) {
-        //    minuteInfo.listContentOfHandoverInfos = JsonConvert.DeserializeObject<List<ListContentOfHandoverInfo>>(minuteInfo.ListContentOfHandover ?? string.Empty)
-        //        .Select(o => new ListContentOfHandoverInfo()
-        //                                                {
-        //                MeasuringId = o.MeasuringId,
-        //                MeasuringName = o.MeasuringName,
-        //                Model = o.Model,
-        //                SerialNumber = o.SerialNumber,
-        //                Accessories = o.Accessories,
-        //                Status = o.Status
-        //            }).ToList() ?? new List<ListContentOfHandoverInfo>();
-        //}
-        //else { minuteInfo.listContentOfHandoverInfos = new List<ListContentOfHandoverInfo>(); }
     </script>
 }

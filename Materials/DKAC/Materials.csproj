@@ -309,6 +309,7 @@
     <Compile Include="Models\InfoModel\AccountModulPageInfo.cs" />
     <Compile Include="Models\InfoModel\DonHangInfo.cs" />
     <Compile Include="Models\InfoModel\PermissionActionInfo.cs" />
+    <Compile Include="Models\InfoModel\TongSoLuongInfo.cs" />
     <Compile Include="Models\InfoModel\UserInfo.cs" />
     <Compile Include="Models\InfoModel\UserRoleInfo.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -2574,6 +2575,7 @@
     <Content Include="Views\Admin\EditRole.cshtml" />
     <Content Include="Views\Admin\PermissionManagerment.cshtml" />
     <Content Include="Views\Admin\RoleManagerment.cshtml" />
+    <Content Include="Views\Material\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

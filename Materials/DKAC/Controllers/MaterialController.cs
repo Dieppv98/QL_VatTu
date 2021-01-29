@@ -46,27 +46,15 @@ namespace DKAC.Controllers
             return View(donHang);
         }
 
-        //public ActionResult EditMaterial(int id, DonHangInfo model)
-        //{
-        //    if (model.id == (int)0)
-        //    {
-        //        return View(model);
-        //    }
-        //    //gọi hàm
-        //    return View(model);
-        //}
-
-        //public ActionResult EditProductionOrder(int id)
-        //{
-        //    if (id == (int)0)
-        //    {
-        //        UserInfo u = new UserInfo();
-        //        return View(u);
-        //    }
-        //    //gọi hàm
-        //    return View();
-        //}
-
+        public ActionResult Details(int id)
+        {
+            var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
+            DonHangInfo donHang = new DonHangInfo();
+            //gọi hàm
+            donHang = _mater.GetbyId(id);
+            donHang.lstMaterialType = lstMaterial;
+            return View(donHang);
+        }
 
         [HttpGet]
         public ActionResult Search(string q)
@@ -152,11 +140,6 @@ namespace DKAC.Controllers
             var lstResultSearch = lstUser.Select(x => x.loai_giay).ToList();
             rs.AddRange(lstResultSearch);
             return Json(rs, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Test()
-        {
-            return View();
         }
 
         [HttpPost]
