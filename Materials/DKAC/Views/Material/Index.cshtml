@@ -64,7 +64,7 @@
                     <div class="col-md-2"></div>
                     <label class="lbl">Từ khóa: </label>
                     <div class="col-md-6" style="margin-bottom: 10px;">
-                        <input type="text" name="KeySearch" placeholder="Nhập số LSX" class="form-control search-form" />
+                        <input type="text" name="Keywords" placeholder="Nhập số LSX" class="form-control search-form" />
                     </div>
                     <div class="col-md-2">
                         <button id="btnSearch" class="btn btn-sm btn-primary filter-submit" type="submit">
@@ -81,7 +81,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Quản lý dự toán vật tư</h2>
+                        <h2>Quản lý phiếu nhập vật tư</h2>
                     </div>
                     <div class="col-sm-6">
                         <a href="/Material/Edit/0" class="btn btn-success" style="padding: 10px 30px 10px 30px; border-radius: 5px"><i class="fa fa-plus"></i> Thêm mới</a>
@@ -116,7 +116,8 @@
                             <td class="text-center">@item.nv_kinh_doanh</td>
                             <td class="text-center">@(item.ngay_giao_hang.HasValue ? item.ngay_giao_hang.Value.ToString("dd/MM/yyyy") : "")</td>
                             <td class="text-center">
-                                <a href="/Employee/Details/@item.id" class="details-link" style="margin-right: 5px;"><i class="fa fa-eye" title="Xem"></i></a>
+                                <a href="/Employee/Details/@item.id" class="details-link" style="margin-right: 5px;" title="Xem chi tiết"><i class="fa fa-eye"></i></a>
+                                <a onclick="Delete(@item.id)" class="details-link red" style="margin-right: 5px;color:red;" title="Xóa"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     }
@@ -175,12 +176,12 @@
 </body>
 
 <script type="text/javascript">
-    function Delete(Id) {
+    function Delete(id) {
         var data = {
-            Id: Id,
+            id: id,
         };
         var title = "Bạn có đồng ý xóa dữ liệu này không?";
-        var url = '/Employee/Delete/';
+        var url = '/Material/Delete/';
         swal({
             title: title,
             icon: "warning",
@@ -200,7 +201,7 @@
                                 text: "Dữ liệu của bạn đã được cập nhật!",
                                 icon: "success",
                             }).then(function (isConfirm) {
-                                window.location.href = '/Employee';
+                                window.location.href = '/Material';
                             });
                         }
                         else {

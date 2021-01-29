@@ -1,4 +1,5 @@
-﻿@model DKAC.Models.InfoModel.DonHangInfo
+﻿
+@model DKAC.Models.InfoModel.DonHangInfo
 @{
     ViewBag.Title = "Nhập liệu";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -272,39 +273,45 @@
                         <label>Quy cách chung: </label>
                     </div>
                     <div class="col-md-10">
-                        <textarea class="form-control" rows="3" id="quy_cach_chung" value="@Model.quy_cach_chung"></textarea>
+                        @Html.TextAreaFor(a=>a.quy_cach_chung, new Dictionary<string, object>
+                              {
+                                  {"class", " form-control"},
+                                    {"id", "quy_cach_chung"},
+                                     { "maxlength", "2001" },
+                                     { "row", "3" },
+                              })
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2 text-right">
-                        <label>Người duyệt: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_can_bo_kt" value="@Model.ten_can_bo_kt" />
-                    </div>
-
                     <div class="col-md-2 text-right">
                         <label>Nhân viên quản lý đơn hàng: </label>
                     </div>
                     <div class="col-md-4">
                         <input type="text" class="form-control" id="ten_can_bo_ql" value="@Model.ten_can_bo_ql" />
                     </div>
-                </div>
 
-                <div class="row">
                     <div class="col-md-2 text-right">
                         <label>Số điện thoại: </label>
                     </div>
                     <div class="col-md-4">
                         <input type="text" class="form-control" id="phone_number" value="@Model.phone_number" />
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="col-md-2 text-right">
                         <label>Email: </label>
                     </div>
                     <div class="col-md-4">
                         <input type="text" class="form-control" id="email" value="@Model.email" />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Người duyệt: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ten_can_bo_kt" value="@Model.ten_can_bo_kt" />
                     </div>
                 </div>
             </div>
@@ -337,7 +344,7 @@
             </ol>
         </div>
 
-        <form action="" method="post" id="edit">
+        <form action="" method="post" id="editMH2">
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-2"></div>
@@ -481,7 +488,7 @@
             </ol>
         </div>
 
-        <form action="" method="post" id="edit">
+        <form action="" method="post" id="editMH3">
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-2"></div>
@@ -568,7 +575,7 @@
                                                 <label>Số lượng tổng:</label>
                                             </div>
                                             <div class="col-md-6 p-l-0">
-                                                <input type="text" class="form-control" id="" />
+                                                <input type="text" class="form-control" id="so_luong_tong" value="@Model.so_luong_tong" />
                                             </div>
                                         </div>
 
@@ -666,7 +673,7 @@
                         <label>Thời gian giao bản:</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="cb_thoi_gian_giao" value="@Model.cb_thoi_gian_giao" />
                     </div>
                 </div>
                 <div class="row">
@@ -674,7 +681,7 @@
                         <label>Ghi chú đặc biệt:</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="cb_ghi_chu" value="@Model.cb_ghi_chu" />
                     </div>
                 </div>
 
@@ -733,7 +740,7 @@
                         <label>Ghi chú đặc biệt:</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="in_ghi_chu" value="@Model.in_ghi_chu" />
                     </div>
                 </div>
                 <div class="row">
@@ -741,7 +748,7 @@
                         <label>Thời hạn giao bán thành phẩm:</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="in_thoi_gian_giao" value="@Model.in_thoi_gian_giao" />
                     </div>
                 </div>
 
@@ -767,7 +774,13 @@
                     </div>
 
                     <div class="col-md-10">
-                        <textarea class="form-control" rows="4"></textarea>
+                        @Html.TextAreaFor(a=>a.thanh_pham_chung, new Dictionary<string, object>
+                              {
+                                  {"class", " form-control"},
+                                    {"id", "thanh_pham_chung"},
+                                     { "maxlength", "2000" },
+                                     { "row", "3" },
+                              })
                     </div>
                 </div>
 
@@ -775,9 +788,14 @@
                     <div class="col-md-2">
                         <label class="margin-top-40">Ghi chú đặc biệt:</label>
                     </div>
-
                     <div class="col-md-10">
-                        <textarea class="form-control" rows="4"></textarea>
+                        @Html.TextAreaFor(a=>a.tp_ghi_chu, new Dictionary<string, object>
+                              {
+                                  {"class", " form-control"},
+                                    {"id", "tp_ghi_chu"},
+                                     { "maxlength", "2000" },
+                                     { "row", "3" },
+                              })
                     </div>
                 </div>
 
@@ -786,7 +804,7 @@
                         <label>Thời hạn giao thành phẩm:</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="" />
+                        <input type="text" class="form-control" id="tp_thoi_han" value="@Model.tp_thoi_han" />
                     </div>
 
                 </div>
@@ -796,14 +814,14 @@
                         <label>Người lập lệnh sản xuất:</label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" disabled />
+                        <input type="text" class="form-control" id="ten_can_bo_qlMH3" disabled value="@Model.ten_can_bo_ql" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Người duyệt:</label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="" disabled />
+                        <input type="text" class="form-control" id="ten_can_bo_ktMH3" disabled value="@Model.ten_can_bo_kt" />
                     </div>
                 </div>
 
@@ -813,7 +831,7 @@
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
                 <a onclick="goBackMH2()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
-                <a onclick="" class="btn btn-success" style="width: 8%; color:white">Lưu</a>
+                <a onclick="AddOrUpdateAllScreen()" class="btn btn-success" style="width: 8%; color:white">Lưu</a>
             </div>
         </div>
     </div>
@@ -877,12 +895,18 @@
             $("#edit").submit(function () {
                 return false;
             });
+            $("#editMH2").submit(function () {
+                return false;
+            });
+            $("#editMH3").submit(function () {
+                return false;
+            });
 
             $("#created_date").datepicker({
                 dateFormat: 'dd/mm/yy'
             }).datepicker("setDate", new Date());
 
-            $("#ngay_giao_hang").datepicker({
+            $("#ngay_giao_hangMH3").datepicker({
                 dateFormat: 'dd/mm/yy'
             }).datepicker("setDate", new Date());
 
@@ -894,7 +918,7 @@
                 },
             });
 
-            $("input#ngay_giao_hang").on({
+            $("input#ngay_giao_hangMH3").on({
                 keydown: function (e) {
                     if (e.which === 8 || e.which === 46)
                         return true;
@@ -935,7 +959,6 @@
                 }
             });
         });
-
 
         function generateHtmlAppendix(lstAppendix) {
             var htmlAllRows = '';
@@ -1259,14 +1282,14 @@
             lstContents = [];
             for (var i = 0; i < lstAppendix.length; i++) {
                 var contents = {
-                    ten: $('#standard_' + (i + 1) + ' .ten').val(),
-                    nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val(),
-                    trang: $('#standard_' + (i + 1) + ' .trang').val(),
-                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val(),
-                    dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val(),
-                    kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val(),
-                    kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val(),
-                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val(),
+                    ten: $('#standard_' + (i + 1) + ' .ten').val().trim(),
+                    nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val().trim(),
+                    trang: $('#standard_' + (i + 1) + ' .trang').val().trim(),
+                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val().trim(),
+                    dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val().trim(),
+                    kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val().trim(),
+                    kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val().trim(),
+                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val().trim(),
                 };
                 lstContents.push(contents);
             };
@@ -1278,23 +1301,79 @@
             lstContents = [];
             for (var i = 0; i < lstAppendixMH2.length; i++) {
                 var contents = {
-                    so_luong: $('#standard_' + (i + 1) + ' .so_luongMH2').val(),
-                    ten: $('#standard_' + (i + 1) + ' .tenMH2').val(),
-                    dinh_luong: $('#standard_' + (i + 1) + ' .dinh_luongMH2').val(),
-                    kho_giay_dai: $('#standard_' + (i + 1) + ' .kho_giay_daiMH2').val(),
-                    kho_giay_rong: $('#standard_' + (i + 1) + ' .kho_giay_rongMH2').val(),
-                    ma_vat_tu: $('#standard_' + (i + 1) + ' .ma_vat_tuMH2').val(),
-                    trang: $('#standard_' + (i + 1) + ' .trangMH2').val(),
-                    dinh_muc: $('#standard_' + (i + 1) + ' .dinh_mucMH2').val(),
-                    sl_chinh: $('#standard_' + (i + 1) + ' .sl_chinhMH2').val(),
-                    sl_bu_in: $('#standard_' + (i + 1) + ' .sl_bu_inMH2').val(),
-                    sl_bu_tp: $('#standard_' + (i + 1) + ' .sl_bu_tpMH2').val(),
-                    sl_tong: $('#standard_' + (i + 1) + ' .sl_tongMH2').val(),
-                    don_vi_tinh: $('#standard_' + (i + 1) + ' .don_vi_tinhMH2').val(),
-                    quy_ky: $('#standard_' + (i + 1) + ' .quy_kyMH2').val(),
-                    muc_dich_sd: $('#standard_' + (i + 1) + ' .muc_dich_sdMH2').val(),
-                    cc_vat_tu: $('#standard_' + (i + 1) + ' .cc_vat_tuMH2').val(),
-                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giayMH2').val(),
+                    so_luong: $('#standard_' + (i + 1) + ' .so_luongMH2').val().trim(),
+                    ten: $('#standard_' + (i + 1) + ' .tenMH2').val().trim(),
+                    dinh_luong: $('#standard_' + (i + 1) + ' .dinh_luongMH2').val().trim(),
+                    kho_giay_dai: $('#standard_' + (i + 1) + ' .kho_giay_daiMH2').val().trim(),
+                    kho_giay_rong: $('#standard_' + (i + 1) + ' .kho_giay_rongMH2').val().trim(),
+                    ma_vat_tu: $('#standard_' + (i + 1) + ' .ma_vat_tuMH2').val().trim(),
+                    trang: $('#standard_' + (i + 1) + ' .trangMH2').val().trim(),
+                    dinh_muc: $('#standard_' + (i + 1) + ' .dinh_mucMH2').val().trim(),
+                    sl_chinh: $('#standard_' + (i + 1) + ' .sl_chinhMH2').val().trim(),
+                    sl_bu_in: $('#standard_' + (i + 1) + ' .sl_bu_inMH2').val().trim(),
+                    sl_bu_tp: $('#standard_' + (i + 1) + ' .sl_bu_tpMH2').val().trim(),
+                    sl_tong: $('#standard_' + (i + 1) + ' .sl_tongMH2').val().trim(),
+                    don_vi_tinh: $('#standard_' + (i + 1) + ' .don_vi_tinhMH2').val().trim(),
+                    quy_ky: $('#standard_' + (i + 1) + ' .quy_kyMH2').val().trim(),
+                    muc_dich_sd: $('#standard_' + (i + 1) + ' .muc_dich_sdMH2').val().trim(),
+                    cc_vat_tu: $('#standard_' + (i + 1) + ' .cc_vat_tuMH2').val().trim(),
+                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giayMH2').val().trim(),
+                };
+                lstContents.push(contents);
+            };
+            return lstContents;
+        }
+
+        //Lấy thông tin details bảng số lượng tổng
+        function GetInfoSoLuongTong() {
+            lstContents = [];
+            for (var i = 0; i < lstAppenSLTong.length; i++) {
+                var contents = {
+                    soluong: $('#standard_' + (i + 1) + ' .soluong').val().trim(),
+                };
+                lstContents.push(contents);
+            };
+            return lstContents;
+        }
+
+        //Lấy thông tin details bảng chế phẩm
+        function GetInfoChiTietCheBan() {
+            lstContents = [];
+            for (var i = 0; i < lstAppendixMH3.length; i++) {
+                var contents = {
+                    ten_tay_in: $('#standard_' + (i + 1) + ' .ten_tay_in1').val().trim(),
+                    so_kem: $('#standard_' + (i + 1) + ' .so_kem1').val().trim(),
+                    so_bo: $('#standard_' + (i + 1) + ' .so_bo1').val().trim(),
+                    tong: $('#standard_' + (i + 1) + ' .tong1').val().trim(),
+                    trang: $('#standard_' + (i + 1) + ' .trang1').val().trim(),
+                    kho_in_dai: $('#standard_' + (i + 1) + ' .kho_in_dai1').val().trim(),
+                    kho_in_rong: $('#standard_' + (i + 1) + ' .kho_in_rong1').val().trim(),
+                    kho_kem: $('#standard_' + (i + 1) + ' .kho_kem1').val().trim(),
+                    phuong_phap_in: $('#standard_' + (i + 1) + ' .phuong_phap_in1').val().trim(),
+                };
+                lstContents.push(contents);
+            };
+            return lstContents;
+        }
+
+        //Lấy thông tin details bảng In
+        function GetInfoChiTietBangIn() {
+            lstContents = [];
+            for (var i = 0; i < lstAppendixPrint.length; i++) {
+                var contents = {
+                    ten_tay_in: $('#standard_' + (i + 1) + ' .ten_tay_in').val().trim(),
+                    ten_loai: $('#standard_' + (i + 1) + ' .ten_loai').val().trim(),
+                    kho_giay: $('#standard_' + (i + 1) + ' .kho_giay').val().trim(),
+                    kho_in_dai: $('#standard_' + (i + 1) + ' .kho_in_dai').val().trim(),
+                    kho_in_rong: $('#standard_' + (i + 1) + ' .kho_in_rong').val().trim(),
+                    chinh: $('#standard_' + (i + 1) + ' .chinh').val().trim(),
+                    bu_in: $('#standard_' + (i + 1) + ' .bu_in').val().trim(),
+                    bu_thanh_pham: $('#standard_' + (i + 1) + ' .bu_thanh_pham').val().trim(),
+                    sl_tong: $('#standard_' + (i + 1) + ' .sl_tong').val().trim(),
+                    phuong_phap_in: $('#standard_' + (i + 1) + ' .phuong_phap_in').val().trim(),
+                    so_kg: $('#standard_' + (i + 1) + ' .so_kg').val().trim(),
+                    so_luot_in_quy_doi: $('#standard_' + (i + 1) + ' .so_luot_in_quy_doi').val().trim(),
+                    so_luot_in_thuc_te: $('#standard_' + (i + 1) + ' .so_luot_in_thuc_te').val().trim(),
                 };
                 lstContents.push(contents);
             };
@@ -1332,8 +1411,8 @@
                     ten_can_bo_ql: $('#ten_can_bo_ql').val().trim(),
                     ten_khach_hang: $('#ten_khach_hang').val().trim(),
                     ten_san_pham: $('#ten_san_pham').val().trim(),
-
-                    lstVatTus: GetInfoDetail(), ///thông tin bảng details
+                    ///thông tin bảng details
+                    lstVatTus: GetInfoDetail(),
                 }
                 return data;
             }
@@ -1532,7 +1611,6 @@
                         </tr>`
         }
 
-
         $("#addRowAppendixTableMH3").click(function () {
             var appendix = {
                 ten_tay_in: '',
@@ -1555,7 +1633,6 @@
                 $("#addRowAppendixTableMH3").prop("disabled", false);
             }
         });
-
 
         function removeAppendixRowMH3(element) {
             var row = parseInt($(element).attr("myid"));
@@ -1642,7 +1719,6 @@
                         </tr>`
         }
 
-
         $("#addRowprintTable").click(function () {
             var appendix = {
                 ten_tay_in: '',
@@ -1684,7 +1760,6 @@
             }
         });
 
-
         function removeAppendixPrintRow(element) {
             var row = parseInt($(element).attr("myid"));
             $(element).parent().parent().remove();
@@ -1713,7 +1788,7 @@
             return `<tr id="standard_${index + 1}" class="appendixRow">
                             <td id="STT" class="text-center">${index + 1}</td>
                             <td>
-                                <input type="text" class="form-control inputText SoLuong" value="${appendix.SoLuong == null ? '' : appendix.SoLuong}" />
+                                <input type="text" class="form-control inputText soluong" value="${appendix.soluong == null ? '' : appendix.soluong}" />
                             </td>
                             <td class="text-center">
                                 <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendSLTongRow(this)" id="removeAppendSLTongRow_${index + 1}" myid="${index + 1}" title="Xóa">
@@ -1726,7 +1801,7 @@
 
         $("#addRowSLTong").click(function () {
             var appendix = {
-                SoLuong: '',
+                soluong: '',
             };
             var htmlRow = generateHtmlAppendSLTongRow(appendix, lstAppenSLTong.length)
             $("#printTableSLTong #appendixPrintTbodySLTong").append(htmlRow);
@@ -1992,6 +2067,8 @@
                 $("#lan_dieu_chinhMH3").val(data.lan_dieu_chinh);
                 $("#ten_san_phamMH3").val(data.ten_san_pham);
                 $("#ten_khach_hangMH3").val(data.ten_khach_hang);
+                $("#ten_can_bo_qlMH3").val(data.ten_can_bo_ql);
+                $("#ten_can_bo_ktMH3").val(data.ten_can_bo_kt);
 
                 //fill bảng quy cách
                 var query = JSLINQ(lstTemp).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
@@ -2084,5 +2161,112 @@
             return htmlRow;
         }
 
+        function GetDataAllScreen() {
+            $("#textvalid").empty();
+            var lsx = $("#so_lenh_sx").val();
+            if (lsx == null || lsx == "" || lsx == ' ') {
+                $(".textNoti").html(textnoti);
+                toastr.warning('Bạn chưa nhập đầy đủ thông tin');
+            }
+            else {
+                var data = {
+                    id: $('#id').val() * 1,
+                    so_lenh_sx: $('#so_lenh_sx').val().trim(),
+                    loai: $('#loai').val().trim(),
+                    created_date: $('#created_date').val().trim(),
+                    email: $('#email').val().trim(),
+                    kho_doc: $('#kho_doc').val().trim(),
+                    kho_ngang: $('#kho_ngang').val().trim(),
+                    lan_dieu_chinh: $('#lan_dieu_chinh').val().trim(),
+                    ma_khach_hang: $('#ma_khach_hang').val().trim(),
+                    ma_san_pham: $('#ma_san_pham').val().trim(),
+                    nha_cc: $('#nha_cc').val().trim(),
+                    nv_kinh_doanh: $('#nv_kinh_doanh').val().trim(),
+                    phieu_dnsx_so: $('#phieu_dnsx_so').val().trim(),
+                    phone_number: $('#phone_number').val().trim(),
+                    email: $('#email').val().trim(),
+                    quy_cach_chung: $('#quy_cach_chung').val().trim(),
+                    ten_can_bo_kt: $('#ten_can_bo_kt').val().trim(),
+                    ten_can_bo_ql: $('#ten_can_bo_ql').val().trim(),
+                    ten_khach_hang: $('#ten_khach_hang').val().trim(),
+                    ten_san_pham: $('#ten_san_pham').val().trim(),
+                    ngay_giao_hang: $('#ngay_giao_hangMH3').val().trim(),
+                    cb_thoi_gian_giao: $('#cb_thoi_gian_giao').val().trim(),
+                    cb_ghi_chu: $('#cb_ghi_chu').val().trim(),
+                    in_ghi_chu: $('#in_ghi_chu').val().trim(),
+                    in_thoi_gian_giao: $('#in_thoi_gian_giao').val().trim(),
+                    thanh_pham_chung: $('#thanh_pham_chung').val().trim(),
+                    tp_ghi_chu: $('#tp_ghi_chu').val().trim(),
+                    so_luong_tong: $('#so_luong_tong').val().trim(),
+
+                    lstVatTus: GetInfoDetail(), //thông tin bảng details tổng quan đơn hàng
+                    lstChiTietDuToans: GetInfoChiTietDuToan(), //thông tin bảng details tổng quan đơn hàng
+                    lstchi_tiet_sl_tong: GetInfoSoLuongTong(), //thông tin bảng số lượng tổng
+                    lstChiTietCheBans: GetInfoChiTietCheBan(), //thông tin bảng chế phẩm
+                    lstChiTietIns: GetInfoChiTietBangIn(),  //thông tin bảng in
+                }
+                return data;
+            }
+            return false;
+        }
+
+        function AddOrUpdateAllScreen() {
+            var data = GetDataAllScreen();
+            if (data != false) {
+
+                var title2 = "Bạn có đồng ý cập nhật không?";
+                var url = '/Material/AddorUpdateDonHang';
+                if ($("form#edit").valid()) {
+                    swal({
+                        title: title2,
+                        icon: "warning",
+                        buttons: {
+                            ok: "Xác nhận",
+                            cancel: "Hủy",
+                        }
+                    }).then((isConfirm) => {
+                        if (isConfirm != 'ok') {
+
+                        } else {
+                            $.post(url, data,
+                                function (rs) {
+                                    if (rs.status > 0) {
+                                        swal({
+                                            title: "Cập nhật thành công!",
+                                            text: "Dữ liệu của bạn đã được cập nhật!",
+                                            icon: "success",
+                                        }).then(function (isConfirm) {
+                                            if (data.id * 1 > 0) {
+                                                window.location.href = '/Material/Index';
+                                            }
+                                            else {
+                                                window.location.href = '/Material/Index';
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        toastr.error(rs.message);
+                                    }
+                                });
+                        }
+                    });
+                }
+            }
+
+        }
+
+        //if (minuteInfo.ListContentOfHandover != null) {
+        //    minuteInfo.listContentOfHandoverInfos = JsonConvert.DeserializeObject<List<ListContentOfHandoverInfo>>(minuteInfo.ListContentOfHandover ?? string.Empty)
+        //        .Select(o => new ListContentOfHandoverInfo()
+        //                                                {
+        //                MeasuringId = o.MeasuringId,
+        //                MeasuringName = o.MeasuringName,
+        //                Model = o.Model,
+        //                SerialNumber = o.SerialNumber,
+        //                Accessories = o.Accessories,
+        //                Status = o.Status
+        //            }).ToList() ?? new List<ListContentOfHandoverInfo>();
+        //}
+        //else { minuteInfo.listContentOfHandoverInfos = new List<ListContentOfHandoverInfo>(); }
     </script>
 }

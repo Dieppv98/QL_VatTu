@@ -19,7 +19,7 @@ namespace DKAC.Controllers
         {
             var currentUser = (User)Session[CommonConstants.USER_SESSION];
             model.page = model.page == 0 ? 1 : model.page;
-            model.pageSize = 5;
+            model.pageSize = 10;
             int totalCount = 0;
             ViewBag.hasViewPermission = CheckPermission(3, 1, currentUser);
             ViewBag.hasAddPermission = CheckPermission(3, 2, currentUser);
@@ -30,8 +30,8 @@ namespace DKAC.Controllers
                 return RedirectToAction("NotPermission", "Home");
             }
             var rs = _mater.Search(model, model.page, model.pageSize, out totalCount);
-            model.totalRecord = rs.Count();
-            model.totalPage = (int)Math.Ceiling((decimal)rs.Count() / model.pageSize);
+            model.totalRecord = totalCount;
+            model.totalPage = (int)Math.Ceiling((decimal)model.totalRecord / model.pageSize);
             model.lstDonHang = rs;
             return View(model);
         }
@@ -157,6 +157,31 @@ namespace DKAC.Controllers
         public ActionResult Test()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddorUpdateDonHang(DonHangInfo model)
+        {
+            User user = (User)Session[CommonConstants.USER_SESSION];
+            model.last_updated = DateTime.Now;
+            var result = _mater.AddorUpdate(model);
+            if (result == 1)
+            {
+                return Json(new { status = 1, message = "Thêm thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { status = 0, message = "Thêm thất bại" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            User user = (User)Session[CommonConstants.USER_SESSION];
+            var result = _mater.Delete(id);
+            if (result == 1)
+            {
+                return Json(new { status = 1, message = "Xóa thành công" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { status = 0, message = "Xóa thất bại" }, JsonRequestBehavior.AllowGet);
         }
     }
 }
