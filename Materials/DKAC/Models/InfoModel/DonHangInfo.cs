@@ -77,6 +77,8 @@ namespace DKAC.Models.InfoModel
         [StringLength(100)]
         public string in_thoi_gian_giao { get; set; }
 
+        public string in_ghi_chu { get; set; }
+
         public string thanh_pham_chung { get; set; }
 
         public string tp_ghi_chu { get; set; }
@@ -88,11 +90,14 @@ namespace DKAC.Models.InfoModel
 
         [StringLength(200)]
         public string kho_tp { get; set; }
+        public string so_luong_tong { get; set; }
+        public string chi_tiet_sl_tong { get; set; }
 
         public List<MaterialType> lstMaterialType { get; set; }
         public List<VatTu> lstVatTus { get; set; }
         public List<ChiTietDuToan> lstChiTietDuToans { get; set; }
         public List<ChiTietCheBan> lstChiTietCheBans { get; set; }
         public List<ChiTietIn> lstChiTietIns { get; set; }
+        public List<string> lstchi_tiet_sl_tong { get; set; }
     }
 }

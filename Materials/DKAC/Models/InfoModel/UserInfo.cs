@@ -22,10 +22,7 @@ namespace DKAC.Models.InfoModel
         public DateTime? ModifyDate { get; set; }
 
         public byte? IsDeleted { get; set; }
-
-        [StringLength(50)]
-        public string Code { get; set; }
-
+       
         [StringLength(200)]
         [Display(Name = "Họ tên")]
         [Required(ErrorMessage = "Vui lòng nhập họ tên")]

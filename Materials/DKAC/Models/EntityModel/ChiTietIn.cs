@@ -18,8 +18,8 @@ namespace DKAC.Models.EntityModel
         public string ten_loai { get; set; }
         
         public string kho_giay { get; set; }
-        public string kho_in_dai { get; set; }
-        public string kho_in_rong { get; set; }
+        public double? kho_in_dai { get; set; }
+        public double? kho_in_rong { get; set; }
 
         public double? chinh { get; set; }
 

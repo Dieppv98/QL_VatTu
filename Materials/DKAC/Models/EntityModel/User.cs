@@ -27,7 +27,7 @@ namespace DKAC.Models.EntityModel
         [StringLength(50)]
         public string UserName { get; set; }
 
-        [StringLength(500)]
+        [StringLength(50)]
         public string PassWord { get; set; }
 
         [StringLength(200)]

@@ -1,8 +1,10 @@
 ﻿using DKAC.Models.EntityModel;
 using DKAC.Models.InfoModel;
 using DKAC.Models.RequestModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
@@ -61,12 +63,16 @@ namespace DKAC.Repository
             return query;
         }
 
-        public List<DonHang> Search(DonHangRequestModel request, int pageIndex, int recordPerPage, out int totalRecord)
+        public List<DonHang> Search(DonHangRequestModel request, int pageIndex, int recordPerPage, out int totalCount)
         {
             pageIndex = pageIndex - 1;
-            var query = db.DonHang.Where(t => (string.IsNullOrEmpty(request.Keywords) || t.so_lenh_sx.Contains(request.Keywords)));
-            totalRecord = query.Count();
+
+            var query = from d in db.DonHang
+                        where (string.IsNullOrEmpty(request.Keywords) || d.so_lenh_sx.Contains(request.Keywords))
+                        select (d);
+            totalCount = query.Count();
             return query.OrderByDescending(x => x.id).Skip(pageIndex * recordPerPage).Take(recordPerPage).ToList();
+
         }
 
         public List<MaterialType> SearchMaterial(MaterialTypeRequestModel request, int pageIndex, int recordPerPage, out int totalRecord)
@@ -114,6 +120,118 @@ namespace DKAC.Repository
         public List<VatTu> GetAllLoaiGiay(string key)
         {
             return db.VatTu.AsNoTracking().Where(x => x.loai_giay.ToLower().Contains(key.ToLower())).ToList();
+        }
+
+        public int AddorUpdate(DonHangInfo model)
+        {
+            var dh = db.DonHang.Where(x => x.id == model.id).FirstOrDefault();
+            if (dh == null) dh = new DonHang();
+
+            dh.cb_ghi_chu = model.cb_ghi_chu;
+            dh.cb_thoi_gian_giao = model.cb_thoi_gian_giao;
+            dh.created_date = model.created_date;
+            dh.email = model.email;
+            dh.in_thoi_gian_giao = model.in_thoi_gian_giao;
+            dh.kho_doc = model.kho_doc;
+            dh.kho_ngang = model.kho_ngang;
+            dh.kho_tp = model.kho_tp;
+            dh.nv_kinh_doanh = model.nv_kinh_doanh;
+            dh.lan_dieu_chinh = model.lan_dieu_chinh;
+            dh.last_updated = DateTime.Now;
+            dh.loai = model.loai;
+            dh.ma_khach_hang = model.ma_khach_hang;
+            dh.ma_san_pham = model.ma_san_pham;
+            dh.ngay_giao_hang = model.ngay_giao_hang;
+            dh.nha_cc = model.nha_cc;
+            dh.phieu_dnsx_so = model.phieu_dnsx_so;
+            dh.phone_number = model.phone_number;
+            dh.quy_cach_chung = model.quy_cach_chung;
+            dh.quy_cach_san_pham = model.quy_cach_san_pham;
+            dh.so_lenh_sx = model.so_lenh_sx;
+            dh.so_luong_tong = model.so_luong_tong;
+            dh.ten_can_bo_kt = model.ten_can_bo_kt;
+            dh.ten_can_bo_ql = model.ten_can_bo_ql;
+            dh.ten_che_ban = model.ten_che_ban;
+            dh.ten_khach_hang = model.ten_khach_hang;
+            dh.ten_san_pham = model.ten_san_pham;
+            dh.thanh_pham_chung = model.thanh_pham_chung;
+            dh.tp_ghi_chu = model.tp_ghi_chu;
+            dh.tp_thoi_han = model.tp_thoi_han;
+            if (model.lstchi_tiet_sl_tong != null)
+            {
+                dh.chi_tiet_sl_tong = JsonConvert.SerializeObject(model.lstchi_tiet_sl_tong);
+            }
+            if (model.id <= 0)
+            {
+                db.DonHang.Add(dh);
+            }
+            db.SaveChanges();
+            /// xóa hết bảng con
+            var lstVatTu = db.VatTu.Where(x => x.don_hang_id == dh.id).ToList();
+            db.VatTu.RemoveRange(lstVatTu);
+            var lstDuToan = db.ChiTietDuToan.Where(x => x.don_hang_id == dh.id).ToList();
+            db.ChiTietDuToan.RemoveRange(lstDuToan);
+            var lstCheban = db.ChiTietCheBan.Where(x => x.don_hang_id == dh.id).ToList();
+            db.ChiTietCheBan.RemoveRange(lstCheban);
+            var lstIn = db.ChiTietIn.Where(x => x.don_hang_id == dh.id).ToList();
+            db.ChiTietIn.RemoveRange(lstIn);
+            ///add lại bảng con
+            foreach (var item in model.lstVatTus)
+            {
+                item.don_hang_id = dh.id;
+            }
+            db.VatTu.AddRange(model.lstVatTus);
+            foreach (var item in model.lstChiTietDuToans)
+            {
+                item.don_hang_id = dh.id;
+            }
+            db.ChiTietDuToan.AddRange(model.lstChiTietDuToans);
+            foreach (var item in model.lstChiTietCheBans)
+            {
+                item.don_hang_id = dh.id;
+            }
+            db.ChiTietCheBan.AddRange(model.lstChiTietCheBans);
+            foreach (var item in model.lstChiTietIns)
+            {
+                item.don_hang_id = dh.id;
+            }
+            db.ChiTietIn.AddRange(model.lstChiTietIns);
+
+            db.SaveChanges();
+            return 1;
+        }
+
+        public int Delete(int id)
+        {
+            try
+            {
+                var dh = db.DonHang.Where(x => x.id == id).FirstOrDefault();
+                if (dh == null) return 0;
+
+                var lstVatTu = db.VatTu.Where(x => x.don_hang_id == dh.id).ToList();
+                db.VatTu.RemoveRange(lstVatTu);
+                var lstDuToan = db.ChiTietDuToan.Where(x => x.don_hang_id == dh.id).ToList();
+                db.ChiTietDuToan.RemoveRange(lstDuToan);
+                var lstCheban = db.ChiTietCheBan.Where(x => x.don_hang_id == dh.id).ToList();
+                db.ChiTietCheBan.RemoveRange(lstCheban);
+                var lstIn = db.ChiTietIn.Where(x => x.don_hang_id == dh.id).ToList();
+                db.ChiTietIn.RemoveRange(lstIn);
+
+                db.DonHang.Remove(dh);
+                db.SaveChanges();
+                return 1;
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        System.Console.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+                return 0;
+            }
         }
     }
 }
