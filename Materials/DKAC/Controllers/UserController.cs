@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace DKAC.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         UserRepository _userRepo = new UserRepository(); 
         // GET: User
@@ -164,8 +164,8 @@ namespace DKAC.Controllers
         public ActionResult ResetPassword(int id)
         {
             var newPassword = "123456789";
-            newPassword = Encryption.EncryptPassword(newPassword);
-            var result = _userRepo.ChangePassword(id, newPassword);
+            var encryptPassword = Encryption.EncryptPassword(newPassword);
+            var result = _userRepo.ChangePassword(id, encryptPassword);
             return Json(result == 1 ? new { status = 1, message = "Mật khẩu mới là: "+  newPassword } : new { status = 0, message = "Cập nhật thất bại" }, JsonRequestBehavior.AllowGet);
         }
     }

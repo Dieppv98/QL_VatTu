@@ -51,7 +51,9 @@ namespace DKAC.Repository
             int startRow = (page - 1) * pageSize;
             if (!string.IsNullOrEmpty(KeySearch))
             {
-                lst = lst.Where(x => x.FullName.Contains(KeySearch) || x.UserName.Contains(KeySearch)).ToList();
+                KeySearch = KeySearch.ToLowerInvariant();
+                lst = lst.Where(x => x.FullName.ToLowerInvariant().Contains(KeySearch) || 
+                                     x.UserName.ToLowerInvariant().Contains(KeySearch)).ToList();
             }
             request.totalRecord = lst.Count;
             request.data = lst.OrderBy(x => x.id)
