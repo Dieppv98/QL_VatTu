@@ -78,6 +78,7 @@ namespace DKAC.Models.EntityModel
 
         [StringLength(100)]
         public string in_thoi_gian_giao { get; set; }
+        public string in_ghi_chu { get; set; }
 
         [Column(TypeName = "text")]
         public string thanh_pham_chung { get; set; }

@@ -14,6 +14,7 @@ namespace DKAC.Models.EntityModel
         public int? don_hang_id { get; set; }
 
         public int? nhom_vat_tu_id { get; set; }
+        public string ten_nhom_vat_tu { get; set; }
 
         [StringLength(1000)]
         public string ten { get; set; }

@@ -30,6 +30,7 @@ namespace DKAC.Repository
                              created_date = d.created_date,
                              email = d.email,
                              in_thoi_gian_giao = d.in_thoi_gian_giao,
+                             in_ghi_chu = d.in_ghi_chu,
                              kho_doc = d.kho_doc,
                              kho_ngang = d.kho_ngang,
                              kho_tp = d.kho_tp,
@@ -56,6 +57,7 @@ namespace DKAC.Repository
                              tp_ghi_chu = d.tp_ghi_chu,
                              tp_thoi_han = d.tp_thoi_han,
                              chi_tiet_sl_tong = d.chi_tiet_sl_tong,
+                             so_luong_tong = d.so_luong_tong,
                          }).FirstOrDefault() ?? new DonHangInfo();
             query.lstVatTus = db.VatTu.Where(x => x.don_hang_id == query.id).ToList() ?? new List<VatTu>();
             query.lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietDuToan>();
@@ -142,6 +144,7 @@ namespace DKAC.Repository
             dh.created_date = model.created_date;
             dh.email = model.email;
             dh.in_thoi_gian_giao = model.in_thoi_gian_giao;
+            dh.in_ghi_chu = model.in_ghi_chu;
             dh.kho_doc = model.kho_doc;
             dh.kho_ngang = model.kho_ngang;
             dh.kho_tp = model.kho_tp;
@@ -210,6 +213,24 @@ namespace DKAC.Repository
             db.SaveChanges();
             return 1;
         }
+
+        //public int AddorUpdateKhachHang(string maKH, string tenKH)
+        //{
+        //    var kh = db.KhachHang.Where(x => x.ma_khach_hang == maKH).FirstOrDefault();
+        //    if (kh == null)
+        //    {
+        //        kh = new KhachHang();
+        //        kh.ma_khach_hang = maKH;
+        //        kh.ten_khach_hang = tenKH;
+        //        db.KhachHang.Add(kh);
+        //    }
+        //    else
+        //    {
+        //        kh.ma_khach_hang = maKH;
+        //        kh.ten_khach_hang = tenKH;
+        //    }
+        //    return db.SaveChanges();
+        //}
 
         public int Delete(int id)
         {
