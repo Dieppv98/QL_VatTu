@@ -40,10 +40,16 @@ namespace DKAC.Controllers
         {
             var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
             DonHangInfo donHang = new DonHangInfo();
+            if (id == 0)
+            {
+                donHang.lstMaterialType = lstMaterial;
+                donHang.lstVatTus = new List<VatTu>();
+                return View("Edit", donHang);
+            }
             //gọi hàm
             donHang = _mater.GetbyId(id);
             donHang.lstMaterialType = lstMaterial;
-            return View(donHang);
+            return View("EditReceipt", donHang);
         }
 
         public ActionResult Details(int id)

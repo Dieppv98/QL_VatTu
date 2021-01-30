@@ -82,18 +82,22 @@
     .margin-top-40 {
         margin-top: 40px !important
     }
+
+    .modal-dialog-center {
+        margin-top: 25%;
+    }
 </style>
 
 <head>
     <title>Nhập liệu phiếu</title>
 </head>
 
-<div class="container manhinh1">
+<div class="container">
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6 uppercase">
-                    <h2>NHẬP LIỆU TỔNG QUAN ĐƠN HÀNG</h2>
+                    <h2>XEM CHI TIẾT PHIẾU</h2>
                 </div>
             </div>
         </div>
@@ -101,7 +105,7 @@
             <ol class="breadcrumb" style="margin-left: 15px;">
                 <li style="margin-right: 10px"><a href="/"> <i class="fa fa-home home"></i> Home</a></li>
                 <li class="active">
-                    <span>Nhập liệu</span>
+                    <span>Chi tiết</span>
                 </li>
             </ol>
         </div>
@@ -135,7 +139,7 @@
                         <label>Ngày: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" style="background-color: white" class="form-control" id="created_date" value="@Model.created_date" placeholder="dd/MM/yyyy" />
+                        <input type="text" class="form-control" id="created_date" value="@(Model.created_date.HasValue?Model.created_date.Value.ToString("dd/MM/yyyy") : "")" placeholder="dd/MM/yyyy" />
                     </div>
                 </div>
 
@@ -176,14 +180,14 @@
                         <label>Mã khách hàng: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ma_khach_hang" value="@Model.ma_khach_hang" oninput="SearchMaKHAutoComplete(this)" onchange="TrimValue(this)" />
+                        <input type="text" class="form-control" id="ma_khach_hang" value="@Model.ma_khach_hang" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Tên khách hàng: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_khach_hang" value="@Model.ten_khach_hang" oninput="SearchTenKHAutoComplete(this)" onchange="TrimValue(this)" />
+                        <input type="text" class="form-control" id="ten_khach_hang" value="@Model.ten_khach_hang" />
                     </div>
                 </div>
 
@@ -192,14 +196,14 @@
                         <label>Mã sản phẩm: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ma_san_pham" value="@Model.ma_san_pham" oninput="SearchMaSPAutoComplete(this)" onchange="TrimValue(this)" />
+                        <input type="text" class="form-control" id="ma_san_pham" value="@Model.ma_san_pham" />
                     </div>
 
                     <div class="col-md-2 text-right">
                         <label>Tên sản phẩm: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_san_pham" value="@Model.ten_san_pham" oninput="SearchTenSPAutoComplete(this)" onchange="TrimValue(this)" />
+                        <input type="text" class="form-control" id="ten_san_pham" value="@Model.ten_san_pham" />
                     </div>
                 </div>
 
@@ -223,6 +227,17 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-2 text-right">
+                        <label>Ngày giao hàng: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ngay_giao_hangMH3" value="@(Model.ngay_giao_hang.HasValue ? Model.ngay_giao_hang.Value.ToString("dd/MM/yyyy"): "")" placeholder="dd/MM/yyyy" />
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+
                 <hr />
 
                 <!--Bảng nội dung CTP-->
@@ -231,7 +246,7 @@
                         <div class="row span">
                             <div class="col-md-12">
                                 <label class="caption-subject sbold uppercase" style="font-size:20px;">
-                                    <u>Nội dung CTP</u>
+                                    <u>NỘI DUNG CTP</u>
                                 </label>
                             </div>
                         </div>
@@ -314,97 +329,18 @@
                         <input type="text" class="form-control" id="ten_can_bo_kt" value="@Model.ten_can_bo_kt" />
                     </div>
                 </div>
-            </div>
-        </form>
+                <hr />
+                <!--//////////////////////////////End tổng quan đơn hàng, start dự toán vật tư/////////////////////////////-->
 
-        <div class="row" style="margin-top: 15px">
-            <div class="col-md-12 text-right">
-                <a href="/Material" class="btn btn-primary" style="width: 8%">Hủy</a>
-                <a onclick="TransViewEditMaterial()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container manhinh2" style="display:none;">
-    <div class="table-wrapper">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-6 uppercase">
-                    <h2>NHẬP LIỆU DỰ TOÁN VẬT TƯ SẢN XUẤT</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <ol class="breadcrumb" style="margin-left: 15px;">
-                <li style="margin-right: 10px"><a href="/"> <i class="fa fa-home home"></i> Home</a></li>
-                <li class="active">
-                    <span>Nhập liệu</span>
-                </li>
-            </ol>
-        </div>
-
-        <form action="" method="post" id="editMH2">
-            <div class="form-group">
-                <div class="row">
+                <div class="row" style="margin-top:40px;">
                     <div class="col-md-2"></div>
                     <div class="col-md-8 text-center">
                         <h2><label>BẢNG DỰ TOÁN VẬT TƯ SẢN XUẤT</label></h2>
                     </div>
-                    <div class="col-md-2 m-1"></div>
+                    <div class="col-md-2"></div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-2 text-right">
-                        <label>Số LSX: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="so_lenh_sxMH2" value="@Model.so_lenh_sx" disabled />
-                    </div>
-
-                    <div class="col-md-2 text-right">
-                        <label>Ngày: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="created_dateMH2" value="@Model.created_date" disabled />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2 text-right">
-                        <label>Tên khách hàng: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="ma_khach_hangMH2" disabled value="@Model.ma_khach_hang" />
-                    </div>
-
-                    <div class="col-md-2 text-right">
-                        <label>Tên sản phẩm: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_san_phamMH2" disabled value="@Model.ten_san_pham" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2 text-right">
-                        <label>Mã sản phẩm: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="ma_san_phamMH2" disabled value="@Model.ma_san_pham" />
-                    </div>
-
-                    <div class="col-md-2 text-right">
-                        <label>Điều chỉnh lần: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="lan_dieu_chinhMH2" disabled value="@Model.lan_dieu_chinh" />
-                    </div>
-                </div>
-
-                <hr />
-
-                <!--Bảng nội dung CTP-->
+                <!--Bảng nội dung dự toán-->
                 <div class="group">
                     <div class="form-body">
                         <div class="row span">
@@ -458,111 +394,18 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+                <hr />
+                <!--//////////////////////////////End dự toán vật tư, start lệnh sản xuất/////////////////////////////-->
 
-        <div class="row" style="margin-top: 15px">
-            <div class="col-md-12 text-right">
-                <a onclick="goBackMH1()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
-                <a onclick="TransViewEditProductOrder()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container manhinh3" style="display:none;">
-    <div class="table-wrapper">
-        <div class="table-title">
-            <div class="row">
-                <div class="col-sm-6 uppercase">
-                    <h2>NHẬP LIỆU LỆNH SẢN XUẤT</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <ol class="breadcrumb" style="margin-left: 15px;">
-                <li style="margin-right: 10px"><a href="/"> <i class="fa fa-home home"></i> Home</a></li>
-                <li class="active">
-                    <span>Nhập liệu</span>
-                </li>
-            </ol>
-        </div>
-
-        <form action="" method="post" id="editMH3">
-            <div class="form-group">
-                <div class="row">
+                <div class="row" style="margin-top:40px;">
                     <div class="col-md-2"></div>
                     <div class="col-md-8 text-center">
                         <h2><label>BẢNG LỆNH SẢN XUẤT</label></h2>
                     </div>
-                    <div class="col-md-2 m-1"></div>
+                    <div class="col-md-2"></div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-2 text-right">
-                        <label>Số LSX: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="so_lenh_sxMH3" disabled value="@Model.so_lenh_sx" />
-                    </div>
-
-                    <div class="col-md-2 text-right">
-                        <label>Ngày: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="created_dateMH3" disabled placeholder="dd/MM/yyyy" value="@Model.created_date" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2 text-right">
-                        <label>Phiếu ĐNSX số: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="phieu_dnsx_soMH3" disabled value="@Model.phieu_dnsx_so" />
-                    </div>
-
-                    <div class="col-md-2 text-right">
-                        <label>NVKD: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="nv_kinh_doanhMH3" disabled value="@Model.nv_kinh_doanh" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2 text-right">
-                        <label>Lần sửa đổi: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="lan_dieu_chinhMH3" disabled value="@Model.lan_dieu_chinh" />
-                    </div>
-
-                    <div class="col-md-2 text-right">
-                        <label>Sản phẩm: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_san_phamMH3" disabled value="@Model.ten_san_pham" />
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2 text-right">
-                        <label>Khách hàng: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_khach_hangMH3" disabled value="@Model.ten_khach_hang" />
-                    </div>
-
-                    <div class="col-md-2 text-right">
-                        <label>Ngày giao hàng: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" style="background-color: white" class="form-control" id="ngay_giao_hangMH3" value="@Model.ngay_giao_hang" placeholder="dd/MM/yyyy" />
-                    </div>
-                </div>
-
-                <!--Số lượng tổng-->
+                <!--Bảng số lượng tổng-->
                 <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6 margin-top-10">
@@ -597,7 +440,7 @@
 
                 <hr />
 
-                <!--I. Quy cách sản phẩm-->
+                <!--I. Quy cách sản phẩm -->
                 <div class="group">
                     <div class="form-body">
                         <div class="row span">
@@ -611,23 +454,9 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6">
-                        <div class="table-responsive" style="border: 1px solid black !important;">
-                            <table class="table table-striped table-bordered" style="border: 1px solid black !important; margin-bottom: 0px" id="tableQuyCachMH3">
-
-                                <tbody id="appendQuyCachTbodyMH3"></tbody>
-
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-3"></div>
-                </div>
-
                 <hr />
 
-                <!--Bảng nội dung CTP-->
+                <!--Bảng nội dung Chế bản-->
                 <div class="group">
                     <div class="form-body">
                         <div class="row span">
@@ -813,36 +642,37 @@
 
                 </div>
 
-                <div class="row">
-                    <div class="col-md-2">
-                        <label>Người lập lệnh sản xuất:</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_can_bo_qlMH3" disabled value="@Model.ten_can_bo_ql" />
-                    </div>
+                @*<div class="row">
+            <div class="col-md-2">
+                <label>Người lập lệnh sản xuất:</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="ten_can_bo_qlMH3" disabled value="@Model.ten_can_bo_ql" />
+            </div>
 
-                    <div class="col-md-2 text-right">
-                        <label>Người duyệt:</label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="ten_can_bo_ktMH3" disabled value="@Model.ten_can_bo_kt" />
-                    </div>
-                </div>
+            <div class="col-md-2 text-right">
+                <label>Người duyệt:</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="ten_can_bo_ktMH3" disabled value="@Model.ten_can_bo_kt" />
+            </div>
+        </div>*@
 
             </div>
         </form>
 
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
-                <a onclick="goBackMH2()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
+                <a href="/Material" class="btn btn-primary" style="width: 8%"> Quay lại</a>
                 <a onclick="AddOrUpdateAllScreen()" class="btn btn-success" style="width: 8%; color:white">Lưu</a>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Modal content-->
 <div class="modal" id="Modal-StageTranfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-center" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle"><b>Thêm mới nhóm vật tư</b></h5>
@@ -886,11 +716,10 @@
 
         var lstMaterialType = @Html.Raw(Json.Encode(Model.lstMaterialType));
         var lstAppendix = @Html.Raw(Json.Encode(Model.lstVatTus));
-        var lstAppendixMH2 = [];  //Html.Raw(Json.Encode(Model.lstChiTietDuToans));
-
-        var lstAppendixMH3 = [];  //Html.Raw(Json.Encode(Model.lstChiTietCheBans));
-        var lstAppendixPrint = [];  //Html.Raw(Json.Encode(Model.lstChiTietIns));
-        var lstAppenSLTong = [];
+        var lstAppendixMH2 = @Html.Raw(Json.Encode(Model.lstChiTietDuToans));
+        var lstAppendixMH3 = @Html.Raw(Json.Encode(Model.lstChiTietCheBans));
+        var lstAppendixPrint = @Html.Raw(Json.Encode(Model.lstChiTietIns));
+        var lstAppenSLTong = @Html.Raw(Json.Encode(Model.lst_sl_tong));
         var lstBangCheBanMH3 = [];
 
         ///////////////////////////////////////Man hinh 1 ///////////////////////////////////////////////
@@ -933,6 +762,26 @@
             var html = generateHtmlAppendix(lstAppendix);
             $('#appendixTbody').html(html);
 
+            var htmlDuToan = generateHtmlAppendMH2(lstAppendixMH2);
+            $('#appendixTbodyMH2').html(htmlDuToan);
+
+            //var query = JSLINQ(lstAppendix).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+            //for (var i = 0; i < query.length; i++) {
+            //    var quycach = JSLINQ(lstAppendix).Where(function (item) { return item.nhom_vat_tu_id == query[i]; }).ToArray();
+            //    var htmlQuyCach = generateHtmlQuyCachRowMH3(quycach);
+            //    $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCach);
+            //}
+
+            var htmlCheBan = generateHtmlAppendixMH3(lstAppendixMH3);
+            $('#appendixTbodyMH3').html(htmlCheBan);
+
+            var htmlIn = generateHtmlAppendixPrint(lstAppendixPrint);
+            $('#appendixPrintTbody').html(htmlIn);
+
+            var htmlSLTong = generateHtmlAppendSoLuongTong(lstAppenSLTong);
+            $('#appendixPrintTbodySLTong').html(htmlSLTong);
+
+
             $(".selcted2").select2({
                 theme: "bootstrap",
                 cache: true,
@@ -961,7 +810,8 @@
                     $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();
                 }
-            });
+                });
+
         });
 
         function generateHtmlAppendix(lstAppendix) {
@@ -1385,45 +1235,6 @@
             return lstContents;
         }
 
-        var textnoti = `<span class="red">Số LSX không được để trống!</span>`;
-
-        function GetData() {
-            $("#textvalid").empty();
-            var lsx = $("#so_lenh_sx").val();
-            if (lsx == null || lsx == "" || lsx == ' ') {
-                $(".textNoti").html(textnoti);
-                toastr.warning('Bạn chưa nhập đầy đủ thông tin');
-            }
-            else {
-                var data = {
-                    id: $('#id').val() * 1,
-                    so_lenh_sx: $('#so_lenh_sx').val().trim(),
-                    loai: $('#loai').val().trim(),
-                    created_date: $('#created_date').val().trim(),
-                    email: $('#email').val().trim(),
-                    kho_doc: $('#kho_doc').val().trim(),
-                    kho_ngang: $('#kho_ngang').val().trim(),
-                    lan_dieu_chinh: $('#lan_dieu_chinh').val().trim(),
-                    ma_khach_hang: $('#ma_khach_hang').val().trim(),
-                    ma_san_pham: $('#ma_san_pham').val().trim(),
-                    nha_cc: $('#nha_cc').val().trim(),
-                    nv_kinh_doanh: $('#nv_kinh_doanh').val().trim(),
-                    phieu_dnsx_so: $('#phieu_dnsx_so').val().trim(),
-                    phone_number: $('#phone_number').val().trim(),
-                    email: $('#email').val().trim(),
-                    quy_cach_chung: $('#quy_cach_chung').val().trim(),
-                    ten_can_bo_kt: $('#ten_can_bo_kt').val().trim(),
-                    ten_can_bo_ql: $('#ten_can_bo_ql').val().trim(),
-                    ten_khach_hang: $('#ten_khach_hang').val().trim(),
-                    ten_san_pham: $('#ten_san_pham').val().trim(),
-                    ///thông tin bảng details
-                    lstVatTus: GetInfoDetail(),
-                }
-                return data;
-            }
-            return false;
-        }
-
         $("input#lan_dieu_chinh").on({
             keydown: function (e) {
                 if (e.which === 69)
@@ -1469,10 +1280,10 @@
                                     <input type="number" style="display:none;" class="form-control inputText trangMH1" value="${appendix.trangMH1 == null ? '' : appendix.trangMH1}" id="trangMH1MH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText dinh_mucMH2" disabled onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText dinh_mucMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc.trim()}" id="dinhmucMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_chinhMH2" disabled onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText sl_chinhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh.trim()}" id="slchinhMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="number" class="form-control inputText sl_bu_inMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_in == null ? '' : appendix.sl_bu_in}" id="slbuinMH2_${index + 1}"/>
@@ -1481,13 +1292,13 @@
                                     <input type="number" class="form-control inputText sl_bu_tpMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_tp == null ? '' : appendix.sl_bu_tp}" id="slbutpMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_tongMH2" disabled value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText sl_tongMH2" value="${appendix.sl_tong == null ? '' : appendix.sl_tong.trim()}" id="sltongMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText don_vi_tinhMH2" value="${appendix.don_vi_tinh == null ? '' : appendix.don_vi_tinh}" id="donvitinhMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText quy_kyMH2" disabled value="${appendix.quy_ky == null ? '' : appendix.quy_ky}" id="quykyMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText quy_kyMH2" value="${appendix.quy_ky == null ? '' : appendix.quy_ky.trim()}" id="quykyMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText muc_dich_sdMH2" value="${appendix.muc_dich_sd == null ? '' : appendix.muc_dich_sd}" id="mucdichsdMH2_${index + 1}"/>
@@ -1582,31 +1393,31 @@
             return `<tr id="standard_${index + 1}" class="appendixRow">
                             <td id="STT" class="text-center">${index + 1}</td>
                             <td>
-                                <input type="text" class="form-control inputText ten_tay_in1" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in}" id="tentayin1_${index + 1}"/>
+                                <input type="text" class="form-control inputText ten_tay_in1" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in.trim()}" id="tentayin1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_kem1" value="${appendix.so_kem == null ? '' : appendix.so_kem}" id="sokem1_${index + 1}"/>
+                                <input type="number" class="form-control inputText so_kem1" value="${appendix.so_kem == null ? '' : appendix.so_kem.trim()}" id="sokem1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_bo1" value="${appendix.so_bo == null ? '' : appendix.so_bo}" id="sobo1_${index + 1}"/>
+                                <input type="number" class="form-control inputText so_bo1" value="${appendix.so_bo == null ? '' : appendix.so_bo.trim()}" id="sobo1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText tong1" value="${appendix.tong == null ? '' : appendix.tong}" id="tong1_${index + 1}"/>
+                                <input type="number" class="form-control inputText tong1" value="${appendix.tong == null ? '' : appendix.tong.trim()}" id="tong1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText trang1" value="${appendix.trang == null ? '' : appendix.trang}" id="trang1_${index + 1}"/>
+                                <input type="number" class="form-control inputText trang1" value="${appendix.trang == null ? '' : appendix.trang.trim()}" id="trang1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_in_dai1" onchange="FillDataKhoInDai(this)" value="${appendix.kho_in_dai == null ? '' : appendix.kho_in_dai}" id="khoindai1_${index + 1}"/>
+                                <input type="number" class="form-control inputText kho_in_dai1" onchange="FillDataKhoInDai(this)" value="${appendix.kho_in_dai == null ? '' : appendix.kho_in_dai.trim()}" id="khoindai1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_in_rong1" onchange="FillDataKhoInRong(this)" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong}" id="khoinrong1_${index + 1}"/>
+                                <input type="number" class="form-control inputText kho_in_rong1" onchange="FillDataKhoInRong(this)" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong.trim()}" id="khoinrong1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_kem1" value="${appendix.kho_kem == null ? '' : appendix.kho_kem}" id="khokem1_${index + 1}"/>
+                                <input type="number" class="form-control inputText kho_kem1" value="${appendix.kho_kem == null ? '' : appendix.kho_kem.trim()}" id="khokem1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="text" class="form-control inputText phuong_phap_in1" onchange="FillDataPhuongPhapIn(this)" value="${appendix.phuong_phap_in == null ? '' : appendix.phuong_phap_in}" id="phuongphapin1_${index + 1}"/>
+                                <input type="text" class="form-control inputText phuong_phap_in1" onchange="FillDataPhuongPhapIn(this)" value="${appendix.phuong_phap_in == null ? '' : appendix.phuong_phap_in.trim()}" id="phuongphapin1_${index + 1}"/>
                             </td>
                             <td class="text-center">
                                 <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendixRowMH3(this)" id="removeAppendixRow_${index + 1}" myid="${index + 1}" title="Xóa">
@@ -1678,43 +1489,43 @@
             return `<tr id="standard_${index + 1}" class="appendixRow">
                             <td id="STT" class="text-center">${index + 1}</td>
                             <td>
-                                <input type="text" class="form-control inputText ten_tay_in" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in}" id="tentayin_${index + 1}"/>
+                                <input type="text" class="form-control inputText ten_tay_in" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in.trim()}" id="tentayin_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="text" class="form-control inputText ten_loai" value="${appendix.ten_loai == null ? '' : appendix.ten_loai}" id="tenloai_${index + 1}"/>
+                                <input type="text" class="form-control inputText ten_loai" value="${appendix.ten_loai == null ? '' : appendix.ten_loai.trim()}" id="tenloai_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="text" class="form-control inputText kho_giay" value="${appendix.kho_giay == null ? '' : appendix.kho_giay}" id="khogiay_${index + 1}"/>
+                                <input type="text" class="form-control inputText kho_giay" value="${appendix.kho_giay == null ? '' : appendix.kho_giay.trim()}" id="khogiay_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_in_dai" value="${appendix.kho_in_dai == null ? '' : appendix.kho_in_dai}" id="khoindai_${index + 1}"/>
+                                <input type="number" class="form-control inputText kho_in_dai" value="${appendix.kho_in_dai == null ? '' : appendix.kho_in_dai.trim()}" id="khoindai_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_in_rong" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong}" id="khoinrong_${index + 1}"/>
+                                <input type="number" class="form-control inputText kho_in_rong" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong.trim()}" id="khoinrong_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText chinh" value="${appendix.chinh == null ? '' : appendix.chinh}" id="chinh_${index + 1}"/>
+                                <input type="number" class="form-control inputText chinh" value="${appendix.chinh == null ? '' : appendix.chinh.trim()}" id="chinh_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText bu_in" value="${appendix.bu_in == null ? '' : appendix.bu_in}" id="buin_${index + 1}"/>
+                                <input type="number" class="form-control inputText bu_in" value="${appendix.bu_in == null ? '' : appendix.bu_in.trim()}" id="buin_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText bu_thanh_pham" value="${appendix.bu_thanh_pham == null ? '' : appendix.bu_thanh_pham}" id="buthanhpham_${index + 1}"/>
+                                <input type="number" class="form-control inputText bu_thanh_pham" value="${appendix.bu_thanh_pham == null ? '' : appendix.bu_thanh_pham.trim()}" id="buthanhpham_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText sl_tong" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="tenloai_${index + 1}"/>
+                                <input type="number" class="form-control inputText sl_tong" value="${appendix.sl_tong == null ? '' : appendix.sl_tong.trim()}" id="tenloai_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="text" class="form-control inputText phuong_phap_in" value="${appendix.phuong_phap_in == null ? '' : appendix.phuong_phap_in}" id="phuongphapin_${index + 1}"/>
+                                <input type="text" class="form-control inputText phuong_phap_in" value="${appendix.phuong_phap_in == null ? '' : appendix.phuong_phap_in.trim()}" id="phuongphapin_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_kg" value="${appendix.so_kg == null ? '' : appendix.so_kg}" id="sokg_${index + 1}"/>
+                                <input type="number" class="form-control inputText so_kg" value="${appendix.so_kg == null ? '' : appendix.so_kg.trim()}" id="sokg_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_luot_in_quy_doi" value="${appendix.so_luot_in_quy_doi == null ? '' : appendix.so_luot_in_quy_doi}" id="soluotinquydoi_${index + 1}"/>
+                                <input type="number" class="form-control inputText so_luot_in_quy_doi" value="${appendix.so_luot_in_quy_doi == null ? '' : appendix.so_luot_in_quy_doi.trim()}" id="soluotinquydoi_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_luot_in_thuc_te" value="${appendix.so_luot_in_thuc_te == null ? '' : appendix.so_luot_in_thuc_te}" id="soluotinthucte_${index + 1}"/>
+                                <input type="number" class="form-control inputText so_luot_in_thuc_te" value="${appendix.so_luot_in_thuc_te == null ? '' : appendix.so_luot_in_thuc_te.trim()}" id="soluotinthucte_${index + 1}"/>
                             </td>
                             <td class="text-center">
                                 <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendixPrintRow(this)" id="removeAppendixPrintRow_${index + 1}" myid="${index + 1}" title="Xóa">
@@ -1788,6 +1599,13 @@
         }
 
         /////////bảng SL Tổng///////////////
+        function generateHtmlAppendSoLuongTong(lstAppenSLTong) {
+            var htmlAllRows = '';
+            for (var i = 0; i < lstAppenSLTong.length; i++) {
+                htmlAllRows = htmlAllRows + generateHtmlAppendSLTongRow(lstAppenSLTong[i], i);
+            }
+            return htmlAllRows;
+        }
 
         function generateHtmlAppendSLTongRow(appendix, index) {
             return `<tr id="standard_${index + 1}" class="appendixRow">
@@ -1842,96 +1660,7 @@
             }
         }
 
-        /////////////////////////////Su ly su kien chuyen view//////////////////////////////////////////////////
-
-        function goBackMH1() {
-            $(".manhinh1").attr("style", "display:block");
-            $(".manhinh2").attr("style", "display:none");
-            $(".manhinh3").attr("style", "display:none");
-        }
-
-        function goBackMH2() {
-            $(".manhinh1").attr("style", "display:none");
-            $(".manhinh2").attr("style", "display:block");
-            $(".manhinh3").attr("style", "display:none");
-        }
-
-        function TransViewEditMaterial() {
-            $("#appendixTableMH2 #appendixTbodyMH2").empty();
-            lstAppendixMH2 = [];
-            lstBangInMH3 = [];
-            var data = GetData();
-            if (data != false) {
-                var lstTemp = data.lstVatTus;
-                $("#ma_khach_hangMH2").val(data.ma_khach_hang);
-                $("#ten_khach_hangMH2").val(data.ten_khach_hang);
-                $("#ma_san_phamMH2").val(data.ma_san_pham);
-                $("#ten_san_phamMH2").val(data.ten_san_pham);
-                $("#lan_dieu_chinhMH2").val(data.lan_dieu_chinh);
-                $("#so_lenh_sxMH2").val(data.so_lenh_sx);
-                $("#created_dateMH2").val(data.created_date);
-
-                //fill bảng con giấy
-                for (var i = 0; i < lstTemp.length; i++) {
-                    var lstDuToanGiay = {
-                        so_luong: '',
-                        ten: 'Giấy ' + lstTemp[i].loai_giay,
-                        dinh_luong: lstTemp[i].dinh_luong_giay,
-                        kho_giay_dai: '',
-                        kho_giay_rong: '',
-                        ma_vat_tu: '',
-                        trang: '',
-                        trangMH1: ((lstTemp[i].trang * 1 == 0) ?1: lstTemp[i].trang * 1),
-                        dinh_muc: '',
-                        sl_chinh: '',
-                        sl_bu_in: '',
-                        sl_bu_tp: '',
-                        sl_tong: '',
-                        don_vi_tinh: '',
-                        quy_ky: '',
-                        muc_dich_sd: lstTemp[i].ten,
-                        cc_vat_tu: '',
-                        loai_giay: '',
-                    };
-                    lstAppendixMH2.push(lstDuToanGiay);
-                }
-
-                //fill bảng con bìa
-                for (var i = 0; i < lstTemp.length; i++) {
-                    var lstDuToanBia = {
-                        so_luong: '',
-                        ten: 'Kẽm ' + lstTemp[i].ten,
-                        dinh_luong: lstTemp[i].dinh_luong_giay,
-                        kho_giay_dai: '',
-                        kho_giay_rong: '',
-                        ma_vat_tu: '',
-                        trang: '',
-                        trangMH1: ((lstTemp[i].trang * 1 == 0) ? 1 : lstTemp[i].trang * 1),
-                        dinh_muc: '',
-                        sl_chinh: '',
-                        sl_bu_in: '',
-                        sl_bu_tp: '',
-                        sl_tong: '',
-                        don_vi_tinh: '',
-                        quy_ky: '',
-                        muc_dich_sd: lstTemp[i].ten,
-                        cc_vat_tu: '',
-                        loai_giay: lstTemp[i].loai_giay,
-                    };
-                    lstAppendixMH2.push(lstDuToanBia);
-                    lstBangCheBanMH3.push(lstDuToanBia);
-                }
-
-                var htmlRow = generateHtmlAppendMH2(lstAppendixMH2)
-                $("#appendixTableMH2 #appendixTbodyMH2").append(htmlRow);
-
-
-                $(".manhinh1").attr("style", "display:none");
-                $(".manhinh2").attr("style", "display:block");
-                $(".manhinh3").attr("style", "display:none");
-
-            }
-        }
+        //////////////////////Su ly su kien tự động fill data///////////////////////////
 
         function FillDataKhoInDai(element) {
             var value = $(element).val().trim();
@@ -2032,140 +1761,10 @@
             $('#quykyMH2_' + numberid).val(quyKy);
         }
 
-        //////////// chuyển sang màn hình 3
-        function GetDetailsBangTongQuan() {
-            lstContents = [];
-            for (var i = 0; i < lstAppendix.length; i++) {
-                var contents = {
-                    ten: $('#standard_' + (i + 1) + ' .ten').val(),
-                    nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val(),
-                    ten_nhom_vat_tu: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id option:selected').text(),
-                    trang: $('#standard_' + (i + 1) + ' .trang').val(),
-                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val(),
-                    dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val(),
-                    kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val(),
-                    kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val(),
-                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val(),
-                };
-                lstContents.push(contents);
-            };
-            return lstContents;
-        }
+        //////////////////////////Get all data/////////////////////////////////////
 
-        function TransViewEditProductOrder() {
-            $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").empty();
-            $("#appendixTableMH3 #appendixTbodyMH3").empty();
-            $("#printTable #appendixPrintTbody").empty();
-            lstAppendixMH3 = [];
-            lstAppendixPrint = [];
-            var lstCheBan = [];
-            var lstCheBanConvert = [];
-            var lstIn = [];
-            var data = GetData();
-            if (data != false) {
-                var lstTemp = GetDetailsBangTongQuan();
-                //fill bảng cha
-                $("#so_lenh_sxMH3").val(data.so_lenh_sx);
-                $("#created_dateMH3").val(data.created_date);
-                $("#phieu_dnsx_soMH3").val(data.phieu_dnsx_so);
-                $("#nv_kinh_doanhMH3").val(data.nv_kinh_doanh);
-                $("#lan_dieu_chinhMH3").val(data.lan_dieu_chinh);
-                $("#ten_san_phamMH3").val(data.ten_san_pham);
-                $("#ten_khach_hangMH3").val(data.ten_khach_hang);
-                $("#ten_can_bo_qlMH3").val(data.ten_can_bo_ql);
-                $("#ten_can_bo_ktMH3").val(data.ten_can_bo_kt);
-
-                //fill bảng quy cách
-                var query = JSLINQ(lstTemp).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
-                for (var i = 0; i < query.length; i++) {
-                    var quycach = JSLINQ(lstTemp).Where(function (item) { return item.nhom_vat_tu_id == query[i]; }).ToArray();
-                    var htmlQuyCach = generateHtmlQuyCachRowMH3(quycach);
-                    $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCach);
-                }
-
-                var lstDuToanKem = GetInfoChiTietDuToan();
-                for (var i = 0; i < lstDuToanKem.length; i++) {
-                    var kem = lstDuToanKem[i].ten;
-                    if (kem.startsWith("Kẽm")) {
-                        lstCheBan.push(lstDuToanKem[i]);
-                    }
-                }
-
-                //fill chế bản
-                for (var i = 0; i < lstCheBan.length; i++) {
-                    var lstDuToanGiay = {
-                        ten_tay_in: lstCheBan[i].ten.slice(4),
-                        so_kem: lstCheBan[i].sl_tong,
-                        so_bo: '',
-                        tong: '',
-                        trang: '',
-                        kho_in_dai: '',
-                        kho_in_rong: '',
-                        kho_kem: '',
-                        phuong_phap_in: '',
-                    };
-                    lstCheBanConvert.push(lstDuToanGiay);
-                    lstAppendixMH3.push(lstDuToanGiay);
-                }
-                var htmlRow = generateHtmlAppendixMH3(lstCheBanConvert)
-                $("#appendixTableMH3 #appendixTbodyMH3").append(htmlRow);
-
-                //fill bảng in
-                for (var i = 0; i < lstCheBan.length; i++) {
-                    var lstDuToanGiay = {
-                        ten_tay_in: lstCheBan[i].ten.slice(4),
-                        ten_loai: lstCheBan[i].loai_giay,
-                        kho_giay: '',
-                        kho_in_dai: '',
-                        kho_in_rong: '',
-                        chinh: lstCheBan[i].sl_chinh,
-                        bu_in: lstCheBan[i].sl_bu_in,
-                        bu_thanh_pham: lstCheBan[i].sl_bu_tp,
-                        sl_tong: lstCheBan[i].sl_tong,
-                        phuong_phap_in: '',
-                        so_kg: lstCheBan[i].quy_ky,
-                        so_luot_in_quy_doi: '',
-                        so_luot_in_thuc_te: '',
-                    };
-                    lstIn.push(lstDuToanGiay);
-                    lstAppendixPrint.push(lstDuToanGiay);
-                }
-                var htmlRowIn = generateHtmlAppendixPrint(lstIn)
-                $("#printTable #appendixPrintTbody").append(htmlRowIn);
-
-                $(".manhinh1").attr("style", "display:none");
-                $(".manhinh2").attr("style", "display:none");
-                $(".manhinh3").attr("style", "display:block");
-            }
-        }
-
-        function generateHtmlQuyCachRowMH3(appendix) {
-            return `<tr class="bg-blue" style="background-color: #e9ecef;color: black;">
-                            <th class="text-center wrapper" style="width: 200px;vertical-align: middle;border: black solid 1px !important;">
-                                ${appendix[0].ten_nhom_vat_tu}
-                            </th>
-                            <td class="wrapper" style="padding: 0px !important;border: black solid 1px !important;">
-                                ${generateDetaislQuyCachMH3(appendix)}
-                            </td>
-                    </tr>`
-        }
-
-        function generateDetaislQuyCachMH3(appendix) {
-            var htmlRow = ``;
-            for (var i = 0; i < appendix.length; i++) {
-                var contentHtml = `${appendix[i].ten}: ${appendix[i].trang} trang ${appendix[i].loai_giay} ${appendix[i].dinh_luong_giay} In ${appendix[i].kieu_in_1}/${appendix[i].kieu_in_2}`
-                htmlRow += `<table class="table table-striped table-bordered" style="margin-bottom: 0px !important">
-                                <tbody>
-                                    <tr class="wrapper">
-                                        <td class="wrapper">${contentHtml}</td>
-                                    </tr>
-                                </tbody>
-                            </table>`;
-            }
-            htmlRow += ``
-            return htmlRow;
-        }
-
+        var textnoti = `<span class="red">Số LSX không được để trống!</span>`;
+        
         function GetDataAllScreen() {
             $("#textvalid").empty();
             var lsx = $("#so_lenh_sx").val();
@@ -2219,7 +1818,6 @@
         function AddOrUpdateAllScreen() {
             var data = GetDataAllScreen();
             if (data != false) {
-
                 var title2 = "Bạn có đồng ý cập nhật không?";
                 var url = '/Material/AddorUpdateDonHang';
                 if ($("form#edit").valid()) {
@@ -2232,7 +1830,6 @@
                         }
                     }).then((isConfirm) => {
                         if (isConfirm != 'ok') {
-
                         } else {
                             $.post(url, data,
                                 function (rs) {
