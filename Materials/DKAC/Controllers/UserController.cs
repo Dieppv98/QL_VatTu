@@ -1,5 +1,6 @@
 ﻿using DKAC.Common;
 using DKAC.Models.EntityModel;
+using DKAC.Models.Enum;
 using DKAC.Models.InfoModel;
 using DKAC.Models.RequestModel;
 using DKAC.Repository;
@@ -13,10 +14,21 @@ namespace DKAC.Controllers
 {
     public class UserController : BaseController
     {
-        UserRepository _userRepo = new UserRepository(); 
+        UserRepository _userRepo = new UserRepository();
         // GET: User
         public ActionResult Index(string KeySearch, int page = 1, int pageSize = 20)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+
+            ViewBag.hasViewPermission = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Xem, currentUser);
+            ViewBag.hasAddPermission = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Them, currentUser);
+            ViewBag.hasUpdatePermission = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Sua, currentUser);
+            ViewBag.hasDeletePermission = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Xoa, currentUser);
+            if (!ViewBag.hasViewPermission)
+            {
+                return RedirectToAction("NotPermission", "Home");
+            }
+
             UserRequestModel model = _userRepo.GetByUser(KeySearch, page, pageSize);
             return View(model);
         }
@@ -47,6 +59,10 @@ namespace DKAC.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Xem, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             User emp = _userRepo.GetById(id);
             EmployeeInfo empInfo = new EmployeeInfo()
             {
@@ -68,12 +84,20 @@ namespace DKAC.Controllers
         [HttpGet]
         public ActionResult Add()
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Them, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             return View();
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Sua, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             User emp = _userRepo.GetById(id);
             EmployeeInfo empInfo = new EmployeeInfo()
             {
@@ -129,6 +153,10 @@ namespace DKAC.Controllers
 
         public ActionResult Delete(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Xoa, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             User user = (User)Session[CommonConstants.USER_SESSION];
             var emp = _userRepo.GetById(id);
             emp.ModifyBy = user.id;
@@ -163,10 +191,14 @@ namespace DKAC.Controllers
         [HttpPost]
         public ActionResult ResetPassword(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Xoa, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             var newPassword = "123456789";
             var encryptPassword = Encryption.EncryptPassword(newPassword);
             var result = _userRepo.ChangePassword(id, encryptPassword);
-            return Json(result == 1 ? new { status = 1, message = "Mật khẩu mới là: "+  newPassword } : new { status = 0, message = "Cập nhật thất bại" }, JsonRequestBehavior.AllowGet);
+            return Json(result == 1 ? new { status = 1, message = "Mật khẩu mới là: " + newPassword } : new { status = 0, message = "Cập nhật thất bại" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

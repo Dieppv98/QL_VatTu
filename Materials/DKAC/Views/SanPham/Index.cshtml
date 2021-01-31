@@ -68,9 +68,12 @@
                     <div class="col-sm-6">
                         <h2>Quản lý sản phẩm</h2>
                     </div>
-                    <div class="col-sm-6">
-                        <a href="/SanPham/Add" class="btn btn-success" style="padding: 10px 30px 10px 30px; border-radius: 5px"><i class="fa fa-plus"></i> Thêm mới</a>
-                    </div>
+                    @if (ViewBag.hasAddPermission)
+                    {
+                        <div class="col-sm-6">
+                            <a href="/SanPham/Add" class="btn btn-success" style="padding: 10px 30px 10px 30px; border-radius: 5px"><i class="fa fa-plus"></i> Thêm mới</a>
+                        </div>
+                    }
                 </div>
             </div>
             <table class="table table-striped table-hover">
@@ -96,10 +99,16 @@
                             <td class="text-center">@item.ten_san_pham</td>
                             <td class="text-center">@item.created_date</td>
                             <td class="text-center">
-                                <a href="/SanPham/Details/@item.id" class="details-link" style="margin-right: 5px;"><i class="fa fa-eye" title="Xem"></i></a>
-                                @if (user != null)
+                                @if (ViewBag.hasViewPermission)
+                                {
+                                    <a href="/SanPham/Details/@item.id" class="details-link" style="margin-right: 5px;"><i class="fa fa-eye" title="Xem"></i></a>
+                                }
+                                @if (ViewBag.hasUpdatePermission)
                                 {
                                     <a href="/SanPham/Edit/@item.id" class="edit" style="margin-right: 5px;"><i class="fa fa-edit" title="Sửa"></i></a>
+                                }
+                                @if (ViewBag.hasDeletePermission)
+                                {
                                     <a onclick="Delete(@item.id)" class="delete" style="margin-right: 5px; cursor: pointer"><i class="fa fa-trash" title="Xóa"></i></a>
                                 }
                             </td>

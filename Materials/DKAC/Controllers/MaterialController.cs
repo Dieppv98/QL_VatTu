@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DKAC.Models.Enum;
 
 namespace DKAC.Controllers
 {
@@ -21,10 +22,10 @@ namespace DKAC.Controllers
             model.page = model.page == 0 ? 1 : model.page;
             model.pageSize = 10;
             int totalCount = 0;
-            ViewBag.hasViewPermission = CheckPermission(3, 1, currentUser);
-            ViewBag.hasAddPermission = CheckPermission(3, 2, currentUser);
-            ViewBag.hasUpdatePermission = CheckPermission(3, 4, currentUser);
-            ViewBag.hasDeletePermission = CheckPermission(3, 8, currentUser);
+            ViewBag.hasViewPermission = CheckPermission((int)PageId.NhapLieu, (int)Actions.Xem, currentUser);
+            ViewBag.hasAddPermission = CheckPermission((int)PageId.NhapLieu, (int)Actions.Them, currentUser);
+            ViewBag.hasUpdatePermission = CheckPermission((int)PageId.NhapLieu, (int)Actions.Sua, currentUser);
+            ViewBag.hasDeletePermission = CheckPermission((int)PageId.NhapLieu, (int)Actions.Xoa, currentUser);
             if (!ViewBag.hasViewPermission)
             {
                 return RedirectToAction("NotPermission", "Home");
@@ -38,15 +39,22 @@ namespace DKAC.Controllers
 
         public ActionResult Edit(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+
             var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
             DonHangInfo donHang = new DonHangInfo();
             if (id == 0)
             {
+                var checkPermissonThem = CheckPermission((int)PageId.NhapLieu, (int)Actions.Them, currentUser); ///check quyền
+                if (checkPermissonThem == false) { return RedirectToAction("NotPermission", "Home"); }
+
                 donHang.lstMaterialType = lstMaterial;
                 donHang.lstVatTus = new List<VatTu>();
                 return View("Edit", donHang);
             }
-            //gọi hàm
+            var checkPermissonSua = CheckPermission((int)PageId.NhapLieu, (int)Actions.Sua, currentUser); ///check quyền
+            if (checkPermissonSua == false) { return RedirectToAction("NotPermission", "Home"); }
+
             donHang = _mater.GetbyId(id);
             donHang.lstMaterialType = lstMaterial;
             return View("EditReceipt", donHang);
@@ -54,6 +62,10 @@ namespace DKAC.Controllers
 
         public ActionResult Details(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.NhapLieu, (int)Actions.Xem, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền xem
+
             var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
             DonHangInfo donHang = new DonHangInfo();
             //gọi hàm
@@ -152,6 +164,9 @@ namespace DKAC.Controllers
         public ActionResult AddorUpdateDonHang(DonHangInfo model)
         {
             User user = (User)Session[CommonConstants.USER_SESSION];
+            var checkPermissonSua = CheckPermission((int)PageId.NhapLieu, (int)Actions.Sua, user); ///check quyền
+            if (checkPermissonSua == false) { return RedirectToAction("NotPermission", "Home"); }
+
             model.last_updated = DateTime.Now;
             var result = _mater.AddorUpdate(model);
             if (result == 1)
@@ -165,6 +180,9 @@ namespace DKAC.Controllers
         public ActionResult Delete(int id)
         {
             User user = (User)Session[CommonConstants.USER_SESSION];
+            var checkPermissonXoa = CheckPermission((int)PageId.NhapLieu, (int)Actions.Xoa, user); ///check quyền
+            if (checkPermissonXoa == false) { return RedirectToAction("NotPermission", "Home"); }
+
             var result = _mater.Delete(id);
             if (result == 1)
             {

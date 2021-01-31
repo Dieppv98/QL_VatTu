@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
+using DKAC.Common;
 using DKAC.Models.EntityModel;
+using DKAC.Models.Enum;
 using DKAC.Models.InfoModel;
 using DKAC.Models.RequestModel;
 using DKAC.Repository;
@@ -13,17 +15,36 @@ namespace DKAC.Controllers
         // Index
         public ActionResult Index(string KeySearch, int page = 1, int pageSize = 20)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+
+            ViewBag.hasViewPermission = CheckPermission((int)PageId.QuanLySanPham, (int)Actions.Xem, currentUser);
+            ViewBag.hasAddPermission = CheckPermission((int)PageId.QuanLySanPham, (int)Actions.Them, currentUser);
+            ViewBag.hasUpdatePermission = CheckPermission((int)PageId.QuanLySanPham, (int)Actions.Sua, currentUser);
+            ViewBag.hasDeletePermission = CheckPermission((int)PageId.QuanLySanPham, (int)Actions.Xoa, currentUser);
+            if (!ViewBag.hasViewPermission)
+            {
+                return RedirectToAction("NotPermission", "Home");
+            }
+
             SanPhamRequestModel model = _sanPhamRepository.GetBySanPham(KeySearch, page, pageSize);
             return View(model);
         }
         // Add
         public ActionResult Add()
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLySanPham, (int)Actions.Them, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             return View();
         }
         [HttpPost]
         public ActionResult Add(SanPham sanPham)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLySanPham, (int)Actions.Them, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             sanPham.created_date = DateTime.Now;
             sanPham.last_updated = DateTime.Now;
             var result = _sanPhamRepository.Add(sanPham);
@@ -33,6 +54,10 @@ namespace DKAC.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLySanPham, (int)Actions.Xem, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền xem
+
             SanPham sanPham = _sanPhamRepository.GetById(id);
             SanPhamInfo sanPhamInfo = new SanPhamInfo()
             {
@@ -47,6 +72,10 @@ namespace DKAC.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLySanPham, (int)Actions.Sua, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền sửa
+
             SanPham sanPham = _sanPhamRepository.GetById(id);
             SanPhamInfo sanPhamInfo = new SanPhamInfo()
             {
@@ -67,6 +96,10 @@ namespace DKAC.Controllers
         // Delete
         public ActionResult Delete(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLySanPham, (int)Actions.Xoa, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền xóa
+
             var result = _sanPhamRepository.Delete(id);
             return Json(result == 1 ? new { status = 1, message = "Xóa thành công" } : new { status = 1, message = "Xóa thất bại" }, JsonRequestBehavior.AllowGet);
         }

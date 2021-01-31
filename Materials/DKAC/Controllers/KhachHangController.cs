@@ -1,4 +1,6 @@
-﻿using DKAC.Models.EntityModel;
+﻿using DKAC.Common;
+using DKAC.Models.EntityModel;
+using DKAC.Models.Enum;
 using DKAC.Models.InfoModel;
 using DKAC.Models.RequestModel;
 using DKAC.Repository;
@@ -13,12 +15,27 @@ namespace DKAC.Controllers
         // Index
         public ActionResult Index(string KeySearch, int page = 1, int pageSize = 20)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+
+            ViewBag.hasViewPermission = CheckPermission((int)PageId.QuanLyKhachHang, (int)Actions.Xem, currentUser);
+            ViewBag.hasAddPermission = CheckPermission((int)PageId.QuanLyKhachHang, (int)Actions.Them, currentUser);
+            ViewBag.hasUpdatePermission = CheckPermission((int)PageId.QuanLyKhachHang, (int)Actions.Sua, currentUser);
+            ViewBag.hasDeletePermission = CheckPermission((int)PageId.QuanLyKhachHang, (int)Actions.Xoa, currentUser);
+            if (!ViewBag.hasViewPermission)
+            {
+                return RedirectToAction("NotPermission", "Home");
+            }
+
             KhachHangRequestModel model = _khachHangRepository.GetByKhachHang(KeySearch, page, pageSize);
             return View(model);
         }
         // Add
         public ActionResult Add()
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLyKhachHang, (int)Actions.Them, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             return View();
         }
         [HttpPost]
@@ -33,6 +50,10 @@ namespace DKAC.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLyKhachHang, (int)Actions.Xem, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             KhachHang khachHang = _khachHangRepository.GetById(id);
             KhachHangInfo khachHangInfo = new KhachHangInfo()
             {
@@ -55,6 +76,10 @@ namespace DKAC.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLyKhachHang, (int)Actions.Sua, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             KhachHang khachHang = _khachHangRepository.GetById(id);
             KhachHangInfo khachHangInfo = new KhachHangInfo()
             {
@@ -83,6 +108,10 @@ namespace DKAC.Controllers
         // Delete
         public ActionResult Delete(int id)
         {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.QuanLyKhachHang, (int)Actions.Xoa, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
+
             var result = _khachHangRepository.Delete(id);
             return Json(result == 1 ? new { status = 1, message = "Xóa thành công" } : new { status = 1, message = "Xóa thất bại" }, JsonRequestBehavior.AllowGet);
         }

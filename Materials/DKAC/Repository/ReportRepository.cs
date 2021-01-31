@@ -1,6 +1,7 @@
 ﻿using DKAC.IRepository;
 using DKAC.Models.EntityModel;
 using DKAC.Models.InfoModel;
+using DKAC.Models.RequestModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +91,19 @@ namespace DKAC.Repository
             uR.Description = model.Description;
             db.Roles.Add(uR);
             return db.SaveChanges();
+        }
+
+        public List<DonHang> GetAllSo_LSX()
+        {
+            return db.DonHang.ToList();
+        }
+
+        public List<DonHang> SearchSoLSX(DonHangRequestModel request, int pageIndex, int recordPerPage, out int totalRecord)
+        {
+            pageIndex = pageIndex - 1;
+            var query = db.DonHang.Where(t => (string.IsNullOrEmpty(request.Keywords) || t.so_lenh_sx.Contains(request.Keywords)));
+            totalRecord = query.Count();
+            return query.OrderByDescending(x => x.id).Skip(pageIndex * recordPerPage).Take(recordPerPage).ToList();
         }
     }
 }

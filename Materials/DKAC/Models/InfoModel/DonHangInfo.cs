@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DKAC.Models.InfoModel
 {
@@ -98,7 +99,7 @@ namespace DKAC.Models.InfoModel
         public List<ChiTietDuToan> lstChiTietDuToans { get; set; }
         public List<ChiTietCheBan> lstChiTietCheBans { get; set; }
         public List<ChiTietIn> lstChiTietIns { get; set; }
-        public List<string> lstchi_tiet_sl_tong { get; set; }
         public List<TongSoLuongInfo> lst_sl_tong { get; set; }
+        public List<SelectListItem> lstSo_LSX { get; set; }
     }
 }
