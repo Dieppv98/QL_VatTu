@@ -105,5 +105,28 @@ namespace DKAC.Repository
             totalRecord = query.Count();
             return query.OrderByDescending(x => x.id).Skip(pageIndex * recordPerPage).Take(recordPerPage).ToList();
         }
+
+        public List<DonHangInfo> ThongKe(int? id, DateTime? fromDate, DateTime? toDate)
+        {
+            var query = (from d in db.DonHang
+                         where (!id.HasValue || d.id == id)
+                         && ((!fromDate.HasValue && !toDate.HasValue)
+                         || (!fromDate.HasValue && d.ngay_giao_hang.Value <= toDate.Value)
+                         || (d.ngay_giao_hang.Value >= fromDate.Value && !toDate.HasValue)
+                         || (d.ngay_giao_hang.Value >= fromDate.Value && d.ngay_giao_hang.Value <= toDate.Value))
+                         select new DonHangInfo()
+                         {
+                             id = d.id,
+                             ngay_giao_hang = d.ngay_giao_hang,
+
+
+                             lstVatTus = db.VatTu.Where(x => x.don_hang_id == d.id).ToList(),
+                             lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == d.id).ToList(),
+                             lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),
+                             lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == d.id).ToList(),
+                         }).ToList();
+
+            return query ?? new List<DonHangInfo>();
+        }
     }
 }

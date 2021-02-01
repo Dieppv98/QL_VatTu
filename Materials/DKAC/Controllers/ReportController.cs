@@ -23,11 +23,7 @@ namespace DKAC.Controllers
         {
             var currentUser = (User)Session[CommonConstants.USER_SESSION];
             ViewBag.hasViewPermission = CheckPermission((int)PageId.ThongKeDuToan, (int)Actions.Xem, currentUser); // check quyền xem page
-
-            if (!ViewBag.hasViewPermission)
-            {
-                return RedirectToAction("NotPermission", "Home");
-            }
+            if (!ViewBag.hasViewPermission) { return RedirectToAction("NotPermission", "Home"); }
 
             var lstDH = _rep.GetAllSo_LSX();
             DonHangInfo dh = new DonHangInfo();
@@ -52,39 +48,39 @@ namespace DKAC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        //public ActionResult GetMeasurEquipAfterEvaluate(int? id, bool exportExcel)
-        //{
-        //    var model = await ApiService.EvaluateMeasurEquipAfterEvaluateService.GetMeasurEquipAfterEvaluate(id);
-        //    var lstEvalua = (from d in model.SelectMany(o => o.lstEvaluateAfterverificationInfo)
-        //                     select new
-        //                     {
-        //                         d.Id,
-        //                         d.MeasuringEquipmentId,
-        //                         d.Conclusion,
-        //                         d.Date,
-        //                         d.Evaluation,
-        //                         d.MaxTolerance,
-        //                         d.Note,
-        //                         d.Parameter,
-        //                         d.Tolerance,
-        //                         d.UnitName,
-        //                     }).ToList();
+        public ActionResult GetMeasurEquipAfterEvaluate(int? id, DateTime? fromDate, DateTime? toDate, bool exportExcel)
+        {
+            var model = _rep.ThongKe(id, fromDate, toDate);
+            //var lstEvalua = (from d in model.SelectMany(o => o.lstEvaluateAfterverificationInfo)
+            //                 select new
+            //                 {
+            //                     d.Id,
+            //                     d.MeasuringEquipmentId,
+            //                     d.Conclusion,
+            //                     d.Date,
+            //                     d.Evaluation,
+            //                     d.MaxTolerance,
+            //                     d.Note,
+            //                     d.Parameter,
+            //                     d.Tolerance,
+            //                     d.UnitName,
+            //                 }).ToList();
 
-        //    var path = Path.Combine(Server.MapPath("~/FileTemplate"), "M3.QT.05-BM.06-DanhGiaPTĐ-SauHC.xlsx");
-        //    var file = new FileInfo(path);
-        //    var excel = new ExcelPackage(file);
-        //    var fr = new FlexCelReport();
-        //    var result = CreateXlsFile(excel);
+            var path = Path.Combine(Server.MapPath("~/FileTemplate"), "ThongKeMaterials.xlsx");
+            var file = new FileInfo(path);
+            var excel = new ExcelPackage(file);
+            var fr = new FlexCelReport();
+            var result = CreateXlsFile(excel);
 
-        //    fr.SetValue("Date", DateTime.Now.Day);
-        //    fr.SetValue("Month", DateTime.Now.Month);
-        //    fr.SetValue("Year", DateTime.Now.Year);
+            fr.SetValue("Date", DateTime.Now.Day);
+            fr.SetValue("Month", DateTime.Now.Month);
+            fr.SetValue("Year", DateTime.Now.Year);
 
-        //    fr.AddTable("evaluateMeasur", model.OrderBy(o => o.Id));
-        //    fr.AddTable("lstEvaluaMeasur", lstEvalua.OrderBy(o => o.MeasuringEquipmentId));
-        //    fr.Run(result);
-        //    fr.Dispose();
-        //    return ViewReport(result, "M3.QT.05-BM.06-DanhGiaPTĐ-SauHC", exportExcel);
-        //}
+            fr.AddTable("evaluateMeasur", model.OrderBy(o => o.id));
+            //fr.AddTable("lstEvaluaMeasur", lstEvalua.OrderBy(o => o.MeasuringEquipmentId));
+            fr.Run(result);
+            fr.Dispose();
+            return ViewReport(result, "ThongKeMaterials", exportExcel);
+        }
     }
 }

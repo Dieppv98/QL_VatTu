@@ -103,11 +103,11 @@
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="/">Trang chủ</a></li>
+                    <li @*class="active"*@><a href="/">Trang chủ</a></li>
 
                     @foreach (var item in per.ListModul)
                     {
-                        <li class="drop-down">
+                        <li class="drop-down @item.ModulName">
                             <a href="">@item.ModulName</a>
                             <ul>
                                 @foreach (var page in per.ListPage)
@@ -215,28 +215,25 @@
 
 <script type="text/javascript">
 
-                //$(document).ready(function () {
-                //    const regex = /http:\/\/.*\/(.*)\//g;
-                //    const match = regex.exec(window.location.href);
-                //    var match_1 = match[1];
-                //    // iterate over all and find match
-                //    if (match) {
-                //        $(".nav-link").each(function () {
-                //            var name = $(this).find("a").attr("href");
-                //            var name_1 = name.slice(1);
-                //            if (name_1 == match_1) {
-                //                $(this).addClass(" active");
-                //            };
+    $(document).ready(function () {
 
-                //            //if ($(this).find(".nav .nav-link .a").attr("href").slice(1) == match[1]) {
-                //            //    $(this).addClass("active");
-                //            //}
-                //        });
-                //    }
-                //    // set active first element
-                //    else {
-                //        $(".nav-link:first").addClass("active");
-                //    }
-                //});
+        ///////////Chặn bật deverloop toll///////////////
+        //window.oncontextmenu = function () {
+        //    return false;
+        //}
+        //document.onkeydown = function (e) {
+        //    if (window.event.keyCode == 123 || e.button == 2)
+        //        return false;
+        //}
+        //////////////////////////////////////////////////
+
+        var pgurl = window.location.href.substr(window.location.href.lastIndexOf("/") + 1);
+
+        if (pgurl == 'Material') {
+
+        }
+        
+
+    });
 
 </script>
