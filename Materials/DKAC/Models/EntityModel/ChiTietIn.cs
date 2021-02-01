@@ -17,7 +17,8 @@ namespace DKAC.Models.EntityModel
         [StringLength(100)]
         public string ten_loai { get; set; }
 
-        public string kho_giay { get; set; }
+        public string kho_giay_dai { get; set; }
+        public string kho_giay_rong { get; set; }
         public string kho_in_dai { get; set; }
         public string kho_in_rong { get; set; }
 
@@ -38,5 +39,6 @@ namespace DKAC.Models.EntityModel
         public string so_luot_in_thuc_te { get; set; }
 
         public int? don_hang_id { get; set; }
+        public int? dinh_luong_giay_in { get; set; }
     }
 }
