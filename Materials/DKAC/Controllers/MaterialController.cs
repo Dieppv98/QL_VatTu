@@ -190,5 +190,44 @@ namespace DKAC.Controllers
             }
             return Json(new { status = 0, message = "Xóa thất bại" }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult DonHangDetails(int id)
+        {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.NhapLieu, (int)Actions.Xem, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền xem
+
+            var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
+            TongQuanDonHangInfo donHangInfo = new TongQuanDonHangInfo();
+            //gọi hàm
+            donHangInfo = _mater.GetTongQuanbyId(id);
+            donHangInfo.lstMaterialType = lstMaterial;
+            return View(donHangInfo);
+        }
+        public ActionResult KHVTDetails(int id)
+        {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.NhapLieu, (int)Actions.Xem, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền xem
+
+            var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
+            DonHangInfo donHangInfo = new DonHangInfo();
+            //gọi hàm
+            donHangInfo = _mater.GetbyId(id);
+            donHangInfo.lstMaterialType = lstMaterial;
+            return View(donHangInfo);
+        }
+        public ActionResult LenhSXDetails(int id)
+        {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.NhapLieu, (int)Actions.Xem, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền xem
+
+            var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
+            LenhSanXuatInfo donHangInfo = new LenhSanXuatInfo();
+            //gọi hàm
+            donHangInfo = _mater.GetLenhSanXuatbyId(id);
+            donHangInfo.lstMaterialType = lstMaterial;
+            return View(donHangInfo);
+        }
     }
 }
