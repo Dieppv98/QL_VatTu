@@ -121,7 +121,9 @@
                             <td class="text-center">
                                 @if (ViewBag.hasViewPermission)
                                 {
-                                    <a href="/Material/Details/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem chi tiết"><i class="fa fa-eye"></i></a>
+                                    <a href="/Material/DonHangDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Tổng quan đơn hàng"><i class="fa fa-eye"></i></a>
+                                    <a href="/Material/KHVTDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem KHVT"><i class="fa fa-file"></i></a>
+                                    <a href="/Material/LenhSXDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Lệnh sản xuất"><i class="fa fa-book"></i></a>
                                 }
                                 @if (ViewBag.hasUpdatePermission)
                                 {

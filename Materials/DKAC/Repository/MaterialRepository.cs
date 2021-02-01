@@ -264,5 +264,158 @@ namespace DKAC.Repository
                 return 0;
             }
         }
+
+        public TongQuanDonHangInfo GetTongQuanbyId(int id)
+        {
+            var query = (from d in db.DonHang.Where(x => x.id == id)
+                         select new TongQuanDonHangInfo()
+                         {
+                             id = d.id,
+                             cb_ghi_chu = d.cb_ghi_chu,
+                             cb_thoi_gian_giao = d.cb_thoi_gian_giao,
+                             created_date = d.created_date,
+                             email = d.email,
+                             in_thoi_gian_giao = d.in_thoi_gian_giao,
+                             in_ghi_chu = d.in_ghi_chu,
+                             kho_doc = d.kho_doc,
+                             kho_ngang = d.kho_ngang,
+                             kho_tp = d.kho_tp,
+                             lan_dieu_chinh = d.lan_dieu_chinh,
+                             last_updated = d.last_updated,
+                             loai = d.loai,
+                             ma_khach_hang = d.ma_khach_hang,
+                             ma_san_pham = d.ma_san_pham,
+                             ngay_giao_hang = d.ngay_giao_hang,
+                             nha_cc = d.nha_cc,
+                             nv_kinh_doanh = d.nv_kinh_doanh,
+                             phieu_dnsx_so = d.phieu_dnsx_so,
+                             phone_number = d.phone_number,
+                             quy_cach_chung = d.quy_cach_chung,
+                             quy_cach_san_pham = d.quy_cach_san_pham,
+                             so_lenh_sx = d.so_lenh_sx,
+                             status = d.status,
+                             ten_can_bo_kt = d.ten_can_bo_kt,
+                             ten_can_bo_ql = d.ten_can_bo_ql,
+                             ten_che_ban = d.ten_che_ban,
+                             ten_khach_hang = d.ten_khach_hang,
+                             ten_san_pham = d.ten_san_pham,
+                             thanh_pham_chung = d.thanh_pham_chung,
+                             tp_ghi_chu = d.tp_ghi_chu,
+                             tp_thoi_han = d.tp_thoi_han,
+                             chi_tiet_sl_tong = d.chi_tiet_sl_tong,
+                             so_luong_tong = d.so_luong_tong,
+                         }).FirstOrDefault() ?? new TongQuanDonHangInfo();
+            query.lstVatTus = db.VatTu.Where(x => x.don_hang_id == query.id).ToList() ?? new List<VatTu>();
+            return query;
+        }
+        public LenhSanXuatInfo GetLenhSanXuatbyId(int id)
+        {
+            var query = (from d in db.DonHang.Where(x => x.id == id)
+                         select new LenhSanXuatInfo()
+                         {
+                             id = d.id,
+                             cb_ghi_chu = d.cb_ghi_chu,
+                             cb_thoi_gian_giao = d.cb_thoi_gian_giao,
+                             created_date = d.created_date,
+                             email = d.email,
+                             in_thoi_gian_giao = d.in_thoi_gian_giao,
+                             in_ghi_chu = d.in_ghi_chu,
+                             kho_doc = d.kho_doc,
+                             kho_ngang = d.kho_ngang,
+                             kho_tp = d.kho_tp,
+                             lan_dieu_chinh = d.lan_dieu_chinh,
+                             last_updated = d.last_updated,
+                             loai = d.loai,
+                             ma_khach_hang = d.ma_khach_hang,
+                             ma_san_pham = d.ma_san_pham,
+                             ngay_giao_hang = d.ngay_giao_hang,
+                             nha_cc = d.nha_cc,
+                             nv_kinh_doanh = d.nv_kinh_doanh,
+                             phieu_dnsx_so = d.phieu_dnsx_so,
+                             phone_number = d.phone_number,
+                             quy_cach_chung = d.quy_cach_chung,
+                             quy_cach_san_pham = d.quy_cach_san_pham,
+                             so_lenh_sx = d.so_lenh_sx,
+                             status = d.status,
+                             ten_can_bo_kt = d.ten_can_bo_kt,
+                             ten_can_bo_ql = d.ten_can_bo_ql,
+                             ten_che_ban = d.ten_che_ban,
+                             ten_khach_hang = d.ten_khach_hang,
+                             ten_san_pham = d.ten_san_pham,
+                             thanh_pham_chung = d.thanh_pham_chung,
+                             tp_ghi_chu = d.tp_ghi_chu,
+                             tp_thoi_han = d.tp_thoi_han,
+                             chi_tiet_sl_tong = d.chi_tiet_sl_tong,
+                             so_luong_tong = d.so_luong_tong,
+                         }).FirstOrDefault() ?? new LenhSanXuatInfo();
+            query.lstVatTus = db.VatTu.Where(x => x.don_hang_id == query.id).ToList() ?? new List<VatTu>();
+            var queryNhomVT = query.lstVatTus.Select(x=>x.nhom_vat_tu_id).Distinct().OrderBy(x=>x.Value).ToArray();
+            query.lstnhomVatTus = new List<NhomVatTu>();
+            foreach (var data in queryNhomVT)
+            {
+                var quycach = query.lstVatTus.Where(x => x.nhom_vat_tu_id == data);
+                query.lstnhomVatTus.Add(new NhomVatTu
+                {
+                    nhom_vat_tu_id = data,
+                    ten_nhom_vat_tu = quycach.FirstOrDefault().ten_nhom_vat_tu,
+                    lstVatTus = quycach.OrderBy(x => x.id).ToList(),
+            });
+            }
+            query.lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietCheBan>();
+            query.lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietIn>();
+            if (query.chi_tiet_sl_tong != null)
+            {
+                query.lst_sl_tong = JsonConvert.DeserializeObject<List<TongSoLuongInfo>>(query.chi_tiet_sl_tong ?? string.Empty)
+                        .Select(o => new TongSoLuongInfo()
+                        {
+                            Values = o.Values
+                        }).ToList() ?? new List<TongSoLuongInfo>();
+            }
+            else { query.lst_sl_tong = new List<TongSoLuongInfo>(); }
+            return query;
+        }
+        public DuToanVatTuInfo GetKHVTbyId(int id)
+        {
+            var query = (from d in db.DonHang.Where(x => x.id == id)
+                         select new DuToanVatTuInfo()
+                         {
+                             id = d.id,
+                             cb_ghi_chu = d.cb_ghi_chu,
+                             cb_thoi_gian_giao = d.cb_thoi_gian_giao,
+                             created_date = d.created_date,
+                             email = d.email,
+                             in_thoi_gian_giao = d.in_thoi_gian_giao,
+                             in_ghi_chu = d.in_ghi_chu,
+                             kho_doc = d.kho_doc,
+                             kho_ngang = d.kho_ngang,
+                             kho_tp = d.kho_tp,
+                             lan_dieu_chinh = d.lan_dieu_chinh,
+                             last_updated = d.last_updated,
+                             loai = d.loai,
+                             ma_khach_hang = d.ma_khach_hang,
+                             ma_san_pham = d.ma_san_pham,
+                             ngay_giao_hang = d.ngay_giao_hang,
+                             nha_cc = d.nha_cc,
+                             nv_kinh_doanh = d.nv_kinh_doanh,
+                             phieu_dnsx_so = d.phieu_dnsx_so,
+                             phone_number = d.phone_number,
+                             quy_cach_chung = d.quy_cach_chung,
+                             quy_cach_san_pham = d.quy_cach_san_pham,
+                             so_lenh_sx = d.so_lenh_sx,
+                             status = d.status,
+                             ten_can_bo_kt = d.ten_can_bo_kt,
+                             ten_can_bo_ql = d.ten_can_bo_ql,
+                             ten_che_ban = d.ten_che_ban,
+                             ten_khach_hang = d.ten_khach_hang,
+                             ten_san_pham = d.ten_san_pham,
+                             thanh_pham_chung = d.thanh_pham_chung,
+                             tp_ghi_chu = d.tp_ghi_chu,
+                             tp_thoi_han = d.tp_thoi_han,
+                             chi_tiet_sl_tong = d.chi_tiet_sl_tong,
+                             so_luong_tong = d.so_luong_tong,
+                         }).FirstOrDefault() ?? new DuToanVatTuInfo();
+            query.lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietDuToan>();
+            return query;
+        }
     }
 }

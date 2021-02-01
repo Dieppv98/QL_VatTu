@@ -73,7 +73,7 @@
       <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
     </Reference>
     <Reference Include="FlexCel">
-      <HintPath>..\packages\FlexCel.dll</HintPath>
+      <HintPath>..\packages\FlexCel\FlexCel.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.11.4.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.11.4\lib\net45\Google.Protobuf.dll</HintPath>
@@ -320,10 +320,13 @@
     <Compile Include="Models\EntityModel\VatTu.cs" />
     <Compile Include="Models\InfoModel\AccountModulPageInfo.cs" />
     <Compile Include="Models\InfoModel\DonHangInfo.cs" />
+    <Compile Include="Models\InfoModel\DuToanVatTuInfo.cs" />
     <Compile Include="Models\InfoModel\EmployeeInfo.cs" />
     <Compile Include="Models\InfoModel\KhachHangInfo.cs" />
+    <Compile Include="Models\InfoModel\LenhSanXuatInfo.cs" />
     <Compile Include="Models\InfoModel\PermissionActionInfo.cs" />
     <Compile Include="Models\InfoModel\SanPhamInfo.cs" />
+    <Compile Include="Models\InfoModel\TongQuanDonHangInfo.cs" />
     <Compile Include="Models\InfoModel\TongSoLuongInfo.cs" />
     <Compile Include="Models\InfoModel\UserInfo.cs" />
     <Compile Include="Models\InfoModel\UserRoleInfo.cs" />
@@ -2614,6 +2617,9 @@
     <Content Include="Views\KhachHang\Details.cshtml" />
     <Content Include="Views\Material\EditReceipt.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Material\DonHangDetails.cshtml" />
+    <Content Include="Views\Material\KHVTDetails.cshtml" />
+    <Content Include="Views\Material\LenhSXDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
