@@ -13,6 +13,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace DKAC.Controllers
 {
     public class ReportController : BaseController
@@ -81,6 +82,40 @@ namespace DKAC.Controllers
             fr.Run(result);
             fr.Dispose();
             return ViewReport(result, "ThongKeMaterials", exportExcel);
+        }
+
+        [HttpGet]
+        public ActionResult ExportExcelBangDuToan(int id, bool exportExcel)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            var model = _rep.ExportExcelDonHang(id);
+
+            var lstDuToan = model.lstChiTietDuToans ?? new List<ChiTietDuToan>();
+
+            var path = Path.Combine(Server.MapPath("~/FileTemplate"), "ExprotDuToanVatTu.xlsx");
+            var file = new FileInfo(path);
+            var excel = new ExcelPackage(file);
+            var fr = new FlexCelReport();
+
+            var result = CreateXlsFile(excel);
+
+            fr.SetValue("ten_khach_hang", model.ten_khach_hang);
+            fr.SetValue("ten_san_pham", model.ten_san_pham);
+            fr.SetValue("ma_san_pham", model.ma_san_pham);
+            fr.SetValue("lan_dieu_chinh", model.lan_dieu_chinh);
+            fr.SetValue("quy_cach_chung", model.quy_cach_chung);
+            fr.SetValue("ten_can_bo_ql", model.ten_can_bo_ql);
+            fr.SetValue("ten_can_bo_kt", model.ten_can_bo_kt);
+            fr.SetValue("created_date", (model.created_date.HasValue ? model.created_date.Value.ToString("dd/MM/yyyy") : ""));
+
+            fr.AddTable("lstDuToan", lstDuToan.OrderBy(o => o.id));
+            fr.Run(result);
+            fr.Dispose();
+            if(exportExcel == false)
+            {
+                return ExportPDF(result, "ExprotDuToanVatTu", exportExcel);
+            }
+            return ViewReport(result, "ExprotDuToanVatTu", exportExcel);
         }
     }
 }
