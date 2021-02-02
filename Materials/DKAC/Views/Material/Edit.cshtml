@@ -423,7 +423,6 @@
                                             <th class="text-center" rowspan="3" style="width:40px">STT</th>
                                             <th class="text-center" rowspan="3" style="width:50px">Số lượng</th>
                                             <th class="text-center" colspan="4" style="width:320px">Quy cách loại vật tư</th>
-                                            <th class="text-center" rowspan="3" style="width:70px">Mã vật tư</th>
                                             <th class="text-center" rowspan="3" style="width:50px">Trang/tờ</th>
                                             <th class="text-center" rowspan="3" style="width:60px">Định mức</th>
                                             <th class="text-center" colspan="4" style="width:240px">Số lượng</th>
@@ -1301,7 +1300,6 @@
                     dinh_luong: $('#standard_' + (i + 1) + ' .dinh_luongMH2').val().toString().trim(),
                     kho_giay_dai: $('#standard_' + (i + 1) + ' .kho_giay_daiMH2').val().toString().trim(),
                     kho_giay_rong: $('#standard_' + (i + 1) + ' .kho_giay_rongMH2').val().toString(),
-                    ma_vat_tu: $('#standard_' + (i + 1) + ' .ma_vat_tuMH2').val().toString().trim(),
                     trang: $('#standard_' + (i + 1) + ' .trangMH2').val().toString().trim(),
                     dinh_muc: ($('#standard_' + (i + 1) + ' .dinh_mucMH2').val()).toString().trim(),
                     sl_chinh: $('#standard_' + (i + 1) + ' .sl_chinhMH2').val().toString().trim(),
@@ -1452,19 +1450,16 @@
                                     <input type="number" class="form-control inputText kho_giay_rongMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.kho_giay_rong == null ? '' : appendix.kho_giay_rong}" id="khogiayrongMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText ma_vat_tuMH2" value="${appendix.ma_vat_tu == null ? '' : appendix.ma_vat_tu}" id="mavattuMH2_${index + 1}"/>
-                                </td>
-                                <td>
                                     <input type="number" class="form-control inputText trangMH2" onchange="AutoTinhDinhMuc(this)" value="${appendix.trang == null ? '' : appendix.trang}" id="trangMH2_${index + 1}"/>
                                 </td>
                                 <td style="display:none;">
                                     <input type="number" style="display:none;" class="form-control inputText trangMH1" value="${appendix.trangMH1 == null ? '' : appendix.trangMH1}" id="trangMH1MH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText dinh_mucMH2" disabled onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText dinh_mucMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_chinhMH2" disabled onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText sl_chinhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="number" class="form-control inputText sl_bu_inMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_in == null ? '' : appendix.sl_bu_in}" id="slbuinMH2_${index + 1}"/>
@@ -1473,13 +1468,13 @@
                                     <input type="number" class="form-control inputText sl_bu_tpMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_tp == null ? '' : appendix.sl_bu_tp}" id="slbutpMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_tongMH2" disabled value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText sl_tongMH2" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText don_vi_tinhMH2" value="${appendix.don_vi_tinh == null ? '' : appendix.don_vi_tinh}" id="donvitinhMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText quy_kyMH2" disabled value="${appendix.quy_ky == null ? '' : appendix.quy_ky}" id="quykyMH2_${index + 1}"/>
+                                    <input type="number" class="form-control inputText quy_kyMH2" value="${appendix.quy_ky == null ? '' : appendix.quy_ky}" id="quykyMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText muc_dich_sdMH2" value="${appendix.muc_dich_sd == null ? '' : appendix.muc_dich_sd}" id="mucdichsdMH2_${index + 1}"/>
@@ -1879,7 +1874,6 @@
                         dinh_luong: lstTemp[i].dinh_luong_giay,
                         kho_giay_dai: '',
                         kho_giay_rong: '',
-                        ma_vat_tu: '',
                         trang: '',
                         trangMH1: ((lstTemp[i].trang * 1 == 0) ?1: lstTemp[i].trang * 1),
                         dinh_muc: '',
@@ -1901,7 +1895,7 @@
                     var lstDuToanBia = {
                         so_luong: '',
                         ten: 'Kẽm ' + lstTemp[i].ten,
-                        dinh_luong: lstTemp[i].dinh_luong_giay,
+                        dinh_luong: '',
                         kho_giay_dai: '',
                         kho_giay_rong: '',
                         ma_vat_tu: '',
@@ -2059,6 +2053,7 @@
             lstAppendixMH3 = [];
             lstAppendixPrint = [];
             var lstCheBan = [];
+            var lstDuToanGiayConvert = [];
             var lstCheBanConvert = [];
             var lstIn = [];
             var data = GetData();
@@ -2089,6 +2084,9 @@
                     if (kem.startsWith("Kẽm")) {
                         lstCheBan.push(lstDuToanKem[i]);
                     }
+                    if (kem.startsWith("Giấy")){
+                        lstDuToanGiayConvert.push(lstDuToanKem[i]);
+                    }
                 }
 
                 //fill chế bản
@@ -2115,17 +2113,17 @@
                     var lstDuToanGiay = {
                         ten_tay_in: lstCheBan[i].ten.slice(4),
                         ten_loai: lstCheBan[i].loai_giay,
-                        dinh_luong_giay_in: lstCheBan[i].dinh_luong,
-                        kho_giay_dai: lstCheBan[i].kho_giay_dai,
-                        kho_giay_rong: lstCheBan[i].kho_giay_rong,
+                        dinh_luong_giay_in: lstDuToanGiayConvert[i].dinh_luong,
+                        kho_giay_dai: lstDuToanGiayConvert[i].kho_giay_dai,
+                        kho_giay_rong: lstDuToanGiayConvert[i].kho_giay_rong,
                         kho_in_dai: '',
                         kho_in_rong: '',
-                        chinh: lstCheBan[i].sl_chinh,
-                        bu_in: lstCheBan[i].sl_bu_in,
-                        bu_thanh_pham: lstCheBan[i].sl_bu_tp,
-                        sl_tong: lstCheBan[i].sl_tong,
+                        chinh: lstDuToanGiayConvert[i].sl_chinh,
+                        bu_in: lstDuToanGiayConvert[i].sl_bu_in,
+                        bu_thanh_pham: lstDuToanGiayConvert[i].sl_bu_tp,
+                        sl_tong: lstDuToanGiayConvert[i].sl_tong,
                         phuong_phap_in: '',
-                        so_kg: lstCheBan[i].quy_ky,
+                        so_kg: lstDuToanGiayConvert[i].quy_ky,
                         so_luot_in_quy_doi: '',
                         so_luot_in_thuc_te: '',
                     };
