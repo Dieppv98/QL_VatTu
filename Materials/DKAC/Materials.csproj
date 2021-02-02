@@ -2376,6 +2376,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jQuery1.2.6.js" />
     <None Include="Scripts\JSLINQ-vsdoc.js" />
     <Content Include="Scripts\JSLINQ.js" />
     <Content Include="Scripts\jsSelect2\components-md.css" />
@@ -2585,7 +2586,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Material\Edit.cshtml" />
-    <Content Include="Views\Material\EditMaterial.cshtml" />
     <Content Include="Scripts\select.min.js.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -2597,7 +2597,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Material\EditProductionOrder.cshtml" />
     <Content Include="Views\Admin\EditRole.cshtml" />
     <Content Include="Views\Admin\PermissionManagerment.cshtml" />
     <Content Include="Views\Admin\RoleManagerment.cshtml" />

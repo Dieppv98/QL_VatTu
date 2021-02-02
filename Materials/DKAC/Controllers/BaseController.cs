@@ -122,6 +122,7 @@ namespace DKAC.Controllers
 
         protected XlsFile CreateXlsFile(ExcelPackage excel)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             var result = new XlsFile(true);
             try
             {

@@ -128,5 +128,43 @@ namespace DKAC.Repository
 
             return query ?? new List<DonHangInfo>();
         }
+
+        public DonHangInfo ExportExcelDonHang(int id)
+        {
+            var query = (from d in db.DonHang.Where(x => x.id == id)
+                         select new DonHangInfo()
+                         {
+                             id = d.id,
+                             ngay_giao_hang = d.ngay_giao_hang,
+                             ten_can_bo_kt = d.ten_can_bo_kt,
+                             ten_can_bo_ql = d.ten_can_bo_ql,
+                             ten_khach_hang = d.ten_khach_hang,
+                             ten_san_pham = d.ten_san_pham,
+                             ma_khach_hang = d.ma_khach_hang,
+                             ma_san_pham = d.ma_san_pham,
+                             phieu_dnsx_so = d.phieu_dnsx_so,
+                             nv_kinh_doanh = d.nv_kinh_doanh,
+                             phone_number = d.phone_number,
+                             loai = d.loai,
+                             lan_dieu_chinh = d.lan_dieu_chinh,
+                             kho_doc = d.kho_doc,
+                             kho_ngang = d.kho_ngang,
+                             kho_tp = d.kho_tp,
+                             created_date = d.created_date,
+                             email = d.email,
+                             quy_cach_chung = d.quy_cach_chung,
+                             nha_cc = d.nha_cc,
+                             so_luong_tong = d.so_luong_tong,
+                             chi_tiet_sl_tong = d.chi_tiet_sl_tong,
+                             tp_ghi_chu = d.tp_ghi_chu,
+
+                             lstVatTus = db.VatTu.Where(x => x.don_hang_id == d.id).ToList(),
+                             lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == d.id).ToList(),
+                             lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),
+                             lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == d.id).ToList(),
+                         }).FirstOrDefault();
+
+            return query ?? new DonHangInfo();
+        }
     }
 }
