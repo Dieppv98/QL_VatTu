@@ -101,5 +101,6 @@ namespace DKAC.Models.InfoModel
         public List<ChiTietIn> lstChiTietIns { get; set; }
         public List<TongSoLuongInfo> lst_sl_tong { get; set; }
         public List<SelectListItem> lstSo_LSX { get; set; }
+        public List<PPIn> lstPPIn { get; set; }
     }
 }

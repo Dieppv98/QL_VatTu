@@ -30,6 +30,7 @@ namespace DKAC.Models.EntityModel
         public virtual DbSet<KhachHang> KhachHang { get; set; }
         public virtual DbSet<VatTu> VatTu { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
+        public virtual DbSet<PPIn> PPIn { get; set; }
 
         //public MaterialsContext(string connectionString)
         //    : base(connectionString) { }
@@ -69,7 +70,7 @@ namespace DKAC.Models.EntityModel
                 .IsFixedLength();
 
             modelBuilder.Entity<ChiTietCheBan>()
-                .Property(e => e.phuong_phap_in)
+                .Property(e => e.ten_tay_in)
                 .IsFixedLength();
 
             modelBuilder.Entity<ChiTietDuToan>()
@@ -77,7 +78,7 @@ namespace DKAC.Models.EntityModel
                 .IsFixedLength();
 
             modelBuilder.Entity<ChiTietIn>()
-                .Property(e => e.phuong_phap_in)
+                .Property(e => e.ten_loai)
                 .IsFixedLength();
 
             modelBuilder.Entity<DonHang>()
@@ -94,6 +95,10 @@ namespace DKAC.Models.EntityModel
 
             modelBuilder.Entity<SanPham>()
                 .Property(e => e.ten_san_pham)
+                .IsFixedLength();
+
+            modelBuilder.Entity<PPIn>()
+                .Property(e => e.Name)
                 .IsFixedLength();
 
         }

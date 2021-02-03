@@ -30,7 +30,7 @@ namespace DKAC.Models.EntityModel
 
         public string sl_tong { get; set; }
 
-        public string phuong_phap_in { get; set; }
+        public int? phuong_phap_in { get; set; }
 
         public string so_kg { get; set; }
 

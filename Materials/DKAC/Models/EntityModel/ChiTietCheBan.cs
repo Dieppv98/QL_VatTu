@@ -28,7 +28,7 @@ namespace DKAC.Models.EntityModel
         
         public string kho_kem { get; set; }
         
-        public string phuong_phap_in { get; set; }
+        public int? phuong_phap_in { get; set; }
 
         public int? don_hang_id { get; set; }
     }
