@@ -122,7 +122,7 @@ namespace DKAC.Repository
         public int ChangePassword(int id, string PassWord)
         {
             var data = db.Users.Where(x => x.id == id).FirstOrDefault();
-            data.PassWord = "hoandeptrai";
+            data.PassWord = PassWord;
             data.ModifyDate = DateTime.Now;
             db.SaveChanges();
             return 1;

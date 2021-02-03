@@ -11,10 +11,8 @@ namespace DKAC.Models.EntityModel
     {
         public int id { get; set; }
 
-        [StringLength(20)]
         public string ma_san_pham { get; set; }
 
-        [StringLength(500)]
         public string ten_san_pham { get; set; }
 
         public DateTime? created_date { get; set; }

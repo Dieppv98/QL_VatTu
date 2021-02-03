@@ -26,14 +26,18 @@ namespace DKAC.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool result = _loginRepo.Login(login.UserName, login.Password);
-                if (result)
+                var user = _loginRepo.GetUserByUserName(login.UserName);
+                if (user != null)
                 {
-                    var user = _loginRepo.GetUserByUserName(login.UserName);
-                    var pagemodul = _loginRepo.GetAccountModulPageInfo(user.id);
-                    Session.Add(CommonConstants.USER_SESSION, user);
-                    Session.Add(CommonConstants.PAGE_MODUL_SESSION, pagemodul);
-                    return RedirectToAction("Index", "Home");
+                    bool authenSuccess;
+                    authenSuccess = Encryption.CheckPassword(login.Password, user.PassWord, "");
+                    if (authenSuccess)
+                    {
+                        var pagemodul = _loginRepo.GetAccountModulPageInfo(user.id);
+                        Session.Add(CommonConstants.USER_SESSION, user);
+                        Session.Add(CommonConstants.PAGE_MODUL_SESSION, pagemodul);
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không chính xác!");
             }
