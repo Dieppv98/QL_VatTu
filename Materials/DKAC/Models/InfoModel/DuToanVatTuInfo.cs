@@ -89,7 +89,7 @@ namespace DKAC.Models.InfoModel
 
         [StringLength(200)]
         public string kho_tp { get; set; }
-        public string so_luong_tong { get; set; }
+        public int? so_luong_tong { get; set; }
         public string chi_tiet_sl_tong { get; set; }
 
         public List<VatTu> lstVatTus { get; set; }

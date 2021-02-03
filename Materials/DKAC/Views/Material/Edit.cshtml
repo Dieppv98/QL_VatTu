@@ -329,145 +329,145 @@
 <!--Bảng dự toán-->
 <div style="display: none;">
     @*<div class="container manhinh2" style="display:none;">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-6 uppercase">
-                        <h2>NHẬP LIỆU DỰ TOÁN VẬT TƯ SẢN XUẤT</h2>
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-6 uppercase">
+                            <h2>NHẬP LIỆU DỰ TOÁN VẬT TƯ SẢN XUẤT</h2>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <ol class="breadcrumb" style="margin-left: 15px;">
-                    <li style="margin-right: 10px"><a href="/"> <i class="fa fa-home home"></i> Home</a></li>
-                    <li class="active">
-                        <span>Nhập liệu</span>
-                    </li>
-                </ol>
-            </div>
+                <div class="row">
+                    <ol class="breadcrumb" style="margin-left: 15px;">
+                        <li style="margin-right: 10px"><a href="/"> <i class="fa fa-home home"></i> Home</a></li>
+                        <li class="active">
+                            <span>Nhập liệu</span>
+                        </li>
+                    </ol>
+                </div>
 
-            <form action="" method="post" id="editMH2">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8 text-center">
-                            <h2><label>BẢNG DỰ TOÁN VẬT TƯ SẢN XUẤT</label></h2>
-                        </div>
-                        <div class="col-md-2 m-1"></div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2 text-right">
-                            <label>Số LSX: </label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="so_lenh_sxMH2" value="@Model.so_lenh_sx" disabled />
+                <form action="" method="post" id="editMH2">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8 text-center">
+                                <h2><label>BẢNG DỰ TOÁN VẬT TƯ SẢN XUẤT</label></h2>
+                            </div>
+                            <div class="col-md-2 m-1"></div>
                         </div>
 
-                        <div class="col-md-2 text-right">
-                            <label>Ngày: </label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="created_dateMH2" value="@Model.created_date" disabled />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2 text-right">
-                            <label>Tên khách hàng: </label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="ma_khach_hangMH2" disabled value="@Model.ma_khach_hang" />
-                        </div>
-
-                        <div class="col-md-2 text-right">
-                            <label>Tên sản phẩm: </label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="ten_san_phamMH2" disabled value="@Model.ten_san_pham" />
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-2 text-right">
-                            <label>Mã sản phẩm: </label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="ma_san_phamMH2" disabled value="@Model.ma_san_pham" />
-                        </div>
-
-                        <div class="col-md-2 text-right">
-                            <label>Điều chỉnh lần: </label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" id="lan_dieu_chinhMH2" disabled value="@Model.lan_dieu_chinh" />
-                        </div>
-                    </div>
-
-                    <hr />
-
-                    Bảng nội dung CTP
-                    <div class="group">
-                        <div class="form-body">
-                            <div class="row span">
-                                <div class="col-md-12">
-                                    <label class="caption-subject sbold uppercase" style="font-size:20px;">
-                                        <u>BẢNG DỰ TOÁN VẬT TƯ</u>
-                                    </label>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-2 text-right">
+                                <label>Số LSX: </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="so_lenh_sxMH2" value="@Model.so_lenh_sx" disabled />
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered info-materials" id="appendixTableMH2">
-                                            <tr style="background-color: #0076d2; color: white;">
-                                                <th class="text-center" rowspan="3" style="width:40px">STT</th>
-                                                <th class="text-center" rowspan="3" style="width:50px">Số lượng(tờ)</th>
-                                                <th class="text-center" colspan="4" style="width:320px">Quy cách loại vật tư</th>
-                                                <th class="text-center" rowspan="3" style="width:50px">Trang/tờ</th>
-                                                <th class="text-center" rowspan="3" style="width:60px">Định mức</th>
-                                                <th class="text-center" colspan="4" style="width:240px">Số lượng</th>
-                                                <th class="text-center" rowspan="3" style="width:60px">Quy ký</th>
-                                                <th class="text-center" rowspan="3" style="width:110px">Mục đích sử dụng</th>
-                                                <th class="text-center" style="width:40px;" rowspan="3">
-                                                    <a class="btn btn-sm btn-primary lock p5" id="addRowAppendixTableMH2" title="Thêm mới">
-                                                        <i class="fa fa-plus"></i>
-                                                    </a>
-                                                </th>
-                                            </tr>
-                                            <tr style="background-color: #0076d2; color: white;">
-                                                <th class="text-center" rowspan="2" style="width:130px">Vật tư</th>
-                                                <th class="text-center" rowspan="2" style="width:70px">Định lượng giấy</th>
-                                                <th class="text-center" colspan="2" style="width:120px">Khổ giấy</th>
-                                                <th class="text-center" rowspan="2" style="width:60px">Chính</th>
-                                                <th class="text-center" rowspan="2" style="width:60px">Bù in</th>
-                                                <th class="text-center" rowspan="2" style="width:60px">Bù TP</th>
-                                                <th class="text-center" rowspan="2" style="width:60px">Tổng</th>
-                                            </tr>
-                                            <tr style="background-color: #0076d2; color: white;">
-                                                <th class="text-center" style="width:60px">Dài</th>
-                                                <th class="text-center" style="width:60px">Rộng</th>
-                                            </tr>
+                            <div class="col-md-2 text-right">
+                                <label>Ngày: </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="created_dateMH2" value="@Model.created_date" disabled />
+                            </div>
+                        </div>
 
-                                            <tbody id="appendixTbodyMH2"></tbody>
-                                        </table>
+                        <div class="row">
+                            <div class="col-md-2 text-right">
+                                <label>Tên khách hàng: </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="ma_khach_hangMH2" disabled value="@Model.ma_khach_hang" />
+                            </div>
+
+                            <div class="col-md-2 text-right">
+                                <label>Tên sản phẩm: </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="ten_san_phamMH2" disabled value="@Model.ten_san_pham" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 text-right">
+                                <label>Mã sản phẩm: </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="ma_san_phamMH2" disabled value="@Model.ma_san_pham" />
+                            </div>
+
+                            <div class="col-md-2 text-right">
+                                <label>Điều chỉnh lần: </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="lan_dieu_chinhMH2" disabled value="@Model.lan_dieu_chinh" />
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        Bảng nội dung CTP
+                        <div class="group">
+                            <div class="form-body">
+                                <div class="row span">
+                                    <div class="col-md-12">
+                                        <label class="caption-subject sbold uppercase" style="font-size:20px;">
+                                            <u>BẢNG DỰ TOÁN VẬT TƯ</u>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-bordered info-materials" id="appendixTableMH2">
+                                                <tr style="background-color: #0076d2; color: white;">
+                                                    <th class="text-center" rowspan="3" style="width:40px">STT</th>
+                                                    <th class="text-center" rowspan="3" style="width:50px">Số lượng(tờ)</th>
+                                                    <th class="text-center" colspan="4" style="width:320px">Quy cách loại vật tư</th>
+                                                    <th class="text-center" rowspan="3" style="width:50px">Trang/tờ</th>
+                                                    <th class="text-center" rowspan="3" style="width:60px">Định mức</th>
+                                                    <th class="text-center" colspan="4" style="width:240px">Số lượng</th>
+                                                    <th class="text-center" rowspan="3" style="width:60px">Quy ký</th>
+                                                    <th class="text-center" rowspan="3" style="width:110px">Mục đích sử dụng</th>
+                                                    <th class="text-center" style="width:40px;" rowspan="3">
+                                                        <a class="btn btn-sm btn-primary lock p5" id="addRowAppendixTableMH2" title="Thêm mới">
+                                                            <i class="fa fa-plus"></i>
+                                                        </a>
+                                                    </th>
+                                                </tr>
+                                                <tr style="background-color: #0076d2; color: white;">
+                                                    <th class="text-center" rowspan="2" style="width:130px">Vật tư</th>
+                                                    <th class="text-center" rowspan="2" style="width:70px">Định lượng giấy</th>
+                                                    <th class="text-center" colspan="2" style="width:120px">Khổ giấy</th>
+                                                    <th class="text-center" rowspan="2" style="width:60px">Chính</th>
+                                                    <th class="text-center" rowspan="2" style="width:60px">Bù in</th>
+                                                    <th class="text-center" rowspan="2" style="width:60px">Bù TP</th>
+                                                    <th class="text-center" rowspan="2" style="width:60px">Tổng</th>
+                                                </tr>
+                                                <tr style="background-color: #0076d2; color: white;">
+                                                    <th class="text-center" style="width:60px">Dài</th>
+                                                    <th class="text-center" style="width:60px">Rộng</th>
+                                                </tr>
+
+                                                <tbody id="appendixTbodyMH2"></tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
 
-            <div class="row" style="margin-top: 15px">
-                <div class="col-md-12 text-right">
-                    <a onclick="goBackMH1()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
-                    <a onclick="TransViewEditProductOrder()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
+                <div class="row" style="margin-top: 15px">
+                    <div class="col-md-12 text-right">
+                        <a onclick="goBackMH1()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
+                        <a onclick="TransViewEditProductOrder()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 </div>
 <!--End bảng dự toán-->
 
@@ -577,7 +577,7 @@
                                                 <label>Số lượng tổng:</label>
                                             </div>
                                             <div class="col-md-9 text-left">
-                                                <input type="text" class="form-control" id="so_luong_tong" value="@Model.so_luong_tong" />
+                                                <input type="number" class="form-control" id="so_luong_tong" value="@Model.so_luong_tong" onchange="AutoFillTPSoLuong()" />
                                             </div>
                                         </div>
 
@@ -629,27 +629,34 @@
                 <div class="group">
                     <div class="form-body">
                         <div class="row span">
-                            <div class="col-md-2">
+                            <div class="col-md-12">
                                 <label class="caption-subject sbold uppercase" style="font-size:20px;">
                                     <u>II. CHẾ BẢN</u>
                                 </label>
                             </div>
-                            <div class="col-md-2 text-right" style="padding-top: 10px;">
+                        </div>
+
+                        <div class="row span">
+                            <div class="col-md-2" style="padding-top: 10px;">
                                 <label>Thời gian giao file:</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <input type="text" class="form-control" id="cb_thoi_gian_giao" value="@Model.cb_thoi_gian_giao" />
                             </div>
                         </div>
 
                         <div class="row span">
-                            <div class="col-md-2">
-                            </div>
-                            <div class="col-md-2 text-right" style="padding-top: 10px;">
+                            <div class="col-md-2" style="padding-top: 10px;">
                                 <label>Ghi chú đặc biệt:</label>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="cb_ghi_chu" value="@Model.cb_ghi_chu" />
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(a=>a.cb_ghi_chu, new Dictionary<string, object>
+                                      {
+                                          {"class", " form-control"},
+                                            {"id", "cb_ghi_chu"},
+                                             { "maxlength", "2000" },
+                                             { "row", "3" },
+                                      })
                             </div>
                         </div>
 
@@ -693,18 +700,28 @@
                 <div class="group">
                     <div class="form-body">
                         <div class="row span">
-                            <div class="col-md-2">
+                            <div class="col-md-12">
                                 <label class="caption-subject sbold uppercase" style="font-size:20px;">
                                     <u>III. IN</u>
                                 </label>
                             </div>
-                            <div class="col-md-2 text-right" style="padding-top: 10px;">
+                        </div>
+
+                        <div class="row span">
+                            <div class="col-md-2" style="padding-top: 10px;">
                                 <label>Ghi chú đặc biệt:</label>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="in_ghi_chu" value="@Model.in_ghi_chu" />
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(a=>a.in_ghi_chu, new Dictionary<string, object>
+                                      {
+                                          {"class", " form-control"},
+                                            {"id", "in_ghi_chu"},
+                                             { "maxlength", "2000" },
+                                             { "row", "3" },
+                                      })
                             </div>
                         </div>
+
 
                         <div class="row">
                             <div class="col-md-12">
@@ -757,9 +774,54 @@
                                 </label>
                             </div>
                         </div>
-
-
                     </div>
+                </div>
+
+                <!--Bảng thành phẩm-->
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <div class="table-responsive" @*style="overflow-y: hidden;overflow-x: hidden;"*@>
+                            <table class="table table-striped table-bordered">
+                                <tr style="background-color: #0076d2; color: white;">
+                                    <th class="text-center" colspan="4">Quy cách</th>
+                                    <th class="text-center" rowspan="2">Số lượng</th>
+                                    <th class="text-center" rowspan="2">Số cuốn/thùng</th>
+                                    <th class="text-center" rowspan="2" style="width: 100px">Đơn vị tính</th>
+                                </tr>
+                                <tr style="background-color: #0076d2; color: white;">
+                                    <th class="text-center" style="width: 200px">Vật tư</th>
+                                    <th class="text-center">Dài</th>
+                                    <th class="text-center">Rộng</th>
+                                    <th class="text-center">Cao</th>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Thùng</td>
+                                    <th class="text-center"><input class="form-control" value="@Model.tp_dai" id="tp_dai" /></th>
+                                    <th class="text-center"><input class="form-control" value="@Model.tp_rong" id="tp_rong" /></th>
+                                    <th class="text-center"><input class="form-control" value="@Model.tp_cao" id="tp_cao" /></th>
+                                    <th class="text-center"><input class="form-control" value="@Model.tp_soluong" id="tp_soluong" /></th>
+                                    <th class="text-center"><input class="form-control" value="@Model.tp_socuon_thung" id="tp_socuon_thung" @*onchange="AutoFillTPSoLuong()"*@/></th>
+                                    <td class="text-center">Thùng</td>
+                                </tr>
+
+                                <tr>
+                                    <th class="text-center">
+                                        <select class="form-control text-center" name="bangkeo" id="bangkeo" onchange="ShowTooltip(this)">
+                                            <option value="" disabled selected hidden>--Chọn--</option>
+                                            <option value="1" @(Model.tp_vat_tu == 1 ? "selected" : "") title="Công thức tính: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng">Băng keo</option>
+                                            <option value="2" @(Model.tp_vat_tu == 2 ? "selected" : "") title="Công thức tính: (dài + rộng + 40) * 2 / số thùng">Băng keo đặc biệt</option>
+                                        </select>
+                                    </th>
+                                    <th class="text-center" colspan="3"><input disabled class="form-control" /></th>
+                                    <th class="text-center"><input class="form-control" value="@Model.tp_sl_bangkeo" id="tp_sl_bangkeo" />@*<a href="#" rel="tooltip" data-original-title="Công thức tính thứ 1: " id="tooltip1"></a><a href="#" rel="tooltip" data-original-title="Công thức tính thứ 2: " id="tooltip2"></a>*@</th>
+                                    <th class="text-center"><input disabled class="form-control" /></th>
+                                    <td class="text-center">Mét</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
                 </div>
 
 
@@ -1576,10 +1638,10 @@
                                 <input type="text" class="form-control inputText ten_tay_in1" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in}" id="tentayin1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_kem1" value="${appendix.so_kem == null ? '' : appendix.so_kem}" id="sokem1_${index + 1}"/>
+                                <input type="number" class="form-control inputText so_kem1" onchange="AutoFillTongCheBan(this)" value="${appendix.so_kem == null ? '' : appendix.so_kem}" id="sokem1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_bo1" value="${appendix.so_bo == null ? '' : appendix.so_bo}" id="sobo1_${index + 1}"/>
+                                <input type="number" class="form-control inputText so_bo1" onchange="AutoFillTongCheBan(this)" value="${appendix.so_bo == null ? '' : appendix.so_bo}" id="sobo1_${index + 1}"/>
                             </td>
                             <td>
                                 <input type="number" class="form-control inputText tong1" value="${appendix.tong == null ? '' : appendix.tong}" id="tong1_${index + 1}"/>
@@ -1701,16 +1763,16 @@
                                 <input type="number" class="form-control inputText kho_in_rong" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong}" id="khoinrong_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText chinh" value="${appendix.chinh == null ? '' : appendix.chinh}" id="chinh_${index + 1}"/>
+                                <input type="number" class="form-control inputText chinh"  onchange="AutoFillTongIn(this)" value="${appendix.chinh == null ? '' : appendix.chinh}" id="chinh_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText bu_in" value="${appendix.bu_in == null ? '' : appendix.bu_in}" id="buin_${index + 1}"/>
+                                <input type="number" class="form-control inputText bu_in" onchange="AutoFillTongIn(this)" alue="${appendix.bu_in == null ? '' : appendix.bu_in}" id="buin_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText bu_thanh_pham" value="${appendix.bu_thanh_pham == null ? '' : appendix.bu_thanh_pham}" id="buthanhpham_${index + 1}"/>
+                                <input type="number" class="form-control inputText bu_thanh_pham" onchange="AutoFillTongIn(this)" value="${appendix.bu_thanh_pham == null ? '' : appendix.bu_thanh_pham}" id="buthanhpham_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText sl_tong" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="tenloai_${index + 1}"/>
+                                <input type="number" class="form-control inputText sl_tong" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltong_${index + 1}"/>
                             </td>
                             <td>
                                 ${generatePPInPrint(appendix, index)}
@@ -2015,6 +2077,49 @@
             $('#quykyMH2_' + numberid).val(quyKy);
         }
 
+        function AutoFillTongCheBan(element) {
+            var id = $(element).attr("id");
+            var index = id.indexOf('_');
+            var numberid = id.substring(index + 1);
+            var sokem1 = $('#sokem1_' + numberid).val() * 1;
+            var sobo1 = $('#sobo1_' + numberid).val() * 1;
+
+            var tong1 = (sokem1 + sobo1);
+            $('#tong1_' + numberid).val(tong1);
+        }
+
+        function AutoFillTongIn(element) {
+            var id = $(element).attr("id");
+            var index = id.indexOf('_');
+            var numberid = id.substring(index + 1);
+            var chinh = $('#chinh_' + numberid).val() * 1;
+            var buin = $('#buin_' + numberid).val() * 1;
+            var butp = $('#buthanhpham_' + numberid).val() * 1;
+
+            var tong = (chinh + buin + butp);
+            $('#sltong_' + numberid).val(tong);
+        }
+
+        function AutoFillTPSoLuong() {
+            var slTong = $('#so_luong_tong').val() * 1;
+            var tpSoCuon = $('#tp_socuon_thung').val() * 1;
+
+            var sl = (slTong + tpSoCuon);
+            $('#tp_soluong').val(sl);
+        }
+
+        function ShowTooltip(element) {
+            var value = $(element).val();
+
+            if (value == 1) {
+                $('#tooltip1').tooltip({ trigger: 'manual' }).tooltip('show');
+            }
+            if (value == 2) {
+                $('#tooltip2').tooltip({ trigger: 'manual' }).tooltip('show');
+            }
+            
+        }
+
         //////////// chuyển sang màn hình 3
         function GetDetailsBangTongQuan() {
             lstContents = [];
@@ -2194,7 +2299,7 @@
                     thanh_pham_chung: $('#thanh_pham_chung').val().trim(),
                     tp_ghi_chu: $('#tp_ghi_chu').val().trim(),
                     tp_thoi_han: $('#tp_thoi_han').val().trim(),
-                    so_luong_tong: $('#so_luong_tong').val().trim(),
+                    so_luong_tong: $('#so_luong_tong').val(),
 
                     lstVatTus: GetInfoDetail(), //thông tin bảng details tổng quan đơn hàng
                     lstChiTietDuToans: GetInfoChiTietDuToan(), //thông tin bảng details tổng quan đơn hàng
