@@ -750,7 +750,7 @@
 
         function generate(appendix, index) {
             var htmlRow = `<select disabled class="form-control nhom_vat_tu_id selcted2" required style="width: 100%">`;
-            htmlRow += `<option value="" ${appendix.nhom_vat_tu_id == '' ? 'selected' : ''}>---Chọn---</option > `;
+            htmlRow += `<option value="" ${appendix.nhom_vat_tu_id == '' ? 'selected' : ''}></option >`;
             for (var i = 0; i < lstMaterialType.length; i++) {
                 htmlRow += `<option value = "${lstMaterialType[i].Id}" ${lstMaterialType[i].Id == appendix.nhom_vat_tu_id ? 'selected' : ''}> ${lstMaterialType[i].MaterialTypeName}</option> `;
             }

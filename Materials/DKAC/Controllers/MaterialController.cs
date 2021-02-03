@@ -42,21 +42,28 @@ namespace DKAC.Controllers
             var currentUser = (User)Session[CommonConstants.USER_SESSION];
 
             var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
+            var lstPPin = _mater.GetAllPPIn() ?? new List<PPIn>();
+
             DonHangInfo donHang = new DonHangInfo();
+            donHang.lstMaterialType = lstMaterial;
+
             if (id == 0)
             {
-                var checkPermissonThem = CheckPermission((int)PageId.NhapLieu, (int)Actions.Them, currentUser); ///check quyền
+                var checkPermissonThem = CheckPermission((int)PageId.NhapLieu, (int)Actions.Them, currentUser); ///check quyền thêm
                 if (checkPermissonThem == false) { return RedirectToAction("NotPermission", "Home"); }
 
                 donHang.lstMaterialType = lstMaterial;
+                donHang.lstPPIn = lstPPin;
                 donHang.lstVatTus = new List<VatTu>();
                 return View("Edit", donHang);
             }
-            var checkPermissonSua = CheckPermission((int)PageId.NhapLieu, (int)Actions.Sua, currentUser); ///check quyền
+
+            var checkPermissonSua = CheckPermission((int)PageId.NhapLieu, (int)Actions.Sua, currentUser); ///check quyền sủa
             if (checkPermissonSua == false) { return RedirectToAction("NotPermission", "Home"); }
 
             donHang = _mater.GetbyId(id);
             donHang.lstMaterialType = lstMaterial;
+            donHang.lstPPIn = lstPPin;
             return View("EditReceipt", donHang);
         }
 

@@ -19,6 +19,11 @@ namespace DKAC.Repository
             return db.MaterialTypes.AsNoTracking().ToList();
         }
 
+        public List<PPIn> GetAllPPIn()
+        {
+            return db.PPIn.AsNoTracking().ToList();
+        }
+
         public DonHangInfo GetbyId(int id)
         {
             var query = (from d in db.DonHang.Where(x => x.id == id)

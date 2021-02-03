@@ -312,6 +312,7 @@
     <Compile Include="Models\EntityModel\Modul.cs" />
     <Compile Include="Models\EntityModel\Page.cs" />
     <Compile Include="Models\EntityModel\PermissionAction.cs" />
+    <Compile Include="Models\EntityModel\PPIn.cs" />
     <Compile Include="Models\EntityModel\Role.cs" />
     <Compile Include="Models\EntityModel\SanPham.cs" />
     <Compile Include="Models\EntityModel\User.cs" />
