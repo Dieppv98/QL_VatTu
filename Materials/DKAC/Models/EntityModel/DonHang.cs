@@ -77,9 +77,9 @@ namespace DKAC.Models.EntityModel
         public int? tp_dai { get; set; }
         public int? tp_rong { get; set; }
         public int? tp_cao { get; set; }
-        public double? tp_soluong { get; set; }
+        public string tp_soluong { get; set; }
         public int? tp_socuon_thung { get; set; }
-        public double? tp_sl_bangkeo { get; set; }
+        public string tp_sl_bangkeo { get; set; }
         public int? tp_vat_tu { get; set; }
 
     }
