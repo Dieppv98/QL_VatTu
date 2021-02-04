@@ -320,154 +320,152 @@
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
                 <a href="/Material" class="btn btn-primary" style="width: 8%">Hủy</a>
-                <a onclick="TransViewEditProductOrder()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
+                <a onclick="TransViewEditMaterial()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
             </div>
         </div>
     </div>
 </div>
 
 <!--Bảng dự toán-->
-<div style="display: none;">
-    @*<div class="container manhinh2" style="display:none;">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-6 uppercase">
-                            <h2>NHẬP LIỆU DỰ TOÁN VẬT TƯ SẢN XUẤT</h2>
-                        </div>
-                    </div>
+<div class="container manhinh2" style="display:none;">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6 uppercase">
+                    <h2>NHẬP LIỆU DỰ TOÁN VẬT TƯ SẢN XUẤT</h2>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <ol class="breadcrumb" style="margin-left: 15px;">
+                <li style="margin-right: 10px"><a href="/"> <i class="fa fa-home home"></i> Home</a></li>
+                <li class="active">
+                    <span>Nhập liệu</span>
+                </li>
+            </ol>
+        </div>
+
+        <form action="" method="post" id="editMH2">
+            <div class="form-group">
                 <div class="row">
-                    <ol class="breadcrumb" style="margin-left: 15px;">
-                        <li style="margin-right: 10px"><a href="/"> <i class="fa fa-home home"></i> Home</a></li>
-                        <li class="active">
-                            <span>Nhập liệu</span>
-                        </li>
-                    </ol>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 text-center">
+                        <h2><label>BẢNG DỰ TOÁN VẬT TƯ SẢN XUẤT</label></h2>
+                    </div>
+                    <div class="col-md-2 m-1"></div>
                 </div>
 
-                <form action="" method="post" id="editMH2">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-8 text-center">
-                                <h2><label>BẢNG DỰ TOÁN VẬT TƯ SẢN XUẤT</label></h2>
-                            </div>
-                            <div class="col-md-2 m-1"></div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2 text-right">
-                                <label>Số LSX: </label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="so_lenh_sxMH2" value="@Model.so_lenh_sx" disabled />
-                            </div>
-
-                            <div class="col-md-2 text-right">
-                                <label>Ngày: </label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="created_dateMH2" value="@Model.created_date" disabled />
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2 text-right">
-                                <label>Tên khách hàng: </label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="ma_khach_hangMH2" disabled value="@Model.ma_khach_hang" />
-                            </div>
-
-                            <div class="col-md-2 text-right">
-                                <label>Tên sản phẩm: </label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="ten_san_phamMH2" disabled value="@Model.ten_san_pham" />
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-2 text-right">
-                                <label>Mã sản phẩm: </label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="ma_san_phamMH2" disabled value="@Model.ma_san_pham" />
-                            </div>
-
-                            <div class="col-md-2 text-right">
-                                <label>Điều chỉnh lần: </label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" id="lan_dieu_chinhMH2" disabled value="@Model.lan_dieu_chinh" />
-                            </div>
-                        </div>
-
-                        <hr />
-
-                        Bảng nội dung CTP
-                        <div class="group">
-                            <div class="form-body">
-                                <div class="row span">
-                                    <div class="col-md-12">
-                                        <label class="caption-subject sbold uppercase" style="font-size:20px;">
-                                            <u>BẢNG DỰ TOÁN VẬT TƯ</u>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-bordered info-materials" id="appendixTableMH2">
-                                                <tr style="background-color: #0076d2; color: white;">
-                                                    <th class="text-center" rowspan="3" style="width:40px">STT</th>
-                                                    <th class="text-center" rowspan="3" style="width:50px">Số lượng(tờ)</th>
-                                                    <th class="text-center" colspan="4" style="width:320px">Quy cách loại vật tư</th>
-                                                    <th class="text-center" rowspan="3" style="width:50px">Trang/tờ</th>
-                                                    <th class="text-center" rowspan="3" style="width:60px">Định mức</th>
-                                                    <th class="text-center" colspan="4" style="width:240px">Số lượng</th>
-                                                    <th class="text-center" rowspan="3" style="width:60px">Quy ký</th>
-                                                    <th class="text-center" rowspan="3" style="width:110px">Mục đích sử dụng</th>
-                                                    <th class="text-center" style="width:40px;" rowspan="3">
-                                                        <a class="btn btn-sm btn-primary lock p5" id="addRowAppendixTableMH2" title="Thêm mới">
-                                                            <i class="fa fa-plus"></i>
-                                                        </a>
-                                                    </th>
-                                                </tr>
-                                                <tr style="background-color: #0076d2; color: white;">
-                                                    <th class="text-center" rowspan="2" style="width:130px">Vật tư</th>
-                                                    <th class="text-center" rowspan="2" style="width:70px">Định lượng giấy</th>
-                                                    <th class="text-center" colspan="2" style="width:120px">Khổ giấy</th>
-                                                    <th class="text-center" rowspan="2" style="width:60px">Chính</th>
-                                                    <th class="text-center" rowspan="2" style="width:60px">Bù in</th>
-                                                    <th class="text-center" rowspan="2" style="width:60px">Bù TP</th>
-                                                    <th class="text-center" rowspan="2" style="width:60px">Tổng</th>
-                                                </tr>
-                                                <tr style="background-color: #0076d2; color: white;">
-                                                    <th class="text-center" style="width:60px">Dài</th>
-                                                    <th class="text-center" style="width:60px">Rộng</th>
-                                                </tr>
-
-                                                <tbody id="appendixTbodyMH2"></tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>Số LSX: </label>
                     </div>
-                </form>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="so_lenh_sxMH2" value="@Model.so_lenh_sx" disabled />
+                    </div>
 
-                <div class="row" style="margin-top: 15px">
-                    <div class="col-md-12 text-right">
-                        <a onclick="goBackMH1()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
-                        <a onclick="TransViewEditProductOrder()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
+                    <div class="col-md-2 text-right">
+                        <label>Ngày: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="created_dateMH2" value="@Model.created_date" disabled />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>Tên khách hàng: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ma_khach_hangMH2" disabled value="@Model.ma_khach_hang" />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Tên sản phẩm: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ten_san_phamMH2" disabled value="@Model.ten_san_pham" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 text-right">
+                        <label>Mã sản phẩm: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="ma_san_phamMH2" disabled value="@Model.ma_san_pham" />
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <label>Điều chỉnh lần: </label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="lan_dieu_chinhMH2" disabled value="@Model.lan_dieu_chinh" />
+                    </div>
+                </div>
+
+                <hr />
+
+                Bảng nội dung CTP
+                <div class="group">
+                    <div class="form-body">
+                        <div class="row span">
+                            <div class="col-md-12">
+                                <label class="caption-subject sbold uppercase" style="font-size:20px;">
+                                    <u>BẢNG DỰ TOÁN VẬT TƯ</u>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered info-materials" id="appendixTableMH2">
+                                        <tr style="background-color: #0076d2; color: white;">
+                                            <th class="text-center" rowspan="3" style="width:40px">STT</th>
+                                            <th class="text-center" rowspan="3" style="width:50px">Số lượng(tờ)</th>
+                                            <th class="text-center" colspan="4" style="width:320px">Quy cách loại vật tư</th>
+                                            <th class="text-center" rowspan="3" style="width:50px">Trang/tờ</th>
+                                            <th class="text-center" rowspan="3" style="width:60px">Định mức</th>
+                                            <th class="text-center" colspan="4" style="width:240px">Số lượng</th>
+                                            <th class="text-center" rowspan="3" style="width:60px">Quy ký</th>
+                                            <th class="text-center" rowspan="3" style="width:110px">Mục đích sử dụng</th>
+                                            <th class="text-center" style="width:40px;" rowspan="3">
+                                                <a class="btn btn-sm btn-primary lock p5" id="addRowAppendixTableMH2" title="Thêm mới">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                        <tr style="background-color: #0076d2; color: white;">
+                                            <th class="text-center" rowspan="2" style="width:130px">Vật tư</th>
+                                            <th class="text-center" rowspan="2" style="width:70px">Định lượng giấy</th>
+                                            <th class="text-center" colspan="2" style="width:120px">Khổ giấy</th>
+                                            <th class="text-center" rowspan="2" style="width:60px">Chính</th>
+                                            <th class="text-center" rowspan="2" style="width:60px">Bù in</th>
+                                            <th class="text-center" rowspan="2" style="width:60px">Bù TP</th>
+                                            <th class="text-center" rowspan="2" style="width:60px">Tổng</th>
+                                        </tr>
+                                        <tr style="background-color: #0076d2; color: white;">
+                                            <th class="text-center" style="width:60px">Dài</th>
+                                            <th class="text-center" style="width:60px">Rộng</th>
+                                        </tr>
+
+                                        <tbody id="appendixTbodyMH2"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>*@
+        </form>
+
+        <div class="row" style="margin-top: 15px">
+            <div class="col-md-12 text-right">
+                <a onclick="goBackMH2()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
+                <a onclick="TransViewEditProductOrder()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
 </div>
 <!--End bảng dự toán-->
 
@@ -779,27 +777,27 @@
 
                 <!--Bảng thành phẩm-->
                 <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-6">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
                         <div class="table-responsive" @*style="overflow-y: hidden;overflow-x: hidden;"*@>
                             <table class="table table-striped table-bordered">
                                 <tr style="background-color: #0076d2; color: white;">
                                     <th class="text-center" colspan="4">Quy cách</th>
-                                    <th class="text-center" rowspan="2" style="width: 150px">Số lượng</th>
-                                    <th class="text-center" rowspan="2">Số cuốn/thùng</th>
+                                    <th class="text-center" rowspan="2" style="width: 200px">Số lượng</th>
+                                    <th class="text-center" rowspan="2" style="width: 150px">Số cuốn/thùng</th>
                                     <th class="text-center" rowspan="2" style="width: 100px">Đơn vị tính</th>
                                 </tr>
                                 <tr style="background-color: #0076d2; color: white;">
                                     <th class="text-center" style="width: 190px">Vật tư</th>
-                                    <th class="text-center">Dài</th>
-                                    <th class="text-center">Rộng</th>
-                                    <th class="text-center">Cao</th>
+                                    <th class="text-center" style="width: 140px">Dài</th>
+                                    <th class="text-center" style="width: 140px">Rộng</th>
+                                    <th class="text-center" style="width: 140px">Cao</th>
                                 </tr>
                                 <tr>
                                     <td class="text-center">Thùng</td>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_dai" id="tp_dai" onchange="AutoTinhSLBangKeo(this)"/></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_rong" id="tp_rong" onchange="AutoTinhSLBangKeo(this)"/></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_cao" id="tp_cao" onchange="AutoTinhSLBangKeo(this)"/></th>
+                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_dai" id="tp_dai" onchange="AutoTinhSLBangKeo(this)" /></th>
+                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_rong" id="tp_rong" onchange="AutoTinhSLBangKeo(this)" /></th>
+                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_cao" id="tp_cao" onchange="AutoTinhSLBangKeo(this)" /></th>
                                     <th class="text-center"><input class="form-control" type="number" value="@Model.tp_soluong" id="tp_soluong" /></th>
                                     <th class="text-center"><input class="form-control" type="number" value="@Model.tp_socuon_thung" id="tp_socuon_thung" onchange="AutoFillTPSoLuong()" /></th>
                                     <td class="text-center">Thùng</td>
@@ -821,7 +819,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-md-3"></div>
+                    <div class="col-md-2"></div>
                 </div>
 
 
@@ -1918,7 +1916,7 @@
 
         function goBackMH1() {
             $(".manhinh1").attr("style", "display:block");
-            //$(".manhinh2").attr("style", "display:none");
+            $(".manhinh2").attr("style", "display:none");
             $(".manhinh3").attr("style", "display:none");
         }
 
@@ -2131,11 +2129,13 @@
                 var slBangKeo = (((tpdai + tprong + 40) * 2) / 100 * tpsl).toFixed(2);
                 $('#tp_sl_bangkeo').val(slBangKeo);
                 $('#bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
+                $('#tp_sl_bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
             }
             if (value == 2) {
                 var slBangKeoDacBiet = (((tpdai * 2) + ((tprong + tpcao) * 4) + 60) / 100 * tpsl).toFixed(2);
                 $('#tp_sl_bangkeo').val(slBangKeoDacBiet);
                 $('#bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
+                $('#tp_sl_bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
             }
 
         }
@@ -2152,11 +2152,13 @@
                 var slBangKeo = (((tpdai + tprong + 40) * 2) / 100 * tpsl).toFixed(2);
                 $('#tp_sl_bangkeo').val(slBangKeo);
                 $('#bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
+                $('#tp_sl_bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
             }
             if (slbk == 2) {
                 var slBangKeoDacBiet = (((tpdai * 2) + ((tprong + tpcao) * 4) + 60) / 100 * tpsl).toFixed(2);
                 $('#tp_sl_bangkeo').val(slBangKeoDacBiet);
                 $('#bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
+                $('#tp_sl_bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
             }
 
         }
@@ -2204,14 +2206,45 @@
                 $("#ten_khach_hangMH3").val(data.ten_khach_hang);
                 $("#ten_can_bo_qlMH3").val(data.ten_can_bo_ql);
                 $("#ten_can_bo_ktMH3").val(data.ten_can_bo_kt);
+                $("#thanh_pham_chung").val(data.quy_cach_chung);
 
                 //fill bảng quy cách
+                var lstQuyCach = [];
+                var lstQuyCachBia = [];
+                var lstQuyCachThuong = [];
+                //var lstQuyCachBiaConvert = [];
+
                 var query = JSLINQ(lstTemp).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
                 for (var i = 0; i < query.length; i++) {
                     var quycach = JSLINQ(lstTemp).Where(function (item) { return item.nhom_vat_tu_id == query[i]; }).ToArray();
-                    var htmlQuyCach = generateHtmlQuyCachRowMH3(quycach);
-                    $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCach);
+                    for (var j = 0; j < quycach.length; j++) {
+                        lstQuyCach.push(quycach[j]);
+                    }
                 }
+                for (var i = 0; i < lstQuyCach.length; i++) {
+                    if (lstQuyCach[i].ten_nhom_vat_tu.trim().startsWith("Bìa")) {
+                        lstQuyCachBia.push(lstQuyCach[i]);
+                    }
+                    else { lstQuyCachThuong.push(lstQuyCach[i]) }
+                }
+
+                for (var i = 0; i < lstQuyCachBia.length; i++) {
+                    var quycachBiaConvert = JSLINQ(lstQuyCachBia).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+                    for (var i = 0; i < quycachBiaConvert.length; i++) {
+                        var quycachbia = JSLINQ(lstQuyCachBia).Where(function (item) { return item.nhom_vat_tu_id == quycachBiaConvert[i]; }).ToArray();
+                        var htmlQuyCachBia = generateHtmlQuyCachRowMH3(quycachbia);
+                        $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachBia);
+                    }
+                }
+                for (var i = 0; i < lstQuyCachThuong.length; i++) {
+                    var quycachThuongConvert = JSLINQ(lstQuyCachThuong).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+                    for (var i = 0; i < quycachThuongConvert.length; i++) {
+                        var quycachthuong = JSLINQ(lstQuyCachThuong).Where(function (item) { return item.nhom_vat_tu_id == quycachThuongConvert[i]; }).ToArray();
+                        var htmlQuyCachThuong = generateHtmlQuyCachRowMH3(quycachthuong);
+                        $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachThuong);
+                    }
+                }
+
 
                 var lstTongQuan = GetInfoDetail();
 
@@ -2271,7 +2304,7 @@
                 $("#printTable #appendixPrintTbody").append(htmlRowIn);
 
                 $(".manhinh1").attr("style", "display:none");
-                //$(".manhinh2").attr("style", "display:none");
+                $(".manhinh2").attr("style", "display:none");
                 $(".manhinh3").attr("style", "display:block");
             }
         }
@@ -2347,10 +2380,10 @@
                     tp_soluong: $('#tp_soluong').val() * 1,
                     tp_socuon_thung: $('#tp_socuon_thung').val() * 1,
                     tp_sl_bangkeo: $('#tp_sl_bangkeo').val() * 1,
-                    tp_vat_tu: $('#tp_vat_tu').val() * 1,
+                    tp_vat_tu: $('#bangkeo').val() * 1,
 
                     lstVatTus: GetInfoDetail(), //thông tin bảng details tổng quan đơn hàng
-                    //lstChiTietDuToans: GetInfoChiTietDuToan(), //thông tin bảng details dự toán
+                    lstChiTietDuToans: GetInfoChiTietDuToan(), //thông tin bảng details dự toán
                     lst_sl_tong: GetInfoSoLuongTong(), //thông tin bảng số lượng tổng
                     lstChiTietCheBans: GetInfoChiTietCheBan(), //thông tin bảng chế phẩm
                     lstChiTietIns: GetInfoChiTietBangIn(),  //thông tin bảng in
