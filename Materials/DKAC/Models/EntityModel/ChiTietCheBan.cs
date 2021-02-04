@@ -10,8 +10,7 @@ namespace DKAC.Models.EntityModel
     public partial class ChiTietCheBan
     {
         public int id { get; set; }
-
-        [StringLength(500)]
+        
         public string ten_tay_in { get; set; }
 
         public string so_kem { get; set; }

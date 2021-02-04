@@ -14,8 +14,7 @@ namespace DKAC.Models.EntityModel
         public DateTime? created_date { get; set; }
 
         public DateTime? last_updated { get; set; }
-
-        [StringLength(500)]
+        
         public string ten { get; set; }
 
         public double? dinh_luong { get; set; }
@@ -23,8 +22,7 @@ namespace DKAC.Models.EntityModel
         public double? dinh_luong_thuc_te { get; set; }
 
         public double? so_luong { get; set; }
-
-        [StringLength(20)]
+       
         public string ma_vat_tu { get; set; }
 
         public double? trang { get; set; }
@@ -38,14 +36,11 @@ namespace DKAC.Models.EntityModel
         public double? sl_bu_tp { get; set; }
 
         public string sl_tong { get; set; }
-
-        [StringLength(50)]
+        
         public string don_vi_tinh { get; set; }
-
-        [StringLength(500)]
+        
         public string muc_dich_sd { get; set; }
-
-        [StringLength(50)]
+        
         public string cc_vat_tu { get; set; }
         public double? kho_giay_dai { get; set; }
         public double? kho_giay_rong { get; set; }
