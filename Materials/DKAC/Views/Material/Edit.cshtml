@@ -785,36 +785,36 @@
                             <table class="table table-striped table-bordered">
                                 <tr style="background-color: #0076d2; color: white;">
                                     <th class="text-center" colspan="4">Quy cách</th>
-                                    <th class="text-center" rowspan="2">Số lượng</th>
+                                    <th class="text-center" rowspan="2" style="width: 150px">Số lượng</th>
                                     <th class="text-center" rowspan="2">Số cuốn/thùng</th>
                                     <th class="text-center" rowspan="2" style="width: 100px">Đơn vị tính</th>
                                 </tr>
                                 <tr style="background-color: #0076d2; color: white;">
-                                    <th class="text-center" style="width: 200px">Vật tư</th>
+                                    <th class="text-center" style="width: 190px">Vật tư</th>
                                     <th class="text-center">Dài</th>
                                     <th class="text-center">Rộng</th>
                                     <th class="text-center">Cao</th>
                                 </tr>
                                 <tr>
                                     <td class="text-center">Thùng</td>
-                                    <th class="text-center"><input class="form-control" value="@Model.tp_dai" id="tp_dai" /></th>
-                                    <th class="text-center"><input class="form-control" value="@Model.tp_rong" id="tp_rong" /></th>
-                                    <th class="text-center"><input class="form-control" value="@Model.tp_cao" id="tp_cao" /></th>
-                                    <th class="text-center"><input class="form-control" value="@Model.tp_soluong" id="tp_soluong" /></th>
-                                    <th class="text-center"><input class="form-control" value="@Model.tp_socuon_thung" id="tp_socuon_thung" @*onchange="AutoFillTPSoLuong()"*@/></th>
+                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_dai" id="tp_dai" onchange="AutoTinhSLBangKeo(this)"/></th>
+                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_rong" id="tp_rong" onchange="AutoTinhSLBangKeo(this)"/></th>
+                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_cao" id="tp_cao" onchange="AutoTinhSLBangKeo(this)"/></th>
+                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_soluong" id="tp_soluong" /></th>
+                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_socuon_thung" id="tp_socuon_thung" onchange="AutoFillTPSoLuong()" /></th>
                                     <td class="text-center">Thùng</td>
                                 </tr>
 
                                 <tr>
                                     <th class="text-center">
-                                        <select class="form-control text-center" name="bangkeo" id="bangkeo" onchange="ShowTooltip(this)">
+                                        <select class="form-control text-center" name="bangkeo" id="bangkeo" onchange="AutoFillTPSoLuongBangKeo(this)">
                                             <option value="" disabled selected hidden>--Chọn--</option>
-                                            <option value="1" @(Model.tp_vat_tu == 1 ? "selected" : "") title="Công thức tính: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng">Băng keo</option>
-                                            <option value="2" @(Model.tp_vat_tu == 2 ? "selected" : "") title="Công thức tính: (dài + rộng + 40) * 2 / số thùng">Băng keo đặc biệt</option>
+                                            <option value="1" @(Model.tp_vat_tu == 1 ? "selected" : "") title="Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng">Băng keo</option>
+                                            <option value="2" @(Model.tp_vat_tu == 2 ? "selected" : "") title="Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng">Băng keo đặc biệt</option>
                                         </select>
                                     </th>
                                     <th class="text-center" colspan="3"><input disabled class="form-control" /></th>
-                                    <th class="text-center"><input class="form-control" value="@Model.tp_sl_bangkeo" id="tp_sl_bangkeo" />@*<a href="#" rel="tooltip" data-original-title="Công thức tính thứ 1: " id="tooltip1"></a><a href="#" rel="tooltip" data-original-title="Công thức tính thứ 2: " id="tooltip2"></a>*@</th>
+                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_sl_bangkeo" id="tp_sl_bangkeo" />@*<a href="#" rel="tooltip" data-original-title="Công thức tính thứ 1: " id="tooltip1"></a><a href="#" rel="tooltip" data-original-title="Công thức tính thứ 2: " id="tooltip2"></a>*@</th>
                                     <th class="text-center"><input disabled class="form-control" /></th>
                                     <td class="text-center">Mét</td>
                                 </tr>
@@ -2104,7 +2104,7 @@
             var slTong = $('#so_luong_tong').val() * 1;
             var tpSoCuon = $('#tp_socuon_thung').val() * 1;
 
-            var sl = (slTong + tpSoCuon);
+            var sl = (slTong / tpSoCuon).toFixed(2);
             $('#tp_soluong').val(sl);
         }
 
@@ -2117,7 +2117,48 @@
             if (value == 2) {
                 $('#tooltip2').tooltip({ trigger: 'manual' }).tooltip('show');
             }
-            
+
+        }
+
+        function AutoFillTPSoLuongBangKeo(element) {
+            var value = $(element).val();
+            var tpdai = $('#tp_dai').val() * 1;
+            var tprong = $('#tp_rong').val() * 1;
+            var tpcao = $('#tp_cao').val() * 1;
+            var tpsl= $('#tp_soluong').val() * 1;
+
+            if (value == 1) {
+                var slBangKeo = (((tpdai + tprong + 40) * 2) / 100 * tpsl).toFixed(2);
+                $('#tp_sl_bangkeo').val(slBangKeo);
+                $('#bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
+            }
+            if (value == 2) {
+                var slBangKeoDacBiet = (((tpdai * 2) + ((tprong + tpcao) * 4) + 60) / 100 * tpsl).toFixed(2);
+                $('#tp_sl_bangkeo').val(slBangKeoDacBiet);
+                $('#bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
+            }
+
+        }
+
+        function AutoTinhSLBangKeo(element) {
+            var tpdai = $('#tp_dai').val() * 1;
+            var tprong = $('#tp_rong').val() * 1;
+            var tpcao = $('#tp_cao').val() * 1;
+            var tpsl = $('#tp_soluong').val() * 1;
+            var slbk = $('#bangkeo').val();
+
+            if (slbk == "") return false;
+            if (slbk == 1) {
+                var slBangKeo = (((tpdai + tprong + 40) * 2) / 100 * tpsl).toFixed(2);
+                $('#tp_sl_bangkeo').val(slBangKeo);
+                $('#bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
+            }
+            if (slbk == 2) {
+                var slBangKeoDacBiet = (((tpdai * 2) + ((tprong + tpcao) * 4) + 60) / 100 * tpsl).toFixed(2);
+                $('#tp_sl_bangkeo').val(slBangKeoDacBiet);
+                $('#bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
+            }
+
         }
 
         //////////// chuyển sang màn hình 3
@@ -2300,9 +2341,16 @@
                     tp_ghi_chu: $('#tp_ghi_chu').val().trim(),
                     tp_thoi_han: $('#tp_thoi_han').val().trim(),
                     so_luong_tong: $('#so_luong_tong').val(),
+                    tp_dai: $('#tp_dai').val() * 1,
+                    tp_rong: $('#tp_rong').val() * 1,
+                    tp_cao: $('#tp_cao').val() * 1,
+                    tp_soluong: $('#tp_soluong').val() * 1,
+                    tp_socuon_thung: $('#tp_socuon_thung').val() * 1,
+                    tp_sl_bangkeo: $('#tp_sl_bangkeo').val() * 1,
+                    tp_vat_tu: $('#tp_vat_tu').val() * 1,
 
                     lstVatTus: GetInfoDetail(), //thông tin bảng details tổng quan đơn hàng
-                    lstChiTietDuToans: GetInfoChiTietDuToan(), //thông tin bảng details tổng quan đơn hàng
+                    //lstChiTietDuToans: GetInfoChiTietDuToan(), //thông tin bảng details dự toán
                     lst_sl_tong: GetInfoSoLuongTong(), //thông tin bảng số lượng tổng
                     lstChiTietCheBans: GetInfoChiTietCheBan(), //thông tin bảng chế phẩm
                     lstChiTietIns: GetInfoChiTietBangIn(),  //thông tin bảng in
