@@ -79,18 +79,21 @@ namespace DKAC.Models.InfoModel
         public int? tp_dai { get; set; }
         public int? tp_rong { get; set; }
         public int? tp_cao { get; set; }
-        public int? tp_soluong { get; set; }
+        public string tp_soluong { get; set; }
         public int? tp_socuon_thung { get; set; }
-        public int? tp_sl_bangkeo { get; set; }
+        public string tp_sl_bangkeo { get; set; }
         public int? tp_vat_tu { get; set; }
 
         public List<MaterialType> lstMaterialType { get; set; }
         public List<VatTu> lstVatTus { get; set; }
         public List<ChiTietDuToan> lstChiTietDuToans { get; set; }
         public List<ChiTietCheBan> lstChiTietCheBans { get; set; }
+        public List<ChiTietCheBanInfo> lstCheBanInfo { get; set; }
         public List<ChiTietIn> lstChiTietIns { get; set; }
+        public List<ChiTietInInfo> lstInInfo { get; set; }
         public List<TongSoLuongInfo> lst_sl_tong { get; set; }
         public List<SelectListItem> lstSo_LSX { get; set; }
-        public List<PPIn> lstPPIn { get; set; }
+        public List<PPIn> lstPPIn { get; set; } 
+        public List<KhoKem> lstkhoKem { get; set; }
     }
 }

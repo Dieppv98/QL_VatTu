@@ -43,6 +43,7 @@ namespace DKAC.Controllers
 
             var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
             var lstPPin = _mater.GetAllPPIn() ?? new List<PPIn>();
+            var lstKhokem = _mater.GetAllKhoKem() ?? new List<KhoKem>();
 
             DonHangInfo donHang = new DonHangInfo();
             donHang.lstMaterialType = lstMaterial;
@@ -55,6 +56,7 @@ namespace DKAC.Controllers
                 donHang.lstMaterialType = lstMaterial;
                 donHang.lstPPIn = lstPPin;
                 donHang.lstVatTus = new List<VatTu>();
+                donHang.lstkhoKem = lstKhokem;
                 return View("Edit", donHang);
             }
 
@@ -64,6 +66,7 @@ namespace DKAC.Controllers
             donHang = _mater.GetbyId(id);
             donHang.lstMaterialType = lstMaterial;
             donHang.lstPPIn = lstPPin;
+            donHang.lstkhoKem = lstKhokem;
             return View("EditReceipt", donHang);
         }
 
@@ -78,6 +81,24 @@ namespace DKAC.Controllers
             //gọi hàm
             donHang = _mater.GetbyId(id);
             donHang.lstMaterialType = lstMaterial;
+            return View(donHang);
+        }
+
+        public ActionResult DetailsLSX(int id)
+        {
+            var currentUser = (User)Session[CommonConstants.USER_SESSION];
+            var checkPer = CheckPermission((int)PageId.NhapLieu, (int)Actions.Xem, currentUser);
+            if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền xem
+
+            var lstPPin = _mater.GetAllPPIn() ?? new List<PPIn>();
+            var lstKhokem = _mater.GetAllKhoKem() ?? new List<KhoKem>();
+            var lstMaterial = _mater.GetAllMaterial() ?? new List<MaterialType>();
+            DonHangInfo donHang = new DonHangInfo();
+            //gọi hàm
+            donHang = _mater.GetbyId(id);
+            donHang.lstMaterialType = lstMaterial;
+            donHang.lstMaterialType = lstMaterial;
+            donHang.lstPPIn = lstPPin;
             return View(donHang);
         }
 
@@ -197,6 +218,7 @@ namespace DKAC.Controllers
             }
             return Json(new { status = 0, message = "Xóa thất bại" }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult DonHangDetails(int id)
         {
             var currentUser = (User)Session[CommonConstants.USER_SESSION];
@@ -210,6 +232,7 @@ namespace DKAC.Controllers
             donHangInfo.lstMaterialType = lstMaterial;
             return View(donHangInfo);
         }
+
         public ActionResult KHVTDetails(int id)
         {
             var currentUser = (User)Session[CommonConstants.USER_SESSION];
@@ -223,6 +246,7 @@ namespace DKAC.Controllers
             donHangInfo.lstMaterialType = lstMaterial;
             return View(donHangInfo);
         }
+
         public ActionResult LenhSXDetails(int id)
         {
             var currentUser = (User)Session[CommonConstants.USER_SESSION];

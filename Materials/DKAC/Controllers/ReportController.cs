@@ -111,11 +111,88 @@ namespace DKAC.Controllers
             fr.AddTable("lstDuToan", lstDuToan.OrderBy(o => o.id));
             fr.Run(result);
             fr.Dispose();
-            if(exportExcel == false)
+            if (exportExcel == false)
             {
                 return ExportPDF(result, "ExprotDuToanVatTu", exportExcel);
             }
             return ViewReport(result, "ExprotDuToanVatTu", exportExcel);
+        }
+
+        [HttpGet]
+        public ActionResult ExportExcelBangLSX(int id, bool exportExcel)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            var model = _rep.ExportExcelDonHang(id);
+            var lstsltong = model.lst_sl_tong ?? new List<TongSoLuongInfo>();
+            var lstCheBanInfo = model.lstCheBanInfo ?? new List<ChiTietCheBanInfo>();
+            var lstInInfo = model.lstInInfo ?? new List<ChiTietInInfo>();
+
+            var lstQuycach = new List<VatTu>();
+            var lstQuycachBia = new List<VatTu>();
+            var lstQuycachThuong = new List<VatTu>();
+            var lstQuycachConvert = new List<VatTu>();
+
+            var lstId = model.lstVatTus.OrderBy(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
+            for (int i = 0; i < lstId.Count; i++)
+            {
+                var vattu = model.lstVatTus.Where(x => x.nhom_vat_tu_id == lstId[i]).ToList();
+                lstQuycach.AddRange(vattu);
+            }
+            for (int i = 0; i < lstQuycach.Count; i++)
+            {
+                if (lstQuycach[i].ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa"))
+                {
+                    lstQuycachBia.Add(lstQuycach[i]);
+                }
+                else { lstQuycachThuong.Add(lstQuycach[i]); }
+            }
+            lstQuycachConvert.AddRange(lstQuycachBia);
+            lstQuycachConvert.AddRange(lstQuycachThuong);
+
+            var path = Path.Combine(Server.MapPath("~/FileTemplate"), "Export-LSX.xlsx");
+            var file = new FileInfo(path);
+            var excel = new ExcelPackage(file);
+            var fr = new FlexCelReport();
+            var result = CreateXlsFile(excel);
+
+            fr.SetValue("so_lenh_sx", model.so_lenh_sx);
+            fr.SetValue("phieu_dnsx_so", model.phieu_dnsx_so);
+            fr.SetValue("nv_kinh_doanh", model.nv_kinh_doanh);
+            fr.SetValue("loai", model.loai);
+            fr.SetValue("nha_cc", model.nha_cc);
+            fr.SetValue("ma_khach_hang", model.ma_khach_hang);
+            fr.SetValue("ten_khach_hang", model.ten_khach_hang);
+            fr.SetValue("ten_san_pham", model.ten_san_pham);
+            fr.SetValue("ma_san_pham", model.ma_san_pham);
+            fr.SetValue("lan_dieu_chinh", model.lan_dieu_chinh);
+            fr.SetValue("so_luong_tong", model.so_luong_tong);
+            fr.SetValue("quy_cach_chung", model.quy_cach_chung);
+            fr.SetValue("ten_can_bo_ql", model.ten_can_bo_ql);
+            fr.SetValue("ten_can_bo_kt", model.ten_can_bo_kt);
+            fr.SetValue("created_date", (model.created_date.HasValue ? model.created_date.Value.ToString("dd/MM/yyyy") : ""));
+            fr.SetValue("ngay_giao_hang", (model.ngay_giao_hang.HasValue ? model.ngay_giao_hang.Value.ToString("dd/MM/yyyy") : ""));
+            fr.SetValue("cb_ghi_chu", model.cb_ghi_chu);
+            fr.SetValue("cb_thoi_gian_giao", model.cb_thoi_gian_giao);
+            fr.SetValue("in_ghi_chu", model.in_ghi_chu);
+            fr.SetValue("tp_dai", model.tp_dai);
+            fr.SetValue("tp_rong", model.tp_rong);
+            fr.SetValue("tp_cao", model.tp_cao);
+            fr.SetValue("tp_soluong", model.tp_soluong);
+            fr.SetValue("tp_socuon_thung", model.tp_socuon_thung);
+            fr.SetValue("tp_ghi_chu", model.tp_ghi_chu);
+            fr.SetValue("tp_thoi_han", model.tp_thoi_han);
+            fr.SetValue("tp_sl_bangkeo", model.tp_sl_bangkeo);
+            fr.SetValue("tp_vat_tu", model.tp_vat_tu);
+
+            fr.AddTable("lstsltong", lstsltong);
+            fr.AddTable("lstQuyCach", lstQuycachConvert);
+            fr.AddTable("lstCheBanInfo", lstCheBanInfo);
+            fr.AddTable("lstInInfo", lstInInfo);
+            fr.Run(result);
+            fr.Dispose();
+
+            return ViewReport(result, "Export-LSX", exportExcel);
         }
     }
 }

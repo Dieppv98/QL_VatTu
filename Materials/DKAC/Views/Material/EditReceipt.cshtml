@@ -1414,10 +1414,10 @@
                                 <input type="number" class="form-control inputText kho_in_rong1" onchange="FillDataKhoInRong(this)" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong.trim()}" id="khoinrong1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_kem1" value="${appendix.kho_kem == null ? '' : appendix.kho_kem.trim()}" id="khokem1_${index + 1}"/>
+                                <input type="number" class="form-control inputText kho_kem1" value="${appendix.kho_kem == null ? '' : appendix.kho_kem}" id="khokem1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="text" class="form-control inputText phuong_phap_in1" onchange="FillDataPhuongPhapIn(this)" value="${appendix.phuong_phap_in == null ? '' : appendix.phuong_phap_in.trim()}" id="phuongphapin1_${index + 1}"/>
+                                <input type="text" class="form-control inputText phuong_phap_in1" onchange="FillDataPhuongPhapIn(this)" value="${appendix.phuong_phap_in == null ? '' : appendix.phuong_phap_in}" id="phuongphapin1_${index + 1}"/>
                             </td>
                             <td class="text-center">
                                 <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendixRowMH3(this)" id="removeAppendixRow_${index + 1}" myid="${index + 1}" title="Xóa">
@@ -1516,7 +1516,7 @@
                                 <input type="number" class="form-control inputText sl_tong" value="${appendix.sl_tong == null ? '' : appendix.sl_tong.trim()}" id="tenloai_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="text" class="form-control inputText phuong_phap_in" value="${appendix.phuong_phap_in == null ? '' : appendix.phuong_phap_in.trim()}" id="phuongphapin_${index + 1}"/>
+                                <input type="text" class="form-control inputText phuong_phap_in" value="${appendix.phuong_phap_in == null ? '' : appendix.phuong_phap_in}" id="phuongphapin_${index + 1}"/>
                             </td>
                             <td>
                                 <input type="number" class="form-control inputText so_kg" value="${appendix.so_kg == null ? '' : appendix.so_kg.trim()}" id="sokg_${index + 1}"/>

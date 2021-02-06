@@ -24,6 +24,11 @@ namespace DKAC.Repository
             return db.PPIn.AsNoTracking().ToList();
         }
 
+        public List<KhoKem> GetAllKhoKem()
+        {
+            return db.KhoKem.AsNoTracking().ToList();
+        }
+
         public DonHangInfo GetbyId(int id)
         {
             var query = (from d in db.DonHang.Where(x => x.id == id)
@@ -63,11 +68,21 @@ namespace DKAC.Repository
                              tp_thoi_han = d.tp_thoi_han,
                              chi_tiet_sl_tong = d.chi_tiet_sl_tong,
                              so_luong_tong = d.so_luong_tong,
+                             tp_vat_tu = d.tp_vat_tu,
+                             tp_soluong = d.tp_soluong,
+                             tp_socuon_thung = d.tp_socuon_thung,
+                             tp_rong = d.tp_rong,
+                             tp_sl_bangkeo = d.tp_sl_bangkeo,
+                             tp_dai = d.tp_dai,
+                             tp_cao = d.tp_cao,
+
                          }).FirstOrDefault() ?? new DonHangInfo();
             query.lstVatTus = db.VatTu.Where(x => x.don_hang_id == query.id).ToList() ?? new List<VatTu>();
             query.lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietDuToan>();
             query.lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietCheBan>();
             query.lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietIn>();
+            query.lstPPIn = db.PPIn.ToList();
+            query.lstkhoKem = db.KhoKem.ToList();
             if (query.chi_tiet_sl_tong != null)
             {
                 query.lst_sl_tong = JsonConvert.DeserializeObject<List<TongSoLuongInfo>>(query.chi_tiet_sl_tong ?? string.Empty)
@@ -175,6 +190,14 @@ namespace DKAC.Repository
             dh.thanh_pham_chung = model.thanh_pham_chung;
             dh.tp_ghi_chu = model.tp_ghi_chu;
             dh.tp_thoi_han = model.tp_thoi_han;
+            dh.so_luong_tong = model.so_luong_tong;
+            dh.tp_dai = model.tp_dai;
+            dh.tp_rong = model.tp_rong;
+            dh.tp_cao = model.tp_cao;
+            dh.tp_soluong = model.tp_soluong;
+            dh.tp_socuon_thung = model.tp_socuon_thung;
+            dh.tp_sl_bangkeo = model.tp_sl_bangkeo;
+            dh.tp_vat_tu = model.tp_vat_tu;
             if (model.lst_sl_tong != null)
             {
                 dh.chi_tiet_sl_tong = JsonConvert.SerializeObject(model.lst_sl_tong);
@@ -354,7 +377,7 @@ namespace DKAC.Repository
                              so_luong_tong = d.so_luong_tong,
                          }).FirstOrDefault() ?? new LenhSanXuatInfo();
             query.lstVatTus = db.VatTu.Where(x => x.don_hang_id == query.id).ToList() ?? new List<VatTu>();
-            var queryNhomVT = query.lstVatTus.Select(x=>x.nhom_vat_tu_id).Distinct().OrderBy(x=>x.Value).ToArray();
+            var queryNhomVT = query.lstVatTus.Select(x => x.nhom_vat_tu_id).Distinct().OrderBy(x => x.Value).ToArray();
             query.lstnhomVatTus = new List<NhomVatTu>();
             foreach (var data in queryNhomVT)
             {
@@ -364,7 +387,7 @@ namespace DKAC.Repository
                     nhom_vat_tu_id = data,
                     ten_nhom_vat_tu = quycach.FirstOrDefault().ten_nhom_vat_tu,
                     lstVatTus = quycach.OrderBy(x => x.id).ToList(),
-            });
+                });
             }
             query.lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietCheBan>();
             query.lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietIn>();

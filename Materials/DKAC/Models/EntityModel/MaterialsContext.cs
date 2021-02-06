@@ -31,6 +31,7 @@ namespace DKAC.Models.EntityModel
         public virtual DbSet<VatTu> VatTu { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
         public virtual DbSet<PPIn> PPIn { get; set; }
+        public virtual DbSet<KhoKem> KhoKem { get; set; }
 
         //public MaterialsContext(string connectionString)
         //    : base(connectionString) { }

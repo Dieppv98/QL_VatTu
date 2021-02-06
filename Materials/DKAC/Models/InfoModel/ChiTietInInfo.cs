@@ -1,18 +1,16 @@
-namespace DKAC.Models.EntityModel
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-    [Table("ChiTietIn")]
-    public partial class ChiTietIn
+namespace DKAC.Models.InfoModel
+{
+    public class ChiTietInInfo
     {
         public int id { get; set; }
-        
+
         public string ten_tay_in { get; set; }
-        
+
         public string ten_loai { get; set; }
 
         public string kho_giay_dai { get; set; }
@@ -30,6 +28,7 @@ namespace DKAC.Models.EntityModel
         public string sl_tong { get; set; }
 
         public int? phuong_phap_in { get; set; }
+        public string phuong_phap_in_name { get; set; }
 
         public string so_kg { get; set; }
 

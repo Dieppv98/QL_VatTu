@@ -307,6 +307,7 @@
     <Compile Include="Models\EntityModel\ChiTietIn.cs" />
     <Compile Include="Models\EntityModel\DonHang.cs" />
     <Compile Include="Models\EntityModel\KhachHang.cs" />
+    <Compile Include="Models\EntityModel\KhoKem.cs" />
     <Compile Include="Models\EntityModel\MaterialType.cs" />
     <Compile Include="Models\EntityModel\MaterialsContext.cs" />
     <Compile Include="Models\EntityModel\Modul.cs" />
@@ -320,6 +321,8 @@
     <Compile Include="Models\EntityModel\UserRole.cs" />
     <Compile Include="Models\EntityModel\VatTu.cs" />
     <Compile Include="Models\InfoModel\AccountModulPageInfo.cs" />
+    <Compile Include="Models\InfoModel\ChiTietCheBanInfo.cs" />
+    <Compile Include="Models\InfoModel\ChiTietInInfo.cs" />
     <Compile Include="Models\InfoModel\DonHangInfo.cs" />
     <Compile Include="Models\InfoModel\DuToanVatTuInfo.cs" />
     <Compile Include="Models\InfoModel\EmployeeInfo.cs" />
@@ -2620,6 +2623,7 @@
     <Content Include="Views\Material\DonHangDetails.cshtml" />
     <Content Include="Views\Material\KHVTDetails.cshtml" />
     <Content Include="Views\Material\LenhSXDetails.cshtml" />
+    <Content Include="Views\Material\DetailsLSX.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
