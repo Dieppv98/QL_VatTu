@@ -262,7 +262,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"></div>
-                </div>
+                </div> 
 
                 <hr />
 
@@ -682,6 +682,16 @@
             return htmlRow;
         }
 
+        function generatePPInCheBan(appendix, index) {
+            var htmlRow = `<select class="form-control phuong_phap_in1" required style="width: 100%" id="phuongphapin1_${index + 1}" disabled>`;
+            htmlRow += `<option value="" ${appendix.phuong_phap_in == '' ? 'selected' : ''}>-Chọn-</option > `;
+            for (var i = 0; i < lstlstPPIn.length; i++) {
+                htmlRow += `<option value = "${lstlstPPIn[i].id}" ${lstlstPPIn[i].id == appendix.phuong_phap_in ? 'selected' : ''}> ${lstlstPPIn[i].Name.trim()}</option> `;
+            }
+            htmlRow += `</select>`
+            return htmlRow;
+        }
+
         function generateHtmlAppendixRowMH3(appendix, index) {
             return `<tr id="standard_${index + 1}" class="appendixRow">
                             <td id="STT" class="text-center">${index + 1}</td>
@@ -710,7 +720,7 @@
                                 ${generateKhoKem(appendix, index)}
                             </td>
                             <td>
-                                <input type="text" disabled class="form-control inputText phuong_phap_in1" onchange="FillDataPhuongPhapIn(this)" value="${appendix.phuong_phap_in == null ? '' : appendix.phuong_phap_in}" id="phuongphapin1_${index + 1}"/>
+                                ${generatePPInCheBan(appendix, index)}
                             </td>
                         </tr>`
         }

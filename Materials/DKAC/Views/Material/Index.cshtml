@@ -102,7 +102,7 @@
                         <th class="text-center">Tên khách hàng</th>
                         <th class="text-center">Nhân viên KD</th>
                         <th class="text-center">Ngày giao hàng</th>
-                        <th class="text-center" style="width: 120px;">Hành động</th>
+                        <th class="text-center" style="width: 140px;">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,13 +121,18 @@
                             <td class="text-center">
                                 @if (ViewBag.hasViewPermission)
                                 {
-                                    <a href="/Material/DonHangDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Tổng quan đơn hàng"><i class="fa fa-eye"></i></a>
-                                    <a href="/Material/KHVTDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem KHVT"><i class="fa fa-file"></i></a>
-                                    <a href="/Material/LenhSXDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Lệnh sản xuất"><i class="fa fa-book"></i></a>
+                                    <a href="/Material/DetailsLSX/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Tổng quan đơn hàng"><i class="fa fa-eye"></i></a>
+                                    @*<a href="/Material/DonHangDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Tổng quan đơn hàng"><i class="fa fa-eye"></i></a>
+                                        <a href="/Material/KHVTDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem KHVT"><i class="fa fa-file"></i></a>
+                                        <a href="/Material/LenhSXDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Lệnh sản xuất"><i class="fa fa-book"></i></a>*@
                                 }
                                 @if (ViewBag.hasUpdatePermission)
                                 {
                                     <a href="/Material/Edit/@item.id" class="details-link" style="margin-right:8px;color:cornflowerblue" title="Sửa"><i class="fa fa-pen"></i></a>
+                                }
+                                @if (ViewBag.hasViewPermission)
+                                {
+                                    <a onclick="printResul(@item.id)" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Tổng quan đơn hàng"><i class="fa fa-print"></i></a>
                                 }
                                 @if (ViewBag.hasDeletePermission)
                                 {
@@ -225,6 +230,23 @@
                     });
             }
         });
+    }
+
+    function printResul(id) {
+        viewReportInNewWindow('/Report/ExportExcelBangLSX?id=' + id + '&exportExcel=false#view=FitH');
+    }
+
+    function viewReportInNewWindow(url) {
+        var params = [
+            'left=0',
+            'top=0',
+            'height=' + window.outerHeight,
+            'width=' + window.outerWidth,
+            'fullscreen=yes' // only works in IE, but here for completeness
+        ].join(',');
+        console.log(params);
+        var randomnumber = Math.floor((Math.random() * 100) + 1);
+        var popup = window.open(url, "_blank", 'popup_window', randomnumber, params);
     }
 </script>
 
