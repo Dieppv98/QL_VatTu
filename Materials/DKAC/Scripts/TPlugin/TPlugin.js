@@ -13,6 +13,8 @@
 				autoGroup: false,
 				allowPlus: true,
 				allowMinus: true,
+				autoUnmask : true , 
+            	unmaskAsNumber : true
 			});
 		},
 		phieuDNSXMask: function () {
