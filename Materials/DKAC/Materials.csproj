@@ -2355,6 +2355,12 @@
     <Content Include="Scripts\i18n\vi.js" />
     <Content Include="Scripts\i18n\zh-CN.js" />
     <Content Include="Scripts\i18n\zh-TW.js" />
+    <Content Include="Scripts\input-mask\input-mask.html" />
+    <Content Include="Scripts\input-mask\inputmask.js" />
+    <Content Include="Scripts\input-mask\jquery.inputmask.js" />
+    <Content Include="Scripts\input-mask\jquery.inputmask.min.js" />
+    <Content Include="Scripts\input-mask\jquery.min.js" />
+    <Content Include="Scripts\input-mask\TPlugin.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -2561,6 +2567,7 @@
     <Content Include="Scripts\sweetalert-dev.js" />
     <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\TPlugin\TPlugin.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
