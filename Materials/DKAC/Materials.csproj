@@ -329,6 +329,7 @@
     <Compile Include="Models\InfoModel\KhachHangInfo.cs" />
     <Compile Include="Models\InfoModel\LenhSanXuatInfo.cs" />
     <Compile Include="Models\InfoModel\PermissionActionInfo.cs" />
+    <Compile Include="Models\InfoModel\QuyCachInfo.cs" />
     <Compile Include="Models\InfoModel\SanPhamInfo.cs" />
     <Compile Include="Models\InfoModel\TongQuanDonHangInfo.cs" />
     <Compile Include="Models\InfoModel\TongSoLuongInfo.cs" />

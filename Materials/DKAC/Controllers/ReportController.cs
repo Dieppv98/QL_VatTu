@@ -124,32 +124,64 @@ namespace DKAC.Controllers
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             var model = _rep.ExportExcelDonHang(id);
+            var lstvatTu = model.lstVatTus;
             var lstsltong = model.lst_sl_tong ?? new List<TongSoLuongInfo>();
             var lstCheBanInfo = model.lstCheBanInfo ?? new List<ChiTietCheBanInfo>();
             var lstInInfo = model.lstInInfo ?? new List<ChiTietInInfo>();
 
-            var lstQuycach = new List<VatTu>();
+            //var lstQuycach = new List<VatTu>();
             var lstQuycachBia = new List<VatTu>();
             var lstQuycachThuong = new List<VatTu>();
-            var lstQuycachConvert = new List<VatTu>();
+            // var lstQuycachConvert = new List<VatTu>();
+            var lstQuyCachInfo = new List<QuyCachInfo>();
 
-            var lstId = model.lstVatTus.OrderBy(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
-            for (int i = 0; i < lstId.Count; i++)
+            if (lstvatTu.Count > 0)
             {
-                var vattu = model.lstVatTus.Where(x => x.nhom_vat_tu_id == lstId[i]).ToList();
-                lstQuycach.AddRange(vattu);
-            }
-            for (int i = 0; i < lstQuycach.Count; i++)
-            {
-                if (lstQuycach[i].ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa"))
+                var lst = model.lstVatTus.Where(x => x.ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa")).OrderBy(x => x.nhom_vat_tu_id).ToList();
+                for (int i = 0; i < lstvatTu.Count; i++)
                 {
-                    lstQuycachBia.Add(lstQuycach[i]);
+                    if (lstvatTu[i].ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa"))
+                    {
+                        lstQuycachBia.Add(lstvatTu[i]);
+                    }
+                    else { lstQuycachThuong.Add(lstvatTu[i]); }
                 }
-                else { lstQuycachThuong.Add(lstQuycach[i]); }
-            }
-            lstQuycachConvert.AddRange(lstQuycachBia);
-            lstQuycachConvert.AddRange(lstQuycachThuong);
 
+                var lstIds = lstQuycachBia.OrderBy(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
+                for (int i = 0; i < lstIds.Count; i++)
+                {
+                    var vattu = lstQuycachBia.Where(x => x.nhom_vat_tu_id == lstIds[i]).ToList();
+                    if (vattu.Count > 0)
+                    {
+                        var quycachinfo = new QuyCachInfo()
+                        {
+                            id = vattu[0].nhom_vat_tu_id,
+                            ten_nhom_vat_tu = vattu[0].ten_nhom_vat_tu,
+                            lstvatTus = vattu,
+                        };
+                        lstQuyCachInfo.Add(quycachinfo);
+                    }
+                }
+
+                var lstIdsThuong = lstQuycachThuong.OrderBy(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
+                for (int i = 0; i < lstIdsThuong.Count; i++)
+                {
+                    var vattuThuong = lstQuycachThuong.Where(x => x.nhom_vat_tu_id == lstIdsThuong[i]).ToList();
+                    if (vattuThuong.Count > 0)
+                    {
+                        var quycachinfoThuong = new QuyCachInfo()
+                        {
+                            id = vattuThuong[0].nhom_vat_tu_id,
+                            ten_nhom_vat_tu = vattuThuong[0].ten_nhom_vat_tu,
+                            lstvatTus = vattuThuong,
+                        };
+                        lstQuyCachInfo.Add(quycachinfoThuong);
+                    }
+                }
+            }
+
+            var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList();
+            
             var path = Path.Combine(Server.MapPath("~/FileTemplate"), "Export-LSX.xlsx");
             var file = new FileInfo(path);
             var excel = new ExcelPackage(file);
@@ -186,7 +218,8 @@ namespace DKAC.Controllers
             fr.SetValue("tp_vat_tu", model.tp_vat_tu);
 
             fr.AddTable("lstsltong", lstsltong);
-            fr.AddTable("lstQuyCach", lstQuycachConvert);
+            fr.AddTable("lstQuyCach", lstQuyCachInfo);
+            fr.AddTable("lstQuyCachChitiet", lstQuyCachChitiet);
             fr.AddTable("lstCheBanInfo", lstCheBanInfo);
             fr.AddTable("lstInInfo", lstInInfo);
             fr.Run(result);
