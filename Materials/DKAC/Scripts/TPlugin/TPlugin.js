@@ -2,13 +2,13 @@
 	$.fn.extend({
 		decimalMask: function (maxlength) {
 			return this.inputmask('decimal', {
-				groupSeparator: ',',
+				groupSeparator: '.',
 				autoGroup: true,
 				integerDigits: "*", //number of integerDigits
 				digits: maxlength,
 				digitsOptional: false,
 				placeholder: '0',
-				radixPoint: ".",
+				radixPoint: ",",
 				groupSize: 3,
 				autoGroup: false,
 				allowPlus: true,

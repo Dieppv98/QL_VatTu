@@ -461,7 +461,7 @@
 
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
-                <a onclick="goBackMH2()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
+                <a onclick="goBackMH1()" class="btn btn-primary" style="width: 8%; color:white"><i class="fa fa-arrow-left"></i>  Quay lại</a>
                 <a onclick="TransViewEditProductOrder()" class="btn btn-success" style="width: 8%; color:white">Tiếp  <i class="fa fa-arrow-right"></i></a>
             </div>
         </div>
@@ -787,11 +787,11 @@
                                             <option value="2" title="Không dùng công thức">Thùng(Không dùng công thức)</option>
                                         </select>
                                     </td>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_dai" id="tp_dai" onchange="AutoTinhSLBangKeo(this)" /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_rong" id="tp_rong" onchange="AutoTinhSLBangKeo(this)" /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_cao" id="tp_cao" onchange="AutoTinhSLBangKeo(this)" /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_soluong" id="tp_soluong" /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_socuon_thung" id="tp_socuon_thung" onchange="AutoFillTPSoLuong()" /></th>
+                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_dai" id="tp_dai" onchange="AutoTinhSLBangKeo(this)" /></th>
+                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_rong" id="tp_rong" onchange="AutoTinhSLBangKeo(this)" /></th>
+                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_cao" id="tp_cao" onchange="AutoTinhSLBangKeo(this)" /></th>
+                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_soluong" id="tp_soluong" /></th>
+                                    <th class="text-center"><input class="form-control iinteger" type="text" value="@Model.tp_socuon_thung" id="tp_socuon_thung" onchange="AutoFillTPSoLuong()" /></th>
                                     <td class="text-center">Thùng</td>
                                 </tr>
 
@@ -804,7 +804,7 @@
                                         </select>
                                     </th>
                                     <th class="text-center" colspan="3"><input disabled class="form-control" /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_sl_bangkeo" id="tp_sl_bangkeo" />@*<a href="#" rel="tooltip" data-original-title="Công thức tính thứ 1: " id="tooltip1"></a><a href="#" rel="tooltip" data-original-title="Công thức tính thứ 2: " id="tooltip2"></a>*@</th>
+                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_sl_bangkeo" id="tp_sl_bangkeo" />@*<a href="#" rel="tooltip" data-original-title="Công thức tính thứ 1: " id="tooltip1"></a><a href="#" rel="tooltip" data-original-title="Công thức tính thứ 2: " id="tooltip2"></a>*@</th>
                                     <th class="text-center"><input disabled class="form-control" /></th>
                                     <td class="text-center">Mét</td>
                                 </tr>
@@ -921,13 +921,13 @@
     <script src="~/Scripts/TPlugin/TPlugin.js"></script>
     <script type="text/javascript">
         // Input mask
-        $(document).ready(function () {
-            
-        });
-        $(".idecimal").decimalMask(2);
-        $(".iinteger").decimalMask(0);
         $("#so_lenh_sx").soLenhSXMask();
         $("#phieu_dnsx_so").phieuDNSXMask();
+
+        function formatDocument() {
+            $(".idecimal").decimalMask(2);
+            $(".iinteger").decimalMask(0);
+        }
 
         var lstMaterialType = @Html.Raw(Json.Encode(Model.lstMaterialType));
         var lstlstPPIn = @Html.Raw(Json.Encode(Model.lstPPIn));
@@ -942,6 +942,8 @@
 
         ///////////////////////////////////////Man hinh 1 ///////////////////////////////////////////////
         $(document).ready(function () {
+            formatDocument()
+
             $("#edit").submit(function () {
                 return false;
             });
@@ -978,6 +980,7 @@
 
             var html = generateHtmlAppendix(lstAppendix);
             $('#appendixTbody').html(html);
+            formatDocument()
 
             $(".selcted2").select2({
                 theme: "bootstrap",
@@ -1007,7 +1010,8 @@
                     $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();
                 }
-            });
+                });
+
         });
 
         function generateHtmlAppendix(lstAppendix) {
@@ -1064,7 +1068,6 @@
                             </tr>`
         }
 
-
         $("#addRowAppendixTable").click(function () {
             var appendix = {
                 ten: '',
@@ -1078,6 +1081,7 @@
             };
             var htmlRow = generateHtmlAppendixRow(appendix, lstAppendix.length)
             $("#appendixTable #appendixTbody").append(htmlRow);
+            formatDocument()
             lstAppendix.push(appendix);
             if (lstAppendix.length > 1000) {
                 $("#addRowAppendixTable").prop("disabled", true);
@@ -1116,7 +1120,6 @@
                 });
         });
 
-
         function removeAppendixRow(element) {
             var row = parseInt($(element).attr("myid"));
             $(element).parent().parent().remove();
@@ -1142,7 +1145,6 @@
                 }
             }
         }
-
 
         function UpdateMaterialType() {
             $('#notiMaterialName').empty();
@@ -1492,43 +1494,43 @@
             return `<tr id="standard_${index + 1}" class="appendixRow">
                                 <td id="STT" class="text-center">${index + 1}</td>
                                 <td>
-                                    <input type="number" class="form-control inputText so_luongMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.so_luong == null ? '' : appendix.so_luong}" id="soluongMH2_${index + 1}"/>
+                                    <input type="text" class="form-control iinteger inputText so_luongMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.so_luong == null ? '' : appendix.so_luong}" id="soluongMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText tenMH2" value="${appendix.ten == null ? '' : appendix.ten}" id="tenMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText dinh_luongMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.dinh_luong == null ? '' : appendix.dinh_luong}" id="dinhluongMH2_${index + 1}"/>
+                                    <input type="text" class="form-control idecimal inputText dinh_luongMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.dinh_luong == null ? '' : appendix.dinh_luong}" id="dinhluongMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText kho_giay_daiMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.kho_giay_dai == null ? '' : appendix.kho_giay_dai}" id="khogiaydaiMH2_${index + 1}"/>
+                                    <input type="text" class="form-control iinteger inputText kho_giay_daiMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.kho_giay_dai == null ? '' : appendix.kho_giay_dai}" id="khogiaydaiMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText kho_giay_rongMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.kho_giay_rong == null ? '' : appendix.kho_giay_rong}" id="khogiayrongMH2_${index + 1}"/>
+                                    <input type="text" class="form-control iinteger inputText kho_giay_rongMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.kho_giay_rong == null ? '' : appendix.kho_giay_rong}" id="khogiayrongMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText trangMH2" onchange="AutoTinhDinhMuc(this)" value="${appendix.trang == null ? '' : appendix.trang}" id="trangMH2_${index + 1}"/>
+                                    <input type="text" class="form-control iinteger inputText trangMH2" onchange="AutoTinhDinhMuc(this)" value="${appendix.trang == null ? '' : appendix.trang}" id="trangMH2_${index + 1}"/>
                                 </td>
                                 <td style="display:none;">
-                                    <input type="number" style="display:none;" class="form-control inputText trangMH1" value="${appendix.trangMH1 == null ? '' : appendix.trangMH1}" id="trangMH1MH2_${index + 1}"/>
+                                    <input type="text" style="display:none;" class="form-control iinteger inputText trangMH1" value="${appendix.trangMH1 == null ? '' : appendix.trangMH1}" id="trangMH1MH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText dinh_mucMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
+                                    <input type="text" class="form-control idecimal inputText dinh_mucMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_chinhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
+                                    <input type="text" class="form-control iinteger inputText sl_chinhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_bu_inMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_in == null ? '' : appendix.sl_bu_in}" id="slbuinMH2_${index + 1}"/>
+                                    <input type="text" class="form-control iinteger inputText sl_bu_inMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_in == null ? '' : appendix.sl_bu_in}" id="slbuinMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_bu_tpMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_tp == null ? '' : appendix.sl_bu_tp}" id="slbutpMH2_${index + 1}"/>
+                                    <input type="text" class="form-control iinteger inputText sl_bu_tpMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_tp == null ? '' : appendix.sl_bu_tp}" id="slbutpMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText sl_tongMH2" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
+                                    <input type="text" class="form-control iinteger inputText sl_tongMH2" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control inputText quy_kyMH2" value="${appendix.quy_ky == null ? '' : appendix.quy_ky}" id="quykyMH2_${index + 1}"/>
+                                    <input type="text" class="form-control idecimal inputText quy_kyMH2" value="${appendix.quy_ky == null ? '' : appendix.quy_ky}" id="quykyMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText muc_dich_sdMH2" value="${appendix.muc_dich_sd == null ? '' : appendix.muc_dich_sd}" id="mucdichsdMH2_${index + 1}"/>
@@ -1567,6 +1569,7 @@
             var htmlRow = generateHtmlAppendixRowMK2(appendix, lstAppendixMH2.length)
             $("#appendixTableMH2 #appendixTbodyMH2").append(htmlRow);
             lstAppendixMH2.push(appendix);
+            formatDocument()
             if (lstAppendixMH2.length > 1000) {
                 $("#addRowAppendixTableMH2").prop("disabled", true);
             }
@@ -1642,22 +1645,22 @@
                                 <input type="text" class="form-control inputText ten_tay_in1" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in}" id="tentayin1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_kem1" onchange="AutoFillTongCheBan(this)" value="${appendix.so_kem == null ? '' : appendix.so_kem}" id="sokem1_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText so_kem1" onchange="AutoFillTongCheBan(this)" value="${appendix.so_kem == null ? '' : appendix.so_kem}" id="sokem1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_bo1" onchange="AutoFillTongCheBan(this)" value="${appendix.so_bo == null ? '' : appendix.so_bo}" id="sobo1_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText so_bo1" onchange="AutoFillTongCheBan(this)" value="${appendix.so_bo == null ? '' : appendix.so_bo}" id="sobo1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText tong1" value="${appendix.tong == null ? '' : appendix.tong}" id="tong1_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText tong1" value="${appendix.tong == null ? '' : appendix.tong}" id="tong1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText trang1" value="${appendix.trang == null ? '' : appendix.trang}" id="trang1_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText trang1" value="${appendix.trang == null ? '' : appendix.trang}" id="trang1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_in_dai1" onchange="FillDataKhoInDai(this)" value="${appendix.kho_in_dai == null ? '' : appendix.kho_in_dai}" id="khoindai1_${index + 1}"/>
+                                <input type="text" class="form-control idecimal inputText kho_in_dai1" onchange="FillDataKhoInDai(this)" value="${appendix.kho_in_dai == null ? '' : appendix.kho_in_dai}" id="khoindai1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_in_rong1" onchange="FillDataKhoInRong(this)" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong}" id="khoinrong1_${index + 1}"/>
+                                <input type="text" class="form-control idecimal inputText kho_in_rong1" onchange="FillDataKhoInRong(this)" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong}" id="khoinrong1_${index + 1}"/>
                             </td>
                             <td>
                                 ${generateKhoKem(appendix, index)}
@@ -1687,6 +1690,7 @@
             };
             var htmlRow = generateHtmlAppendixRowMH3(appendix, lstAppendixMH3.length)
             $("#appendixTableMH3 #appendixTbodyMH3").append(htmlRow);
+            formatDocument()
             lstAppendixMH3.push(appendix);
             if (lstAppendixMH3.length > 100) {
                 $("#addRowAppendixTableMH3").prop("disabled", true);
@@ -1752,46 +1756,46 @@
                                 <input type="text" class="form-control inputText ten_loai" value="${appendix.ten_loai == null ? '' : appendix.ten_loai}" id="tenloai_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText dinh_luong_giay_in" value="${appendix.dinh_luong_giay_in == null ? '' : appendix.dinh_luong_giay_in}" id="dinhluonggiayin_${index + 1}"/>
+                                <input type="text" class="form-control idecimal inputText dinh_luong_giay_in" value="${appendix.dinh_luong_giay_in == null ? '' : appendix.dinh_luong_giay_in}" id="dinhluonggiayin_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_giay_dai" value="${appendix.kho_giay_dai == null ? '' : appendix.kho_giay_dai}" id="khogiaydai_${index + 1}"/>
+                                <input type="text" class="form-control idecimal inputText kho_giay_dai" value="${appendix.kho_giay_dai == null ? '' : appendix.kho_giay_dai}" id="khogiaydai_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_giay_rong" value="${appendix.kho_giay_rong == null ? '' : appendix.kho_giay_rong}" id="khogiayrong_${index + 1}"/>
+                                <input type="text" class="form-control idecimal inputText kho_giay_rong" value="${appendix.kho_giay_rong == null ? '' : appendix.kho_giay_rong}" id="khogiayrong_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_in_dai" value="${appendix.kho_in_dai == null ? '' : appendix.kho_in_dai}" id="khoindai_${index + 1}"/>
+                                <input type="text" class="form-control idecimal inputText kho_in_dai" value="${appendix.kho_in_dai == null ? '' : appendix.kho_in_dai}" id="khoindai_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText kho_in_rong" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong}" id="khoinrong_${index + 1}"/>
+                                <input type="text" class="form-control idecimal  inputText kho_in_rong" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong}" id="khoinrong_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText chinh"  onchange="AutoFillTongIn(this)" value="${appendix.chinh == null ? '' : appendix.chinh}" id="chinh_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText chinh"  onchange="AutoFillTongIn(this)" value="${appendix.chinh == null ? '' : appendix.chinh}" id="chinh_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText bu_in" onchange="AutoFillTongIn(this)" value="${appendix.bu_in == null ? '' : appendix.bu_in}" id="buin_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText bu_in" onchange="AutoFillTongIn(this)" value="${appendix.bu_in == null ? '' : appendix.bu_in}" id="buin_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText bu_thanh_pham" onchange="AutoFillTongIn(this)" value="${appendix.bu_thanh_pham == null ? '' : appendix.bu_thanh_pham}" id="buthanhpham_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText bu_thanh_pham" onchange="AutoFillTongIn(this)" value="${appendix.bu_thanh_pham == null ? '' : appendix.bu_thanh_pham}" id="buthanhpham_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText bu_phat_hanh" onchange="AutoFillTongIn(this)" value="${appendix.bu_phat_hanh == null ? '' : appendix.bu_phat_hanh}" id="buphathanh_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText bu_phat_hanh" onchange="AutoFillTongIn(this)" value="${appendix.bu_phat_hanh == null ? '' : appendix.bu_phat_hanh}" id="buphathanh_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText sl_tong" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltong_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText sl_tong" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltong_${index + 1}"/>
                             </td>
                             <td>
                                 ${generatePPInPrint(appendix, index)}
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_kg" value="${appendix.so_kg == null ? '' : appendix.so_kg}" id="sokg_${index + 1}"/>
+                                <input type="text" class="form-control idecimal inputText so_kg" value="${appendix.so_kg == null ? '' : appendix.so_kg}" id="sokg_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_luot_in_quy_doi" value="${appendix.so_luot_in_quy_doi == null ? '' : appendix.so_luot_in_quy_doi}" id="soluotinquydoi_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText so_luot_in_quy_doi" value="${appendix.so_luot_in_quy_doi == null ? '' : appendix.so_luot_in_quy_doi}" id="soluotinquydoi_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="number" class="form-control inputText so_luot_in_thuc_te" value="${appendix.so_luot_in_thuc_te == null ? '' : appendix.so_luot_in_thuc_te}" id="soluotinthucte_${index + 1}"/>
+                                <input type="text" class="form-control iinteger inputText so_luot_in_thuc_te" value="${appendix.so_luot_in_thuc_te == null ? '' : appendix.so_luot_in_thuc_te}" id="soluotinthucte_${index + 1}"/>
                             </td>
                             <td class="text-center">
                                 <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendixPrintRow(this)" id="removeAppendixPrintRow_${index + 1}" myid="${index + 1}" title="Xóa">
@@ -1823,7 +1827,7 @@
             var htmlRow = generateHtmlAppendixPrintRow(appendix, lstAppendixPrint.length)
             $("#printTable #appendixPrintTbody").append(htmlRow);
             lstAppendixPrint.push(appendix);
-
+            formatDocument()
             // kích thêm mới dòng bảng in tự động fill thông tin từ bảng chế bản
             var khoindai = $('#khoindai1_' + lstAppendixPrint.length).val();
             $('#khoindai_' + lstAppendixPrint.length).val(khoindai);
@@ -2279,7 +2283,7 @@
                 for (var i = 0; i < lstTongQuan.length; i++) {
                     var lstDuToanGiay = {
                         ten_tay_in: lstTongQuan[i].ten,
-                        so_kem: lstDuToanGiayConvert[i].sl_tong,
+                        so_kem: '',
                         so_bo: '',
                         tong: '',
                         trang: '',
@@ -2293,6 +2297,7 @@
                 }
                 var htmlRow = generateHtmlAppendixMH3(lstCheBanConvert)
                 $("#appendixTableMH3 #appendixTbodyMH3").append(htmlRow);
+                formatDocument();
 
                 //fill bảng in
                 for (var i = 0; i < lstTongQuan.length; i++) {
@@ -2319,6 +2324,7 @@
                 }
                 var htmlRowIn = generateHtmlAppendixPrint(lstIn)
                 $("#printTable #appendixPrintTbody").append(htmlRowIn);
+                formatDocument();
 
                 $(".manhinh1").attr("style", "display:none");
                 $(".manhinh2").attr("style", "display:none");
