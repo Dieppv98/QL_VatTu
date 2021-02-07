@@ -445,5 +445,10 @@ namespace DKAC.Repository
             query.lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietDuToan>();
             return query;
         }
+        public DonHang GetBySoLenhSX(string soLenhSX)
+        {
+            var data = db.DonHang.Where(x => x.so_lenh_sx.Trim() == soLenhSX).FirstOrDefault();
+            return data;
+        }
     }
 }

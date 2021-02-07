@@ -13,8 +13,8 @@
 				autoGroup: false,
 				allowPlus: true,
 				allowMinus: true,
-				autoUnmask : true , 
-            	unmaskAsNumber : true
+				autoUnmask: true,
+				unmaskAsNumber: true
 			});
 		},
 		phieuDNSXMask: function () {
@@ -33,6 +33,17 @@
 				casing: "upper"
 				// placeholder: "HS-0000/00"
 			})
-		}
+		},
+		upperMask: function () {
+			return this.inputmask({
+				casing: "upper"
+			})
+		},
+		upperStringMask: function () {
+			return this.inputmask({
+				regex: '[a-z]*',
+				casing: "upper"
+			})
+        }
 	});
 })(jQuery);

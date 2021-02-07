@@ -260,5 +260,15 @@ namespace DKAC.Controllers
             donHangInfo.lstMaterialType = lstMaterial;
             return View(donHangInfo);
         }
+        [HttpPost]
+        public ActionResult CheckDuplicatedSoLenhSX(string soLenhSX)
+        {
+            var name = _mater.GetBySoLenhSX(soLenhSX);
+            if (name == null)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
     }
 }
