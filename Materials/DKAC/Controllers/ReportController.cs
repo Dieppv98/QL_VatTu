@@ -128,19 +128,16 @@ namespace DKAC.Controllers
             var lstsltong = model.lst_sl_tong ?? new List<TongSoLuongInfo>();
             var lstCheBanInfo = model.lstCheBanInfo ?? new List<ChiTietCheBanInfo>();
             var lstInInfo = model.lstInInfo ?? new List<ChiTietInInfo>();
-
-            //var lstQuycach = new List<VatTu>();
+            
             var lstQuycachBia = new List<VatTu>();
             var lstQuycachThuong = new List<VatTu>();
-            // var lstQuycachConvert = new List<VatTu>();
             var lstQuyCachInfo = new List<QuyCachInfo>();
 
             if (lstvatTu.Count > 0)
             {
-                var lst = model.lstVatTus.Where(x => x.ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa")).OrderBy(x => x.nhom_vat_tu_id).ToList();
                 for (int i = 0; i < lstvatTu.Count; i++)
                 {
-                    if (lstvatTu[i].ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa"))
+                    if (lstvatTu[i].ten_nhom_vat_tu != null && lstvatTu[i].ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa"))
                     {
                         lstQuycachBia.Add(lstvatTu[i]);
                     }
@@ -179,7 +176,6 @@ namespace DKAC.Controllers
                     }
                 }
             }
-
             var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList();
             
             var path = Path.Combine(Server.MapPath("~/FileTemplate"), "Export-LSX.xlsx");

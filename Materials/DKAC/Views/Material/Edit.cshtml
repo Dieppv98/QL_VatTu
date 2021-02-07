@@ -122,7 +122,7 @@
                         <label>Số LSX: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="so_lenh_sx" value="@Model.so_lenh_sx" placeholder="Ví dụ: HS-0001/21"/>
+                        <input type="text" class="form-control" id="so_lenh_sx" value="@Model.so_lenh_sx" placeholder="Ví dụ: HS-0001/21" />
                         <div class="valid" style="color: red; font-style: italic;">
                             <div class="textNoti" id="textvalid">
                                 <!--hiển thị thông báo-->
@@ -1336,8 +1336,8 @@
             for (var i = 0; i < lstAppendix.length; i++) {
                 var contents = {
                     ten: $('#standard_' + (i + 1) + ' .ten').val().toString().trim(),
-                    nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val().toString().trim(),
-                    ten_nhom_vat_tu: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id option:selected').text().trim(),
+                    nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val(),
+                    ten_nhom_vat_tu: ($('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val() == "" ? "" :  $('#standard_' + (i + 1) + ' .nhom_vat_tu_id option:selected').text().trim()),
                     trang: $('#standard_' + (i + 1) + ' .trang').val().toString().trim(),
                     loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val().toString().trim(),
                     dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val().toString().trim(),
@@ -1389,20 +1389,20 @@
                 var contents = {
                     ten_tay_in: $('#standard_' + (i + 1) + ' .ten_tay_in').val().trim(),
                     ten_loai: $('#standard_' + (i + 1) + ' .ten_loai').val().trim(),
-                    dinh_luong_giay_in: $('#standard_' + (i + 1) + ' .dinh_luong_giay_in').val().trim(),
-                    kho_giay_dai: $('#standard_' + (i + 1) + ' .kho_giay_dai').val().toString().trim(),
-                    kho_giay_rong: $('#standard_' + (i + 1) + ' .kho_giay_rong').val().toString().trim(),
-                    kho_in_dai: $('#standard_' + (i + 1) + ' .kho_in_dai').val().toString().trim(),
-                    kho_in_rong: $('#standard_' + (i + 1) + ' .kho_in_rong').val().toString().trim(),
-                    chinh: $('#standard_' + (i + 1) + ' .chinh').val().toString().trim(),
-                    bu_in: $('#standard_' + (i + 1) + ' .bu_in').val().toString().trim(),
-                    bu_thanh_pham: $('#standard_' + (i + 1) + ' .bu_thanh_pham').val().toString().trim(),
-                    bu_phat_hanh: $('#standard_' + (i + 1) + ' .bu_phat_hanh').val().toString().trim(),
-                    sl_tong: $('#standard_' + (i + 1) + ' .sl_tong').val().toString().trim(),
+                    dinh_luong_giay_in: $('#standard_' + (i + 1) + ' .dinh_luong_giay_in').val(),
+                    kho_giay_dai: $('#standard_' + (i + 1) + ' .kho_giay_dai').val(),
+                    kho_giay_rong: $('#standard_' + (i + 1) + ' .kho_giay_rong').val(),
+                    kho_in_dai: $('#standard_' + (i + 1) + ' .kho_in_dai').val(),
+                    kho_in_rong: $('#standard_' + (i + 1) + ' .kho_in_rong').val(),
+                    chinh: $('#standard_' + (i + 1) + ' .chinh').val(),
+                    bu_in: $('#standard_' + (i + 1) + ' .bu_in').val(),
+                    bu_thanh_pham: $('#standard_' + (i + 1) + ' .bu_thanh_pham').val(),
+                    bu_phat_hanh: $('#standard_' + (i + 1) + ' .bu_phat_hanh').val(),
+                    sl_tong: $('#standard_' + (i + 1) + ' .sl_tong').val(),
                     phuong_phap_in: $('#standard_' + (i + 1) + ' .phuong_phap_in').val(),
-                    so_kg: $('#standard_' + (i + 1) + ' .so_kg').val().toString().trim(),
-                    so_luot_in_quy_doi: $('#standard_' + (i + 1) + ' .so_luot_in_quy_doi').val().toString().trim(),
-                    so_luot_in_thuc_te: $('#standard_' + (i + 1) + ' .so_luot_in_thuc_te').val().toString().trim(),
+                    so_kg: $('#standard_' + (i + 1) + ' .so_kg').val(),
+                    so_luot_in_quy_doi: $('#standard_' + (i + 1) + ' .so_luot_in_quy_doi').val(),
+                    so_luot_in_thuc_te: $('#standard_' + (i + 1) + ' .so_luot_in_thuc_te').val(),
                 };
                 lstContents.push(contents);
             };
@@ -1462,20 +1462,20 @@
             lstContents = [];
             for (var i = 0; i < lstAppendixMH2.length; i++) {
                 var contents = {
-                    so_luong: $('#standard_' + (i + 1) + ' .so_luongMH2').val().trim(),
+                    so_luong: $('#standard_' + (i + 1) + ' .so_luongMH2').val(),
                     ten: $('#standard_' + (i + 1) + ' .tenMH2').val().trim(),
-                    dinh_luong: $('#standard_' + (i + 1) + ' .dinh_luongMH2').val().toString().trim(),
-                    kho_giay_dai: $('#standard_' + (i + 1) + ' .kho_giay_daiMH2').val().toString().trim(),
-                    kho_giay_rong: $('#standard_' + (i + 1) + ' .kho_giay_rongMH2').val().toString(),
-                    trang: $('#standard_' + (i + 1) + ' .trangMH2').val().toString().trim(),
-                    dinh_muc: ($('#standard_' + (i + 1) + ' .dinh_mucMH2').val()).toString().trim(),
-                    sl_chinh: $('#standard_' + (i + 1) + ' .sl_chinhMH2').val().toString().trim(),
-                    sl_bu_in: $('#standard_' + (i + 1) + ' .sl_bu_inMH2').val().toString().trim(),
-                    sl_bu_tp: $('#standard_' + (i + 1) + ' .sl_bu_tpMH2').val().toString().trim(),
-                    sl_tong: ($('#standard_' + (i + 1) + ' .sl_tongMH2').val()).toString().trim(),
-                    quy_ky: ($('#standard_' + (i + 1) + ' .quy_kyMH2').val()).toString().trim(),
-                    muc_dich_sd: $('#standard_' + (i + 1) + ' .muc_dich_sdMH2').val().toString().trim(),
-                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giayMH2').val().toString().trim(),
+                    dinh_luong: $('#standard_' + (i + 1) + ' .dinh_luongMH2').val(),
+                    kho_giay_dai: $('#standard_' + (i + 1) + ' .kho_giay_daiMH2').val(),
+                    kho_giay_rong: $('#standard_' + (i + 1) + ' .kho_giay_rongMH2').val(),
+                    trang: $('#standard_' + (i + 1) + ' .trangMH2').val(),
+                    dinh_muc: $('#standard_' + (i + 1) + ' .dinh_mucMH2').val(),
+                    sl_chinh: $('#standard_' + (i + 1) + ' .sl_chinhMH2').val(),
+                    sl_bu_in: $('#standard_' + (i + 1) + ' .sl_bu_inMH2').val(),
+                    sl_bu_tp: $('#standard_' + (i + 1) + ' .sl_bu_tpMH2').val(),
+                    sl_tong: $('#standard_' + (i + 1) + ' .sl_tongMH2').val(),
+                    quy_ky: $('#standard_' + (i + 1) + ' .quy_kyMH2').val(),
+                    muc_dich_sd: $('#standard_' + (i + 1) + ' .muc_dich_sdMH2').val(),
+                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giayMH2').val(),
                 };
                 lstContents.push(contents);
             };
@@ -1503,10 +1503,10 @@
                                     <input type="text" class="form-control idecimal inputText dinh_luongMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.dinh_luong == null ? '' : appendix.dinh_luong}" id="dinhluongMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control iinteger inputText kho_giay_daiMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.kho_giay_dai == null ? '' : appendix.kho_giay_dai}" id="khogiaydaiMH2_${index + 1}"/>
+                                    <input type="text" class="form-control idecimal inputText kho_giay_daiMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.kho_giay_dai == null ? '' : appendix.kho_giay_dai}" id="khogiaydaiMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control iinteger inputText kho_giay_rongMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.kho_giay_rong == null ? '' : appendix.kho_giay_rong}" id="khogiayrongMH2_${index + 1}"/>
+                                    <input type="text" class="form-control idecimal inputText kho_giay_rongMH2" onchange="AutoTinhQuyKy(this)" value="${appendix.kho_giay_rong == null ? '' : appendix.kho_giay_rong}" id="khogiayrongMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control iinteger inputText trangMH2" onchange="AutoTinhDinhMuc(this)" value="${appendix.trang == null ? '' : appendix.trang}" id="trangMH2_${index + 1}"/>
@@ -1991,7 +1991,7 @@
         }
 
         function FillDataKhoInDai(element) {
-            var value = $(element).val().trim();
+            var value = $(element).val();
             var id = $(element).attr("id");
             var index = id.indexOf('_');
             var numberid = id.substring(index + 1);
@@ -1999,7 +1999,7 @@
         }
 
         function FillDataKhoInRong(element) {
-            var value = $(element).val().trim();
+            var value = $(element).val();
             var id = $(element).attr("id");
             var index = id.indexOf('_');
             var numberid = id.substring(index + 1);
@@ -2043,7 +2043,7 @@
             var soLuong = ($('#soluongMH2_' + numberid).val() * 1 == 0) ? 1 : $('#soluongMH2_' + numberid).val() * 1;
             var dinhMuc = ($('#dinhmucMH2_' + numberid).val() * 1 == 0) ? 1 : $('#dinhmucMH2_' + numberid).val() * 1;
 
-            var soLuongChinh = (soLuong * dinhMuc).toFixed(2);
+            var soLuongChinh = (soLuong * dinhMuc);
             $('#slchinhMH2_' + numberid).val(soLuongChinh);
 
             /// tính số lượng tổng
