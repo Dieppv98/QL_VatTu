@@ -122,7 +122,7 @@
                         <label>Số LSX: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="so_lenh_sx" value="@Model.so_lenh_sx" onchange="onChangeSoLenhSX(this)" placeholder="Ví dụ: HS-0001/21"/>
+                        <input type="text" class="form-control" id="so_lenh_sx" value="@Model.so_lenh_sx" onchange="onChangeSoLenhSX(this)" placeholder="Ví dụ: HS-0001/21" />
                         <div class="valid" style="color: red; font-style: italic;">
                             <div class="textNoti" id="textvalid">
                                 <!--hiển thị thông báo-->
@@ -2234,39 +2234,27 @@
                 var lstQuyCach = [];
                 var lstQuyCachBia = [];
                 var lstQuyCachThuong = [];
-                //var lstQuyCachBiaConvert = [];
 
-                var query = JSLINQ(lstTemp).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
-                for (var i = 0; i < query.length; i++) {
-                    var quycach = JSLINQ(lstTemp).Where(function (item) { return item.nhom_vat_tu_id == query[i]; }).ToArray();
-                    for (var j = 0; j < quycach.length; j++) {
-                        lstQuyCach.push(quycach[j]);
+                for (var i = 0; i < lstTemp.length; i++) {
+                    if (lstTemp[i].ten_nhom_vat_tu != null && lstTemp[i].ten_nhom_vat_tu.trim().toLowerCase().startsWith("bìa")) {
+                        lstQuyCachBia.push(lstTemp[i]);
                     }
-                }
-                for (var i = 0; i < lstQuyCach.length; i++) {
-                    if (lstQuyCach[i].ten_nhom_vat_tu.trim().toLowerCase().startsWith("bìa")) {
-                        lstQuyCachBia.push(lstQuyCach[i]);
-                    }
-                    else { lstQuyCachThuong.push(lstQuyCach[i]) }
+                    else { lstQuyCachThuong.push(lstTemp[i]) }
                 }
 
-                for (var i = 0; i < lstQuyCachBia.length; i++) {
-                    var quycachBiaConvert = JSLINQ(lstQuyCachBia).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
-                    for (var i = 0; i < quycachBiaConvert.length; i++) {
-                        var quycachbia = JSLINQ(lstQuyCachBia).Where(function (item) { return item.nhom_vat_tu_id == quycachBiaConvert[i]; }).ToArray();
-                        var htmlQuyCachBia = generateHtmlQuyCachRowMH3(quycachbia);
-                        $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachBia);
-                    }
-                }
-                for (var i = 0; i < lstQuyCachThuong.length; i++) {
-                    var quycachThuongConvert = JSLINQ(lstQuyCachThuong).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
-                    for (var i = 0; i < quycachThuongConvert.length; i++) {
-                        var quycachthuong = JSLINQ(lstQuyCachThuong).Where(function (item) { return item.nhom_vat_tu_id == quycachThuongConvert[i]; }).ToArray();
-                        var htmlQuyCachThuong = generateHtmlQuyCachRowMH3(quycachthuong);
-                        $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachThuong);
-                    }
+                var quycachBiaConvert = JSLINQ(lstQuyCachBia).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+                for (var j = 0; j < quycachBiaConvert.length; j++) {
+                    var quycachbia = JSLINQ(lstQuyCachBia).Where(function (item) { return item.nhom_vat_tu_id == quycachBiaConvert[j]; }).ToArray();
+                    var htmlQuyCachBia = generateHtmlQuyCachRowMH3(quycachbia);
+                    $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachBia);
                 }
 
+                var quycachThuongConvert = JSLINQ(lstQuyCachThuong).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+                for (var j = 0; j < quycachThuongConvert.length; j++) {
+                    var quycachthuong = JSLINQ(lstQuyCachThuong).Where(function (item) { return item.nhom_vat_tu_id == quycachThuongConvert[j]; }).ToArray();
+                    var htmlQuyCachThuong = generateHtmlQuyCachRowMH3(quycachthuong);
+                    $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachThuong);
+                }
 
                 var lstTongQuan = GetInfoDetail();
 
@@ -2337,7 +2325,7 @@
         function generateHtmlQuyCachRowMH3(appendix) {
             return `<tr class="bg-blue" style="background-color: #e9ecef;color: black;">
                             <th class="text-center wrapper" style="width: 200px;vertical-align: middle;border: black solid 1px !important;">
-                                ${appendix[0].ten_nhom_vat_tu}
+                                ${(appendix[0].ten_nhom_vat_tu)}
                             </th>
                             <td class="wrapper" style="padding: 0px !important;border: black solid 1px !important;">
                                 ${generateDetaislQuyCachMH3(appendix)}
