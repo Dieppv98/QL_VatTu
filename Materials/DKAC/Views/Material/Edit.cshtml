@@ -122,7 +122,7 @@
                         <label>Số LSX: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="so_lenh_sx" value="@Model.so_lenh_sx" placeholder="Ví dụ: HS-0001/21"/>
+                        <input type="text" class="form-control" id="so_lenh_sx" value="@Model.so_lenh_sx" onchange="onChangeSoLenhSX(this)" placeholder="Ví dụ: HS-0001/21"/>
                         <div class="valid" style="color: red; font-style: italic;">
                             <div class="textNoti" id="textvalid">
                                 <!--hiển thị thông báo-->
@@ -2375,9 +2375,9 @@
                     loai: $('#loai').val().trim(),
                     created_date: $('#created_date').val().trim(),
                     email: $('#email').val().trim(),
-                    kho_doc: $('#kho_doc').val().trim(),
-                    kho_ngang: $('#kho_ngang').val().trim(),
-                    lan_dieu_chinh: $('#lan_dieu_chinh').val().trim(),
+                    kho_doc: $('#kho_doc').val(),
+                    kho_ngang: $('#kho_ngang').val(),
+                    lan_dieu_chinh: $('#lan_dieu_chinh').val(),
                     ma_khach_hang: $('#ma_khach_hang').val().trim(),
                     ma_san_pham: $('#ma_san_pham').val().trim(),
                     nha_cc: $('#nha_cc').val().trim(),
@@ -2462,6 +2462,7 @@
             }
 
         }
+
         function onChangeSoLenhSX(element) {
             var lsx = $(element).val().trim();
             // check trùng số lệnh sx
@@ -2473,7 +2474,7 @@
                 type: "POST",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
-                data: IData,
+                data: "{'soLenhSX':'" + lsx + "'}",
                 success: function (result) {
                     if (result == false) {
                         $(".textNoti").html(`Lệnh sản xuất ${lsx} đã tồn tại`);

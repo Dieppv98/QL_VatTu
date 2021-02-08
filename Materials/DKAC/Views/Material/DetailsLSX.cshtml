@@ -583,7 +583,7 @@
                 }
             }
             for (var i = 0; i < lstQuyCach.length; i++) {
-                if (lstQuyCach[i].ten_nhom_vat_tu.trim().toLowerCase().startsWith("bìa")) {
+                if (lstQuyCach[i].ten_nhom_vat_tu != null && lstQuyCach[i].ten_nhom_vat_tu.trim().toLowerCase().startsWith("bìa")) {
                     lstQuyCachBia.push(lstQuyCach[i]);
                 }
                 else { lstQuyCachThuong.push(lstQuyCach[i]) }
