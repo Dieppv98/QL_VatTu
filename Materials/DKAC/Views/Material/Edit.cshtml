@@ -426,7 +426,7 @@
                                             <th class="text-center" colspan="4" style="width:320px">Quy cách loại vật tư</th>
                                             <th class="text-center" rowspan="3" style="width:50px">Trang/tờ</th>
                                             <th class="text-center" rowspan="3" style="width:60px">Định mức</th>
-                                            <th class="text-center" colspan="4" style="width:240px">Số lượng</th>
+                                            <th class="text-center" colspan="5" style="width:240px">Số lượng</th>
                                             <th class="text-center" rowspan="3" style="width:60px">Quy ký</th>
                                             <th class="text-center" rowspan="3" style="width:110px">Mục đích sử dụng</th>
                                             <th class="text-center" style="width:40px;" rowspan="3">
@@ -442,6 +442,7 @@
                                             <th class="text-center" rowspan="2" style="width:60px">Chính</th>
                                             <th class="text-center" rowspan="2" style="width:60px">Bù in</th>
                                             <th class="text-center" rowspan="2" style="width:60px">Bù TP</th>
+                                            <th class="text-center" rowspan="2" style="width:60px">Bù phát hành</th>
                                             <th class="text-center" rowspan="2" style="width:60px">Tổng</th>
                                         </tr>
                                         <tr style="background-color: #0076d2; color: white;">
@@ -1340,12 +1341,12 @@
                     ten: $('#standard_' + (i + 1) + ' .ten').val().toString().trim(),
                     nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val(),
                     ten_nhom_vat_tu: ($('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val() == "" ? "" :  $('#standard_' + (i + 1) + ' .nhom_vat_tu_id option:selected').text().trim()),
-                    trang: $('#standard_' + (i + 1) + ' .trang').val().toString().trim(),
-                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val().toString().trim(),
-                    dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val().toString().trim(),
-                    kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val().toString().trim(),
-                    kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val().toString().trim(),
-                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val().toString().trim(),
+                    trang: $('#standard_' + (i + 1) + ' .trang').val(),
+                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val(),
+                    dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val(),
+                    kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val(),
+                    kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val(),
+                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val().trim(),
                 };
                 lstContents.push(contents);
             };
@@ -1474,6 +1475,7 @@
                     sl_chinh: $('#standard_' + (i + 1) + ' .sl_chinhMH2').val(),
                     sl_bu_in: $('#standard_' + (i + 1) + ' .sl_bu_inMH2').val(),
                     sl_bu_tp: $('#standard_' + (i + 1) + ' .sl_bu_tpMH2').val(),
+                    bu_phat_hanh: $('#standard_' + (i + 1) + ' .bu_phat_hanhMH2').val(),
                     sl_tong: $('#standard_' + (i + 1) + ' .sl_tongMH2').val(),
                     quy_ky: $('#standard_' + (i + 1) + ' .quy_kyMH2').val(),
                     muc_dich_sd: $('#standard_' + (i + 1) + ' .muc_dich_sdMH2').val(),
@@ -1529,6 +1531,9 @@
                                     <input type="text" class="form-control iinteger inputText sl_bu_tpMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_tp == null ? '' : appendix.sl_bu_tp}" id="slbutpMH2_${index + 1}"/>
                                 </td>
                                 <td>
+                                    <input type="text" class="form-control iinteger inputText bu_phat_hanhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.bu_phat_hanh == null ? '' : appendix.bu_phat_hanh}" id="buphathanhMH2_${index + 1}"/>
+                                </td>
+                                <td>
                                     <input type="text" class="form-control iinteger inputText sl_tongMH2" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
                                 </td>
                                 <td>
@@ -1563,6 +1568,7 @@
                 sl_chinh: '',
                 sl_bu_in: '',
                 sl_bu_tp: '',
+                bu_phat_hanh: '',
                 sl_tong: '',
                 quy_ky: '',
                 muc_dich_sd: '',
@@ -2065,8 +2071,9 @@
             var soLuongBuIn = $('#slbuinMH2_' + numberid).val() * 1;
             var soLuongBuTP = $('#slbutpMH2_' + numberid).val() * 1;
             var soLuongChinh = $('#slchinhMH2_' + numberid).val() * 1;
+            var buphathanh = $('#buphathanhMH2_' + numberid).val() * 1;
 
-            var slTong = (soLuongChinh + soLuongBuIn + soLuongBuTP).toFixed(2);
+            var slTong = (soLuongChinh + soLuongBuIn + soLuongBuTP + buphathanh).toFixed(2);
             $('#sltongMH2_' + numberid).val(slTong);
 
             ////tính ô quy ký
@@ -2302,7 +2309,7 @@
                         chinh: lstDuToanGiayConvert[i].sl_chinh,
                         bu_in: lstDuToanGiayConvert[i].sl_bu_in,
                         bu_thanh_pham: lstDuToanGiayConvert[i].sl_bu_tp,
-                        bu_phat_hanh: '',
+                        bu_phat_hanh: lstDuToanGiayConvert[i].bu_phat_hanh,
                         sl_tong: lstDuToanGiayConvert[i].sl_tong,
                         phuong_phap_in: '',
                         so_kg: lstDuToanGiayConvert[i].quy_ky,
@@ -2433,10 +2440,9 @@
                                             icon: "success",
                                         }).then(function (isConfirm) {
                                             if (data.id * 1 > 0) {
-                                                window.location.href = '/Material/Index';
+                                                window.location.href = '/Material/Edit/0';
                                             }
                                             else {
-                                                window.location.href = '/Material/Index';
                                             }
                                         });
                                     }
@@ -2452,11 +2458,9 @@
         }
 
         function onChangeSoLenhSX(element) {
+            $(".textNoti").empty();
             var lsx = $(element).val().trim();
             // check trùng số lệnh sx
-            var IData = {
-                soLenhSX: lsx
-            }
             $.ajax({
                 url: "/Material/CheckDuplicatedSoLenhSX/",
                 type: "POST",

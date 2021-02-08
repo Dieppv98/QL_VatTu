@@ -262,7 +262,7 @@
                         </div>
                     </div>
                     <div class="col-md-3"></div>
-                </div> 
+                </div>
 
                 <hr />
 
@@ -575,35 +575,25 @@
             var lstQuyCachThuong = [];
             //var lstQuyCachBiaConvert = [];
 
-            var query = JSLINQ(lstAppendix).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
-            for (var i = 0; i < query.length; i++) {
-                var quycach = JSLINQ(lstAppendix).Where(function (item) { return item.nhom_vat_tu_id == query[i]; }).ToArray();
-                for (var j = 0; j < quycach.length; j++) {
-                    lstQuyCach.push(quycach[j]);
+            for (var i = 0; i < lstAppendix.length; i++) {
+                if (lstAppendix[i].ten_nhom_vat_tu != null && lstTemp[i].ten_nhom_vat_tu.trim().toLowerCase().startsWith("bìa")) {
+                    lstQuyCachBia.push(lstAppendix[i]);
                 }
-            }
-            for (var i = 0; i < lstQuyCach.length; i++) {
-                if (lstQuyCach[i].ten_nhom_vat_tu != null && lstQuyCach[i].ten_nhom_vat_tu.trim().toLowerCase().startsWith("bìa")) {
-                    lstQuyCachBia.push(lstQuyCach[i]);
-                }
-                else { lstQuyCachThuong.push(lstQuyCach[i]) }
+                else { lstQuyCachThuong.push(lstAppendix[i]) }
             }
 
-            for (var i = 0; i < lstQuyCachBia.length; i++) {
-                var quycachBiaConvert = JSLINQ(lstQuyCachBia).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
-                for (var i = 0; i < quycachBiaConvert.length; i++) {
-                    var quycachbia = JSLINQ(lstQuyCachBia).Where(function (item) { return item.nhom_vat_tu_id == quycachBiaConvert[i]; }).ToArray();
-                    var htmlQuyCachBia = generateHtmlQuyCachRowMH3(quycachbia);
-                    $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachBia);
-                }
+            var quycachBiaConvert = JSLINQ(lstQuyCachBia).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+            for (var j = 0; j < quycachBiaConvert.length; j++) {
+                var quycachbia = JSLINQ(lstQuyCachBia).Where(function (item) { return item.nhom_vat_tu_id == quycachBiaConvert[j]; }).ToArray();
+                var htmlQuyCachBia = generateHtmlQuyCachRowMH3(quycachbia);
+                $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachBia);
             }
-            for (var i = 0; i < lstQuyCachThuong.length; i++) {
-                var quycachThuongConvert = JSLINQ(lstQuyCachThuong).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
-                for (var i = 0; i < quycachThuongConvert.length; i++) {
-                    var quycachthuong = JSLINQ(lstQuyCachThuong).Where(function (item) { return item.nhom_vat_tu_id == quycachThuongConvert[i]; }).ToArray();
-                    var htmlQuyCachThuong = generateHtmlQuyCachRowMH3(quycachthuong);
-                    $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachThuong);
-                }
+
+            var quycachThuongConvert = JSLINQ(lstQuyCachThuong).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+            for (var j = 0; j < quycachThuongConvert.length; j++) {
+                var quycachthuong = JSLINQ(lstQuyCachThuong).Where(function (item) { return item.nhom_vat_tu_id == quycachThuongConvert[j]; }).ToArray();
+                var htmlQuyCachThuong = generateHtmlQuyCachRowMH3(quycachthuong);
+                $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachThuong);
             }
 
             var htmlCheBan = generateHtmlAppendixMH3(lstAppendixMH3);
@@ -649,7 +639,7 @@
         function generateDetaislQuyCachMH3(appendix) {
             var htmlRow = ``;
             for (var i = 0; i < appendix.length; i++) {
-                var contentHtml = `${appendix[i].ten}: ${appendix[i].trang} trang ${appendix[i].loai_giay} ${appendix[i].dinh_luong_giay} In ${appendix[i].kieu_in_1}/${appendix[i].kieu_in_2}`
+                var contentHtml = `${appendix[i].ten == null ? '' : appendix[i].ten}: ${appendix[i].trang == null ? '' : appendix[i].trang} trang ${appendix[i].loai_giay == null ? '' : appendix[i].loai_giay} ${appendix[i].dinh_luong_giay == null ? '' : appendix[i].dinh_luong_giay} In ${appendix[i].kieu_in_1 == null ? '' : appendix[i].kieu_in_1 + `/`}${appendix[i].kieu_in_2 == null ? '' : appendix[i].kieu_in_2}`
                 htmlRow += `<table class="table table-striped table-bordered" style="margin-bottom: 0px !important">
                                 <tbody>
                                     <tr class="wrapper">

@@ -34,6 +34,7 @@ namespace DKAC.Models.EntityModel
         public double? sl_bu_in { get; set; }
 
         public double? sl_bu_tp { get; set; }
+        public int? bu_phat_hanh { get; set; }
 
         public string sl_tong { get; set; }
         
