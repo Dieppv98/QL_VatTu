@@ -2361,7 +2361,6 @@
     <Content Include="Scripts\input-mask\jquery.inputmask.js" />
     <Content Include="Scripts\input-mask\jquery.inputmask.min.js" />
     <Content Include="Scripts\input-mask\jquery.min.js" />
-    <Content Include="Scripts\input-mask\TPlugin.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />

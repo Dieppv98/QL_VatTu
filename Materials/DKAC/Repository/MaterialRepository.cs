@@ -217,26 +217,38 @@ namespace DKAC.Repository
             var lstIn = db.ChiTietIn.Where(x => x.don_hang_id == dh.id).ToList();
             db.ChiTietIn.RemoveRange(lstIn);
             ///add lại bảng con
-            foreach (var item in model.lstVatTus)
+            if (model.lstVatTus != null)
             {
-                item.don_hang_id = dh.id;
+                foreach (var item in model.lstVatTus)
+                {
+                    item.don_hang_id = dh.id;
+                }
+                db.VatTu.AddRange(model.lstVatTus);
             }
-            db.VatTu.AddRange(model.lstVatTus);
-            foreach (var item in model.lstChiTietDuToans)
+            if (model.lstChiTietDuToans != null)
             {
-                item.don_hang_id = dh.id;
+                foreach (var item in model.lstChiTietDuToans)
+                {
+                    item.don_hang_id = dh.id;
+                }
+                db.ChiTietDuToan.AddRange(model.lstChiTietDuToans);
             }
-            db.ChiTietDuToan.AddRange(model.lstChiTietDuToans);
-            foreach (var item in model.lstChiTietCheBans)
+            if (model.lstChiTietCheBans != null)
             {
-                item.don_hang_id = dh.id;
+                foreach (var item in model.lstChiTietCheBans)
+                {
+                    item.don_hang_id = dh.id;
+                }
+                db.ChiTietCheBan.AddRange(model.lstChiTietCheBans);
             }
-            db.ChiTietCheBan.AddRange(model.lstChiTietCheBans);
-            foreach (var item in model.lstChiTietIns)
+            if (model.lstChiTietIns != null)
             {
-                item.don_hang_id = dh.id;
+                foreach (var item in model.lstChiTietIns)
+                {
+                    item.don_hang_id = dh.id;
+                }
+                db.ChiTietIn.AddRange(model.lstChiTietIns);
             }
-            db.ChiTietIn.AddRange(model.lstChiTietIns);
 
             db.SaveChanges();
             return 1;

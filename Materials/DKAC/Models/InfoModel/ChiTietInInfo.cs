@@ -38,5 +38,6 @@ namespace DKAC.Models.InfoModel
 
         public int? don_hang_id { get; set; }
         public int? dinh_luong_giay_in { get; set; }
+        public int? vat_tu_id { get; set; }
     }
 }

@@ -51,5 +51,6 @@ namespace DKAC.Models.EntityModel
 
         public int? don_hang_id { get; set; }
         public string loai_giay { get; set; }
+        public int? vat_tu_id { get; set; }
     }
 }

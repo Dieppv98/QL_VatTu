@@ -430,10 +430,10 @@
                                             <th class="text-center" rowspan="3" style="width:60px">Quy ký</th>
                                             <th class="text-center" rowspan="3" style="width:110px">Mục đích sử dụng</th>
                                             @*<th class="text-center" style="width:40px;" rowspan="3">
-                                                <a class="btn btn-sm btn-primary lock p5" id="addRowAppendixTableMH2" title="Thêm mới">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
-                                            </th>*@
+                                                    <a class="btn btn-sm btn-primary lock p5" id="addRowAppendixTableMH2" title="Thêm mới">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+                                                </th>*@
                                         </tr>
                                         <tr style="background-color: #0076d2; color: white;">
                                             <th class="text-center" rowspan="2" style="width:130px">Vật tư</th>
@@ -729,10 +729,10 @@
                                             <th class="text-center" rowspan="2" style="width:70px">Số lượt in quy đổi</th>
                                             <th class="text-center" rowspan="2" style="width:70px">Số lượt in thực tế</th>
                                             @*<th class="text-center" rowspan="2" style="width:40px;">
-                                                <a class="btn btn-sm btn-primary lock p5" id="addRowprintTable" title="Thêm mới">
-                                                    <i class="fa fa-plus"></i>
-                                                </a>
-                                            </th>*@
+                                                    <a class="btn btn-sm btn-primary lock p5" id="addRowprintTable" title="Thêm mới">
+                                                        <i class="fa fa-plus"></i>
+                                                    </a>
+                                                </th>*@
                                         </tr>
                                         <tr style="background-color: #0076d2; color: white;">
                                             <th class="text-center" style="width:60px">Dài</th>
@@ -1370,6 +1370,7 @@
             lstContents = [];
             for (var i = 0; i < lstAppendixMH3.length; i++) {
                 var contents = {
+                    vat_tu_id: $('#standard_' + (i + 1) + ' .vat_tu_id1').val().trim(),
                     ten_tay_in: $('#standard_' + (i + 1) + ' .ten_tay_in1').val().trim(),
                     so_kem: $('#standard_' + (i + 1) + ' .so_kem1').val().toString(),
                     so_bo: $('#standard_' + (i + 1) + ' .so_bo1').val().toString().trim(),
@@ -1390,6 +1391,7 @@
             lstContents = [];
             for (var i = 0; i < lstAppendixPrint.length; i++) {
                 var contents = {
+                    vat_tu_id: $('#standard_' + (i + 1) + ' .vat_tu_id').val().trim(),
                     ten_tay_in: $('#standard_' + (i + 1) + ' .ten_tay_in').val().trim(),
                     ten_loai: $('#standard_' + (i + 1) + ' .ten_loai').val().trim(),
                     dinh_luong_giay_in: $('#standard_' + (i + 1) + ' .dinh_luong_giay_in').val(),
@@ -1465,6 +1467,7 @@
             lstContents = [];
             for (var i = 0; i < lstAppendixMH2.length; i++) {
                 var contents = {
+                    vat_tu_id: $('#standard_' + (i + 1) + ' .vat_tu_idMH2').val(),
                     so_luong: $('#standard_' + (i + 1) + ' .so_luongMH2').val(),
                     ten: $('#standard_' + (i + 1) + ' .tenMH2').val().trim(),
                     dinh_luong: $('#standard_' + (i + 1) + ' .dinh_luongMH2').val(),
@@ -1497,6 +1500,9 @@
         function generateHtmlAppendixRowMK2(appendix, index) {
             return `<tr id="standard_${index + 1}" class="appendixRow">
                                 <td id="STT" class="text-center">${index + 1}</td>
+                                <td style="display:none;">
+                                    <input type="number" style="display:none;" class="form-control inputText vat_tu_idMH2" value="${appendix.vat_tu_id == null ? '' : appendix.vat_tu_id}" id="vattuidMH2_${index + 1}"/>
+                                </td>
                                 <td>
                                     <input type="text" class="form-control iinteger inputText so_luongMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.so_luong == null ? '' : appendix.so_luong}" id="soluongMH2_${index + 1}"/>
                                 </td>
@@ -1649,6 +1655,9 @@
         function generateHtmlAppendixRowMH3(appendix, index) {
             return `<tr id="standard_${index + 1}" class="appendixRow">
                             <td id="STT" class="text-center">${index + 1}</td>
+                            <td style="display:none;">
+                                <input type="text" style="display:none;" class="form-control inputText vat_tu_id1" value="${appendix.vat_tu_id == null ? '' : appendix.vat_tu_id}" id="vattuid1_${index + 1}"/>
+                            </td>
                             <td>
                                 <input type="text" class="form-control inputText ten_tay_in1" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in}" id="tentayin1_${index + 1}"/>
                             </td>
@@ -1686,6 +1695,7 @@
 
         $("#addRowAppendixTableMH3").click(function () {
             var appendix = {
+                vat_tu_id: '',
                 ten_tay_in: '',
                 so_kem: '',
                 so_bo: '',
@@ -1757,6 +1767,9 @@
         function generateHtmlAppendixPrintRow(appendix, index) {
             return `<tr id="standard_${index + 1}" class="appendixRow">
                             <td id="STT" class="text-center">${index + 1}</td>
+                            <td style="display:none;">
+                                <input type="text" style="display:none;" class="form-control inputText vat_tu_id" value="${appendix.vat_tu_id == null ? '' : appendix.vat_tu_id}" id="vattuid_${index + 1}"/>
+                            </td>
                             <td>
                                 <input type="text" class="form-control inputText ten_tay_in" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in}" id="tentayin_${index + 1}"/>
                             </td>
@@ -1815,6 +1828,7 @@
 
         $("#addRowprintTable").click(function () {
             var appendix = {
+                vat_tu_id: '',
                 ten_tay_in: '',
                 ten_loai: '',
                 dinh_luong_giay_in: '',
@@ -1966,6 +1980,7 @@
                 //fill bảng con giấy
                 for (var i = 0; i < lstTemp.length; i++) {
                     var lstDuToanGiay = {
+                        vat_tu_id: lstTemp[i].nhom_vat_tu_id,
                         so_luong: '',
                         ten: 'Giấy ' + lstTemp[i].loai_giay,
                         dinh_luong: lstTemp[i].dinh_luong_giay,
@@ -2279,6 +2294,7 @@
                 //fill chế bản
                 for (var i = 0; i < lstTongQuan.length; i++) {
                     var lstDuToanGiay = {
+                        vat_tu_id: lstTongQuan[i].nhom_vat_tu_id,
                         ten_tay_in: lstTongQuan[i].ten,
                         so_kem: '',
                         so_bo: '',
@@ -2299,6 +2315,7 @@
                 //fill bảng in
                 for (var i = 0; i < lstTongQuan.length; i++) {
                     var lstDuToanGiay = {
+                        vat_tu_id: lstTongQuan[i].nhom_vat_tu_id,
                         ten_tay_in: lstTongQuan[i].ten /*lstCheBan[i].ten.slice(4)*/,
                         ten_loai: lstTongQuan[i].loai_giay /*lstCheBan[i].loai_giay*/,
                         dinh_luong_giay_in: lstTongQuan[i].dinh_luong_giay /*lstDuToanGiayConvert[i].dinh_luong*/,
@@ -2439,11 +2456,7 @@
                                             text: "Dữ liệu của bạn đã được cập nhật!",
                                             icon: "success",
                                         }).then(function (isConfirm) {
-                                            if (data.id * 1 > 0) {
-                                                window.location.href = '/Material/Edit/0';
-                                            }
-                                            else {
-                                            }
+                                            window.location.href = '/Material/Edit/0';
                                         });
                                     }
                                     else {

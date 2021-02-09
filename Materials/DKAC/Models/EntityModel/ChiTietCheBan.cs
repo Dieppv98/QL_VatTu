@@ -30,5 +30,6 @@ namespace DKAC.Models.EntityModel
         public int? phuong_phap_in { get; set; }
 
         public int? don_hang_id { get; set; }
+        public int? vat_tu_id { get; set; }
     }
 }
