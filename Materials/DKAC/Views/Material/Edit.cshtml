@@ -1659,7 +1659,7 @@
                                 <input type="text" style="display:none;" class="form-control inputText vat_tu_id1" value="${appendix.vat_tu_id == null ? '' : appendix.vat_tu_id}" id="vattuid1_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="text" class="form-control inputText ten_tay_in1" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in}" id="tentayin1_${index + 1}"/>
+                                <input type="text" disabled class="form-control inputText ten_tay_in1" value="${appendix.ten_tay_in == null ? '' : appendix.ten_tay_in}" id="tentayin1_${index + 1}"/>
                             </td>
                             <td>
                                 <input type="text" class="form-control iinteger inputText so_kem1" onchange="AutoFillTongCheBan(this)" value="${appendix.so_kem == null ? '' : appendix.so_kem}" id="sokem1_${index + 1}"/>
@@ -1706,7 +1706,7 @@
                 kho_kem: '',
                 phuong_phap_in: '',
             };
-            var htmlRow = generateHtmlAppendixRowMH3(appendix, lstAppendixMH3.length)
+            var htmlRow = generateHtmlCheBanConfigMH3(appendix, lstAppendixMH3.length)
             $("#appendixTableMH3 #appendixTbodyMH3").append(htmlRow);
             formatDocument()
             lstAppendixMH3.push(appendix);
@@ -1717,6 +1717,57 @@
                 $("#addRowAppendixTableMH3").prop("disabled", false);
             }
         });
+
+        function generateTenTayIn(appendix, index) {
+            var htmlRow = `<select class="form-control ten_tay_in1" required style="width: 100%" id="tentayin1_${index + 1}">`;
+            htmlRow += `<option value="" selected}>---Chọn---</option > `;
+            for (var i = 0; i < lstAppendixMH3.length; i++) {
+                htmlRow += `<option value = "${lstAppendixMH3[i].ten_tay_in}" ${lstAppendixMH3[i].ten_tay_in == lstAppendixMH3.ten_tay_in ? 'selected' : ''}> ${lstAppendixMH3[i].ten_tay_in}</option> `;
+            }
+            htmlRow += `</select>`
+            return htmlRow;
+        }
+
+        function generateHtmlCheBanConfigMH3(appendix, index) {
+            return `<tr id="standard_${index + 1}" class="appendixRow">
+                            <td id="STT" class="text-center">${index + 1}</td>
+                            <td style="display:none;">
+                                <input type="text" style="display:none;" class="form-control inputText vat_tu_id1" value="${appendix.vat_tu_id == null ? '' : appendix.vat_tu_id}" id="vattuid1_${index + 1}"/>
+                            </td>
+                            <td>
+                                ${generateTenTayIn(appendix, index)}
+                            </td>
+                            <td>
+                                <input type="text" class="form-control iinteger inputText so_kem1" onchange="AutoFillTongCheBan(this)" value="${appendix.so_kem == null ? '' : appendix.so_kem}" id="sokem1_${index + 1}"/>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control iinteger inputText so_bo1" onchange="AutoFillTongCheBan(this)" value="${appendix.so_bo == null ? '' : appendix.so_bo}" id="sobo1_${index + 1}"/>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control iinteger inputText tong1" value="${appendix.tong == null ? '' : appendix.tong}" id="tong1_${index + 1}"/>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control iinteger inputText trang1" value="${appendix.trang == null ? '' : appendix.trang}" id="trang1_${index + 1}"/>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control idecimal inputText kho_in_dai1" onchange="FillDataKhoInDai(this)" value="${appendix.kho_in_dai == null ? '' : appendix.kho_in_dai}" id="khoindai1_${index + 1}"/>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control idecimal inputText kho_in_rong1" onchange="FillDataKhoInRong(this)" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong}" id="khoinrong1_${index + 1}"/>
+                            </td>
+                            <td>
+                                ${generateKhoKem(appendix, index)}
+                            </td>
+                            <td>
+                                ${generatePPIn(appendix, index)}
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" onclick="removeAppendixRowMH3(this)" id="removeAppendixRow_${index + 1}" myid="${index + 1}" title="Xóa">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>`
+        }
 
         function removeAppendixRowMH3(element) {
             var row = parseInt($(element).attr("myid"));
@@ -2117,8 +2168,8 @@
             var id = $(element).attr("id");
             var index = id.indexOf('_');
             var numberid = id.substring(index + 1);
-            var sokem1 = $('#sokem1_' + numberid).val() * 1;
-            var sobo1 = $('#sobo1_' + numberid).val() * 1;
+            var sokem1 = ($('#sokem1_' + numberid).val() * 1 == 0 ? 1 : $('#sokem1_' + numberid).val() * 1);
+            var sobo1 = ($('#sobo1_' + numberid).val() * 1 == 0 ? 1 : $('#sobo1_' + numberid).val() * 1);
 
             var tong1 = (sokem1 * sobo1);
             $('#tong1_' + numberid).val(tong1);
