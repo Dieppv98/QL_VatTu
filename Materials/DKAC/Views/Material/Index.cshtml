@@ -126,10 +126,10 @@
                                         <a href="/Material/KHVTDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem KHVT"><i class="fa fa-file"></i></a>
                                         <a href="/Material/LenhSXDetails/@item.id" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Lệnh sản xuất"><i class="fa fa-book"></i></a>*@
                                 }
-                                @if (ViewBag.hasUpdatePermission)
+                                @*@if (ViewBag.hasUpdatePermission)
                                 {
                                     <a href="/Material/Edit/@item.id" class="details-link" style="margin-right:8px;color:cornflowerblue" title="Sửa"><i class="fa fa-pen"></i></a>
-                                }
+                                }*@
                                 @if (ViewBag.hasViewPermission)
                                 {
                                     <a onclick="printResul(@item.id)" class="details-link" style="margin-right:8px;color:#00adff" title="Xem Tổng quan đơn hàng"><i class="fa fa-print"></i></a>
