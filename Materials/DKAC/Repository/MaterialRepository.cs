@@ -251,26 +251,46 @@ namespace DKAC.Repository
             }
 
             db.SaveChanges();
+            AddorUpdateKhachHang(dh.ma_khach_hang, dh.ten_khach_hang);
+            AddorUpdateSanPham(dh.ma_san_pham, dh.ten_san_pham);
             return 1;
         }
 
-        //public int AddorUpdateKhachHang(string maKH, string tenKH)
-        //{
-        //    var kh = db.KhachHang.Where(x => x.ma_khach_hang == maKH).FirstOrDefault();
-        //    if (kh == null)
-        //    {
-        //        kh = new KhachHang();
-        //        kh.ma_khach_hang = maKH;
-        //        kh.ten_khach_hang = tenKH;
-        //        db.KhachHang.Add(kh);
-        //    }
-        //    else
-        //    {
-        //        kh.ma_khach_hang = maKH;
-        //        kh.ten_khach_hang = tenKH;
-        //    }
-        //    return db.SaveChanges();
-        //}
+        private void AddorUpdateKhachHang(string maKH, string tenKH)
+        {
+            var kh = db.KhachHang.Where(x => x.ma_khach_hang == maKH).FirstOrDefault();
+            if (kh == null)
+            {
+                kh = new KhachHang();
+                kh.ma_khach_hang = maKH;
+                kh.ten_khach_hang = tenKH;
+                db.KhachHang.Add(kh);
+            }
+            else
+            {
+                kh.ma_khach_hang = maKH;
+                kh.ten_khach_hang = tenKH;
+            }
+            db.SaveChanges();
+        }
+
+        private void AddorUpdateSanPham(string maSP, string tenSP)
+        {
+            var sp = db.SanPham.Where(x => x.ma_san_pham == maSP).FirstOrDefault();
+            if (sp == null)
+            {
+                sp = new SanPham();
+                sp.ma_san_pham = maSP;
+                sp.ten_san_pham = tenSP;
+                db.SanPham.Add(sp);
+            }
+            else
+            {
+                sp.ma_san_pham = maSP;
+                sp.ten_san_pham = tenSP;
+            }
+            db.SaveChanges();
+        }
 
         public int Delete(int id)
         {

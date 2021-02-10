@@ -131,6 +131,7 @@ namespace DKAC.Controllers
             
             var lstQuycachBia = new List<VatTu>();
             var lstQuycachThuong = new List<VatTu>();
+            var lstQuycachNull = new List<VatTu>();
             var lstQuyCachInfo = new List<QuyCachInfo>();
 
             if (lstvatTu.Count > 0)
@@ -140,6 +141,10 @@ namespace DKAC.Controllers
                     if (lstvatTu[i].ten_nhom_vat_tu != null && lstvatTu[i].ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa"))
                     {
                         lstQuycachBia.Add(lstvatTu[i]);
+                    }
+                    if(lstvatTu[i].nhom_vat_tu_id == null)
+                    {
+                        lstQuycachNull.Add(lstvatTu[i]);
                     }
                     else { lstQuycachThuong.Add(lstvatTu[i]); }
                 }
@@ -153,6 +158,7 @@ namespace DKAC.Controllers
                         var quycachinfo = new QuyCachInfo()
                         {
                             id = vattu[0].nhom_vat_tu_id,
+                            count = vattu.Count,
                             ten_nhom_vat_tu = vattu[0].ten_nhom_vat_tu,
                             lstvatTus = vattu,
                         };
@@ -169,14 +175,32 @@ namespace DKAC.Controllers
                         var quycachinfoThuong = new QuyCachInfo()
                         {
                             id = vattuThuong[0].nhom_vat_tu_id,
+                            count = vattuThuong.Count,
                             ten_nhom_vat_tu = vattuThuong[0].ten_nhom_vat_tu,
                             lstvatTus = vattuThuong,
                         };
                         lstQuyCachInfo.Add(quycachinfoThuong);
                     }
                 }
+
+                if(lstQuycachNull.Count > 0)
+                {
+                    foreach (var item in lstQuycachNull)
+                    {
+                        item.nhom_vat_tu_id = 0;
+                    }
+                    var quycachinfoNull = new QuyCachInfo()
+                    {
+                        id = 0,
+                        ten_nhom_vat_tu = "",
+                        count = lstQuycachNull.Count,
+                        lstvatTus = lstQuycachNull,
+                    };
+                    lstQuyCachInfo.Add(quycachinfoNull);
+                }
+
             }
-            var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList();
+            var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList() ?? new List<VatTu>();
             
             var path = Path.Combine(Server.MapPath("~/FileTemplate"), "Export-LSX.xlsx");
             var file = new FileInfo(path);

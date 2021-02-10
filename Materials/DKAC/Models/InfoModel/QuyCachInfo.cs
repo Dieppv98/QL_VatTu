@@ -9,6 +9,7 @@ namespace DKAC.Models.InfoModel
     public class QuyCachInfo
     {
         public int? id { get; set; }
+        public int? count { get; set; }
         public string ten_nhom_vat_tu { get; set; }
         public List<VatTu> lstvatTus { get; set; }
     }
