@@ -7,7 +7,7 @@
 }
 
 <head>
-    <title>Nhập liệu</title>
+    <title>Thống kê</title>
     <style>
         #btnSearch {
             padding: 7px 15px 7px 15px;
@@ -54,11 +54,12 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-3" style="margin-bottom: 10px;">
                     <label>Từ khóa: </label>
-                    @Html.DropDownListFor(a => a.id, Model.lstSo_LSX, new
+                    @Html.DropDownListFor(a => a.id, Model.lstSo_LSX, "---Chọn số LSX---", new
                            {
                                @class = "form-control",
-                               @data_placeholder = "Nhập số LSX",
+                               @data_placeholder = "---Chọn số LSX---",
                                @id = "lenh_sx",
+                               @style = "width: 100%",
                            })
                     <div class="valid">
                         <div class="textNoti" id="textvalid">
@@ -67,11 +68,11 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Thời gian giao hàng từ ngày: </label>
+                    <label>Thời gian giao từ ngày: </label>
                     <input type="text" class="form-control" id="fromDate" placeholder="dd/MM/yyyy" />
                 </div>
                 <div class="col-md-3">
-                    <label>Thời gian giao hàng đến ngày: </label>
+                    <label>Thời gian giao đến ngày: </label>
                     <input type="text" class="form-control" id="toDate" placeholder="dd/MM/yyyy" />
                 </div>
             </div>

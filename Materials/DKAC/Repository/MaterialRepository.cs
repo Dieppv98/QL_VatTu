@@ -222,6 +222,10 @@ namespace DKAC.Repository
                 foreach (var item in model.lstVatTus)
                 {
                     item.don_hang_id = dh.id;
+                    if(item.loai_giay != null)
+                    {
+                        item.loai_giay = item.loai_giay.Trim();
+                    }
                 }
                 db.VatTu.AddRange(model.lstVatTus);
             }

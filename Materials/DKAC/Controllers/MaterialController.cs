@@ -183,7 +183,7 @@ namespace DKAC.Controllers
         {
             var lstUser = _mater.GetAllLoaiGiay(keySearch);
             var rs = new List<string>();
-            var lstResultSearch = lstUser.Select(x => x.loai_giay).ToList();
+            var lstResultSearch = lstUser.Select(x => x.loai_giay.Trim()).ToList();
             rs.AddRange(lstResultSearch);
             return Json(rs, JsonRequestBehavior.AllowGet);
         }

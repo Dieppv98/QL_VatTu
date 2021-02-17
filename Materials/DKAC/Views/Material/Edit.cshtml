@@ -771,12 +771,12 @@
                             <table class="table table-striped table-bordered">
                                 <tr style="background-color: #0076d2; color: white;">
                                     <th class="text-center" colspan="4">Quy cách</th>
-                                    <th class="text-center" rowspan="2" style="width: 275px">Số lượng</th>
+                                    <th class="text-center" rowspan="2" style="width: 200px">Số lượng</th>
                                     <th class="text-center" rowspan="2" style="width: 150px">Số cuốn/thùng</th>
                                     <th class="text-center" rowspan="2" style="width: 100px">Đơn vị tính</th>
                                 </tr>
                                 <tr style="background-color: #0076d2; color: white;">
-                                    <th class="text-center" style="width: 200px">Vật tư</th>
+                                    <th class="text-center" style="width: 205px">Vật tư</th>
                                     <th class="text-center" style="width: 140px">Dài</th>
                                     <th class="text-center" style="width: 140px">Rộng</th>
                                     <th class="text-center" style="width: 140px">Cao</th>
@@ -1050,7 +1050,7 @@
                                     <input type="text" class="form-control inputText trang iinteger" value="${appendix.trang == null ? '' : appendix.trang}" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText loai_giay istrupper" oninput="AutocompleteLoaiGiay(this)" value="${appendix.loai_giay == null ? '' : appendix.loai_giay}" />
+                                    <input type="text" class="form-control inputText loai_giay" oninput="AutocompleteLoaiGiay(this)" value="${appendix.loai_giay == null ? '' : appendix.loai_giay}" />
                                 </td>
                                 <td>
                                     <input type="text" class="form-control inputText dinh_luong_giay idecimal" value="${appendix.dinh_luong_giay == null ? '' : appendix.dinh_luong_giay}" />
@@ -1230,7 +1230,7 @@
                         url: "/Material/SearchLoaiGiayAutoComplete",
                         data: "{'keySearch':'" + value + "'}",
                         success: function (rs) {
-                            response(rs);
+                            response(rs.trim());
                         },
                         error: function (result) {
                             alert("No Match");
@@ -1343,7 +1343,7 @@
                     nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val(),
                     ten_nhom_vat_tu: ($('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val() == "" ? "" :  $('#standard_' + (i + 1) + ' .nhom_vat_tu_id option:selected').text().trim()),
                     trang: $('#standard_' + (i + 1) + ' .trang').val(),
-                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val(),
+                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val().trim(),
                     dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val(),
                     kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val(),
                     kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val(),
@@ -2267,15 +2267,15 @@
             lstContents = [];
             for (var i = 0; i < lstAppendix.length; i++) {
                 var contents = {
-                    ten: $('#standard_' + (i + 1) + ' .ten').val(),
+                    ten: $('#standard_' + (i + 1) + ' .ten').val().trim(),
                     nhom_vat_tu_id: $('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val(),
-                    ten_nhom_vat_tu: ($('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val() == "" ? '' : $('#standard_' + (i + 1) + ' .nhom_vat_tu_id option:selected').text()),
+                    ten_nhom_vat_tu: ($('#standard_' + (i + 1) + ' .nhom_vat_tu_id').val() == "" ? '' : $('#standard_' + (i + 1) + ' .nhom_vat_tu_id option:selected').text().trim()),
                     trang: $('#standard_' + (i + 1) + ' .trang').val(),
-                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val(),
+                    loai_giay: $('#standard_' + (i + 1) + ' .loai_giay').val().trim(),
                     dinh_luong_giay: $('#standard_' + (i + 1) + ' .dinh_luong_giay').val(),
                     kieu_in_1: $('#standard_' + (i + 1) + ' .kieu_in_1').val(),
                     kieu_in_2: $('#standard_' + (i + 1) + ' .kieu_in_2').val(),
-                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val(),
+                    ghi_chu: $('#standard_' + (i + 1) + ' .ghi_chu').val().trim(),
                 };
                 lstContents.push(contents);
             };

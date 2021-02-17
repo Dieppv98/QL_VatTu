@@ -122,13 +122,12 @@ namespace DKAC.Controllers
         public ActionResult ExportExcelBangLSX(int id, bool exportExcel)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
             var model = _rep.ExportExcelDonHang(id);
             var lstvatTu = model.lstVatTus;
             var lstsltong = model.lst_sl_tong ?? new List<TongSoLuongInfo>();
             var lstCheBanInfo = model.lstCheBanInfo ?? new List<ChiTietCheBanInfo>();
             var lstInInfo = model.lstInInfo ?? new List<ChiTietInInfo>();
-            
+
             var lstQuycachBia = new List<VatTu>();
             var lstQuycachThuong = new List<VatTu>();
             var lstQuycachNull = new List<VatTu>();
@@ -142,10 +141,10 @@ namespace DKAC.Controllers
                     {
                         lstQuycachBia.Add(lstvatTu[i]);
                     }
-                    if(lstvatTu[i].nhom_vat_tu_id == null)
-                    {
-                        lstQuycachNull.Add(lstvatTu[i]);
-                    }
+                    //if (lstvatTu[i].nhom_vat_tu_id == null)
+                    //{
+                    //    lstQuycachNull.Add(lstvatTu[i]);
+                    //}
                     else { lstQuycachThuong.Add(lstvatTu[i]); }
                 }
 
@@ -155,6 +154,12 @@ namespace DKAC.Controllers
                     var vattu = lstQuycachBia.Where(x => x.nhom_vat_tu_id == lstIds[i]).ToList();
                     if (vattu.Count > 0)
                     {
+                        foreach (var item in vattu)
+                        {
+                            if (item.loai_giay != null)
+                                item.loai_giay = item.loai_giay.Trim();
+                        }
+
                         var quycachinfo = new QuyCachInfo()
                         {
                             id = vattu[0].nhom_vat_tu_id,
@@ -183,25 +188,25 @@ namespace DKAC.Controllers
                     }
                 }
 
-                if(lstQuycachNull.Count > 0)
-                {
-                    foreach (var item in lstQuycachNull)
-                    {
-                        item.nhom_vat_tu_id = 0;
-                    }
-                    var quycachinfoNull = new QuyCachInfo()
-                    {
-                        id = 0,
-                        ten_nhom_vat_tu = "",
-                        count = lstQuycachNull.Count,
-                        lstvatTus = lstQuycachNull,
-                    };
-                    lstQuyCachInfo.Add(quycachinfoNull);
-                }
+                //if (lstQuycachNull.Count > 0)
+                //{
+                //    foreach (var item in lstQuycachNull)
+                //    {
+                //        item.nhom_vat_tu_id = 0;
+                //    }
+                //    var quycachinfoNull = new QuyCachInfo()
+                //    {
+                //        id = 0,
+                //        ten_nhom_vat_tu = "",
+                //        count = lstQuycachNull.Count,
+                //        lstvatTus = lstQuycachNull,
+                //    };
+                //    lstQuyCachInfo.Add(quycachinfoNull);
+                //}
 
             }
             var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList() ?? new List<VatTu>();
-            
+
             var path = Path.Combine(Server.MapPath("~/FileTemplate"), "Export-LSX.xlsx");
             var file = new FileInfo(path);
             var excel = new ExcelPackage(file);
