@@ -143,7 +143,7 @@ namespace DKAC.Controllers
         {
             var lstUser = _mater.GetAllKhachHang(keySearch);
             var rs = new List<string>();
-            var lstResultSearch = lstUser.Select(x => x.ma_khach_hang).ToList();
+            var lstResultSearch = lstUser.Select(x => x.ma_khach_hang).Distinct().ToList();
             rs.AddRange(lstResultSearch);
             return Json(rs, JsonRequestBehavior.AllowGet);
         }
@@ -153,7 +153,7 @@ namespace DKAC.Controllers
         {
             var lstUser = _mater.GetAllKhachHang(keySearch);
             var rs = new List<string>();
-            var lstResultSearch = lstUser.Select(x => x.ten_khach_hang).ToList();
+            var lstResultSearch = lstUser.Select(x => x.ten_khach_hang).Distinct().ToList();
             rs.AddRange(lstResultSearch);
             return Json(rs, JsonRequestBehavior.AllowGet);
         }
@@ -163,7 +163,7 @@ namespace DKAC.Controllers
         {
             var lstUser = _mater.GetAllSanPham(keySearch);
             var rs = new List<string>();
-            var lstResultSearch = lstUser.Select(x => x.ma_san_pham).ToList();
+            var lstResultSearch = lstUser.Select(x => x.ma_san_pham).Distinct().ToList();
             rs.AddRange(lstResultSearch);
             return Json(rs, JsonRequestBehavior.AllowGet);
         }
@@ -173,7 +173,7 @@ namespace DKAC.Controllers
         {
             var lstUser = _mater.GetAllSanPham(keySearch);
             var rs = new List<string>();
-            var lstResultSearch = lstUser.Select(x => x.ten_san_pham).ToList();
+            var lstResultSearch = lstUser.Select(x => x.ten_san_pham).Distinct().ToList();
             rs.AddRange(lstResultSearch);
             return Json(rs, JsonRequestBehavior.AllowGet);
         }
@@ -183,7 +183,7 @@ namespace DKAC.Controllers
         {
             var lstUser = _mater.GetAllLoaiGiay(keySearch);
             var rs = new List<string>();
-            var lstResultSearch = lstUser.Select(x => x.loai_giay.Trim()).ToList();
+            var lstResultSearch = lstUser.Select(x => x.loai_giay.Trim()).Distinct().ToList();
             rs.AddRange(lstResultSearch);
             return Json(rs, JsonRequestBehavior.AllowGet);
         }
