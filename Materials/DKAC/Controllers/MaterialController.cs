@@ -197,9 +197,9 @@ namespace DKAC.Controllers
 
             model.last_updated = DateTime.Now;
             var result = _mater.AddorUpdate(model);
-            if (result == 1)
+            if (result > 0)
             {
-                return Json(new { status = 1, message = "Thêm thành công" }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = result, message = "Thêm thành công" }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { status = 0, message = "Thêm thất bại" }, JsonRequestBehavior.AllowGet);
         }

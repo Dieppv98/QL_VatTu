@@ -121,7 +121,6 @@ namespace DKAC.Controllers
         [HttpGet]
         public ActionResult ExportExcelBangLSX(int id, bool exportExcel)
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             var model = _rep.ExportExcelDonHang(id);
             var lstvatTu = model.lstVatTus;
             var lstsltong = model.lst_sl_tong ?? new List<TongSoLuongInfo>();
@@ -171,12 +170,18 @@ namespace DKAC.Controllers
                     }
                 }
 
-                var lstIdsThuong = lstQuycachThuong.OrderBy(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
+                var lstIdsThuong = lstQuycachThuong.OrderByDescending(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
                 for (int i = 0; i < lstIdsThuong.Count; i++)
                 {
                     var vattuThuong = lstQuycachThuong.Where(x => x.nhom_vat_tu_id == lstIdsThuong[i]).ToList();
                     if (vattuThuong.Count > 0)
                     {
+                        foreach (var item in vattuThuong)
+                        {
+                            if (item.loai_giay != null)
+                                item.loai_giay = item.loai_giay.Trim();
+                        }
+
                         var quycachinfoThuong = new QuyCachInfo()
                         {
                             id = vattuThuong[0].nhom_vat_tu_id,
@@ -207,6 +212,7 @@ namespace DKAC.Controllers
             }
             var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList() ?? new List<VatTu>();
 
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             var path = Path.Combine(Server.MapPath("~/FileTemplate"), "Export-LSX.xlsx");
             var file = new FileInfo(path);
             var excel = new ExcelPackage(file);

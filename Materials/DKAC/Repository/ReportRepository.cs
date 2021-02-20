@@ -174,7 +174,6 @@ namespace DKAC.Repository
                              tp_thoi_han = d.tp_thoi_han,
                              tp_vat_tu = d.tp_vat_tu,
                              
-
                              lstVatTus = db.VatTu.Where(x => x.don_hang_id == d.id).ToList(),
                              lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == d.id).ToList(),
                              lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),

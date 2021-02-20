@@ -257,7 +257,7 @@ namespace DKAC.Repository
             db.SaveChanges();
             AddorUpdateKhachHang(dh.ma_khach_hang, dh.ten_khach_hang);
             AddorUpdateSanPham(dh.ma_san_pham, dh.ten_san_pham);
-            return 1;
+            return dh.id;
         }
 
         private void AddorUpdateKhachHang(string maKH, string tenKH)

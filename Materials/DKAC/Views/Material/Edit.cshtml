@@ -183,7 +183,16 @@
                         <label>Tên khách hàng: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control iupper" id="ten_khach_hang" value="@Model.ten_khach_hang" oninput="SearchTenKHAutoComplete(this)" onchange="TrimValue(this)" />
+                        @Html.TextAreaFor(a => a.ten_khach_hang, new Dictionary<string, object>
+                              {
+                                  {"class", " form-control iupper"},
+                                    {"id", "ten_khach_hang"},
+                                     { "maxlength", "2000" },
+                                     { "oninput", "SearchTenKHAutoComplete(this)" },
+                                     { "onchange", "TrimValue(this)" },
+                                     { "row", "3" },
+                              })
+                        @*<input type="text" class="form-control iupper" id="ten_khach_hang" value="@Model.ten_khach_hang" oninput="SearchTenKHAutoComplete(this)" onchange="TrimValue(this)" />*@
                     </div>
                 </div>
 
@@ -199,7 +208,16 @@
                         <label>Tên sản phẩm: </label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control iupper" id="ten_san_pham" value="@Model.ten_san_pham" oninput="SearchTenSPAutoComplete(this)" onchange="TrimValue(this)" />
+                        @Html.TextAreaFor(a => a.ten_san_pham, new Dictionary<string, object>
+                              {
+                                  {"class", " form-control iupper"},
+                                    {"id", "ten_san_pham"},
+                                     { "maxlength", "2000" },
+                                     { "oninput", "SearchTenSPAutoComplete(this)" },
+                                     { "onchange", "TrimValue(this)" },
+                                     { "row", "3" },
+                              })
+                        @*<input type="text" class="form-control iupper" id="ten_san_pham" value="@Model.ten_san_pham" oninput="SearchTenSPAutoComplete(this)" onchange="TrimValue(this)" />*@
                     </div>
                 </div>
 
@@ -270,7 +288,7 @@
 
                 <div class="row">
                     <div class="col-md-2 text-right">
-                        <label>Quy cách chung: </label>
+                        <label class="margin-top-20">Quy cách chung: </label>
                     </div>
                     <div class="col-md-10">
                         @Html.TextAreaFor(a => a.quy_cach_chung, new Dictionary<string, object>
@@ -635,7 +653,7 @@
                         </div>
 
                         <div class="row span">
-                            <div class="col-md-2" style="padding-top: 10px;">
+                            <div class="col-md-2">
                                 <label>Thời gian giao file:</label>
                             </div>
                             <div class="col-md-10">
@@ -644,7 +662,7 @@
                         </div>
 
                         <div class="row span">
-                            <div class="col-md-2" style="padding-top: 10px;">
+                            <div class="col-md-2">
                                 <label>Ghi chú đặc biệt:</label>
                             </div>
                             <div class="col-md-10">
@@ -699,7 +717,7 @@
                         </div>
 
                         <div class="row span">
-                            <div class="col-md-2" style="padding-top: 10px;">
+                            <div class="col-md-2">
                                 <label>Ghi chú đặc biệt:</label>
                             </div>
                             <div class="col-md-10">
@@ -791,7 +809,7 @@
                                     <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_dai" id="tp_dai" onchange="AutoTinhSLBangKeo(this)" /></th>
                                     <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_rong" id="tp_rong" onchange="AutoTinhSLBangKeo(this)" /></th>
                                     <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_cao" id="tp_cao" onchange="AutoTinhSLBangKeo(this)" /></th>
-                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_soluong" id="tp_soluong" disabled/></th>
+                                    <th class="text-center"><input class="form-control iinteger" type="text" value="@Model.tp_soluong" id="tp_soluong" disabled/></th>
                                     <th class="text-center"><input class="form-control iinteger" type="text" value="@Model.tp_socuon_thung" id="tp_socuon_thung" onchange="AutoFillTPSoLuong()" /></th>
                                     <td class="text-center">Thùng</td>
                                 </tr>
@@ -805,7 +823,7 @@
                                         </select>
                                     </th>
                                     <th class="text-center" colspan="3"><input disabled class="form-control" /></th>
-                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_sl_bangkeo" id="tp_sl_bangkeo" disabled/></th>
+                                    <th class="text-center"><input class="form-control iinteger" type="text" value="@Model.tp_sl_bangkeo" id="tp_sl_bangkeo" disabled/></th>
                                     <th class="text-center"><input disabled class="form-control" /></th>
                                     <td class="text-center">Mét</td>
                                 </tr>
@@ -836,7 +854,14 @@
                         <label class="margin-top-20">Ghi chú đặc biệt:</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" value="@Model.tp_ghi_chu" id="tp_ghi_chu" />
+                        @Html.TextAreaFor(a => a.tp_ghi_chu, new Dictionary<string, object>
+                              {
+                                  {"class", " form-control"},
+                                    {"id", "tp_ghi_chu"},
+                                     { "maxlength", "2000" },
+                                     { "row", "3" },
+                              })
+                        @*<input type="text" class="form-control" value="@Model.tp_ghi_chu" id="tp_ghi_chu" />*@
                     </div>
                 </div>
 
@@ -1230,7 +1255,7 @@
                         url: "/Material/SearchLoaiGiayAutoComplete",
                         data: "{'keySearch':'" + value + "'}",
                         success: function (rs) {
-                            response(rs.trim());
+                            response(rs);
                         },
                         error: function (result) {
                             alert("No Match");
@@ -2097,17 +2122,17 @@
 
             var numberid = id.substring(index + 1);
             var trangMH1 = ($('#trangMH1MH2_' + numberid).val() * 1 == 0) ? 1 : $('#trangMH1MH2_' + numberid).val() * 1;
-            var dinhmuc = (trangMH1 / trangMH2).toFixed(2);
+            var dinhmuc = (trangMH1 / trangMH2);
             $('#dinhmucMH2_' + numberid).val(dinhmuc);
             var soLuong = ($('#soluongMH2_' + numberid).val() * 1 == 0) ? 1 : $('#soluongMH2_' + numberid).val() * 1;
-            var soLuongChinh = (soLuong * dinhmuc).toFixed(2);
+            var soLuongChinh = (soLuong * dinhmuc);
             $('#slchinhMH2_' + numberid).val(soLuongChinh);
 
             var soLuongBuIn = $('#slbuinMH2_' + numberid).val() * 1;
             var soLuongBuTP = $('#slbutpMH2_' + numberid).val() * 1;
             var soLuongChinh = $('#slchinhMH2_' + numberid).val() * 1;
 
-            var slTong = (soLuongChinh + soLuongBuIn + soLuongBuTP).toFixed(2);
+            var slTong = (soLuongChinh + soLuongBuIn + soLuongBuTP);
             $('#sltongMH2_' + numberid).val(slTong);
         }
 
@@ -2119,7 +2144,7 @@
             var soLuong = ($('#soluongMH2_' + numberid).val() * 1 == 0) ? 1 : $('#soluongMH2_' + numberid).val() * 1;
             var dinhMuc = ($('#dinhmucMH2_' + numberid).val() * 1 == 0) ? 1 : $('#dinhmucMH2_' + numberid).val() * 1;
 
-            var soLuongChinh = (soLuong * dinhMuc);
+            var soLuongChinh = Math.ceil(soLuong * dinhMuc);
             $('#slchinhMH2_' + numberid).val(soLuongChinh);
 
             /// tính số lượng tổng
@@ -2127,7 +2152,7 @@
             var soLuongBuTP = $('#slbutpMH2_' + numberid).val() * 1;
             var slChinh = $('#slchinhMH2_' + numberid).val() * 1;
 
-            var slTong = (slChinh + soLuongBuIn + soLuongBuTP).toFixed(2);
+            var slTong = (slChinh + soLuongBuIn + soLuongBuTP);
             $('#sltongMH2_' + numberid).val(slTong);
         }
 
@@ -2141,7 +2166,7 @@
             var soLuongChinh = $('#slchinhMH2_' + numberid).val() * 1;
             var buphathanh = $('#buphathanhMH2_' + numberid).val() * 1;
 
-            var slTong = (soLuongChinh + soLuongBuIn + soLuongBuTP + buphathanh).toFixed(2);
+            var slTong = (soLuongChinh + soLuongBuIn + soLuongBuTP + buphathanh);
             $('#sltongMH2_' + numberid).val(slTong);
 
             ////tính ô quy ký
@@ -2149,7 +2174,7 @@
             var khoGiayDai = ($('#khogiaydaiMH2_' + numberid).val() * 1 == 0) ? 1 : $('#khogiaydaiMH2_' + numberid).val() * 1;
             var khoGiayRong = ($('#khogiayrongMH2_' + numberid).val() * 1 == 0) ? 1 : $('#khogiayrongMH2_' + numberid).val() * 1;
             var soLuongTong = ($('#sltongMH2_' + numberid).val() * 1 == 0) ? 1 : $('#sltongMH2_' + numberid).val() * 1;
-            var quyKy = ((dinhLuong * khoGiayDai * khoGiayRong * soLuongTong) / 10000000).toFixed(2);
+            var quyKy = ((dinhLuong * khoGiayDai * khoGiayRong * soLuongTong) / 10000000);
             $('#quykyMH2_' + numberid).val(quyKy);
         }
 
@@ -2162,7 +2187,7 @@
             var khoGiayDai = ($('#khogiaydaiMH2_' + numberid).val() * 1 == 0) ? 1 : $('#khogiaydaiMH2_' + numberid).val() * 1;
             var khoGiayRong = ($('#khogiayrongMH2_' + numberid).val() * 1 == 0) ? 1 : $('#khogiayrongMH2_' + numberid).val() * 1;
             var soLuongTong = ($('#sltongMH2_' + numberid).val() * 1 == 0) ? 1 : $('#sltongMH2_' + numberid).val() * 1;
-            var quyKy = ((dinhLuong * khoGiayDai * khoGiayRong * soLuongTong) / 10000000).toFixed(2);
+            var quyKy = ((dinhLuong * khoGiayDai * khoGiayRong * soLuongTong) / 10000000);
             $('#quykyMH2_' + numberid).val(quyKy);
         }
 
@@ -2194,7 +2219,7 @@
             var slTong = $('#so_luong_tong').val() * 1;
             var tpSoCuon = $('#tp_socuon_thung').val() * 1;
 
-            var sl = (slTong / tpSoCuon).toFixed(2);
+            var sl = Math.ceil(slTong / tpSoCuon);
             $('#tp_soluong').val(sl);
         }
 
@@ -2225,13 +2250,13 @@
             var tpsl= $('#tp_soluong').val() * 1;
 
             if (value == 1) {
-                var slBangKeo = (((tpdai + tprong + 40) * 2) / 100 * tpsl).toFixed(2);
+                var slBangKeo = Math.ceil(((tpdai + tprong + 40) * 2) / 100 * tpsl);
                 $('#tp_sl_bangkeo').val(slBangKeo);
                 $('#bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
                 $('#tp_sl_bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
             }
             if (value == 2) {
-                var slBangKeoDacBiet = (((tpdai * 2) + ((tprong + tpcao) * 4) + 60) / 100 * tpsl).toFixed(2);
+                var slBangKeoDacBiet = Math.ceil(((tpdai * 2) + ((tprong + tpcao) * 4) + 60) / 100 * tpsl);
                 $('#tp_sl_bangkeo').val(slBangKeoDacBiet);
                 $('#bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
                 $('#tp_sl_bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
@@ -2248,13 +2273,13 @@
 
             if (slbk == "") return false;
             if (slbk == 1) {
-                var slBangKeo = (((tpdai + tprong + 40) * 2) / 100 * tpsl).toFixed(2);
+                var slBangKeo = Math.ceil(((tpdai + tprong + 40) * 2) / 100 * tpsl);
                 $('#tp_sl_bangkeo').val(slBangKeo);
                 $('#bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
                 $('#tp_sl_bangkeo').attr("title", "Công thức tính số lượng: (dài + rộng + 40) * 2 / 100 * số thùng");
             }
             if (slbk == 2) {
-                var slBangKeoDacBiet = (((tpdai * 2) + ((tprong + tpcao) * 4) + 60) / 100 * tpsl).toFixed(2);
+                var slBangKeoDacBiet = Math.ceil(((tpdai * 2) + ((tprong + tpcao) * 4) + 60) / 100 * tpsl);
                 $('#tp_sl_bangkeo').val(slBangKeoDacBiet);
                 $('#bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
                 $('#tp_sl_bangkeo').attr("title", "Công thức tính số lượng: ((dài * 2) + ((rộng + cao) * 4) + 60)/100 * số thùng");
@@ -2511,6 +2536,7 @@
                                             text: "Dữ liệu của bạn đã được cập nhật!",
                                             icon: "success",
                                         }).then(function (isConfirm) {
+                                            viewReportInNewWindow('/Report/ExportExcelBangLSX?id=' + rs.status + '&exportExcel=false#view=FitH');
                                             window.location.href = '/Material/Edit/0';
                                         });
                                     }
@@ -2542,6 +2568,19 @@
                     }
                 }
             });
+        }
+
+        function viewReportInNewWindow(url) {
+            var params = [
+                'left=0',
+                'top=0',
+                'height=' + window.outerHeight,
+                'width=' + window.outerWidth,
+                'fullscreen=yes' // only works in IE, but here for completeness
+            ].join(',');
+            console.log(params);
+            var randomnumber = Math.floor((Math.random() * 100) + 1);
+            var popup = window.open(url, "_blank", 'popup_window', randomnumber, params);
         }
     </script>
 }
