@@ -140,10 +140,6 @@ namespace DKAC.Controllers
                     {
                         lstQuycachBia.Add(lstvatTu[i]);
                     }
-                    //if (lstvatTu[i].nhom_vat_tu_id == null)
-                    //{
-                    //    lstQuycachNull.Add(lstvatTu[i]);
-                    //}
                     else { lstQuycachThuong.Add(lstvatTu[i]); }
                 }
 
@@ -192,23 +188,6 @@ namespace DKAC.Controllers
                         lstQuyCachInfo.Add(quycachinfoThuong);
                     }
                 }
-
-                //if (lstQuycachNull.Count > 0)
-                //{
-                //    foreach (var item in lstQuycachNull)
-                //    {
-                //        item.nhom_vat_tu_id = 0;
-                //    }
-                //    var quycachinfoNull = new QuyCachInfo()
-                //    {
-                //        id = 0,
-                //        ten_nhom_vat_tu = "",
-                //        count = lstQuycachNull.Count,
-                //        lstvatTus = lstQuycachNull,
-                //    };
-                //    lstQuyCachInfo.Add(quycachinfoNull);
-                //}
-
             }
             var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList() ?? new List<VatTu>();
 
