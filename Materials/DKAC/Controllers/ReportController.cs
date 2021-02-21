@@ -255,8 +255,9 @@ namespace DKAC.Controllers
             fr.AddTable("lstInInfo", lstInInfo);
             fr.Run(result);
             fr.Dispose();
-
-            return ViewReport(result, "Export-LSX", exportExcel);
+            // ten file: Lệnh sản xuất-SoLenhSX-TenSanPham
+            var tenFile = $"Lệnh sản xuất-{model.so_lenh_sx}-{model.ten_san_pham}"; 
+            return ViewReport(result, tenFile, exportExcel);
         }
     }
 }

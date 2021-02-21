@@ -1,14 +1,15 @@
 ﻿(function ($) {
 	$.fn.extend({
 		decimalMask: function (maxlength) {
-			return this.inputmask('decimal', {
-				groupSeparator: ',',
+			return this.inputmask({
+				alias: 'decimal',
+				groupSeparator: '.',
 				autoGroup: true,
 				integerDigits: "*", //number of integerDigits
 				digits: maxlength,
 				digitsOptional: false,
 				placeholder: '0',
-				radixPoint: ".",
+				radixPoint: ",",
 				groupSize: 3,
 				autoGroup: false,
 				allowPlus: true,
