@@ -11,17 +11,17 @@ namespace DKAC.Models.InfoModel
 
         public string ten_tay_in { get; set; }
 
-        public string so_kem { get; set; }
+        public int? so_kem { get; set; }
 
-        public string so_bo { get; set; }
+        public int? so_bo { get; set; }
 
-        public string tong { get; set; }
+        public int? tong { get; set; }
 
-        public string trang { get; set; }
+        public int? trang { get; set; }
 
-        public string kho_in_dai { get; set; } 
+        public double? kho_in_dai { get; set; } 
 
-        public string kho_in_rong { get; set; }
+        public double? kho_in_rong { get; set; }
 
         public int? kho_kem { get; set; }
         public int? kho_kem_name { get; set; }

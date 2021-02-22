@@ -31,9 +31,9 @@ namespace DKAC.Models.InfoModel
         
         public string loai { get; set; }
 
-        public string kho_ngang { get; set; }
+        public double? kho_ngang { get; set; }
 
-        public string kho_doc { get; set; }
+        public double? kho_doc { get; set; }
         
         public string ten_che_ban { get; set; }
 

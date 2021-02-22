@@ -444,12 +444,12 @@
                                 <tr>
                                     <td class="text-center">
                                         Thùng
-                                    </td>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_dai" id="tp_dai" disabled /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_rong" id="tp_rong" disabled /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_cao" id="tp_cao" disabled /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_soluong" id="tp_soluong" disabled /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_socuon_thung" id="tp_socuon_thung" disabled /></th>
+                                    </td> 
+                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_dai" id="tp_dai" disabled /></th>
+                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_rong" id="tp_rong" disabled /></th>
+                                    <th class="text-center"><input class="form-control idecimal" type="text" value="@Model.tp_cao" id="tp_cao" disabled /></th>
+                                    <th class="text-center"><input class="form-control iinteger" type="text" value="@Model.tp_soluong" id="tp_soluong" disabled /></th>
+                                    <th class="text-center"><input class="form-control iinteger" type="text" value="@Model.tp_socuon_thung" id="tp_socuon_thung" disabled /></th>
                                     <td class="text-center">Thùng</td>
                                 </tr>
 
@@ -462,7 +462,7 @@
                                         </select>
                                     </th>
                                     <th class="text-center" colspan="3"><input disabled class="form-control" /></th>
-                                    <th class="text-center"><input class="form-control" type="number" value="@Model.tp_sl_bangkeo" id="tp_sl_bangkeo" disabled /></th>
+                                    <th class="text-center"><input class="form-control iinteger" type="text" value="@Model.tp_sl_bangkeo" id="tp_sl_bangkeo" disabled /></th>
                                     <th class="text-center"><input disabled class="form-control" /></th>
                                     <td class="text-center">Mét</td>
                                 </tr>
@@ -536,8 +536,8 @@
 
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
-                <a onclick="printKcsResult(@Model.id)" class="btn btn-success red" style="width: 6%;background-color: darkred;color: white"><i class="fa fa-file-pdf"></i> In</a>
-                <a onclick="ExportExcel(@Model.id)" class="btn btn-success" style="width: 6%;color: white"><i class="fa fa-file-excel"></i> Excel</a>
+                <a onclick="printKcsResult(@Model.id)" class="btn btn-success red" style="min-width: 6%;background-color: darkred;color: white"><i class="fa fa-file-pdf"></i> In</a>
+                <a onclick="ExportExcel(@Model.id)" class="btn btn-success" style="min-width: 6%;color: white"><i class="fa fa-file-excel"></i> Excel</a>
                 <a href="/Material" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Quay lại</a>
             </div>
         </div>

@@ -708,7 +708,7 @@
 
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
-                <a href="/Material" class="btn btn-primary" style="width: 6%"> Quay lại</a>
+                <a href="/Material" class="btn btn-primary" style="min-width: 6%"> Quay lại</a>
                 <a onclick="AddOrUpdateAllScreen()" class="btn btn-success" style="width: 6%; color:white">Lưu</a>
             </div>
         </div>
@@ -1341,7 +1341,7 @@
                                     <input type="text" class="form-control idecimal3 inputText dinh_mucMH2" onchange="AutoTinhSoLuongChinh(this)" value="${appendix.dinh_muc == null ? '' : appendix.dinh_muc}" id="dinhmucMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control iinteger inputText sl_chinhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
+                                    <input type="text" class="form-control idecimal inputText sl_chinhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_chinh == null ? '' : appendix.sl_chinh}" id="slchinhMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control iinteger inputText sl_bu_inMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.sl_bu_in == null ? '' : appendix.sl_bu_in}" id="slbuinMH2_${index + 1}"/>
@@ -1353,7 +1353,7 @@
                                     <input type="text" class="form-control iinteger inputText bu_phat_hanhMH2" onchange="AutoTinhSoLuongTong(this)" value="${appendix.bu_phat_hanh == null ? '' : appendix.bu_phat_hanh}" id="buphathanhMH2_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control iinteger inputText sl_tongMH2" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
+                                    <input type="text" class="form-control idecimal inputText sl_tongMH2" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltongMH2_${index + 1}"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control idecimal inputText quy_kyMH2" value="${appendix.quy_ky == null ? '' : appendix.quy_ky}" id="quykyMH2_${index + 1}"/>
@@ -1652,7 +1652,7 @@
                                 <input type="text" class="form-control idecimal  inputText kho_in_rong" value="${appendix.kho_in_rong == null ? '' : appendix.kho_in_rong}" id="khoinrong_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="text" class="form-control iinteger inputText chinh"  onchange="AutoFillTongIn(this)" value="${appendix.chinh == null ? '' : appendix.chinh}" id="chinh_${index + 1}"/>
+                                <input type="text" class="form-control idecimal inputText chinh"  onchange="AutoFillTongIn(this)" value="${appendix.chinh == null ? '' : appendix.chinh}" id="chinh_${index + 1}"/>
                             </td>
                             <td>
                                 <input type="text" class="form-control iinteger inputText bu_in" onchange="AutoFillTongIn(this)" value="${appendix.bu_in == null ? '' : appendix.bu_in}" id="buin_${index + 1}"/>
@@ -1664,7 +1664,7 @@
                                 <input type="text" class="form-control iinteger inputText bu_phat_hanh" onchange="AutoFillTongIn(this)" value="${appendix.bu_phat_hanh == null ? '' : appendix.bu_phat_hanh}" id="buphathanh_${index + 1}"/>
                             </td>
                             <td>
-                                <input type="text" class="form-control iinteger inputText sl_tong" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltong_${index + 1}"/>
+                                <input type="text" class="form-control idecimal inputText sl_tong" value="${appendix.sl_tong == null ? '' : appendix.sl_tong}" id="sltong_${index + 1}"/>
                             </td>
                             <td>
                                 ${generatePPInPrint(appendix, index)}
