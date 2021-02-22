@@ -536,9 +536,9 @@
 
         <div class="row" style="margin-top: 15px">
             <div class="col-md-12 text-right">
-                <a onclick="printKcsResult(@Model.id)" class="btn btn-success red" style="width: 8%;background-color: darkred;color: white"><i class="fa fa-file-pdf"></i> In</a>
-                <a onclick="ExportExcel(@Model.id)" class="btn btn-success" style="width: 9%;color: white"><i class="fa fa-file-excel"></i> Xuất Excel</a>
-                <a href="/Material" class="btn btn-primary" style="width: 8%"><i class="fa fa-arrow-left"></i> Quay lại</a>
+                <a onclick="printKcsResult(@Model.id)" class="btn btn-success red" style="width: 6%;background-color: darkred;color: white"><i class="fa fa-file-pdf"></i> In</a>
+                <a onclick="ExportExcel(@Model.id)" class="btn btn-success" style="width: 6%;color: white"><i class="fa fa-file-excel"></i> Excel</a>
+                <a href="/Material" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Quay lại</a>
             </div>
         </div>
     </div>
@@ -589,7 +589,7 @@
                 $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachBia);
             }
 
-            var quycachThuongConvert = JSLINQ(lstQuyCachThuong).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+            var quycachThuongConvert = JSLINQ(lstQuyCachThuong).OrderByDescending(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
             for (var j = 0; j < quycachThuongConvert.length; j++) {
                 var quycachthuong = JSLINQ(lstQuyCachThuong).Where(function (item) { return item.nhom_vat_tu_id == quycachThuongConvert[j]; }).ToArray();
                 var htmlQuyCachThuong = generateHtmlQuyCachRowMH3(quycachthuong);

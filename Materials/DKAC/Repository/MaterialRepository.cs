@@ -76,7 +76,15 @@ namespace DKAC.Repository
                              tp_dai = d.tp_dai,
                              tp_cao = d.tp_cao,
 
-                         }).FirstOrDefault() ?? new DonHangInfo();
+                         }).FirstOrDefault();
+            if (query == null)
+            {
+                query = new DonHangInfo()
+                {
+                    id = 0,
+                };
+                return query;
+            }
             query.lstVatTus = db.VatTu.Where(x => x.don_hang_id == query.id).ToList() ?? new List<VatTu>();
             query.lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietDuToan>();
             query.lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == query.id).ToList() ?? new List<ChiTietCheBan>();
@@ -222,7 +230,7 @@ namespace DKAC.Repository
                 foreach (var item in model.lstVatTus)
                 {
                     item.don_hang_id = dh.id;
-                    if(item.loai_giay != null)
+                    if (item.loai_giay != null)
                     {
                         item.loai_giay = item.loai_giay.Trim();
                     }

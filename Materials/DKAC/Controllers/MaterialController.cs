@@ -64,6 +64,14 @@ namespace DKAC.Controllers
             if (checkPermissonSua == false) { return RedirectToAction("NotPermission", "Home"); }
 
             donHang = _mater.GetbyId(id);
+            if (donHang.id == 0)
+            {
+                donHang.lstMaterialType = lstMaterial;
+                donHang.lstPPIn = lstPPin;
+                donHang.lstVatTus = new List<VatTu>();
+                donHang.lstkhoKem = lstKhokem;
+                return View("Edit", donHang);
+            }
             donHang.lstMaterialType = lstMaterial;
             donHang.lstPPIn = lstPPin;
             donHang.lstkhoKem = lstKhokem;
