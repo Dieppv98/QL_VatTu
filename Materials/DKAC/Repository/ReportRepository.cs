@@ -102,7 +102,7 @@ namespace DKAC.Repository
         public List<DonHang> SearchSoLSX(DonHangRequestModel request, int pageIndex, int recordPerPage, out int totalRecord)
         {
             pageIndex = pageIndex - 1;
-            var query = db.DonHang.Where(t => (string.IsNullOrEmpty(request.Keywords) || t.so_lenh_sx.Contains(request.Keywords)));
+            var query = db.DonHang.Where(t => (string.IsNullOrEmpty(request.Keywords) || t.so_lenh_sx.Contains(request.Keywords.Trim())));
             totalRecord = query.Count();
             return query.OrderByDescending(x => x.id).Skip(pageIndex * recordPerPage).Take(recordPerPage).ToList();
         }
@@ -173,7 +173,7 @@ namespace DKAC.Repository
                              tp_soluong = d.tp_soluong,
                              tp_thoi_han = d.tp_thoi_han,
                              tp_vat_tu = d.tp_vat_tu,
-                             
+
                              lstVatTus = db.VatTu.Where(x => x.don_hang_id == d.id).ToList(),
                              lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == d.id).ToList(),
                              lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),
@@ -237,6 +237,11 @@ namespace DKAC.Repository
                                }).ToList() ?? new List<ChiTietInInfo>();
 
             return query ?? new DonHangInfo();
+        }
+
+        public List<DonHang> SearchLSXAutoComplete(string key)
+        {
+            return db.DonHang.AsNoTracking().Where(x => x.so_lenh_sx.ToLower().Contains(key.ToLower())).Distinct().ToList();
         }
     }
 }
