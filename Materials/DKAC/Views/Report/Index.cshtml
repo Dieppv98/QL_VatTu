@@ -6,38 +6,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    #btnSearch {
+        padding: 7px 15px 7px 15px;
+    }
+
+    .lbl {
+        padding: 0px;
+        width: auto;
+        margin-top: 8px;
+        padding-left: 15px;
+    }
+
+    table {
+        border: 2px solid #e8e4e4;
+    }
+
+    .paging {
+        padding: 0px 15px 0px 15px;
+        text-align: right;
+    }
+
+    ul {
+        margin: 0px !important;
+    }
+
+    .search-form {
+        font-size: small !important;
+    }
+
+    .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+        width: 2.6em !important;
+        cursor: default;
+    }
+
+        .ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
+            display: contents !important;
+        }
+</style>
 <head>
     <title>Thống kê</title>
-    <style>
-        #btnSearch {
-            padding: 7px 15px 7px 15px;
-        }
-
-        .lbl {
-            padding: 0px;
-            width: auto;
-            margin-top: 8px;
-            padding-left: 15px;
-        }
-
-        table {
-            border: 2px solid #e8e4e4;
-        }
-
-        .paging {
-            padding: 0px 15px 0px 15px;
-            text-align: right;
-        }
-
-        ul {
-            margin: 0px !important;
-        }
-
-        .search-form {
-            font-size: small !important;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -185,13 +193,23 @@
             //});
 
             $("#fromDate").datepicker({
-                dateFormat: 'dd/mm/yy'
-            }).datepicker();
+                todayBtn: "linked",
+                language: "it",
+                autoclose: true,
+                todayHighlight: true,
+                format: 'dd/MM/yyyy',
+                //changeYear: true,
+            });
 
             $("#toDate").datepicker({
-                dateFormat: 'dd/mm/yy'
-            }).datepicker();
+                todayBtn: "linked",
+                language: "it",
+                autoclose: true,
+                todayHighlight: true,
+                format: 'dd/MM/yyyy',
+            });
 
         });
+
     </script>
 }

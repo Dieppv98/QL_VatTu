@@ -14,6 +14,8 @@ namespace DKAC.Models.RequestModel
         public override object RouteValues => new
         {
             this.Keywords,
+            this.FromDate,
+            this.ToDate,
         };
         public int id { get; set; }
         public DateTime? created_date { get; set; }
@@ -77,5 +79,8 @@ namespace DKAC.Models.RequestModel
         public string kho_tp { get; set; }
 
         public List<DonHang> lstDonHang { get; set; }
+
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
     }
 }

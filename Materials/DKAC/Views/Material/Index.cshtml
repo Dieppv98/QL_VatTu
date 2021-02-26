@@ -45,9 +45,19 @@
         .search-form {
             font-size: small !important;
         }
+
+        .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+            width: 2.6em !important;
+            cursor: default;
+        }
+
+            .ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
+                display: contents !important;
+            }
     </style>
 
 </head>
+
 
 <body>
     <div class="container">
@@ -61,16 +71,47 @@
             </div>
             <form action="@Url.Action("Index", "Material")" id="search-form" method="get">
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col-md-2"></div>
-                    <label class="lbl">Từ khóa: </label>
-                    <div class="col-md-6" style="margin-bottom: 10px;">
-                        <input type="text" name="Keywords" placeholder="Nhập số LSX" class="form-control search-form" />
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-3">
+                        <label>Từ khóa: </label>
+                        @Html.TextBoxFor(m => m.Keywords, new Dictionary<string, object>
+                           {
+                               {"class", " form-control"},
+                                 {"id", "Keywords"},
+                                 {"placeholder", "Nhập số LSX"},
+                           })
                     </div>
+
+                    <div class="col-md-3">
+                        <label>Từ gian giao từ ngày: </label>
+                        @Html.TextBoxFor(m => m.FromDate, new Dictionary<string, object>
+                            {
+                                {"class", " form-control"},
+                                  {"id", "FromDate"},
+                                  {"placeholder", "dd/MM/yyyy"},
+                            })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Từ gian giao đến ngày: </label>
+                        @Html.TextBoxFor(m => m.ToDate, new Dictionary<string, object>
+                            {
+                                {"class", " form-control"},
+                                  {"id", "ToDate"},
+                                  {"placeholder", "dd/MM/yyyy"},
+                            })
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-5"></div>
                     <div class="col-md-2">
                         <button id="btnSearch" class="btn btn-sm btn-primary filter-submit" type="submit">
                             <i class="fa fa-search"></i> Tìm kiếm
                         </button>
                     </div>
+                    <div class="col-md-5"></div>
                 </div>
             </form>
         </div>
@@ -113,9 +154,9 @@
                             <td class="text-center">@count</td>
                             <td class="text-center">@item.so_lenh_sx</td>
                             <td class="text-center">@item.ma_san_pham</td>
-                            <td class="text-left">@item.ten_san_pham</td>
+                            <td class="text-center">@item.ten_san_pham</td>
                             <td class="text-center">@item.ma_khach_hang</td>
-                            <td class="text-left">@item.ten_khach_hang</td>
+                            <td class="text-center">@item.ten_khach_hang</td>
                             <td class="text-center">@item.nv_kinh_doanh</td>
                             <td class="text-center">@(item.ngay_giao_hang.HasValue ? item.ngay_giao_hang.Value.ToString("dd/MM/yyyy") : "")</td>
                             <td class="text-center">
@@ -195,6 +236,10 @@
     </div>
 </body>
 
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/assets/login/vendor/datepicker/moment.min.js"></script>
+<script src="~/Scripts/bootbox.min.js"></script>
+
 <script type="text/javascript">
     function Delete(id) {
         var data = {
@@ -248,5 +293,25 @@
         var randomnumber = Math.floor((Math.random() * 100) + 1);
         var popup = window.open(url, "_blank", 'popup_window', randomnumber, params);
     }
+
+    $(document).ready(function () {
+        $("#FromDate").datepicker({
+            todayBtn: "linked",
+            language: "it",
+            autoclose: true,
+            todayHighlight: true,
+            format: 'dd/MM/yyyy',
+            //changeYear: true,
+        });
+
+        $("#ToDate").datepicker({
+            todayBtn: "linked",
+            language: "it",
+            autoclose: true,
+            todayHighlight: true,
+            format: 'dd/MM/yyyy',
+        });
+
+    });
 </script>
 

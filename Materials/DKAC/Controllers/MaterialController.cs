@@ -16,6 +16,7 @@ namespace DKAC.Controllers
     {
         MaterialRepository _mater = new MaterialRepository();
         // GET: Material
+        [HttpGet]
         public ActionResult Index(DonHangRequestModel model)
         {
             var currentUser = (User)Session[CommonConstants.USER_SESSION];
