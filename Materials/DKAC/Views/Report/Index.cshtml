@@ -54,13 +54,14 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-3" style="margin-bottom: 10px;">
                     <label>Từ khóa: </label>
-                    @Html.DropDownListFor(a => a.id, Model.lstSo_LSX, "---Chọn số LSX---", new
-                           {
-                               @class = "form-control",
-                               @data_placeholder = "---Chọn số LSX---",
-                               @id = "lenh_sx",
-                               @style = "width: 100%",
-                           })
+                    <input class="form-control" id="lenh_sx" placeholder="Nhập lệnh sản xuất" oninput="SearchLSXAutoComplete(this)" />
+                    @*@Html.DropDownListFor(a => a.id, Model.lstSo_LSX, "---Chọn số LSX---", new
+                        {
+                            @class = "form-control",
+                            @data_placeholder = "---Chọn số LSX---",
+                            @id = "lenh_sx",
+                            @style = "width: 100%",
+                        })*@
                     <div class="valid">
                         <div class="textNoti" id="textvalid">
 
@@ -139,28 +140,49 @@
         }
 
 
+        function SearchLSXAutoComplete(element) {
+            var value = $(element).val();
+            $(element).autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        url: "/Report/SearchLSXAutoComplete",
+                        data: "{'keySearch':'" + value + "'}",
+                        success: function (rs) {
+                            response(rs);
+                        },
+                        error: function (result) {
+                            alert("No Match");
+                        }
+                    });
+                }
+            });
+        }
 
 
         $(document).ready(function () {
 
-            $('#lenh_sx').select2({
-                allowClear: true,
-                theme: "bootstrap",
-                cache: true,
-                ajax: {
-                    url: '/Report/SearchLSX',
-                    dataType: 'json',
-                    delay: 250,
-                    cache: true,
-                    processResults: function (data) {
-                        return {
-                            results: data.map(o => {
-                                return { id: o.id, text: o.so_lenh_sx }
-                            })
-                        };
-                    }
-                }
-            });
+            //$('#lenh_sx').select2({
+            //    allowClear: true,
+            //    theme: "bootstrap",
+            //    cache: true,
+            //    ajax: {
+            //        url: '/Report/SearchLSX',
+            //        dataType: 'json',
+            //        delay: 250,
+            //        cache: true,
+            //        processResults: function (data) {
+            //            return {
+            //                results: data.map(o => {
+            //                    return { id: o.id, text: o.so_lenh_sx }
+            //                })
+            //            };
+            //        }
+            //    }
+            //});
 
             $("#fromDate").datepicker({
                 dateFormat: 'dd/mm/yy'
@@ -170,23 +192,6 @@
                 dateFormat: 'dd/mm/yy'
             }).datepicker();
 
-            var now = new Date();
-            var month = now.getMonth() + 1;
-            var year = now.getFullYear();
-            var setMonth = 00;
-            var finishDate = 00;
-
-            if (month < 10) { setMonth = '0' + month; }
-            else { setMonth = month; }
-
-            //$("#fromDate").val('01/' + setMonth + '/' + year);
-            //if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-            //    finishDate = 31;
-            //else if (month == 2) {
-            //    if (year % 4 == 0) { finishDate = 29; }
-            //    else { finishDate = 28; }
-            //} else { finishDate = 30; }
-            //$("#toDate").val(finishDate + '/' + setMonth + '/' + year);
         });
     </script>
 }

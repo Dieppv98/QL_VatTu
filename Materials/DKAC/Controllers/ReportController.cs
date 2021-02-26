@@ -251,5 +251,15 @@ namespace DKAC.Controllers
             var tenFile = $"Lệnh sản xuất-{model.so_lenh_sx.Trim()}-{model.ten_san_pham}"; 
             return ViewReport(result, tenFile, exportExcel);
         }
+
+        [HttpPost]
+        public ActionResult SearchLSXAutoComplete(string keySearch)
+        {
+            var lstLSX = _rep.SearchLSXAutoComplete(keySearch);
+            var rs = new List<string>();
+            var lstResultSearch = lstLSX.Select(x => x.so_lenh_sx).Distinct().ToList();
+            rs.AddRange(lstResultSearch);
+            return Json(rs, JsonRequestBehavior.AllowGet);
+        }
     }
 }
