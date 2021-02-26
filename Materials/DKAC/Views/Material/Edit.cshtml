@@ -2335,23 +2335,34 @@
                 //fill bảng quy cách
                 var lstQuyCach = [];
                 var lstQuyCachBia = [];
+                var lstQuyCachRuot = [];
                 var lstQuyCachThuong = [];
 
                 for (var i = 0; i < lstTemp.length; i++) {
                     if (lstTemp[i].ten_nhom_vat_tu != null && lstTemp[i].ten_nhom_vat_tu.trim().toLowerCase().startsWith("bìa")) {
                         lstQuyCachBia.push(lstTemp[i]);
                     }
+                    else if (lstTemp[i].ten_nhom_vat_tu != null && lstTemp[i].ten_nhom_vat_tu.trim().toLowerCase().startsWith("ruột")) {
+                        lstQuyCachRuot.push(lstTemp[i]);
+                    }
                     else { lstQuyCachThuong.push(lstTemp[i]) }
                 }
-
-                var quycachBiaConvert = JSLINQ(lstQuyCachBia).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+                // bìa
+                var quycachBiaConvert = JSLINQ(lstQuyCachBia).OrderBy(function (item) { return item.ten_nhom_vat_tu; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
                 for (var j = 0; j < quycachBiaConvert.length; j++) {
                     var quycachbia = JSLINQ(lstQuyCachBia).Where(function (item) { return item.nhom_vat_tu_id == quycachBiaConvert[j]; }).ToArray();
                     var htmlQuyCachBia = generateHtmlQuyCachRowMH3(quycachbia);
                     $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachBia);
                 }
-
-                var quycachThuongConvert = JSLINQ(lstQuyCachThuong).OrderBy(function (item) { return item.nhom_vat_tu_id; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+                // ruột
+                var quycachRuotConvert = JSLINQ(lstQuyCachRuot).OrderBy(function (item) { return item.ten_nhom_vat_tu; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
+                for (var j = 0; j < quycachRuotConvert.length; j++) {
+                    var quycachruot = JSLINQ(lstQuyCachRuot).Where(function (item) { return item.nhom_vat_tu_id == quycachRuotConvert[j]; }).ToArray();
+                    var htmlQuyCachRuot = generateHtmlQuyCachRowMH3(quycachruot);
+                    $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachRuot);
+                }
+                // thường
+                var quycachThuongConvert = JSLINQ(lstQuyCachThuong).OrderByDescending(function (item) { return item.ten_nhom_vat_tu; }).Distinct(function (item) { return item.nhom_vat_tu_id; }).ToArray();
                 for (var j = 0; j < quycachThuongConvert.length; j++) {
                     var quycachthuong = JSLINQ(lstQuyCachThuong).Where(function (item) { return item.nhom_vat_tu_id == quycachThuongConvert[j]; }).ToArray();
                     var htmlQuyCachThuong = generateHtmlQuyCachRowMH3(quycachthuong);

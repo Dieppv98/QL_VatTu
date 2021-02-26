@@ -27,7 +27,7 @@ namespace DKAC.Models.EntityModel
         public int? bu_in { get; set; }
         public int? bu_phat_hanh { get; set; }
 
-        public double? sl_tong { get; set; }
+        public int? sl_tong { get; set; }
 
         public int? phuong_phap_in { get; set; }
 

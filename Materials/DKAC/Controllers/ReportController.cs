@@ -122,14 +122,15 @@ namespace DKAC.Controllers
         public ActionResult ExportExcelBangLSX(int id, bool exportExcel)
         {
             var model = _rep.ExportExcelDonHang(id);
-            var lstvatTu = model.lstVatTus;
+            var lstvatTu = model.lstVatTus.OrderBy(x=>x.ten_nhom_vat_tu).ToList();
             var lstsltong = model.lst_sl_tong ?? new List<TongSoLuongInfo>();
             var lstCheBanInfo = model.lstCheBanInfo ?? new List<ChiTietCheBanInfo>();
             var lstInInfo = model.lstInInfo ?? new List<ChiTietInInfo>();
 
+            var lstQuycachAll = new List<VatTu>();
             var lstQuycachBia = new List<VatTu>();
             var lstQuycachThuong = new List<VatTu>();
-            var lstQuycachNull = new List<VatTu>();
+            var lstQuycachRuot = new List<VatTu>();
             var lstQuyCachInfo = new List<QuyCachInfo>();
 
             if (lstvatTu.Count > 0)
@@ -140,13 +141,25 @@ namespace DKAC.Controllers
                     {
                         lstQuycachBia.Add(lstvatTu[i]);
                     }
+                    else if (lstvatTu[i].ten_nhom_vat_tu != null && lstvatTu[i].ten_nhom_vat_tu.Trim().ToLower().StartsWith("ruột"))
+                    {
+                        lstQuycachRuot.Add(lstvatTu[i]);
+                    }
                     else { lstQuycachThuong.Add(lstvatTu[i]); }
+                    lstQuycachAll.Add(lstvatTu[i]);
                 }
-
-                var lstIds = lstQuycachBia.OrderBy(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
+                // bìa
+                var lstIdsBia = lstQuycachBia.OrderBy(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
+                // ruột
+                var lstIdsRuot = lstQuycachRuot.OrderBy(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
+                // thường
+                var lstIdsThuong = lstQuycachThuong.OrderByDescending(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
+                var lstIds = lstIdsBia;
+                lstIds.AddRange(lstIdsRuot);
+                lstIds.AddRange(lstIdsThuong);
                 for (int i = 0; i < lstIds.Count; i++)
                 {
-                    var vattu = lstQuycachBia.Where(x => x.nhom_vat_tu_id == lstIds[i]).ToList();
+                    var vattu = lstQuycachAll.Where(x => x.nhom_vat_tu_id == lstIds[i]).OrderBy(x=>x.id).ToList();
                     if (vattu.Count > 0)
                     {
                         foreach (var item in vattu)
@@ -165,29 +178,29 @@ namespace DKAC.Controllers
                         lstQuyCachInfo.Add(quycachinfo);
                     }
                 }
+                // thường
+                //var lstIdsThuong = lstQuycachThuong.OrderByDescending(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
+                //for (int i = 0; i < lstIdsThuong.Count; i++)
+                //{
+                //    var vattuThuong = lstQuycachThuong.Where(x => x.nhom_vat_tu_id == lstIdsThuong[i]).ToList();
+                //    if (vattuThuong.Count > 0)
+                //    {
+                //        foreach (var item in vattuThuong)
+                //        {
+                //            if (item.loai_giay != null)
+                //                item.loai_giay = item.loai_giay.Trim();
+                //        }
 
-                var lstIdsThuong = lstQuycachThuong.OrderByDescending(x => x.nhom_vat_tu_id).Select(x => x.nhom_vat_tu_id).Distinct().ToList();
-                for (int i = 0; i < lstIdsThuong.Count; i++)
-                {
-                    var vattuThuong = lstQuycachThuong.Where(x => x.nhom_vat_tu_id == lstIdsThuong[i]).ToList();
-                    if (vattuThuong.Count > 0)
-                    {
-                        foreach (var item in vattuThuong)
-                        {
-                            if (item.loai_giay != null)
-                                item.loai_giay = item.loai_giay.Trim();
-                        }
-
-                        var quycachinfoThuong = new QuyCachInfo()
-                        {
-                            id = vattuThuong[0].nhom_vat_tu_id,
-                            count = vattuThuong.Count,
-                            ten_nhom_vat_tu = vattuThuong[0].ten_nhom_vat_tu,
-                            lstvatTus = vattuThuong,
-                        };
-                        lstQuyCachInfo.Add(quycachinfoThuong);
-                    }
-                }
+                //        var quycachinfoThuong = new QuyCachInfo()
+                //        {
+                //            id = vattuThuong[0].nhom_vat_tu_id,
+                //            count = vattuThuong.Count,
+                //            ten_nhom_vat_tu = vattuThuong[0].ten_nhom_vat_tu,
+                //            lstvatTus = vattuThuong,
+                //        };
+                //        lstQuyCachInfo.Add(quycachinfoThuong);
+                //    }
+                //}
             }
             var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList() ?? new List<VatTu>();
 
