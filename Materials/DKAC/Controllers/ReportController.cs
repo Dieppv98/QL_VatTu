@@ -248,7 +248,7 @@ namespace DKAC.Controllers
             fr.Run(result);
             fr.Dispose();
             // ten file: Lệnh sản xuất-SoLenhSX-TenSanPham
-            var tenFile = $"Lệnh sản xuất-{model.so_lenh_sx.Trim()}-{model.ten_san_pham}"; 
+            var tenFile = $"Lệnh sản xuất-{model.so_lenh_sx.Trim()}-{model.ten_san_pham.Trim()}"; 
             return ViewReport(result, tenFile, exportExcel);
         }
 

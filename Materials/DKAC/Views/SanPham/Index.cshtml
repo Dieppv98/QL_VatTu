@@ -82,7 +82,7 @@
                         <th class="text-center">STT</th>
                         <th class="text-center">Mã sản phẩm</th>
                         <th class="text-center">Tên sản phẩm</th>
-                        <th class="text-center">Ngày tạo</th>
+                        <th class="text-center">Ngày cập nhật</th>
                         <th class="text-center" style="width:200px;">Hành động</th>
                     </tr>
                 </thead>
@@ -96,8 +96,8 @@
                         <tr>
                             <td class="text-center">@count</td>
                             <td class="text-center">@item.ma_san_pham</td>
-                            <td class="text-center">@item.ten_san_pham</td>
-                            <td class="text-center">@item.created_date</td>
+                            <td class="text-left">@item.ten_san_pham</td>
+                            <td class="text-center">@item.last_updated</td>
                             <td class="text-center">
                                 @if (ViewBag.hasViewPermission)
                                 {

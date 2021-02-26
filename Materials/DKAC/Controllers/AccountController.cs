@@ -36,7 +36,7 @@ namespace DKAC.Controllers
                         var pagemodul = _loginRepo.GetAccountModulPageInfo(user.id);
                         Session.Add(CommonConstants.USER_SESSION, user);
                         Session.Add(CommonConstants.PAGE_MODUL_SESSION, pagemodul);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Material");
                     }
                 }
                 ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không chính xác!");

@@ -276,12 +276,15 @@ namespace DKAC.Repository
                 kh = new KhachHang();
                 kh.ma_khach_hang = maKH;
                 kh.ten_khach_hang = tenKH;
+                kh.created_date = DateTime.Now;
+                kh.last_updated = DateTime.Now;
                 db.KhachHang.Add(kh);
             }
             else
             {
                 kh.ma_khach_hang = maKH;
                 kh.ten_khach_hang = tenKH;
+                kh.last_updated = DateTime.Now;
             }
             db.SaveChanges();
         }
@@ -294,12 +297,15 @@ namespace DKAC.Repository
                 sp = new SanPham();
                 sp.ma_san_pham = maSP;
                 sp.ten_san_pham = tenSP;
+                sp.created_date = DateTime.Now;
+                sp.last_updated = DateTime.Now;
                 db.SanPham.Add(sp);
             }
             else
             {
                 sp.ma_san_pham = maSP;
                 sp.ten_san_pham = tenSP;
+                sp.last_updated = DateTime.Now;
             }
             db.SaveChanges();
         }
