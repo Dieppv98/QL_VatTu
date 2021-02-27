@@ -295,6 +295,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IRepository\IChiTietThongKeRepository.cs" />
     <Compile Include="IRepository\IKhachHangRepository.cs" />
     <Compile Include="IRepository\ILoginRepository.cs" />
     <Compile Include="IRepository\IReportRepository.cs" />
@@ -305,6 +306,7 @@
     <Compile Include="Models\EntityModel\ChiTietCheBan.cs" />
     <Compile Include="Models\EntityModel\ChiTietDuToan.cs" />
     <Compile Include="Models\EntityModel\ChiTietIn.cs" />
+    <Compile Include="Models\EntityModel\ChiTietThongKe.cs" />
     <Compile Include="Models\EntityModel\DonHang.cs" />
     <Compile Include="Models\EntityModel\KhachHang.cs" />
     <Compile Include="Models\EntityModel\KhoKem.cs" />
@@ -343,6 +345,7 @@
     <Compile Include="Models\RequestModel\SanPhamRequestModel.cs" />
     <Compile Include="Models\RequestModel\UserRequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ChiTietThongKeRepository.cs" />
     <Compile Include="Repository\KhachHangRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\MaterialRepository.cs" />

@@ -236,12 +236,15 @@ namespace DKAC.Repository
                     }
                 }
                 db.VatTu.AddRange(model.lstVatTus);
+                db.SaveChanges();
             }
+            var lstVatTuTemp = model.lstVatTus;
             if (model.lstChiTietDuToans != null)
             {
                 foreach (var item in model.lstChiTietDuToans)
                 {
                     item.don_hang_id = dh.id;
+                    item.vat_tu_id = lstVatTuTemp.Where(x => x.ten.Trim() == item.ten.Trim()).FirstOrDefault().id;
                 }
                 db.ChiTietDuToan.AddRange(model.lstChiTietDuToans);
             }
@@ -250,6 +253,7 @@ namespace DKAC.Repository
                 foreach (var item in model.lstChiTietCheBans)
                 {
                     item.don_hang_id = dh.id;
+                    item.vat_tu_id = lstVatTuTemp.Where(x => x.ten.Trim() == item.ten_tay_in.Trim()).FirstOrDefault().id;
                 }
                 db.ChiTietCheBan.AddRange(model.lstChiTietCheBans);
             }
@@ -258,10 +262,64 @@ namespace DKAC.Repository
                 foreach (var item in model.lstChiTietIns)
                 {
                     item.don_hang_id = dh.id;
+                    item.vat_tu_id = lstVatTuTemp.Where(x => x.ten.Trim() == item.ten_tay_in.Trim()).FirstOrDefault().id;
                 }
                 db.ChiTietIn.AddRange(model.lstChiTietIns);
             }
+            // Thêm vào ChiTietThongKe
+            var LstChiTietThongKe = new List<ChiTietThongKe>();
+            foreach (var cheBanDetail in model.lstChiTietCheBans)
+            {
+                var ktp_so_trang = 0;
+                var sl_giay_chinh = 0;
+                var sl_in_thuc_te = 0;
+                string loai_vat_tu = null;
 
+                var VatTuDetail = lstVatTuTemp.Where(x => x.id == cheBanDetail.vat_tu_id.Value).FirstOrDefault();
+                var ChiTietInDetail = model.lstChiTietIns.Where(x => x.vat_tu_id == cheBanDetail.vat_tu_id.Value).FirstOrDefault();
+
+                if (VatTuDetail.ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa"))
+                {
+                    loai_vat_tu = "Bìa";
+                }
+                else if (VatTuDetail.ten_nhom_vat_tu.Trim().ToLower().StartsWith("ruột"))
+                {
+                    loai_vat_tu = "Ruột";
+                }
+                else loai_vat_tu = VatTuDetail.ten_nhom_vat_tu.Trim() ?? null;
+
+                // nếu đã có thì so_trang = sl_giay_chinh = sl_in_thuc_te = 0
+                var cheBanCount = LstChiTietThongKe.Where(x => x.VatTuID == cheBanDetail.vat_tu_id.Value).Count();
+                if (cheBanCount <= 0)
+                {
+                    ktp_so_trang = VatTuDetail.trang ?? 0;
+                    sl_giay_chinh = ChiTietInDetail.chinh.Value;
+                    sl_in_thuc_te = ChiTietInDetail.so_luot_in_thuc_te.Value;
+                }
+                var chiTietThongKeInfo = new ChiTietThongKe()
+                {
+                    ID = 0,
+                    MaDonHang = model.id,
+                    LoaiVatTu = loai_vat_tu,
+                    NhomVatTuID = VatTuDetail.nhom_vat_tu_id ?? null,
+                    TenNhomVatTu = VatTuDetail.ten_nhom_vat_tu ?? null,
+                    VatTuID = cheBanDetail.vat_tu_id.Value,
+                    TayIn = cheBanDetail.ten_tay_in,
+                    KTP_SoTrang = ktp_so_trang,
+                    KGI_Rong = cheBanDetail.kho_in_rong.Value,
+                    KGI_Cao = cheBanDetail.kho_in_dai.Value,
+                    SLGiayChinh = sl_giay_chinh,
+                    KI_Cao = ChiTietInDetail.kho_in_dai.Value,
+                    KI_Rong = ChiTietInDetail.kho_giay_rong.Value,
+                    SLInThucTe = sl_in_thuc_te,
+                    MI_Tren = VatTuDetail.kieu_in_1.Value,
+                    MI_Duoi = VatTuDetail.kieu_in_1.Value,
+                    KhoKem = cheBanDetail.kho_kem.Value,
+                    TongKhoKem = cheBanDetail.tong.Value
+                };
+                LstChiTietThongKe.Add(chiTietThongKeInfo);
+            }
+            db.ChiTietThongKes.AddRange(LstChiTietThongKe);
             db.SaveChanges();
             AddorUpdateKhachHang(dh.ma_khach_hang, dh.ten_khach_hang);
             AddorUpdateSanPham(dh.ma_san_pham, dh.ten_san_pham);

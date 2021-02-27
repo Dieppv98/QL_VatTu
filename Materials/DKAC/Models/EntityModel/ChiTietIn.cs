@@ -20,7 +20,7 @@ namespace DKAC.Models.EntityModel
         public double? kho_in_dai { get; set; }
         public double? kho_in_rong { get; set; }
 
-        public double? chinh { get; set; }
+        public int? chinh { get; set; }
 
         public int? bu_thanh_pham { get; set; }
 

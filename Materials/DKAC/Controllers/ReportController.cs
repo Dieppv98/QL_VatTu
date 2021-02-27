@@ -203,6 +203,15 @@ namespace DKAC.Controllers
                 //}
             }
             var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList() ?? new List<VatTu>();
+            if (!string.IsNullOrWhiteSpace(model.quy_cach_chung))
+            {
+                var newQuyCach = new QuyCachInfo();
+                var newVatTu = new VatTu();
+                newQuyCach.ten_nhom_vat_tu = "";
+                newVatTu.ten = model.quy_cach_chung.Trim();
+                lstQuyCachInfo.Add(newQuyCach);
+                lstQuyCachChitiet.Add(newVatTu);
+            }
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             var path = Path.Combine(Server.MapPath("~/FileTemplate"), "Export-LSX.xlsx");

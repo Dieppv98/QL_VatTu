@@ -696,21 +696,21 @@
                 <input type="text" style="background-color: white" class="form-control" id="ngay_giao_hangMH3" value="@Model.ngay_giao_hang" placeholder="dd/MM/yyyy" />
             </div>
         </div>*@
-                <div class="row">
-                    <div class="col-md-2 text-right">
-                        <label>Số LSX: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="so_lenh_sxMH3" value="@Model.so_lenh_sx" disabled />
-                    </div>
-
-                    <div class="col-md-2 text-right">
-                        <label>Ngày: </label>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="created_dateMH3" value="@Model.created_date" disabled />
-                    </div>
+            <div class="row">
+                <div class="col-md-2 text-right">
+                    <label>Số LSX: </label>
                 </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="so_lenh_sxMH3" value="@Model.so_lenh_sx" disabled />
+                </div>
+
+                <div class="col-md-2 text-right">
+                    <label>Ngày giao hàng: </label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" style="background-color: white" class="form-control" id="ngay_giao_hangMH3" value="@Model.ngay_giao_hang" placeholder="dd/MM/yyyy" />
+                </div>
+            </div>
 
                 <div class="row">
                     <div class="col-md-2 text-right">
@@ -2570,6 +2570,8 @@
                 $("#nha_ccMH3").val(data.nha_cc);
                 $("#kho_docMH3").val(data.kho_doc);
                 $("#kho_ngangMH3").val(data.kho_ngang);
+                $("#ten_can_bo_qlMH3").val(data.ten_can_bo_ql);
+                $("#ten_can_bo_ktMH3").val(data.ten_can_bo_kt);
 
                 //fill bảng quy cách
                 var lstQuyCach = [];
@@ -2607,7 +2609,24 @@
                     var htmlQuyCachThuong = generateHtmlQuyCachRowMH3(quycachthuong);
                     $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachThuong);
                 }
-
+                // quy cách sp
+                var quycachchungMH1 = $('#quy_cach_chung').val();
+                if (!quycachchungMH1 || quycachchungMH1.trim() !== "") {
+                    var htmlquycachsp = `<tr class="bg-blue" style="background-color: #e9ecef;color: black;">
+                            <th class="text-center wrapper" style="width: 200px;vertical-align: middle;border: black solid 1px !important;">
+                            </th>
+                            <td class="wrapper" style="padding: 0px !important;border: black solid 1px !important;">
+                                <table class="table table-striped table-bordered" style="margin-bottom: 0px !important">
+                                    <tbody>
+                                        <tr class="wrapper">
+                                            <td class="wrapper">${quycachchungMH1.trim()}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                    </tr>`
+                    $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlquycachsp);
+                }
                 var lstTongQuan = GetInfoDetail();
 
                 var lstDuToanKem = GetInfoChiTietDuToan();
