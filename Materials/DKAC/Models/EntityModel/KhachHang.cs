@@ -16,7 +16,7 @@ namespace DKAC.Models.EntityModel
         public string ten_khach_hang { get; set; }
 
         public string ten_cong_ty { get; set; }
-        
+
         public string dia_chi { get; set; }
 
         public string ma_so_thue { get; set; }

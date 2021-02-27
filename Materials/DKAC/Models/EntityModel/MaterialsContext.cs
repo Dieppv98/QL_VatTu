@@ -32,6 +32,7 @@ namespace DKAC.Models.EntityModel
         public virtual DbSet<SanPham> SanPham { get; set; }
         public virtual DbSet<PPIn> PPIn { get; set; }
         public virtual DbSet<KhoKem> KhoKem { get; set; }
+        public virtual DbSet<ChiTietThongKe> ChiTietThongKes { get; set; }
 
         //public MaterialsContext(string connectionString)
         //    : base(connectionString) { }
@@ -101,7 +102,9 @@ namespace DKAC.Models.EntityModel
             modelBuilder.Entity<PPIn>()
                 .Property(e => e.Name)
                 .IsFixedLength();
-
+            modelBuilder.Entity<ChiTietThongKe>()
+                .Property(e => e.TayIn)
+                .IsFixedLength();
         }
     }
 }
