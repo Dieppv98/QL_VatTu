@@ -109,6 +109,10 @@ namespace DKAC.Repository
 
             var query = from d in db.DonHang
                         where (string.IsNullOrEmpty(request.Keywords) || d.so_lenh_sx.Contains(request.Keywords))
+                        && ((!request.FromDate.HasValue && !request.ToDate.HasValue)
+                        || (d.ngay_giao_hang.Value >= request.FromDate.Value && !request.ToDate.HasValue)
+                        || (d.ngay_giao_hang.Value >= request.FromDate.Value && d.ngay_giao_hang.Value <= request.ToDate.Value)
+                        || (!request.FromDate.HasValue && d.ngay_giao_hang.Value <= request.ToDate.Value))
                         select (d);
             totalCount = query.Count();
             return query.OrderByDescending(x => x.id).Skip(pageIndex * recordPerPage).Take(recordPerPage).ToList();
