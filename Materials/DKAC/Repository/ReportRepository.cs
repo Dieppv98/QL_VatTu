@@ -107,10 +107,10 @@ namespace DKAC.Repository
             return query.OrderByDescending(x => x.id).Skip(pageIndex * recordPerPage).Take(recordPerPage).ToList();
         }
 
-        public List<DonHangInfo> ThongKe(int? id, DateTime? fromDate, DateTime? toDate)
+        public List<DonHangInfo> ThongKe(string lsx, DateTime? fromDate, DateTime? toDate)
         {
             var query = (from d in db.DonHang
-                         where (!id.HasValue || d.id == id)
+                         where (string.IsNullOrEmpty(lsx) || d.so_lenh_sx.ToLower().Contains(lsx.ToLower().Trim()))
                          && ((!fromDate.HasValue && !toDate.HasValue)
                          || (!fromDate.HasValue && d.ngay_giao_hang.Value <= toDate.Value)
                          || (d.ngay_giao_hang.Value >= fromDate.Value && !toDate.HasValue)
@@ -118,13 +118,20 @@ namespace DKAC.Repository
                          select new DonHangInfo()
                          {
                              id = d.id,
+                             so_lenh_sx = d.so_lenh_sx,
+                             ten_san_pham = d.ten_san_pham,
+                             ma_san_pham = d.ma_san_pham,
+                             ten_khach_hang = d.ten_khach_hang,
+                             ma_khach_hang = d.ma_khach_hang,
+                             so_luong_tong = d.so_luong_tong,
+                             phieu_dnsx_so = d.phieu_dnsx_so,
                              ngay_giao_hang = d.ngay_giao_hang,
 
-
-                             lstVatTus = db.VatTu.Where(x => x.don_hang_id == d.id).ToList(),
-                             lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == d.id).ToList(),
-                             lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),
-                             lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == d.id).ToList(),
+                             lstthongKes = db.ChiTietThongKes.Where(x => x.MaDonHang == d.id).ToList(),
+                             //lstVatTus = db.VatTu.Where(x => x.don_hang_id == d.id).ToList(),
+                             //lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == d.id).ToList(),
+                             //lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),
+                             //lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == d.id).ToList(),
                          }).ToList();
 
             return query ?? new List<DonHangInfo>();

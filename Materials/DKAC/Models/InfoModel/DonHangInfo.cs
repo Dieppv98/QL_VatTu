@@ -95,5 +95,6 @@ namespace DKAC.Models.InfoModel
         public List<SelectListItem> lstSo_LSX { get; set; }
         public List<PPIn> lstPPIn { get; set; } 
         public List<KhoKem> lstkhoKem { get; set; }
+        public List<ChiTietThongKe> lstthongKes { get; set; }
     }
 }

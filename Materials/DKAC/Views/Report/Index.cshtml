@@ -59,7 +59,8 @@
                 </div>
             </div>
             <div class="row" style="margin-top: 20px;">
-                <div class="col-md-1"></div>
+                <div class="col-md-2"></div>
+
                 <div class="col-md-3" style="margin-bottom: 10px;">
                     <label>Từ khóa: </label>
                     <input class="form-control" id="lenh_sx" placeholder="Nhập lệnh sản xuất" oninput="SearchLSXAutoComplete(this)" />
@@ -70,20 +71,19 @@
                             @id = "lenh_sx",
                             @style = "width: 100%",
                         })*@
-                    <div class="valid">
-                        <div class="textNoti" id="textvalid">
-
-                        </div>
-                    </div>
                 </div>
+
                 <div class="col-md-3">
                     <label>Thời gian giao từ ngày: </label>
                     <input type="text" class="form-control" id="fromDate" placeholder="dd/MM/yyyy" />
                 </div>
+
                 <div class="col-md-3">
                     <label>Thời gian giao đến ngày: </label>
                     <input type="text" class="form-control" id="toDate" placeholder="dd/MM/yyyy" />
                 </div>
+
+                <div class="col-md-1"></div>
             </div>
 
             <div class="row" style="margin-top: 20px;">
@@ -134,12 +134,15 @@
 
 @section scripts{
 
-
     <script type="text/javascript">
 
-        var me = $("#lenh_sx").val();
-        function LoadMeasurEquipment() {
-            var html = `<iframe id="iframe" src="EvaluateMeasurEquipAfterEvaluate/GetMeasurEquipAfterEvaluate?id=${me}&exportExcel=false" type="application/pdf"></iframe>`;
+        var lsx = $("#lenh_sx").val();
+        fromDate = $("#fromDate").val();
+        toDate = $("#toDate").val();
+
+        $("#previewExport").empty();
+        function LoadLSX() {
+            var html = `<iframe id="iframe" src="Report/LoadLSX?lsx=${lsx}&fromDate=${fromDate}&toDate=${toDate}&exportExcel=false" type="application/pdf"></iframe>`;
             $("#previewExport").html(html);
         }
 

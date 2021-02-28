@@ -49,24 +49,11 @@ namespace DKAC.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetMeasurEquipAfterEvaluate(int? id, DateTime? fromDate, DateTime? toDate, bool exportExcel)
+        public ActionResult LoadLSX(string lsx, DateTime? fromDate, DateTime? toDate, bool exportExcel)
         {
-            var model = _rep.ThongKe(id, fromDate, toDate);
-            //var lstEvalua = (from d in model.SelectMany(o => o.lstEvaluateAfterverificationInfo)
-            //                 select new
-            //                 {
-            //                     d.Id,
-            //                     d.MeasuringEquipmentId,
-            //                     d.Conclusion,
-            //                     d.Date,
-            //                     d.Evaluation,
-            //                     d.MaxTolerance,
-            //                     d.Note,
-            //                     d.Parameter,
-            //                     d.Tolerance,
-            //                     d.UnitName,
-            //                 }).ToList();
-
+            var model = _rep.ThongKe(lsx, fromDate, toDate);
+            var ChiTietDonHang = model.SelectMany(x => x.lstthongKes).ToList();
+            
             var path = Path.Combine(Server.MapPath("~/FileTemplate"), "ThongKeMaterials.xlsx");
             var file = new FileInfo(path);
             var excel = new ExcelPackage(file);
@@ -77,8 +64,9 @@ namespace DKAC.Controllers
             fr.SetValue("Month", DateTime.Now.Month);
             fr.SetValue("Year", DateTime.Now.Year);
 
-            fr.AddTable("evaluateMeasur", model.OrderBy(o => o.id));
-            //fr.AddTable("lstEvaluaMeasur", lstEvalua.OrderBy(o => o.MeasuringEquipmentId));
+            fr.AddTable("DonHang", model.OrderBy(o => o.id));
+            fr.AddTable("ChiTietDonHang", ChiTietDonHang.OrderBy(o => o.ID));
+
             fr.Run(result);
             fr.Dispose();
             return ViewReport(result, "ThongKeMaterials", exportExcel);
