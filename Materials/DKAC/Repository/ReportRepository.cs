@@ -133,7 +133,11 @@ namespace DKAC.Repository
                              //lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),
                              //lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == d.id).ToList(),
                          }).ToList();
+            //ListChiTietNhomVatTu
+            // Bìa
 
+            // Ruột
+            // Khác
             return query ?? new List<DonHangInfo>();
         }
 
