@@ -248,7 +248,7 @@ namespace DKAC.Repository
                 foreach (var item in model.lstChiTietDuToans)
                 {
                     item.don_hang_id = dh.id;
-                    item.vat_tu_id = lstVatTuTemp.Where(x => x.ten.Trim() == item.ten.Trim()).FirstOrDefault().id;
+                    item.vat_tu_id = lstVatTuTemp.Where(x => x.ten.Trim() == item.muc_dich_sd.Trim()).FirstOrDefault().id;
                 }
                 db.ChiTietDuToan.AddRange(model.lstChiTietDuToans);
             }

@@ -79,9 +79,9 @@ namespace DKAC.Models.InfoModel
         public int? tp_dai { get; set; }
         public int? tp_rong { get; set; }
         public int? tp_cao { get; set; }
-        public string tp_soluong { get; set; }
+        public int? tp_soluong { get; set; }
         public int? tp_socuon_thung { get; set; }
-        public string tp_sl_bangkeo { get; set; }
+        public int? tp_sl_bangkeo { get; set; }
         public int? tp_vat_tu { get; set; }
 
         public List<MaterialType> lstMaterialType { get; set; }

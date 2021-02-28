@@ -191,15 +191,6 @@ namespace DKAC.Controllers
                 //}
             }
             var lstQuyCachChitiet = lstQuyCachInfo.SelectMany(x => x.lstvatTus).ToList() ?? new List<VatTu>();
-            if (!string.IsNullOrWhiteSpace(model.quy_cach_chung))
-            {
-                var newQuyCach = new QuyCachInfo();
-                var newVatTu = new VatTu();
-                newQuyCach.ten_nhom_vat_tu = "";
-                newVatTu.ten = model.quy_cach_chung.Trim();
-                lstQuyCachInfo.Add(newQuyCach);
-                lstQuyCachChitiet.Add(newVatTu);
-            }
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             var path = Path.Combine(Server.MapPath("~/FileTemplate"), "Export-LSX.xlsx");
@@ -236,6 +227,7 @@ namespace DKAC.Controllers
             fr.SetValue("tp_thoi_han", model.tp_thoi_han);
             fr.SetValue("tp_sl_bangkeo", model.tp_sl_bangkeo);
             fr.SetValue("tp_vat_tu", model.tp_vat_tu);
+            fr.SetValue("title_quy_cach_chung", "");
 
             fr.AddTable("lstsltong", lstsltong);
             fr.AddTable("lstQuyCach", lstQuyCachInfo);
