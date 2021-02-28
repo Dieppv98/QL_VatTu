@@ -13,7 +13,7 @@
 				groupSize: 3,
 				autoGroup: false,
 				allowPlus: true,
-				allowMinus: true,
+				allowMinus: false,
 				autoUnmask: true,
 				unmaskAsNumber: true
 			});
