@@ -1172,7 +1172,7 @@
         }
 
         function generate(appendix, index) {
-            var htmlRow = `<select class="form-control nhom_vat_tu_id selcted2" required style="width: 100%">`;
+            var htmlRow = `<select class="form-control nhom_vat_tu_id selcted2"  id="nhomvattuidMH1_${index + 1}" required style="width: 100%">`;
             htmlRow += `<option value="" ${appendix.nhom_vat_tu_id == '' ? 'selected' : ''}>---Chọn---</option > `;
             for (var i = 0; i < lstMaterialType.length; i++) {
                 htmlRow += `<option value = "${lstMaterialType[i].Id}" ${lstMaterialType[i].Id == appendix.nhom_vat_tu_id ? 'selected' : ''}> ${lstMaterialType[i].MaterialTypeName}</option> `;
@@ -1188,25 +1188,25 @@
                                     ${generate(appendix, index)}
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText ten" value="${appendix.ten == null ? '' : appendix.ten}" />
+                                    <input type="text" class="form-control inputText ten" value="${appendix.ten == null ? '' : appendix.ten}" id="tenMH1_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText trang iinteger" value="${appendix.trang == null ? '' : appendix.trang}" />
+                                    <input type="text" class="form-control inputText trang iinteger" value="${appendix.trang == null ? '' : appendix.trang}" id="trangMH1_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText loai_giay" oninput="AutocompleteLoaiGiay(this)" value="${appendix.loai_giay == null ? '' : appendix.loai_giay}" />
+                                    <input type="text" class="form-control inputText loai_giay" oninput="AutocompleteLoaiGiay(this)" value="${appendix.loai_giay == null ? '' : appendix.loai_giay}"  id="loaigiayMH1_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText dinh_luong_giay idecimal" value="${appendix.dinh_luong_giay == null ? '' : appendix.dinh_luong_giay}" />
+                                    <input type="text" class="form-control inputText dinh_luong_giay idecimal" value="${appendix.dinh_luong_giay == null ? '' : appendix.dinh_luong_giay}"  id="dinhluonggiayMH1_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText kieu_in_1 iinteger" value="${appendix.kieu_in_1 == null ? '' : appendix.kieu_in_1}" />
+                                    <input type="text" class="form-control inputText kieu_in_1 iinteger" value="${appendix.kieu_in_1 == null ? '' : appendix.kieu_in_1}"  id="kieuin1MH1_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText kieu_in_2 iinteger" value="${appendix.kieu_in_2 == null ? '' : appendix.kieu_in_2}" />
+                                    <input type="text" class="form-control inputText kieu_in_2 iinteger" value="${appendix.kieu_in_2 == null ? '' : appendix.kieu_in_2}"  id="kieuin2MH1_${index + 1}"/>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control inputText ghi_chu" value="${appendix.ghi_chu == null ? '' : appendix.ghi_chu}" />
+                                    <input type="text" class="form-control inputText ghi_chu" value="${appendix.ghi_chu == null ? '' : appendix.ghi_chu}"  id="ghichuMH1_${index + 1}"/>
                                 </td>
                                 <td class="text-center">
                                     <a class="btn btn-sm widget-btn-red red p5 lock remove-row appendix-row" style"background-color: white !important;" onclick="removeAppendixRow(this)" id="removeAppendixRow_${index + 1}" myid="${index + 1}" title="Xóa">
@@ -2611,16 +2611,17 @@
                     $("#tableQuyCachMH3 #appendQuyCachTbodyMH3").append(htmlQuyCachThuong);
                 }
                 // quy cách sp
-                var quycachchungMH1 = $('#quy_cach_chung').val();
-                if (!quycachchungMH1 || quycachchungMH1.trim() !== "") {
+                var quycachchungMH1 = $('#quy_cach_chung').val().trim();
+                if (quycachchungMH1 != null && quycachchungMH1 != "") {
                     var htmlquycachsp = `<tr class="bg-blue" style="background-color: #e9ecef;color: black;">
                             <th class="text-center wrapper" style="width: 200px;vertical-align: middle;border: black solid 1px !important;">
+                                Phụ bản
                             </th>
                             <td class="wrapper" style="padding: 0px !important;border: black solid 1px !important;">
                                 <table class="table table-striped table-bordered" style="margin-bottom: 0px !important">
                                     <tbody>
                                         <tr class="wrapper">
-                                            <td class="wrapper">${quycachchungMH1.trim()}</td>
+                                            <td class="wrapper">${quycachchungMH1}</td>
                                         </tr>
                                     </tbody>
                                 </table>
