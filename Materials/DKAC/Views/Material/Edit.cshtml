@@ -2543,6 +2543,24 @@
             $('#sltong_' + numberid).val(tong);
         }
 
+        function AutoFillSoLuongTong() {
+            var chiTietDuToan = GetInfoChiTietDuToan();
+            var soLuongTong = 0;
+            if (chiTietDuToan.length > 0) {
+                const sumUnique = chiTietDuToan => {
+                    let res = 0;
+                    for (let i = 0; i < chiTietDuToan.length; i++) {
+                        if (arr.indexOf(chiTietDuToan[i]) !== chiTietDuToan.lastIndexOf(chiTietDuToan[i]) || !(chiTietDuToan[i] > 0)) {
+                            continue;
+                        };
+                        res += chiTietDuToan[i];
+                    };
+                    return res;
+                };
+                soLuongTong = sumUnique(chiTietDuToan);
+            }
+            $("#so_luong_tong").val(soLuongTong);
+        }
         function AutoFillTPSoLuong() {
             var slTong = $('#so_luong_tong').val() * 1;
             var tpSoCuon = $('#tp_socuon_thung').val() * 1;
@@ -2664,6 +2682,8 @@
                 $("#kho_ngangMH3").val(data.kho_ngang);
                 $("#ten_can_bo_qlMH3").val(data.ten_can_bo_ql);
                 $("#ten_can_bo_ktMH3").val(data.ten_can_bo_kt);
+                $("#thanh_pham_chung").val(data.quy_cach_chung);
+                AutoFillSoLuongTong();
 
                 //fill bảng quy cách
                 var lstQuyCach = [];
