@@ -303,7 +303,7 @@ namespace DKAC.Repository
                 var chiTietThongKeInfo = new ChiTietThongKe()
                 {
                     ID = 0,
-                    MaDonHang = model.id,
+                    MaDonHang = dh.id,
                     LoaiVatTu = loai_vat_tu,
                     NhomVatTuID = VatTuDetail.nhom_vat_tu_id ?? null,
                     TenNhomVatTu = VatTuDetail.ten_nhom_vat_tu ?? null,
