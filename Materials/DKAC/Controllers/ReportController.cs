@@ -56,6 +56,7 @@ namespace DKAC.Controllers
             
             var path = Path.Combine(Server.MapPath("~/FileTemplate"), "ThongKeMaterials.xlsx");
             var file = new FileInfo(path);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             var excel = new ExcelPackage(file);
             var fr = new FlexCelReport();
             var result = CreateXlsFile(excel);

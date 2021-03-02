@@ -89,9 +89,9 @@
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-5"></div>
                 <div class="col-md-2">
-                    <a id="btnSearch" href="/Report/LoadLSX?exportExcel=false" class="btn btn-sm btn-primary filter-submit" type="submit">
+                    <button id="btnSearch" onclick="LoadLSX()" class="btn btn-sm btn-primary filter-submit" type="submit">
                         <i class="fa fa-search"></i> Xem thông tin
-                    </a>
+                    </button>
                 </div>
                 <div class="col-md-5"></div>
             </div>
@@ -140,8 +140,8 @@
         fromDate = $("#fromDate").val();
         toDate = $("#toDate").val();
 
-        $("#previewExport").empty();
         function LoadLSX() {
+            $("#previewExport").empty();
             var html = `<iframe id="iframe" src="Report/LoadLSX?lsx=${lsx}&fromDate=${fromDate}&toDate=${toDate}&exportExcel=false" type="application/pdf"></iframe>`;
             $("#previewExport").html(html);
         }
