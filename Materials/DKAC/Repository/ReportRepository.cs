@@ -133,7 +133,7 @@ namespace DKAC.Repository
                              //lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),
                              //lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == d.id).ToList(),
                          }).ToList();
-            query = query.Where(x => x.lstthongKes.Count() > 0).ToList();
+            query = query.Where(x => x.lstthongKes.Count() > 0).OrderByDescending(x=> x.id).ThenBy(x=>x.so_lenh_sx).ToList();
             //ListChiTietNhomVatTu
             var ListChiTietThongKes = new List<ChiTietThongKeInfo>();
             foreach (var chiTietInfo in query)
