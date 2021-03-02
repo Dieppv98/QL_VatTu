@@ -133,10 +133,12 @@ namespace DKAC.Repository
                              //lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),
                              //lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == d.id).ToList(),
                          }).ToList();
+            query = query.Where(x => x.lstthongKes.Count() > 0).ToList();
             //ListChiTietNhomVatTu
             var ListChiTietThongKes = new List<ChiTietThongKeInfo>();
             foreach (var chiTietInfo in query)
             {
+                ListChiTietThongKes = new List<ChiTietThongKeInfo>();
                 // Bìa
                 var lstNhomBias = chiTietInfo.lstthongKes.Where(x => x.LoaiVatTu.Trim().ToLower() == "bìa").ToList();
                 var lstQuyCachBias = lstNhomBias.GroupBy(x => new { x.KGI_Cao, x.KGI_Rong, x.KI_Cao, x.KI_Rong }).Select(y => new
@@ -180,12 +182,12 @@ namespace DKAC.Repository
                 {
                     foreach (var item2 in item1.lstMauIn)
                     {
-                        var kho_kem_600 = item2.lstKemIn.Where(x => x.KhoKem == 600 && x.KhoKem != null).Select(x => x.TongKhoKem).FirstOrDefault();
-                        var kho_kem_800 = item2.lstKemIn.Where(x => x.KhoKem == 800 && x.KhoKem != null).Select(x => x.TongKhoKem).FirstOrDefault();
-                        var kho_kem_900 = item2.lstKemIn.Where(x => x.KhoKem == 900 && x.KhoKem != null).Select(x => x.TongKhoKem).FirstOrDefault();
-                        var kho_kem_608 = item2.lstKemIn.Where(x => x.KhoKem == 608 && x.KhoKem != null).Select(x => x.TongKhoKem).FirstOrDefault();
-                        var kho_kem_680 = item2.lstKemIn.Where(x => x.KhoKem == 680 && x.KhoKem != null).Select(x => x.TongKhoKem).FirstOrDefault();
-                        var kho_kem_607 = item2.lstKemIn.Where(x => x.KhoKem == 607 && x.KhoKem != null).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_600 = item2.lstKemIn.Where(x => x.KhoKem == 600).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_800 = item2.lstKemIn.Where(x => x.KhoKem == 800).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_900 = item2.lstKemIn.Where(x => x.KhoKem == 900).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_608 = item2.lstKemIn.Where(x => x.KhoKem == 608).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_680 = item2.lstKemIn.Where(x => x.KhoKem == 680).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_607 = item2.lstKemIn.Where(x => x.KhoKem == 607).Select(x => x.TongKhoKem).FirstOrDefault();
                         var tay_in = String.Join("+", item2.Tay_In.Distinct().ToList());
 
                         var newThongKeInfo = new ChiTietThongKeInfo
@@ -206,14 +208,162 @@ namespace DKAC.Repository
                             kho_kem_900 = kho_kem_900,
                             kho_kem_608 = kho_kem_608,
                             kho_kem_680 = kho_kem_680,
-                            kho_kem_607 = kho_kem_607,
+                            kho_kem_607 = kho_kem_607
                         };
                         ListChiTietThongKes.Add(newThongKeInfo);
-
                     }
                 }
                 // Ruột
+                var lstNhomRuots = chiTietInfo.lstthongKes.Where(x => x.LoaiVatTu.Trim().ToLower() == "ruột").ToList();
+                var lstQuyCachRuots = lstNhomRuots.GroupBy(x => new { x.KGI_Cao, x.KGI_Rong, x.KI_Cao, x.KI_Rong }).Select(y => new
+                {
+                    KGI_Cao = y.Key.KGI_Cao,
+                    KGI_Rong = y.Key.KGI_Rong,
+                    KI_Cao = y.Key.KI_Cao,
+                    KI_Rong = y.Key.KI_Rong,
+
+                    So_Trang = y.Sum(i => i.KTP_SoTrang),
+                    SL_Giay_Chinh = y.Sum(i => i.SLGiayChinh),
+                    SLInThucTe = y.Sum(i => i.SLInThucTe),
+                    // mau in
+                    lstMauIn = lstNhomRuots.Where(x => x.KGI_Cao == y.Key.KGI_Cao &&
+                                                    x.KGI_Rong == y.Key.KGI_Rong &&
+                                                    x.KI_Cao == y.Key.KI_Cao &&
+                                                    x.KI_Rong == y.Key.KI_Rong)
+                                          .GroupBy(z => new { z.KGI_Cao, z.KGI_Rong, z.KI_Cao, z.KI_Rong, z.MI_Tren, z.MI_Duoi })
+                                          .Select(t => new
+                                          {
+                                              MI_Tren = t.Key.MI_Tren,
+                                              MI_Duoi = t.Key.MI_Duoi,
+                                              Trang_Mau_In = t.Sum(u => u.KTP_SoTrang),
+                                              Tay_In = t.OrderBy(i => i.VatTuID).Select(x => x.TayIn).ToList(),
+                                              lstKemIn = lstNhomRuots.Where(v => v.KGI_Cao == y.Key.KGI_Cao &&
+                                                                                v.KGI_Rong == y.Key.KGI_Rong &&
+                                                                                v.KI_Cao == y.Key.KI_Cao &&
+                                                                                v.KI_Rong == y.Key.KI_Rong &&
+                                                                                v.MI_Tren == t.Key.MI_Tren &&
+                                                                                v.MI_Duoi == t.Key.MI_Duoi
+                                                                                )
+                                                                    .GroupBy(c => new { c.KGI_Cao, c.KGI_Rong, c.KI_Cao, c.KI_Rong, c.MI_Tren, c.MI_Duoi, c.KhoKem }).Select(i => new
+                                                                    {
+                                                                        KhoKem = db.KhoKem.Where(x => x.id == i.Key.KhoKem).Select(m => m.value).FirstOrDefault(),
+                                                                        TongKhoKem = i.Sum(x => x.TongKhoKem)
+                                                                    })
+                                          })
+                });
+
+                foreach (var item1 in lstQuyCachRuots)
+                {
+                    foreach (var item2 in item1.lstMauIn)
+                    {
+                        var kho_kem_600 = item2.lstKemIn.Where(x => x.KhoKem == 600).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_800 = item2.lstKemIn.Where(x => x.KhoKem == 800).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_900 = item2.lstKemIn.Where(x => x.KhoKem == 900).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_608 = item2.lstKemIn.Where(x => x.KhoKem == 608).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_680 = item2.lstKemIn.Where(x => x.KhoKem == 680).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_607 = item2.lstKemIn.Where(x => x.KhoKem == 607).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var tay_in = "Ruột";
+
+                        var newThongKeInfo = new ChiTietThongKeInfo
+                        {
+                            LoaiVatTu = "Ruột",
+                            TayIn = tay_in,
+                            KTP_SoTrang = item1.So_Trang,
+                            KGI_Rong = item1.KGI_Rong,
+                            KGI_Cao = item1.KGI_Cao,
+                            SLGiayChinh = item1.SL_Giay_Chinh,
+                            KI_Rong = item1.KI_Rong,
+                            KI_Cao = item1.KI_Cao,
+                            SLInThucTe = item1.SLInThucTe,
+                            MI_Tren = item2.MI_Tren,
+                            MI_Duoi = item2.MI_Duoi,
+                            kho_kem_600 = kho_kem_600,
+                            kho_kem_800 = kho_kem_800,
+                            kho_kem_900 = kho_kem_900,
+                            kho_kem_608 = kho_kem_608,
+                            kho_kem_680 = kho_kem_680,
+                            kho_kem_607 = kho_kem_607
+                        };
+                        ListChiTietThongKes.Add(newThongKeInfo);
+                    }
+                }
                 // Khác
+                var lstNhomThuongs = chiTietInfo.lstthongKes.Where(x => x.LoaiVatTu.Trim().ToLower() != "bìa" && x.LoaiVatTu.Trim().ToLower() != "ruột").ToList();
+                var lstQuyCachThuongs = lstNhomThuongs.GroupBy(x => new { x.KGI_Cao, x.KGI_Rong, x.KI_Cao, x.KI_Rong }).Select(y => new
+                {
+                    KGI_Cao = y.Key.KGI_Cao,
+                    KGI_Rong = y.Key.KGI_Rong,
+                    KI_Cao = y.Key.KI_Cao,
+                    KI_Rong = y.Key.KI_Rong,
+
+                    So_Trang = y.Sum(i => i.KTP_SoTrang),
+                    SL_Giay_Chinh = y.Sum(i => i.SLGiayChinh),
+                    SLInThucTe = y.Sum(i => i.SLInThucTe),
+                    // mau in
+                    lstMauIn = lstNhomThuongs.Where(x => x.KGI_Cao == y.Key.KGI_Cao &&
+                                                    x.KGI_Rong == y.Key.KGI_Rong &&
+                                                    x.KI_Cao == y.Key.KI_Cao &&
+                                                    x.KI_Rong == y.Key.KI_Rong)
+                                          .GroupBy(z => new { z.KGI_Cao, z.KGI_Rong, z.KI_Cao, z.KI_Rong, z.MI_Tren, z.MI_Duoi })
+                                          .Select(t => new
+                                          {
+                                              MI_Tren = t.Key.MI_Tren,
+                                              MI_Duoi = t.Key.MI_Duoi,
+                                              Trang_Mau_In = t.Sum(u => u.KTP_SoTrang),
+                                              Tay_In = t.OrderBy(i => i.VatTuID).Select(x => x.TayIn).ToList(),
+                                              lstKemIn = lstNhomThuongs.Where(v => v.KGI_Cao == y.Key.KGI_Cao &&
+                                                                                v.KGI_Rong == y.Key.KGI_Rong &&
+                                                                                v.KI_Cao == y.Key.KI_Cao &&
+                                                                                v.KI_Rong == y.Key.KI_Rong &&
+                                                                                v.MI_Tren == t.Key.MI_Tren &&
+                                                                                v.MI_Duoi == t.Key.MI_Duoi
+                                                                                )
+                                                                    .GroupBy(c => new { c.KGI_Cao, c.KGI_Rong, c.KI_Cao, c.KI_Rong, c.MI_Tren, c.MI_Duoi, c.KhoKem }).Select(i => new
+                                                                    {
+                                                                        KhoKem = db.KhoKem.Where(x => x.id == i.Key.KhoKem).Select(m => m.value).FirstOrDefault(),
+                                                                        TongKhoKem = i.Sum(x => x.TongKhoKem)
+                                                                    })
+                                          })
+                });
+
+                foreach (var item1 in lstQuyCachThuongs)
+                {
+                    foreach (var item2 in item1.lstMauIn)
+                    {
+                        var kho_kem_600 = item2.lstKemIn.Where(x => x.KhoKem == 600).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_800 = item2.lstKemIn.Where(x => x.KhoKem == 800).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_900 = item2.lstKemIn.Where(x => x.KhoKem == 900).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_608 = item2.lstKemIn.Where(x => x.KhoKem == 608).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_680 = item2.lstKemIn.Where(x => x.KhoKem == 680).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var kho_kem_607 = item2.lstKemIn.Where(x => x.KhoKem == 607).Select(x => x.TongKhoKem).FirstOrDefault();
+                        var tay_in = String.Join("+", item2.Tay_In.Distinct().ToList());
+
+                        var newThongKeInfo = new ChiTietThongKeInfo
+                        {
+                            LoaiVatTu = "",
+                            TayIn = tay_in,
+                            KTP_SoTrang = item1.So_Trang,
+                            KGI_Rong = item1.KGI_Rong,
+                            KGI_Cao = item1.KGI_Cao,
+                            SLGiayChinh = item1.SL_Giay_Chinh,
+                            KI_Rong = item1.KI_Rong,
+                            KI_Cao = item1.KI_Cao,
+                            SLInThucTe = item1.SLInThucTe,
+                            MI_Tren = item2.MI_Tren,
+                            MI_Duoi = item2.MI_Duoi,
+                            kho_kem_600 = kho_kem_600,
+                            kho_kem_800 = kho_kem_800,
+                            kho_kem_900 = kho_kem_900,
+                            kho_kem_608 = kho_kem_608,
+                            kho_kem_680 = kho_kem_680,
+                            kho_kem_607 = kho_kem_607
+                        };
+                        ListChiTietThongKes.Add(newThongKeInfo);
+                    }
+                }
+                // thay đổi list thống kê
+                chiTietInfo.lstthongKeInfos = ListChiTietThongKes;
+
             }
 
             return query ?? new List<DonHangInfo>();

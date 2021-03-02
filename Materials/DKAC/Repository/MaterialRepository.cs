@@ -282,6 +282,7 @@ namespace DKAC.Repository
                 var VatTuDetail = lstVatTuTemp.Where(x => x.id == cheBanDetail.vat_tu_id.Value).FirstOrDefault();
                 var ChiTietInDetail = model.lstChiTietIns.Where(x => x.vat_tu_id == cheBanDetail.vat_tu_id.Value).FirstOrDefault();
 
+                VatTuDetail.ten_nhom_vat_tu = VatTuDetail.ten_nhom_vat_tu ?? "";
                 if (VatTuDetail.ten_nhom_vat_tu.Trim().ToLower().StartsWith("bìa"))
                 {
                     loai_vat_tu = "Bìa";
