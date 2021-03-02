@@ -325,6 +325,7 @@
     <Compile Include="Models\InfoModel\AccountModulPageInfo.cs" />
     <Compile Include="Models\InfoModel\ChiTietCheBanInfo.cs" />
     <Compile Include="Models\InfoModel\ChiTietInInfo.cs" />
+    <Compile Include="Models\InfoModel\ChiTietThongKeInfo.cs" />
     <Compile Include="Models\InfoModel\DonHangInfo.cs" />
     <Compile Include="Models\InfoModel\DuToanVatTuInfo.cs" />
     <Compile Include="Models\InfoModel\EmployeeInfo.cs" />
