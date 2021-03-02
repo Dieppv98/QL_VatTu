@@ -119,20 +119,6 @@
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-2">
-                        <label>Vai trò: </label>
-                    </div>
-                    <div class="col-md-6">
-                        @Html.DropDownListFor(m => m.UserGroupId, new List<SelectListItem>
-                                              {
-                                                 new SelectListItem {Value = "1", Text = "Nhân viên"},
-                                                 new SelectListItem {Value = "2", Text = "Trưởng phòng"},
-                                              }, new { @class = "form-control", @id = "UserGroupId" })
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-2">
                         <label>Số điện thoại: </label>
                     </div>
                     <div class="col-md-6">
@@ -231,7 +217,6 @@
             Email: $('#Email').val(),
             CMND: $('#CMND').val(),
             Address: $('#Address').val(),
-            UserGroupId: $('#UserGroupId').val()
         };
 
         var title = "Bạn có đồng ý cập nhật không?";

@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <label>Từ gian giao từ ngày: </label>
+                        <label>Từ gian giao từ: </label>
                         @Html.TextBoxFor(m => m.FromDate, new Dictionary<string, object>
                             {
                                 {"class", " form-control"},
@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <label>Từ gian giao đến ngày: </label>
+                        <label>Từ gian giao đến: </label>
                         @Html.TextBoxFor(m => m.ToDate, new Dictionary<string, object>
                             {
                                 {"class", " form-control"},
@@ -107,13 +107,13 @@
                 </div>
 
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col-md-5"></div>
-                    <div class="col-md-2">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 text-center">
                         <button id="btnSearch" class="btn btn-sm btn-primary filter-submit" type="submit">
                             <i class="fa fa-search"></i> Tìm kiếm
                         </button>
                     </div>
-                    <div class="col-md-5"></div>
+                    <div class="col-md-2"></div>
                 </div>
             </form>
         </div>

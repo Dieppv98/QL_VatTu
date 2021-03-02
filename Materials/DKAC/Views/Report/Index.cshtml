@@ -43,6 +43,15 @@
         .ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
             display: contents !important;
         }
+
+    #previewExport {
+        height: 70vh;
+    }
+
+    iframe {
+        width: 100%;
+        height: 100%;
+    }
 </style>
 <head>
     <title>Thống kê</title>
@@ -74,12 +83,12 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label>Thời gian giao từ ngày: </label>
+                    <label>Thời gian giao từ: </label>
                     <input type="text" class="form-control" id="fromDate" placeholder="dd/MM/yyyy" />
                 </div>
 
                 <div class="col-md-3">
-                    <label>Thời gian giao đến ngày: </label>
+                    <label>Thời gian giao đến: </label>
                     <input type="text" class="form-control" id="toDate" placeholder="dd/MM/yyyy" />
                 </div>
 
@@ -87,13 +96,13 @@
             </div>
 
             <div class="row" style="margin-top: 20px;">
-                <div class="col-md-5"></div>
-                <div class="col-md-2">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 text-center">
                     <button id="btnSearch" onclick="LoadLSX()" class="btn btn-sm btn-primary filter-submit" type="submit">
                         <i class="fa fa-search"></i> Xem thông tin
                     </button>
                 </div>
-                <div class="col-md-5"></div>
+                <div class="col-md-2"></div>
             </div>
         </div>
     </div>

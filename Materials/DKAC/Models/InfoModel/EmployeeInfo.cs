@@ -42,21 +42,23 @@ namespace DKAC.Models.InfoModel
         [Display(Name = "Mật khẩu")]
         [StringLength(20)]
         public string PassWord { get; set; }
-        
+
         public string Position { get; set; }
 
         public int? UserGroupId { get; set; }
         [Column(TypeName = "date")]
         public DateTime? Birthday { get; set; }
-        
+
         public int? Gender { get; set; }
-        
+
         public string Address { get; set; }
-        
+
         public string Email { get; set; }
-        
+
         public string Tel { get; set; }
-        
+
         public string CMND { get; set; }
+
+        public List<SelectListItem> lstRole { get; set; }
     }
 }

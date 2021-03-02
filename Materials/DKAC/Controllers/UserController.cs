@@ -87,7 +87,7 @@ namespace DKAC.Controllers
             var currentUser = (User)Session[CommonConstants.USER_SESSION];
             var checkPer = CheckPermission((int)PageId.QuanLyNguoiDung, (int)Actions.Them, currentUser);
             if (checkPer == false) { return RedirectToAction("NotPermission", "Home"); }  ////check quyền
-
+            
             return View();
         }
 
