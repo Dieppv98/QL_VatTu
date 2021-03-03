@@ -9,6 +9,8 @@ namespace DKAC.Models.InfoModel
     {
         public string LoaiVatTu { get; set; }
 
+        public int? MaDonHang { get; set; } 
+
         public int? NhomVatTuID { get; set; }
 
         public string TenNhomVatTu { get; set; }
@@ -30,6 +32,7 @@ namespace DKAC.Models.InfoModel
         public int? SLInThucTe { get; set; }
         public int? MI_Tren { get; set; }
         public int? MI_Duoi { get; set; }
+        public int? SL_Trang_Mau_In { get; set; }
         public int? kho_kem_600 { get; set; }
         public int? kho_kem_800 { get; set; }
         public int? kho_kem_900 { get; set; }

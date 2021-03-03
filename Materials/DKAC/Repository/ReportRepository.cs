@@ -126,14 +126,12 @@ namespace DKAC.Repository
                              so_luong_tong = d.so_luong_tong,
                              phieu_dnsx_so = d.phieu_dnsx_so,
                              ngay_giao_hang = d.ngay_giao_hang,
+                             kho_doc = d.kho_doc,
+                             kho_ngang = d.kho_ngang,
 
                              lstthongKes = db.ChiTietThongKes.Where(x => x.MaDonHang == d.id).ToList(),
-                             //lstVatTus = db.VatTu.Where(x => x.don_hang_id == d.id).ToList(),
-                             //lstChiTietDuToans = db.ChiTietDuToan.Where(x => x.don_hang_id == d.id).ToList(),
-                             //lstChiTietCheBans = db.ChiTietCheBan.Where(x => x.don_hang_id == d.id).ToList(),
-                             //lstChiTietIns = db.ChiTietIn.Where(x => x.don_hang_id == d.id).ToList(),
                          }).ToList();
-            query = query.Where(x => x.lstthongKes.Count() > 0).OrderByDescending(x=> x.id).ThenBy(x=>x.so_lenh_sx).ToList();
+            query = query.Where(x => x.lstthongKes.Count() > 0).OrderByDescending(x => x.id).ThenBy(x => x.so_lenh_sx).ToList();
             //ListChiTietNhomVatTu
             var ListChiTietThongKes = new List<ChiTietThongKeInfo>();
             foreach (var chiTietInfo in query)
@@ -192,6 +190,7 @@ namespace DKAC.Repository
 
                         var newThongKeInfo = new ChiTietThongKeInfo
                         {
+                            MaDonHang = chiTietInfo.id,
                             LoaiVatTu = "Bìa",
                             TayIn = tay_in,
                             KTP_SoTrang = item1.So_Trang,
@@ -203,6 +202,7 @@ namespace DKAC.Repository
                             SLInThucTe = item1.SLInThucTe,
                             MI_Tren = item2.MI_Tren,
                             MI_Duoi = item2.MI_Duoi,
+                            SL_Trang_Mau_In = item2.Trang_Mau_In,
                             kho_kem_600 = kho_kem_600,
                             kho_kem_800 = kho_kem_800,
                             kho_kem_900 = kho_kem_900,
@@ -266,6 +266,7 @@ namespace DKAC.Repository
 
                         var newThongKeInfo = new ChiTietThongKeInfo
                         {
+                            MaDonHang = chiTietInfo.id,
                             LoaiVatTu = "Ruột",
                             TayIn = tay_in,
                             KTP_SoTrang = item1.So_Trang,
@@ -277,6 +278,7 @@ namespace DKAC.Repository
                             SLInThucTe = item1.SLInThucTe,
                             MI_Tren = item2.MI_Tren,
                             MI_Duoi = item2.MI_Duoi,
+                            SL_Trang_Mau_In = item2.Trang_Mau_In,
                             kho_kem_600 = kho_kem_600,
                             kho_kem_800 = kho_kem_800,
                             kho_kem_900 = kho_kem_900,
@@ -340,6 +342,7 @@ namespace DKAC.Repository
 
                         var newThongKeInfo = new ChiTietThongKeInfo
                         {
+                            MaDonHang = chiTietInfo.id,
                             LoaiVatTu = "",
                             TayIn = tay_in,
                             KTP_SoTrang = item1.So_Trang,
@@ -351,6 +354,7 @@ namespace DKAC.Repository
                             SLInThucTe = item1.SLInThucTe,
                             MI_Tren = item2.MI_Tren,
                             MI_Duoi = item2.MI_Duoi,
+                            SL_Trang_Mau_In = item2.Trang_Mau_In,
                             kho_kem_600 = kho_kem_600,
                             kho_kem_800 = kho_kem_800,
                             kho_kem_900 = kho_kem_900,

@@ -119,7 +119,7 @@
             <div class="portlet-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="pull-right text-right buttonExcell" style="display:none;">
+                        <div class="pull-right text-right buttonExcell" style="display:none;" id="buttonExcel">
                             <button id="btnExport" class="btn btn-success filter-submit" onclick="ExportExcel()" title="Xuất Excel">
                                 <i class="fa fa-file-excel-o"></i> Xuất Excel
                             </button>
@@ -153,10 +153,11 @@
             $("#previewExport").empty();
             var html = `<iframe id="iframe" src="Report/LoadLSX?lsx=${lsx}&fromDate=${fromDate}&toDate=${toDate}&exportExcel=false" type="application/pdf"></iframe>`;
             $("#previewExport").html(html);
+            $("#buttonExcel").attr("style", "display:block");
         }
 
         function ExportExcel() {
-            window.location.href = 'EvaluateMeasurEquipAfterEvaluate/GetMeasurEquipAfterEvaluate?id=' + me + '&exportExcel=true';
+            window.location.href = `Report/LoadLSX?lsx=${lsx}&fromDate=${fromDate}&toDate=${toDate}&exportExcel=true`;
         }
 
 

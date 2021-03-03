@@ -52,25 +52,25 @@ namespace DKAC.Controllers
         public ActionResult LoadLSX(string lsx, DateTime? fromDate, DateTime? toDate, bool exportExcel)
         {
             var model = _rep.ThongKe(lsx, fromDate, toDate);
-            var ChiTietDonHang = model.SelectMany(x => x.lstthongKes).ToList();
+            var ChiTietDonHang = model.SelectMany(x => x.lstthongKeInfos).ToList();
             
-            var path = Path.Combine(Server.MapPath("~/FileTemplate"), "ThongKeMaterials.xlsx");
+            var path = Path.Combine(Server.MapPath("~/FileTemplate"), "ThongKe_LSX.xlsx");
             var file = new FileInfo(path);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             var excel = new ExcelPackage(file);
             var fr = new FlexCelReport();
             var result = CreateXlsFile(excel);
 
-            fr.SetValue("Date", DateTime.Now.Day);
-            fr.SetValue("Month", DateTime.Now.Month);
-            fr.SetValue("Year", DateTime.Now.Year);
+            //fr.SetValue("Date", DateTime.Now.Day);
+            //fr.SetValue("Month", DateTime.Now.Month);
+            //fr.SetValue("Year", DateTime.Now.Year);
 
             fr.AddTable("DonHang", model.OrderBy(o => o.id));
-            fr.AddTable("ChiTietDonHang", ChiTietDonHang.OrderBy(o => o.ID));
+            fr.AddTable("ChiTietDonHang", ChiTietDonHang);
 
             fr.Run(result);
             fr.Dispose();
-            return ViewReport(result, "ThongKeMaterials", exportExcel);
+            return ViewReport(result, "ThongKe_LSX", exportExcel);
         }
 
         [HttpGet]
