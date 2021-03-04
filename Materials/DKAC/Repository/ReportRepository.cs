@@ -210,6 +210,20 @@ namespace DKAC.Repository
                             kho_kem_680 = kho_kem_680,
                             kho_kem_607 = kho_kem_607
                         };
+                        var soQuyCach = ListChiTietThongKes.Where(x => x.KGI_Rong == item1.KGI_Rong && x.KGI_Cao == item1.KGI_Cao
+                                                                   && x.KI_Cao == item1.KI_Cao && x.KI_Rong == item1.KI_Rong);
+
+                        if (soQuyCach.Count() > 0)
+                        {
+                            newThongKeInfo.LoaiVatTu = null;
+                            newThongKeInfo.KTP_SoTrang = null;
+                            newThongKeInfo.KGI_Rong = null;
+                            newThongKeInfo.KGI_Cao = null;
+                            newThongKeInfo.SLGiayChinh = null;
+                            newThongKeInfo.KI_Rong = null;
+                            newThongKeInfo.KI_Cao = null;
+                            newThongKeInfo.SLInThucTe = null;
+                        }
                         ListChiTietThongKes.Add(newThongKeInfo);
                     }
                 }
@@ -286,6 +300,20 @@ namespace DKAC.Repository
                             kho_kem_680 = kho_kem_680,
                             kho_kem_607 = kho_kem_607
                         };
+                        var soQuyCach = ListChiTietThongKes.Where(x => x.KGI_Rong == item1.KGI_Rong && x.KGI_Cao == item1.KI_Cao 
+                                                                    && x.KI_Cao == item1.KI_Cao && x.KI_Rong == item1.KI_Rong);
+
+                        if (soQuyCach.Count() > 0)
+                        {
+                            newThongKeInfo.LoaiVatTu = null;
+                            newThongKeInfo.KTP_SoTrang = null;
+                            newThongKeInfo.KGI_Rong = null;
+                            newThongKeInfo.KGI_Cao = null;
+                            newThongKeInfo.SLGiayChinh = null;
+                            newThongKeInfo.KI_Rong = null;
+                            newThongKeInfo.KI_Cao = null;
+                            newThongKeInfo.SLInThucTe = null;
+                        }
                         ListChiTietThongKes.Add(newThongKeInfo);
                     }
                 }
@@ -343,7 +371,7 @@ namespace DKAC.Repository
                         var newThongKeInfo = new ChiTietThongKeInfo
                         {
                             MaDonHang = chiTietInfo.id,
-                            LoaiVatTu = "",
+                            LoaiVatTu = "Khác",
                             TayIn = tay_in,
                             KTP_SoTrang = item1.So_Trang,
                             KGI_Rong = item1.KGI_Rong,
@@ -362,6 +390,20 @@ namespace DKAC.Repository
                             kho_kem_680 = kho_kem_680,
                             kho_kem_607 = kho_kem_607
                         };
+                        var soQuyCach = ListChiTietThongKes.Where(x => x.KGI_Rong == item1.KGI_Rong && x.KGI_Cao == item1.KGI_Cao
+                                                                   && x.KI_Cao == item1.KI_Cao && x.KI_Rong == item1.KI_Rong);
+
+                        if (soQuyCach.Count() > 0)
+                        {
+                            newThongKeInfo.LoaiVatTu = null;
+                            newThongKeInfo.KTP_SoTrang = null;
+                            newThongKeInfo.KGI_Rong = null;
+                            newThongKeInfo.KGI_Cao = null;
+                            newThongKeInfo.SLGiayChinh = null;
+                            newThongKeInfo.KI_Rong = null;
+                            newThongKeInfo.KI_Cao = null;
+                            newThongKeInfo.SLInThucTe = null;
+                        }
                         ListChiTietThongKes.Add(newThongKeInfo);
                     }
                 }
