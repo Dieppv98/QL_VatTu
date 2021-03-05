@@ -228,6 +228,8 @@ namespace DKAC.Repository
             db.ChiTietCheBan.RemoveRange(lstCheban);
             var lstIn = db.ChiTietIn.Where(x => x.don_hang_id == dh.id).ToList();
             db.ChiTietIn.RemoveRange(lstIn);
+            var lstChiTietThongKes = db.ChiTietThongKes.Where(x => x.MaDonHang == dh.id).ToList();
+            db.ChiTietThongKes.RemoveRange(lstChiTietThongKes);
             ///add lại bảng con
             if (model.lstVatTus != null)
             {
